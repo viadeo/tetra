@@ -1,4 +1,4 @@
-// Testing the MVC core view functionality
+// Testing the MVC tetra view functionality
 // ====================================
 
 // For documentation, see
@@ -32,7 +32,7 @@
 //  * window events cannot be tested on IE6/7/8 as there is no window.dispatchEvent
 //  * the :disabled and :enabled pseudoselectors do not work under Firefox + Prototype
 
-describe("the Core MVC view", function() {
+describe("the tetra MVC view", function() {
 
     "use strict";    
     
@@ -43,20 +43,20 @@ describe("the Core MVC view", function() {
     describe("view instantiation", function() {
         
         afterEach(function(){
-            core.view.destroy("myView", "myScope");
-            core.view.destroy("mySecondView", "myScope");
-            core.view.destroy("myView", "mySecondScope");
-            core.view.destroy("mySecondView", "mySecondScope");
-            core.view.destroy("myThirdView", "mySecondScope");
-            core.controller.destroy("myController", "myScope");
+            tetra.view.destroy("myView", "myScope");
+            tetra.view.destroy("mySecondView", "myScope");
+            tetra.view.destroy("myView", "mySecondScope");
+            tetra.view.destroy("mySecondView", "mySecondScope");
+            tetra.view.destroy("myThirdView", "mySecondScope");
+            tetra.controller.destroy("myController", "myScope");
         });        
         
         it("should register and cache a successfully created view", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(VNS.test.getObjectLength(views)).toBe(0);
 
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -65,7 +65,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
             expect(VNS.test.getObjectLength(views)).toBe(1);
@@ -75,11 +75,11 @@ describe("the Core MVC view", function() {
         });
         
         it("should register multiple views on the same scope", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             
             // myScope/myView
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -89,7 +89,7 @@ describe("the Core MVC view", function() {
             });
             
             // myScope/mySecondView
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -98,7 +98,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
             expect(views.myScope[1]).toBe("myScope/mySecondView");
@@ -109,12 +109,12 @@ describe("the Core MVC view", function() {
         });
         
         it("should register the same view on different scopes", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(views.mySecondScope).toBeUndefined();
             
             // myScope/myView
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -124,7 +124,7 @@ describe("the Core MVC view", function() {
             });
             
             // mySecondScope/myView
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "mySecondScope",
                 constr: function(me, app) {
                     return {
@@ -133,7 +133,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
             expect(views.mySecondScope).toBeDefined();
@@ -144,12 +144,12 @@ describe("the Core MVC view", function() {
         });
         
         it("should register multiple views on different scopes", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(views.mySecondScope).toBeUndefined();
             
             // myScope/myView
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -159,7 +159,7 @@ describe("the Core MVC view", function() {
             });
             
             // mySecondScope/mySecondView
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "mySecondScope",
                 constr: function(me, app) {
                     return {
@@ -168,7 +168,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
             expect(views.mySecondScope).toBeDefined();
@@ -181,10 +181,10 @@ describe("the Core MVC view", function() {
         });
         
         it("should conditionally register a view *only* if its dependencies have already been loaded or could be retrieve using requireJS", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 use: ["myController"],
                 scope: "myScope",
                 constr: function(me, app) {
@@ -195,11 +195,11 @@ describe("the Core MVC view", function() {
             });
             
             // Verify that the view has *not* been registered
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             
             // Create the test controller
-            core.controller.register("myController", {
+            tetra.controller.register("myController", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -211,7 +211,7 @@ describe("the Core MVC view", function() {
             // requireJS must auto-register the view using its previous definition
             
             // -- BAM --
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
         });
@@ -219,7 +219,7 @@ describe("the Core MVC view", function() {
         it("should be able to notify a view, as if from a controller", function() {
             var spy = sinon.spy();
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -234,7 +234,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -249,7 +249,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            core.view.register("myThirdView", {
+            tetra.view.register("myThirdView", {
                 scope: "mySecondScope",
                 constr: function(me, app) {
                     return {
@@ -265,11 +265,11 @@ describe("the Core MVC view", function() {
             });
             
             // Try to notify, but on the wrong scope
-            core.view.notify("myTestControllerEvent", {foo: "bar"}, "myUselessScope");
+            tetra.view.notify("myTestControllerEvent", {foo: "bar"}, "myUselessScope");
             expect(spy.called).toBeFalsy();
             
             // Try to notify on the correct scope
-            core.view.notify("myTestControllerEvent", {foo: "bar"}, "myScope");
+            tetra.view.notify("myTestControllerEvent", {foo: "bar"}, "myScope");
             expect(spy.called).toBeTruthy();
             expect(spy.calledTwice).toBeTruthy();
             
@@ -279,10 +279,10 @@ describe("the Core MVC view", function() {
         });
         
         it("should be able to destroy a view", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
 
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -291,41 +291,41 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
             
-            core.view.destroy("myView", "myScope");
-            views = core.debug.view.list();
+            tetra.view.destroy("myView", "myScope");
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
         });
         
         // ### Error states ###
         
         it("should throw an exception when a view is registered with no name or params", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(VNS.test.getObjectLength(views)).toBe(0);
             
-            expect(core.view.register).toThrow();
-            expect(function(){core.view.register("myView");}).toThrow();
-            expect(function(){core.view.register(null, {scope: "myScope"});}).toThrow();
+            expect(tetra.view.register).toThrow();
+            expect(function(){tetra.view.register("myView");}).toThrow();
+            expect(function(){tetra.view.register(null, {scope: "myScope"});}).toThrow();
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(VNS.test.getObjectLength(views)).toBe(0);
         });
         
         it("should throw an exception when a view is registered with no scope or constructor", function() {
-            var views = core.debug.view.list();
+            var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(VNS.test.getObjectLength(views)).toBe(0);
             
-            expect(function(){core.view.register("myView", {});}).toThrow();
-            expect(function(){core.view.register("myView", {scope: "myScope"});}).toThrow();
-            expect(function(){core.view.register("myView", {constr: function(){}});}).toThrow();
+            expect(function(){tetra.view.register("myView", {});}).toThrow();
+            expect(function(){tetra.view.register("myView", {scope: "myScope"});}).toThrow();
+            expect(function(){tetra.view.register("myView", {constr: function(){}});}).toThrow();
             
-            views = core.debug.view.list();
+            views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             expect(VNS.test.getObjectLength(views)).toBe(0);
         });
@@ -336,7 +336,7 @@ describe("the Core MVC view", function() {
     describe("view configuration", function() {
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
+            tetra.view.destroy("myView", "myScope");
             this.spy = null;
         });
         
@@ -346,7 +346,7 @@ describe("the Core MVC view", function() {
                 methods
             ;
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -379,7 +379,7 @@ describe("the Core MVC view", function() {
             var spy = sinon.spy();
             
             // Setup a test controller
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -420,7 +420,7 @@ describe("the Core MVC view", function() {
             // setup the test view
             var that = this;
 
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -466,8 +466,8 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
-            core.view.destroy("mySecondView", "myScope");
+            tetra.view.destroy("myView", "myScope");
+            tetra.view.destroy("mySecondView", "myScope");
             
             this.spy = null;
             this.bubblingTestNode = null;
@@ -540,7 +540,7 @@ describe("the Core MVC view", function() {
             var that = this;
             
             // `myFirstView` is defined in the `beforeEach` and handles the same user events
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -612,7 +612,7 @@ describe("the Core MVC view", function() {
             
             // setup the test view
             var that = this;
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -670,8 +670,8 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
-            core.view.destroy("mySecondView", "myScope");
+            tetra.view.destroy("myView", "myScope");
+            tetra.view.destroy("mySecondView", "myScope");
             
             this.spy = null;
             this.mouseTestNode = null;
@@ -741,7 +741,7 @@ describe("the Core MVC view", function() {
             ;
             
             // `myView` is defined in the `beforeEach` and handles the same user events
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -792,7 +792,7 @@ describe("the Core MVC view", function() {
             // setup the spy and view
             this.spy = sinon.spy();
             var that = this;
-            core.view.register("keyEventRouter", {
+            tetra.view.register("keyEventRouter", {
                 scope: "keyEventRouterScope",
                 constr: function(me, app) {
                     return {
@@ -832,8 +832,8 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("keyEventRouter", "keyEventRouterScope");
-            core.view.destroy("mySecondView", "myScope");
+            tetra.view.destroy("keyEventRouter", "keyEventRouterScope");
+            tetra.view.destroy("mySecondView", "myScope");
             
             this.spy = null;
             this.keyTestField = null;
@@ -875,7 +875,7 @@ describe("the Core MVC view", function() {
             var that = this;
 
             // `myView` is defined in the `beforeEach` and handles the same user events 
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -950,7 +950,7 @@ describe("the Core MVC view", function() {
             this.spy = sinon.spy();
             var that = this;
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -993,7 +993,7 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
+            tetra.view.destroy("myView", "myScope");
             
             this.spy = null;
             this.nonBubblingTestField = null;
@@ -1044,7 +1044,7 @@ describe("the Core MVC view", function() {
                 someOtherField = d.getElementById("someOtherTestField")
             ;
 
-            core.view.register("mySecondView", {
+            tetra.view.register("mySecondView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1118,7 +1118,7 @@ describe("the Core MVC view", function() {
             this.spy = sinon.spy();
             var that = this;
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1162,8 +1162,8 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
-            core.view.destroy("mySecondView", "myScope");
+            tetra.view.destroy("myView", "myScope");
+            tetra.view.destroy("mySecondView", "myScope");
             
             this.spy = null;
             this.nonBubblingTestField = null;
@@ -1240,7 +1240,7 @@ describe("the Core MVC view", function() {
             // setup the spy and view
             this.spy = sinon.spy();
             var that = this;
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1267,8 +1267,8 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
-            core.view.destroy("mySecondView", "myScope");
+            tetra.view.destroy("myView", "myScope");
+            tetra.view.destroy("mySecondView", "myScope");
             this.spy = null;
         });
         
@@ -1321,7 +1321,7 @@ describe("the Core MVC view", function() {
                 var that = this;
     
                 // `myView` is defined in the `beforeEach` function and handles the same window events
-                core.view.register("mySecondView", {
+                tetra.view.register("mySecondView", {
                     scope: "myScope",
                     constr: function(me, app) {
                         return {
@@ -1368,7 +1368,7 @@ describe("the Core MVC view", function() {
             // setup the spy and view
             this.spy = sinon.spy();
             var that = this;
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1429,7 +1429,7 @@ describe("the Core MVC view", function() {
         });
     
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
+            tetra.view.destroy("myView", "myScope");
             this.spy = null;
         });
         
@@ -1627,7 +1627,7 @@ describe("the Core MVC view", function() {
             // setup the spy and view
             this.spy = sinon.spy();
             var that = this;
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1664,7 +1664,7 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
+            tetra.view.destroy("myView", "myScope");
             this.spy = null;
         });
         
@@ -1805,7 +1805,7 @@ describe("the Core MVC view", function() {
             // setup the spy and view
             this.spy = sinon.spy();
             var that = this;
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1836,7 +1836,7 @@ describe("the Core MVC view", function() {
         });
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
+            tetra.view.destroy("myView", "myScope");
             this.spy = null;
         });
         
@@ -1934,14 +1934,14 @@ describe("the Core MVC view", function() {
     describe("view handling of controller notifications", function(){
         
         afterEach(function() {
-            core.view.destroy("myView", "myScope");
-            core.controller.destroy("myController", "myScope");
+            tetra.view.destroy("myView", "myScope");
+            tetra.controller.destroy("myController", "myScope");
         });
         
         it("should be able to handle notifications sent from the controller", function() {
             var spy = sinon.spy();
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {
@@ -1956,7 +1956,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            core.controller.register("myController", {
+            tetra.controller.register("myController", {
                 scope: "myScope",
                 constr: function(me, app, page, orm) {
                     return {
@@ -1981,7 +1981,7 @@ describe("the Core MVC view", function() {
         it("should be able to send notifications to the controller", function() {
             var spy = sinon.spy();
 
-            core.controller.register("myController", {
+            tetra.controller.register("myController", {
                 scope: "myScope",
                 constr: function(me, app, page, orm) {
                     return {
@@ -1996,7 +1996,7 @@ describe("the Core MVC view", function() {
                 }
             });
             
-            core.view.register("myView", {
+            tetra.view.register("myView", {
                 scope: "myScope",
                 constr: function(me, app) {
                     return {

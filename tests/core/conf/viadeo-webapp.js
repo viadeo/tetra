@@ -23,23 +23,23 @@
     };
     VNS.os = {};
 
-    // Setup the core default values
-    core.extend(
+    // Setup the tetra default values
+    tetra.extend(
             {
                 conf : {
                     env : 'jQuery',
                     jsVersion : VNS.context.scriptsVersion,
                     authCallback : function() {
-                        core.ajaxBox = new VNS.util.AjaxPopupBox(
+                        tns.ajaxBox = new VNS.util.AjaxPopupBox(
                                 '/r/account/authentication/', {
-                                    callback : 'core.currentRequest',
+                                    callback : 'tns.currentRequest',
                                     allowEscape : false,
-                                    popupVar : 'core.ajaxBox'
+                                    popupVar : 'tns.ajaxBox'
                                 });
                     },
                     currentRequestCallback : function() {
-                        if (core.ajaxBox) {
-                            core.ajaxBox.close();
+                        if (tns.ajaxBox) {
+                            tns.ajaxBox.close();
                         }
                     },
                     enableBootstrap : true,
@@ -49,7 +49,7 @@
             }).start();
 
     // Enable debug mode, with a random string to suppress console messages
-    core.debug.enable("blarg");
+    tetra.debug.enable("blarg");
     
     // Override the requirejs onError, to prevent 404 load exceptions in the console
     requirejs.onError = function(err) {

@@ -1,6 +1,6 @@
-// Testing the MVC core templating functionality
+// Testing the MVC tetra templating functionality
 
-describe("the Core MVC controller", function() {
+describe("the tetra MVC controller", function() {
 
 	"use strict";
 	
@@ -13,19 +13,19 @@ describe("the Core MVC controller", function() {
 		});
 		
 		afterEach(function(){
-			core.view.destroy("myView", "myScope");
+			tetra.view.destroy("myView", "myScope");
 			
-			core.controller.destroy("myFirstCtrl", "myScope");
-			core.controller.destroy("myCtrl", "myScope");
-			core.controller.destroy("otherCtrl", "myScope");
-			core.controller.destroy("otherCtrl", "outOfTheScope");
+			tetra.controller.destroy("myFirstCtrl", "myScope");
+			tetra.controller.destroy("myCtrl", "myScope");
+			tetra.controller.destroy("otherCtrl", "myScope");
+			tetra.controller.destroy("otherCtrl", "outOfTheScope");
 		});
 		
 		it("should evaluate correctly a simple template", function() {			
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController			
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {
 					actions : {
@@ -36,7 +36,7 @@ describe("the Core MVC controller", function() {
 				};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -62,7 +62,7 @@ describe("the Core MVC controller", function() {
 		it("should evaluate correctly a simple template without controller", function() {			
 			var spy = sinon.spy();
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -88,7 +88,7 @@ describe("the Core MVC controller", function() {
 		it("should evaluate correctly a simple template in a javascript string", function() {			
 			var spy = sinon.spy();
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -115,7 +115,7 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController			
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {
 					actions : {
@@ -126,7 +126,7 @@ describe("the Core MVC controller", function() {
 				};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -153,7 +153,7 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {
 					actions : {
@@ -168,7 +168,7 @@ describe("the Core MVC controller", function() {
 				};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -195,7 +195,7 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {
 					actions : {
@@ -206,7 +206,7 @@ describe("the Core MVC controller", function() {
 				};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -233,7 +233,7 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('otherCtrl', {
+			tetra.controller.register('otherCtrl', {
 				scope : 'outOfTheScope',
 				constr : function(me, app, page, orm) { return {
 					events : {
@@ -248,7 +248,7 @@ describe("the Core MVC controller", function() {
 				};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -263,7 +263,7 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Try to notify on the correct scope
-			core.controller.notify("display a box", "Hello world!", "myScope");
+			tetra.controller.notify("display a box", "Hello world!", "myScope");
 			expect(spy.called).toBeFalsy();
 		});
 		
@@ -271,12 +271,12 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -303,12 +303,12 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -335,12 +335,12 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -367,12 +367,12 @@ describe("the Core MVC controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
-			core.controller.register('myCtrl', {
+			tetra.controller.register('myCtrl', {
 				scope : 'myScope',
 				constr : function(me, app, page, orm) { return {};}
 			});
 			
-			core.view.register('myView', {
+			tetra.view.register('myView', {
 				scope : 'myScope',
 				constr : function(me, app, _) { return {
 					events : {},
@@ -409,7 +409,7 @@ describe("the Core MVC controller", function() {
             ;
             
             runs(function() {
-	            core.model.register("myModel", {
+	            tetra.model.register("myModel", {
 	            	scope: "myScope",
 	                req: {
 	                    fetch: {
@@ -423,7 +423,7 @@ describe("the Core MVC controller", function() {
 	            });
 				
 				// Creates myScope/myController
-				core.controller.register('myCtrl', {
+				tetra.controller.register('myCtrl', {
 					scope : 'myScope',
 					constr : function(me, app, page, orm) { return {
 						actions : {
@@ -441,7 +441,7 @@ describe("the Core MVC controller", function() {
 					};}
 				});
 				
-				core.view.register('myView', {
+				tetra.view.register('myView', {
 					scope : 'myScope',
 					constr : function(me, app, _) { return {
 						events : {},

@@ -1,4 +1,4 @@
-// Testing the MVC core controller functionality
+// Testing the MVC tetra controller functionality
 // ====================================
 
 // For documentation, see
@@ -22,7 +22,7 @@
 // We also make use of the `spy()` function, provided by the Sinon.js library.
 // The spy object should always be reset in the `afterEach`.
 
-describe("the Core MVC controller", function() {
+describe("the tetra MVC controller", function() {
 
 	"use strict";
 	
@@ -31,21 +31,21 @@ describe("the Core MVC controller", function() {
 	describe("controller instantiation", function() {
 		
 		afterEach(function(){
-			core.controller.destroy("myController", "myScope");
-			core.controller.destroy("myController", "mySecondScope");
-			core.controller.destroy("mySecondController", "myScope");
-			core.controller.destroy("test", "testscope");
-			core.controller.destroy("myGlobalController", "myScope");
-			core.model.destroy("myModel", "myScope");
+			tetra.controller.destroy("myController", "myScope");
+			tetra.controller.destroy("myController", "mySecondScope");
+			tetra.controller.destroy("mySecondController", "myScope");
+			tetra.controller.destroy("test", "testscope");
+			tetra.controller.destroy("myGlobalController", "myScope");
+			tetra.model.destroy("myModel", "myScope");
 		});
 		
 		it("should register a successfully created controller", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 
 			// Creates a controller with the name "myController" in the scope of "myScope"
 			// i.e. app path is myScope/myController
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -56,8 +56,8 @@ describe("the Core MVC controller", function() {
 			
 			// Creates a controller with the name "mySecondController" in the scope of "myScope", this
 			// time with most properties populated
-			core.model.register("myModel", { scope: "myScope" });
-			core.controller.register("mySecondController", {
+			tetra.model.register("myModel", { scope: "myScope" });
+			tetra.controller.register("mySecondController", {
 				scope: "myScope",
 				use: ["myModel"],
 				constr: function(me, app, page, orm) {
@@ -117,7 +117,7 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeDefined();
 			expect(controllers.myScope[0]).toBe("myScope/myController");
 			expect(controllers.myScope[1]).toBe("myScope/mySecondController");
@@ -125,12 +125,12 @@ describe("the Core MVC controller", function() {
 		});
 		
 		it("should register multiple controllers on the same scope", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 			expect(controllers.testcope).toBeUndefined();
 			
 			// Creates myScope/myController
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -140,7 +140,7 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Creates myScope/mySecondController
-			core.controller.register("mySecondController", {
+			tetra.controller.register("mySecondController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -150,7 +150,7 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Creates testscope/test
-			core.controller.register("test", {
+			tetra.controller.register("test", {
 				scope: "testscope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -159,7 +159,7 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeDefined();
 			expect(controllers.myScope[0]).toBe("myScope/myController");
 			expect(controllers.myScope[1]).toBe("myScope/mySecondController");
@@ -169,12 +169,12 @@ describe("the Core MVC controller", function() {
 		});
 		
 		it("should register multiple controllers on different scopes", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 			expect(controllers.testscope).toBeUndefined();
 			
 			// Creates myScope/myController
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -184,7 +184,7 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Creates testscope/myScope
-			core.controller.register("test", {
+			tetra.controller.register("test", {
 				scope: "testscope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -193,7 +193,7 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeDefined();
 			expect(controllers.myScope[0]).toBe("myScope/myController");
 			expect(controllers.testscope).toBeDefined();
@@ -203,12 +203,12 @@ describe("the Core MVC controller", function() {
 		});
 		
 		it("should register the same controller on different scopes", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 			expect(controllers.mySecondController).toBeUndefined();
 			
 			// Creates myScope/myController
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -218,7 +218,7 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Creates mySecondScope/myController
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "mySecondScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -227,7 +227,7 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeDefined();
 			expect(controllers.myScope[0]).toBe("myScope/myController");
 			expect(controllers.mySecondScope).toBeDefined();
@@ -238,10 +238,10 @@ describe("the Core MVC controller", function() {
 		});
 		
 		it("should conditionally register a controller *only* if its dependencies have already been loaded or could be retrieved using requireJS", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				use: ["myModel"],
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
@@ -252,15 +252,15 @@ describe("the Core MVC controller", function() {
 			});
 
 			// Verify that the controller has *not* been created
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 		});
 		
 		it("should be able to destroy a controller", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -269,18 +269,18 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeDefined();
 			
-			core.controller.destroy("myController", "myScope");
-			controllers = core.debug.ctrl.list();
+			tetra.controller.destroy("myController", "myScope");
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined("as it should have been destroyed");
 		});
 
 		it("should be able to notify a controller, as if from a view", function() {
 			var spy = sinon.spy();
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -295,7 +295,7 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			core.controller.register("mySecondController", {
+			tetra.controller.register("mySecondController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -310,7 +310,7 @@ describe("the Core MVC controller", function() {
 				}
 			});
 			
-			core.controller.register("myThirdController", {
+			tetra.controller.register("myThirdController", {
 				scope: "mySecondScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -326,11 +326,11 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Try to notify, but on the wrong scope
-			core.controller.notify("myTestViewEvent", {foo: "bar"}, "myUselessScope");
+			tetra.controller.notify("myTestViewEvent", {foo: "bar"}, "myUselessScope");
 			expect(spy.called).toBeFalsy();
 			
 			// Try to notify on the correct scope
-			core.controller.notify("myTestViewEvent", {foo: "bar"}, "myScope");
+			tetra.controller.notify("myTestViewEvent", {foo: "bar"}, "myScope");
 			expect(spy.called).toBeTruthy();
 			expect(spy.calledTwice).toBeTruthy();
 			
@@ -338,14 +338,14 @@ describe("the Core MVC controller", function() {
 			expect(data.foo).toBeDefined();
 			expect(data.foo).toBe("bar");
 			
-			core.controller.destroy("mySecondController", "myScope");
-			core.controller.destroy("myThirdController", "mySecondScope");
+			tetra.controller.destroy("mySecondController", "myScope");
+			tetra.controller.destroy("myThirdController", "mySecondScope");
 		});
 		
 		it("should be able to notify a controller, as if from a model", function() {
 			var spy = sinon.spy();
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -363,11 +363,11 @@ describe("the Core MVC controller", function() {
 			});
 			
 			// Try to notify, but on the wrong type
-			core.controller.modelNotify("myTestModelEvent", "call", [{foo: "bar"}]);
+			tetra.controller.modelNotify("myTestModelEvent", "call", [{foo: "bar"}]);
 			expect(spy.called).toBeFalsy();
 			
 			// Try to notify on the correct scope
-			core.controller.modelNotify("myTestModelEvent", "create", [{foo: "bar"}]);
+			tetra.controller.modelNotify("myTestModelEvent", "create", [{foo: "bar"}]);
 			expect(spy.called).toBeTruthy();
 			expect(spy.calledOnce).toBeTruthy();
 			
@@ -379,39 +379,39 @@ describe("the Core MVC controller", function() {
 		// ### Error states ###
 		
 		it("should throw an exception when the controller has no name or params", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			
 			// Confirm that scope myScope does not already exist
 			expect(controllers.myScope).toBeUndefined();
 			
 			// Try to create a controller in various invalid ways
-			expect(core.controller.register).toThrow();
-			expect(function(){core.controller.register("myController");}).toThrow();
-			expect(function(){core.controller.register(null, {scope: "myScope", constr: function(){}});}).toThrow();
+			expect(tetra.controller.register).toThrow();
+			expect(function(){tetra.controller.register("myController");}).toThrow();
+			expect(function(){tetra.controller.register(null, {scope: "myScope", constr: function(){}});}).toThrow();
 			
 			// myScope should still not exist
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 		});
 		
 		it("should throw an exception when the controller has no scope or constructor", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			
 			expect(controllers.myScope).toBeUndefined();
 			
 			// Try to create a controller in various invalid ways
-			expect(function(){core.controller.register("myController", {});}).toThrow();
-			expect(function(){core.controller.register("myController", {scope: "myScope"});}).toThrow();
-			expect(function(){core.controller.register("myController", {constr: function(){}});}).toThrow();
+			expect(function(){tetra.controller.register("myController", {});}).toThrow();
+			expect(function(){tetra.controller.register("myController", {scope: "myScope"});}).toThrow();
+			expect(function(){tetra.controller.register("myController", {constr: function(){}});}).toThrow();
 			
 			// scope "myScope" should still not exist
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 		});
 		
 		// This test is just to confirm that errors are not being swallowed by the register method
 		it("should throw an exception if any kind of malformed data is present in a controller instantiation", function() {
-			var controllers = core.debug.ctrl.list();
+			var controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 			
 			// error: variable blarg has no var keyword
@@ -433,9 +433,9 @@ describe("the Core MVC controller", function() {
 				}
 			};
 			
-			expect(function(){core.controller.register("myController", init);}).toThrow();
+			expect(function(){tetra.controller.register("myController", init);}).toThrow();
 			
-			controllers = core.debug.ctrl.list();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 			
 			// One of our methods throws something
@@ -456,8 +456,8 @@ describe("the Core MVC controller", function() {
 					}
 			};
 			
-			expect(function(){core.controller.register("myController", init);}).toThrow();
-			controllers = core.debug.ctrl.list();
+			expect(function(){tetra.controller.register("myController", init);}).toThrow();
+			controllers = tetra.debug.ctrl.list();
 			expect(controllers.myScope).toBeUndefined();
 		});
 		
@@ -471,8 +471,8 @@ describe("the Core MVC controller", function() {
 					}
 			};
 			
-			expect(function(){core.controller.register("myController", init);}).not.toThrow();
-			expect(function(){core.controller.register("myController", init);}).toThrow();
+			expect(function(){tetra.controller.register("myController", init);}).not.toThrow();
+			expect(function(){tetra.controller.register("myController", init);}).toThrow();
 		});
 	});
 	
@@ -485,13 +485,13 @@ describe("the Core MVC controller", function() {
 		});
 		
 		afterEach(function(){
-			core.controller.destroy("myController", "myScope");
+			tetra.controller.destroy("myController", "myScope");
 			this.spy = null;
 		});
 		
 		it("should fire its init() method once, during start up", function() {
 			var that = this;
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -514,7 +514,7 @@ describe("the Core MVC controller", function() {
 				me,
 				that = this
 			;
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -555,7 +555,7 @@ describe("the Core MVC controller", function() {
 				that = this
 			;
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -590,7 +590,7 @@ describe("the Core MVC controller", function() {
 				that = this
 			;
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -623,7 +623,7 @@ describe("the Core MVC controller", function() {
 				orm,
 				that = this
 			;
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -651,7 +651,7 @@ describe("the Core MVC controller", function() {
 				that = this
 			;
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -685,18 +685,18 @@ describe("the Core MVC controller", function() {
 	describe("controller communication with a model", function() {
 
 		afterEach(function() {
-			core.controller.destroy("myController", "myScope");
-			core.model.destroy("myModel", "myScope");
-			core.model.destroy("mySecondModel", "myScope");
+			tetra.controller.destroy("myController", "myScope");
+			tetra.model.destroy("myModel", "myScope");
+			tetra.model.destroy("mySecondModel", "myScope");
 		});
 		
 		it("should respond to an app.notify()", function() {
 			var spy = sinon.spy();			
 		
-			core.model.register("myModel", { scope: "myScope" });
-			core.model.register("mySecondModel", { scope: "myScope" });			
+			tetra.model.register("myModel", { scope: "myScope" });
+			tetra.model.register("mySecondModel", { scope: "myScope" });			
 			
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				use: ["myModel"],
 				constr: function(me, app, page, orm) {
@@ -734,13 +734,13 @@ describe("the Core MVC controller", function() {
 			expect(spy.called).toBeFalsy();
 		
 			// notify the model that our controller does not use
-			core.debug.model("myScope", "mySecondModel").notify("append")();
+			tetra.debug.model("myScope", "mySecondModel").notify("append")();
 
 			// ... still not called ... 
 			expect(spy.called).toBeFalsy();
 			
 			// notify the controller with a model we **do** use
-			core.debug.model("myScope", "myModel").notify("append")();
+			tetra.debug.model("myScope", "myModel").notify("append")();
 			
 			// --- BAM! ---
 			expect(spy.called).toBeTruthy();
@@ -751,7 +751,7 @@ describe("the Core MVC controller", function() {
 	describe("controller communication with a view", function() {
 
 		afterEach(function() {
-			core.controller.destroy("myController", "myScope");
+			tetra.controller.destroy("myController", "myScope");
 		});
 		
 		it("should respond to an app.notify()", function() {
@@ -761,7 +761,7 @@ describe("the Core MVC controller", function() {
 			;
 			
 			// Setup a test controller with a view event callback
-			core.controller.register("myController", {
+			tetra.controller.register("myController", {
 				scope: "myScope",
 				constr: function(me, app, page, orm) {
 					return {
@@ -788,20 +788,20 @@ describe("the Core MVC controller", function() {
 			});
 
 			// The listener is setup ...
-			viewListeners = core.debug.ctrl.msg("myScope/myController");
+			viewListeners = tetra.debug.ctrl.msg("myScope/myController");
 			expect(viewListeners).toContain("testListener");
 
 			// .. but the spy has still not been called
 			expect(spy.called).toBeFalsy();
 			
 			// simulate the sending of a message for which no handler exists
-			core.debug.ctrl.app("myScope").notify("blarg");
+			tetra.debug.ctrl.app("myScope").notify("blarg");
 			
 			// ... spy still not called ...
 			expect(spy.called).toBeFalsy();
 			
 			// simulate the sending of a handled message from the view
-			core.debug.ctrl.app("myScope").notify("testListener");
+			tetra.debug.ctrl.app("myScope").notify("testListener");
 			
 			// -- BAM! -- 
 			expect(spy.called).toBeTruthy();

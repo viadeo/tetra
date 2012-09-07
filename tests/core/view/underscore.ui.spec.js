@@ -1,4 +1,4 @@
-// Testing the MVC underscore (`_`) functionality
+// Testing the MVC understetra (`_`) functionality
 // ======================================
 
 // For documentation, see
@@ -7,7 +7,7 @@
 // * Sinon - http://sinonjs.org/
 // * Markdown - http://daringfireball.net/projects/markdown/
 
-describe("functions exposed on the underscore object", function() {
+describe("functions exposed on the understetra object", function() {
 
 	"use strict";
 	
@@ -15,12 +15,12 @@ describe("functions exposed on the underscore object", function() {
 	
 	beforeEach(function(){
 		// Load the test fixture
-		loadFixtures("underscore.html");
+		loadFixtures("understetra.html");
 	});
 	
 	afterEach(function(){
 		this.node = null;
-		core.view.destroy("myView", "myScope");
+		tetra.view.destroy("myView", "myScope");
 	});
 	
 	// Test `_` DOM functionality
@@ -35,7 +35,7 @@ describe("functions exposed on the underscore object", function() {
 			
 			this.node = d.getElementById("classTestNode");
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -60,7 +60,7 @@ describe("functions exposed on the underscore object", function() {
 			
 			this.node = d.getElementById("classTestNode");
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -86,7 +86,7 @@ describe("functions exposed on the underscore object", function() {
 			
 			expect(this.node.className.indexOf("bar")).toBe(-1);
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -112,7 +112,7 @@ describe("functions exposed on the underscore object", function() {
 			
 			expect(this.node.className.indexOf("foo")).not.toBe(-1);
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -138,7 +138,7 @@ describe("functions exposed on the underscore object", function() {
 
 			this.node = d.getElementById("classTestNode");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -174,7 +174,7 @@ describe("functions exposed on the underscore object", function() {
 
 			this.node = d.getElementById("testField");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -199,7 +199,7 @@ describe("functions exposed on the underscore object", function() {
 
 			this.node = d.getElementById("testPara");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -224,7 +224,7 @@ describe("functions exposed on the underscore object", function() {
 
 			this.node = d.getElementById("testForm");
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -250,7 +250,7 @@ describe("functions exposed on the underscore object", function() {
 	
 				this.node = d.getElementById("testForm");
 				
-				core.view.register("myView", {
+				tetra.view.register("myView", {
 					scope: "myScope",
 					constr: function(me, app, _) {
 						return {
@@ -278,7 +278,7 @@ describe("functions exposed on the underscore object", function() {
 			appendDiv.className = "appendedDiv";
 			prependDiv.className = "prependedDiv";
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -314,7 +314,7 @@ describe("functions exposed on the underscore object", function() {
 			beforeDiv.className = "beforeDiv";
 			afterDiv.className = "afterDiv";
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -345,7 +345,7 @@ describe("functions exposed on the underscore object", function() {
 			expect(d.getElementById("toReplace")).not.toBeNull();
 			expect(d.getElementById("replaced")).toBeNull();
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -370,7 +370,7 @@ describe("functions exposed on the underscore object", function() {
 		
 			expect(d.getElementById("toRemove")).not.toBeNull();
 			
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -397,7 +397,7 @@ describe("functions exposed on the underscore object", function() {
 				afterCamelised
 			;
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -431,7 +431,7 @@ describe("functions exposed on the underscore object", function() {
 				width
 			;
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -461,7 +461,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("doesNotExist");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -490,7 +490,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("doesNotExistEither");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -523,7 +523,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("blahblah");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -551,7 +551,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("blahblah");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -583,7 +583,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("thirdChild");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -610,7 +610,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("thirdChild");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -638,7 +638,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("firstChild");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -665,7 +665,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("secondChild");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -690,7 +690,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("secondChild");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -717,7 +717,7 @@ describe("functions exposed on the underscore object", function() {
 	
 			this.node = d.getElementById("doesNotExistEither");
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -756,7 +756,7 @@ describe("functions exposed on the underscore object", function() {
 				}
 			;
 
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -783,7 +783,7 @@ describe("functions exposed on the underscore object", function() {
 				obj
 			;
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -808,7 +808,7 @@ describe("functions exposed on the underscore object", function() {
 				falseResults = []
 			;
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -843,7 +843,7 @@ describe("functions exposed on the underscore object", function() {
 			;
 	
 			expect(str).not.toEqual("bam");
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -869,7 +869,7 @@ describe("functions exposed on the underscore object", function() {
 				newObj
 			;
 
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -896,7 +896,7 @@ describe("functions exposed on the underscore object", function() {
 				spy = sinon.spy()
 			;
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -924,7 +924,7 @@ describe("functions exposed on the underscore object", function() {
 				results = []
 			;
 	
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
@@ -952,7 +952,7 @@ describe("functions exposed on the underscore object", function() {
 			;
 	
 			expect(str).not.toEqual("bam");
-			core.view.register("myView", {
+			tetra.view.register("myView", {
 				scope: "myScope",
 				constr: function(me, app, _) {
 					return {
