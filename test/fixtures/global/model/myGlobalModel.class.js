@@ -1,0 +1,3 @@
+core.model.register("myGlobalModel", {
+	
+});

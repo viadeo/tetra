@@ -1,0 +1,81 @@
+<form id="contactsListForm" action="" method="POST">
+	<div id="main980InviteContact">
+	    <div id="listAllContacts" data-widget="contactslist" data-endpoint="/src/test/javascript/fixtures/apps/contactslist/ajax_getcontacts.jsp">
+	    
+	        <a href="javascript:void(0)" class="toggleListSelection" data-state="all">Select All</a>
+	        <a href="javascript:void(0)" class="toggleListSelection" data-state="none">Select None</a>
+
+	        <div class="containerContactsListBox inProgress scroll">
+	        
+	           <!-- Contacts list -->
+               <ul class="containerMembers">
+               </ul>
+               
+               <!-- Ajax spinner -->
+               <div class="isLoading hidden spinner">
+                   <span class="ajaxloader"></span>
+               </div>
+               
+               <!-- No contacts found notification -->
+               <div class="hidden nocontacts">
+                   No contacts found
+               </div>
+               
+               <!-- End of list notification -->
+               <div class="hidden endoflist">
+                   End of list
+               </div>
+               
+               <!-- Overlay shown during the form submission -->
+               <div class="sendingContactsOverlay sendingContactsOverlayBackground hidden"></div>
+	        </div>
+	    </div>
+	</div>
+</form>
+
+<!-- JavaScript templates -->
+<script type="text/html" id="tmpl_contactslist_viadeoMember">
+  <li class="member viadeoContact newContact memberChecked" data-memberid="{%=contactId%}">
+      <div class="viadeoFaviconMember">
+          <img src="http://www.viadeo.com/v_img/addressbook/import/viadeo/favicon20x20.gif" alt="viadeo" title="viadeo">
+      </div>
+      <div class="memCheck"><div class="simulateCheck"></div></div>
+      <div class="globalInfo">
+          <div class="memPhoto">
+              {% if(typeof photoTimestamp !== "undefined"){ %}
+               <img src="/servlet/photo?memberId={%=memberId%}&height=35&width=26&amp;ts={%=photoTimestamp%}" alt="{%=firstname%} {%=lastname%}" title="{%=firstname%} {%=lastname%}" width="26" height="35">
+              {% } else { %}
+               <img src="/servlet/photo?memberId=0020&height=35&width=26&amp;ts=1" alt="{%=firstname%} {%=lastname%}" title="{%=firstname%} {%=lastname%}" width="26" height="35">
+              {% } %}
+          </div>
+          <div class="separator"></div>
+          <div class="memInfo">
+               {%=firstname%} {%=lastname%}
+               <span>{%=headline%}</span>
+          </div>
+      </div>
+  </li>
+</script>
+<script type="text/html" id="tmpl_contactslist_unknownMember">
+   <li class="member otherContact newContact memberChecked" data-memberid="{%=contactId%}">
+      <div class="viadeoFaviconMember"></div>
+      <div class="memCheck"><div class="simulateCheck"></div></div>
+      <div class="globalInfo">
+          <div class="memPhoto"><img src="http://www.viadeo.com/v_img/visuel/silhouette.gif" alt="{%=firstname%} {%=lastname%}" title="{%=firstname%} {%=lastname%}"></div>
+          <div class="separator"></div>
+          <div class="memInfo">
+               <v:text>{%=firstname%} {%=lastname%}</v:text>
+               <span>{%=email%}</span>
+          </div>
+      </div>
+  </li>
+</script>
+<script type="text/html" id="tmpl_contactslist_memberList">
+    {% for(var i=0, len=contacts.length; i < len; i++) { %}
+        {% if(contacts[i].viadeoMember) { %}
+            {%-component('viadeoMember', contacts[i])%} 
+        {% } else { %}
+            {%-component('unknownMember', contacts[i])%}
+        {% } %}
+    {% } %} 
+</script>

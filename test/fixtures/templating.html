@@ -1,0 +1,33 @@
+<div id="parent">
+	<div id="child">
+		Click to show article
+	</div>
+</div>
+<script type="text/html" id="tmpl_myCtrl_box">
+	<div id="box"><h1>{%=title%}</h1><p>{%=message%}</p></div>
+</script>
+<script type="text/html" id="tmpl_box">
+    <div id="box"><h1>{%=title%}</h1><p>{%=message%}</p></div>
+</script>
+<script type="text/html" id="tmpl_myCtrl_title">
+    <h1>{%=title%}</h1>
+</script>
+<script type="text/html" id="tmpl_myCtrl_article">
+    <div id="box">{%-component('title', {title: title})%}<p>{%=message%}</p></div>
+</script>
+<script type="text/html" id="tmpl_otherCtrl_box">
+    <div id="box"><h1>{%=title%}</h1><p>{%=message%}</p></div>
+</script>
+<script type="text/html" id="tmpl_myCtrl_cascade">
+    <div id="parent">{%-component('article', {title: title, message: message})%}</div>
+</script>
+<script type="text/html" id="tmpl_myCtrl_titleli">
+    <li title="{%=title%}">{%=title%}</li>
+</script>
+<script type="text/html" id="tmpl_myCtrl_multiple">
+    <ol id="multiple">
+    {% for(var i=0, len=titles.length; i < len; i++) { %}
+        {%-component('titleli', {title: titles[i]})%}
+    {% } %}
+    </ol>
+</script>
