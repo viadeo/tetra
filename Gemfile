@@ -1,4 +1,4 @@
 source :rubygems
-gem 'json'
-gem 'jasmine'
-gem 'rake'
+
+gem 'jasmine-headless-webkit', :git => 'git://github.com/johnbintz/jasmine-headless-webkit.git', :branch => 'travis-test'
+gem 'rake', '0.9.2'
