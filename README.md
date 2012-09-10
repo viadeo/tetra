@@ -6,7 +6,7 @@ tetra ![travis](https://secure.travis-ci.org/ohory/tetra.png)
 Tetra aims to help developers to build faster and easier a more maintainable code.
 
 The idea is to use a completely MVC (for Model, View, Controller) framework which normalize all implementations with a simple structure splitting code in 3 different layers :
-   * View: DOM access and UX behaviors
+   * View: DOM access and UX behaviors 
    * Controller: Programmatic logic
    * Model: Structured data and Ajax requesting
    
@@ -62,6 +62,15 @@ By default, the Tetra.js framework recommands to use a directory tree to impleme
 			   * _***.ui.js_
       * **model**: Global model classes
 
+## TOC
+   * [View layer](docs/view.md)
+   * [Controller layer](docs/controller.md)
+   * [Model layer](docs/model.md)
+   * [ORM (Object-Relational Mapping)](docs/orm.md)
+   * [Templating system](docs/templating.md)
+   * [Bootstrap](docs/bootstrap.md)
+   * [Debugger](docs/debugger.md)
+	  
 ## Licence
 (The MIT License)
 
