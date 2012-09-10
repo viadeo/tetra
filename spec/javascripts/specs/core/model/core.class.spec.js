@@ -2282,8 +2282,8 @@ describe("the tetra MVC model", function() {
             expect(errorCode).toBe(401);
             expect(errorMsg).toBe("401");
                         
-            expect(tetra.ajaxBox).toBeDefined();
-            delete tetra.ajaxBox;
+            expect(tns.ajaxBox).toBeDefined();
+            delete tns.ajaxBox;
             
             // ### Test a 403 (Forbidden) Response ###
             this.spy = sinon.spy();
@@ -2299,8 +2299,8 @@ describe("the tetra MVC model", function() {
             expect(errorCode).toBe(403);
             expect(errorMsg).toBe("403");
             
-            expect(tetra.ajaxBox).toBeDefined();
-            delete tetra.ajaxBox;
+            expect(tns.ajaxBox).toBeDefined();
+            delete tns.ajaxBox;
             
             // ### Test a 404 (Not Found) response ###
             this.spy = sinon.spy();
