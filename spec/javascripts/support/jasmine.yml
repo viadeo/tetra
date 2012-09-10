@@ -8,9 +8,9 @@ src_files:
   - tetra-view.js
   - tetra-controller.js
   - tetra-model.js
+  - ../spec/javascripts/specs/core/conf/viadeo-webapp.js
 
 spec_files:
-  - core/conf/viadeo-webapp.js
   - core/core.spec.js
   
 src_dir: 'lib'
