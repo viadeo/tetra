@@ -1,4 +1,4 @@
-// Testing the MVC understetra (`_`) functionality
+// Testing the MVC underscore (`_`) functionality
 // ======================================
 
 // For documentation, see
@@ -7,7 +7,7 @@
 // * Sinon - http://sinonjs.org/
 // * Markdown - http://daringfireball.net/projects/markdown/
 
-describe("functions exposed on the understetra object", function() {
+describe("functions exposed on the underscore object", function() {
 
 	"use strict";
 	
@@ -15,7 +15,7 @@ describe("functions exposed on the understetra object", function() {
 	
 	beforeEach(function(){
 		// Load the test fixture
-		loadFixtures("understetra.html");
+		loadFixtures("underscore.html");
 	});
 	
 	afterEach(function(){

@@ -1,4 +1,4 @@
-// Testing the MVC core bootstrap functionality
+// Testing the MVC tetra bootstrap functionality
 // ====================================
 
 // For documentation, see
@@ -11,7 +11,7 @@
 //  * Just like in the view tests, focus/blur are not behaving correctly under IE8 and under
 //  * page IDs appear to be loaded as global variables, so be careful of the naming of your local vars
 
-describe("the core MVC bootstrap mode", function() {
+describe("the tetra MVC bootstrap mode", function() {
 
 	"use strict";
 
@@ -30,20 +30,20 @@ describe("the core MVC bootstrap mode", function() {
 		});
 		
 		afterEach(function() {
-			core.view.destroy("myClickView", "myScope");
-			core.view.destroy("myMouseoverView", "myScope");
-			core.view.destroy("myFocusView", "myScope");
-			core.view.destroy("myVcView", "myScope");
-			core.view.destroy("myVcmView", "myScope");
-			core.view.destroy("myNonExistantControllerView", "myScope");
-			core.view.destroy("myRegisterNameDoesntMatchTheFileNameView", "myScope");
-			core.view.destroy("myGlobalView", "myScope");
+			tetra.view.destroy("myClickView", "myScope");
+			tetra.view.destroy("myMouseoverView", "myScope");
+			tetra.view.destroy("myFocusView", "myScope");
+			tetra.view.destroy("myVcView", "myScope");
+			tetra.view.destroy("myVcmView", "myScope");
+			tetra.view.destroy("myNonExistantControllerView", "myScope");
+			tetra.view.destroy("myRegisterNameDoesntMatchTheFileNameView", "myScope");
+			tetra.view.destroy("myGlobalView", "myScope");
 			
-			core.controller.destroy("myVcController", "myScope");
-			core.controller.destroy("myVcmController", "myScope");
-			core.controller.destroy("myGlobalController", "myScope");
-			core.model.destroy("myVcmModel", "myScope");
-			core.model.destroy("myGlobalModel");
+			tetra.controller.destroy("myVcController", "myScope");
+			tetra.controller.destroy("myVcmController", "myScope");
+			tetra.controller.destroy("myGlobalController", "myScope");
+			tetra.model.destroy("myVcmModel", "myScope");
+			tetra.model.destroy("myGlobalModel");
 		});
 		
 		it("should load the resources for bootstrapped components invoked via a click event handler", function(){
@@ -53,7 +53,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				node = d.getElementById("bootstrapClickTestNode");
 				expect(views.myScope).toBeUndefined();
 				
@@ -63,7 +63,7 @@ describe("the core MVC bootstrap mode", function() {
 			});
 
 			waitsFor(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				return views.myScope && views.myScope[0] === "myScope/myClickView";
 			}, _asyncLoaderTimeout);
 		});
@@ -75,7 +75,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 		
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				node = d.getElementById("bootstrapMouseoverTestNode");
 				expect(views.myScope).toBeUndefined();
 				
@@ -85,7 +85,7 @@ describe("the core MVC bootstrap mode", function() {
 			});
 	
 			waitsFor(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				return views.myScope && views.myScope[0] === "myScope/myMouseoverView";
 			}, _asyncLoaderTimeout);
 		});
@@ -98,7 +98,7 @@ describe("the core MVC bootstrap mode", function() {
 			
 			if(go) {
 				runs(function() {
-					views = core.debug.view.list();
+					views = tetra.debug.view.list();
 					node = d.getElementById("bootstrapFocusTestNode");
 					expect(views.myScope).toBeUndefined();
 					
@@ -108,7 +108,7 @@ describe("the core MVC bootstrap mode", function() {
 				});
 		
 				waitsFor(function() {
-					views = core.debug.view.list();
+					views = tetra.debug.view.list();
 					return views.myScope && views.myScope[0] === "myScope/myFocusView";
 				}, _asyncLoaderTimeout);
 			}
@@ -122,8 +122,8 @@ describe("the core MVC bootstrap mode", function() {
 			;
 
 			runs(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
 				node = d.getElementById("bootstrapVCTestNode");
 				expect(views.myScope).toBeUndefined();
 				expect(controllers.myScope).toBeUndefined();
@@ -134,8 +134,8 @@ describe("the core MVC bootstrap mode", function() {
 			});
 	
 			waitsFor(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
 				return views.myScope && views.myScope[0] === "myScope/myVcView" &&
 					   controllers.myScope && controllers.myScope[0] === "myScope/myVcController";
 			}, _asyncLoaderTimeout);
@@ -150,9 +150,9 @@ describe("the core MVC bootstrap mode", function() {
 			;
 
 			runs(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
-				models = core.debug.model.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
+				models = tetra.debug.model.list();
 				node = d.getElementById("bootstrapVCMTestNode");
 				
 				expect(views.myScope).toBeUndefined();
@@ -165,9 +165,9 @@ describe("the core MVC bootstrap mode", function() {
 			});
 	
 			waitsFor(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
-				models = core.debug.model.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
+				models = tetra.debug.model.list();
 				return views.myScope && views.myScope[0] === "myScope/myVcmView" &&
 					   controllers.myScope && controllers.myScope[0] === "myScope/myVcmController" &&
 					   models[0] === "myScope/myVcmModel";
@@ -183,9 +183,9 @@ describe("the core MVC bootstrap mode", function() {
 			;
 
 			runs(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
-				models = core.debug.model.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
+				models = tetra.debug.model.list();
 				node = d.getElementById("bootstrapGlobalTestNode");
 				
 				expect(views.myScope).toBeUndefined();
@@ -198,9 +198,9 @@ describe("the core MVC bootstrap mode", function() {
 			});
 	
 			waitsFor(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
-				models = core.debug.model.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
+				models = tetra.debug.model.list();
 
 				return views.myScope && views.myScope[0] === "myScope/myGlobalView" &&
 					   controllers.myScope && controllers.myScope[0] === "myScope/myGlobalController" &&
@@ -231,9 +231,9 @@ describe("the core MVC bootstrap mode", function() {
 			});
 	
 			waitsFor(function() {
-				views = core.debug.view.list();
-				controllers =  core.debug.ctrl.list();
-				models = core.debug.model.list();
+				views = tetra.debug.view.list();
+				controllers =  tetra.debug.ctrl.list();
+				models = tetra.debug.model.list();
 				return views.myScope && views.myScope[0] === "myScope/myVcmView" &&
 					   controllers.myScope && controllers.myScope[0] === "myScope/myVcmController" &&
 					   models[0] === "myScope/myVcmModel";
@@ -265,7 +265,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				node = d.getElementById("bootstrapMouseoutTestNode");
 				className = node.className;
@@ -292,7 +292,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				node = d.getElementById("bootstrapMousemoveTestNode");
 				className = node.className;
@@ -318,7 +318,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstraponDblClickTestNode");
@@ -346,7 +346,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapChangeTestNode");
@@ -374,7 +374,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapKeyDownNode");
@@ -402,7 +402,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapBlurNode");
@@ -431,7 +431,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 		
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapNonExistantTestNode");
@@ -452,7 +452,7 @@ describe("the core MVC bootstrap mode", function() {
 			});
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				node = null;
 			});
@@ -469,10 +469,10 @@ describe("the core MVC bootstrap mode", function() {
 			;
 	
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				controllers = core.debug.ctrl.list();
+				controllers = tetra.debug.ctrl.list();
 				expect(controllers.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapNonExistantControllerTestNode");
@@ -494,10 +494,10 @@ describe("the core MVC bootstrap mode", function() {
 			});
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				controllers = core.debug.ctrl.list();
+				controllers = tetra.debug.ctrl.list();
 				expect(controllers.myScope).toBeUndefined();
 				
 				node = null;
@@ -515,13 +515,13 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				controllers = core.debug.ctrl.list();
+				controllers = tetra.debug.ctrl.list();
 				expect(controllers.myScope).toBeUndefined();
 				
-				models = core.debug.model.list();
+				models = tetra.debug.model.list();
 				expect(models.length).toBe(0);
 				
 				node = d.getElementById("bootstrapNonExistantModelTestNode");
@@ -543,13 +543,13 @@ describe("the core MVC bootstrap mode", function() {
 			});
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				controllers = core.debug.ctrl.list();
+				controllers = tetra.debug.ctrl.list();
 				expect(controllers.myScope).toBeUndefined();
 				
-				models = core.debug.model.list();
+				models = tetra.debug.model.list();
 				expect(models.length).toBe(0);
 				node = null;
 			});
@@ -564,7 +564,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				expect(views.myMissingScope).toBeUndefined();
 				
@@ -587,7 +587,7 @@ describe("the core MVC bootstrap mode", function() {
 			});
 			
 			runs(function(){
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				expect(views.myMissingScope).toBeUndefined();
 				node = null;
@@ -603,7 +603,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapNoBootnodeTestNode");
@@ -620,7 +620,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				node = null;
 			});
@@ -635,7 +635,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapNoViewTestNode");
@@ -652,7 +652,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				node = null;
 			});
@@ -667,7 +667,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapViewNotPresentTestNode");
@@ -684,7 +684,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 
 				node = null;
@@ -700,7 +700,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapNoEventTestNode");
@@ -717,7 +717,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 
 				node = null;
@@ -733,7 +733,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapEventNotPresentTestNode");
@@ -747,7 +747,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 	
 				node = null;
@@ -763,7 +763,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapInvalidViewTestNode");
@@ -777,7 +777,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 	
 				node = null;
@@ -793,7 +793,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapInvalidControllerTestNode");
@@ -807,7 +807,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 	
 				node = null;
@@ -823,7 +823,7 @@ describe("the core MVC bootstrap mode", function() {
 			;
 			
 			runs(function() {
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
 				node = d.getElementById("bootstrapInvalidModelTestNode");
@@ -837,7 +837,7 @@ describe("the core MVC bootstrap mode", function() {
 				expect(node.className).toEqual(className);
 				expect(VNS.test.query("script[id]").length).toBe(scriptTagsLength);
 				
-				views = core.debug.view.list();
+				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 	
 				node = null;
