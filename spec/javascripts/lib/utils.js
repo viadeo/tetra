@@ -29,7 +29,7 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
             expect(eventTarget).toEqual(targetElem, "as the element and the target in the event object should match");
         },
         
-        // Checks the validity of arguments returned from a window event object. In this case, we
+        // Checks the validity of arguments returned from a window event object. In this case, we
         // expect the window event type to match the event that was originally launched
         validateWindowEventArguments : function(args, eventType) {
             expect(args.length).toBe(1);
