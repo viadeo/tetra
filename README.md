@@ -6,15 +6,15 @@ tetra ![travis](https://secure.travis-ci.org/ohory/tetra.png)
 Tetra aims to help developers to build faster and easier a more maintainable code.
 
 The idea is to use a completely MVC (for Model, View, Controller) framework which normalize all implementations with a simple structure splitting code in 3 different layers :
-   * [View](tetra/docs/view.md): DOM access and UX behaviors 
-   * [Controller](tetra/docs/controller.md): Programmatic logic
-   * [Model](tetra/docs/model.md): Structured data and Ajax requesting
+   * [View](tetra/blob/master/docs/view.md): DOM access and UX behaviors 
+   * [Controller](tetra/blob/master/docs/controller.md): Programmatic logic
+   * [Model](tetra/blob/master/docs/model.md): Structured data and Ajax requesting
    
 Interactions between layers are realized using an evenemential system managing asynchronous implementation. Each classes have an access to a communication pipe linked to potential listener.
 
-Tetra.js framework is also object-oriented to encourage you to deal with structured data with their associated logic. An [ORM (Object-Relational Mapping)](tetra/docs/orm.md) totally hide the Ajax transactions and assure the consistency of data between front-end and back-end.
+Tetra.js framework is also object-oriented to encourage you to deal with structured data with their associated logic. An [ORM (Object-Relational Mapping)](tetra/blob/master/docs/orm.md) totally hide the Ajax transactions and assure the consistency of data between front-end and back-end.
 
-Additionnally, the "[bootstrap](tetra/docs/bootstrap.md)" feature manage dynamic loading of javascript scripts from data attributes on DOM elements and through a dependency management system.
+Additionnally, the "[bootstrap](tetra/blob/master/docs/bootstrap.md)" feature manage dynamic loading of javascript scripts from data attributes on DOM elements and through a dependency management system.
 
 ## Tetra core tree
 
@@ -63,13 +63,13 @@ By default, the Tetra.js framework recommands to use a directory tree to impleme
       * **model**: Global model classes
 
 ## TOC
-   * [View layer](tetra/docs/view.md)
-   * [Controller layer](tetra/docs/controller.md)
-   * [Model layer](tetra/docs/model.md)
-   * [ORM (Object-Relational Mapping)](tetra/docs/orm.md)
-   * [Templating system](tetra/docs/templating.md)
-   * [Bootstrap](tetra/docs/bootstrap.md)
-   * [Debugger](tetra/docs/debugger.md)
+   * [View layer](tetra/blob/master/docs/view.md)
+   * [Controller layer](tetra/blob/master/docs/controller.md)
+   * [Model layer](tetra/blob/master/docs/model.md)
+   * [ORM (Object-Relational Mapping)](tetra/blob/master/docs/orm.md)
+   * [Templating system](tetra/blob/master/docs/templating.md)
+   * [Bootstrap](tetra/blob/master/docs/bootstrap.md)
+   * [Debugger](tetra/blob/master/docs/debugger.md)
 	  
 ## Licence
 (The MIT License)
