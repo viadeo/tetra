@@ -43,8 +43,8 @@
                         }
                     },
                     enableBootstrap : true,
-                    APPS_PATH : '/src/test/javascript/fixtures/bootstrap',
-                    GLOBAL_PATH : '/src/test/javascript/fixtures/global'
+                    APPS_PATH : '/spec/javascripts/specs/fixtures/bootstrap',
+                    GLOBAL_PATH : '/spec/javascripts/specs/fixtures/global'
                 }
             }).start();
 
