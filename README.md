@@ -42,7 +42,7 @@ tetra.extend({
 }).start();
 ```
 
-If the default settings are sufficient, your can only call the start function (as in /conf/default.js):
+If the default settings are sufficient, you can only call the start function (as in /conf/default.js):
 
 ```js
 tetra.start();
