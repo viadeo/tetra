@@ -1,1 +1,17 @@
-src_files:  - deps/jquery-1.8.js  - deps/json2.js  - deps/require.js  - tetra.js  - mod/require/client.js  - mod/tmpl/client-micro-tmpl.js  - tetra-view.js  - tetra-controller.js  - tetra-model.js  - conf/default.jsspec_files:  - core/core.spec.js  src_dir: 'lib'spec_dir: 'spec/javascripts/specs'
+src_files:
+  - deps/jquery-1.8.js
+  - deps/json2.js
+  - deps/require.js
+  - tetra.js
+  - mod/require/client.js
+  - mod/tmpl/client-micro-tmpl.js
+  - tetra-view.js
+  - tetra-controller.js
+  - tetra-model.js
+  - conf/default.js
+
+spec_files:
+  - core/core.spec.js
+  
+src_dir: 'lib'
+spec_dir: 'spec/javascripts/specs'
