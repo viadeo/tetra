@@ -19,7 +19,8 @@ spec_files:
   - core/core.spec.js
   - core/model/*.spec.js
   - core/controller/*.spec.js
-  - core/view/*.spec.js
+  - core/view/core.bootstrap.spec.js
+#  - core/view/*.spec.js
 
 src_dir: 
 spec_dir: 'spec/javascripts/specs'

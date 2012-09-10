@@ -4,10 +4,6 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
 
 (function(){
 
-	if(typeof jQuery !== 'undefined' && typeof $j === 'undefined') {
-		var $j = jQuery;
-	}
-	
     "use strict";
 
     // Prototype incorrectly converts Arrays to Strings when calling JSON stringify or equivalents, so we
@@ -33,7 +29,7 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
             expect(eventTarget).toEqual(targetElem, "as the element and the target in the event object should match");
         },
         
-        // Checks the validity of arguments returned from a window event object. In this case, we
+        // Checks the validity of arguments returned from a window event object. In this case, we
         // expect the window event type to match the event that was originally launched
         validateWindowEventArguments : function(args, eventType) {
             expect(args.length).toBe(1);
@@ -53,9 +49,9 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
                 node.dispatchEvent(evt);
             } else {
                 // If we can use jQuery to normalise events across dumb browsers, then do so
-                if(typeof $j !== "undefined" && 
+                if(typeof jQuery !== "undefined" && 
                         (type === "focus" || type === "blur" || type === "change" || type === "scroll" || type === "reset")) {
-                    $j(node).trigger(type);
+                    jQuery(node).trigger(type);
                 } else {
                     evt = document.createEventObject();
                     type = (type.toLowerCase() === "dblclick") ? type.toLowerCase() : type;
@@ -70,7 +66,7 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
                 return $$(selector);
             }
             else if(jQuery !== "undefined") {
-                return $j(selector);
+                return jQuery(selector);
             }
             else if(document.querySelectorAll) {
                 return document.querySelectorAll(selector);
