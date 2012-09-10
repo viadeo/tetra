@@ -17,7 +17,7 @@ src_files:
 
 spec_files:
   - core/core.spec.js
-#  - core/model/*.spec.js
+  - core/model/*.spec.js
 #  - core/controller/*.spec.js
 #  - core/view/*.spec.js
 
