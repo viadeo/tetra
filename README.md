@@ -12,7 +12,7 @@ The idea is to use a completely MVC (for Model, View, Controller) framework whic
    
 Interactions between layers are realized using an evenemential system managing asynchronous implementation. Each classes have an access to a communication pipe linked to potential listener.
 
-Tetra.js framework is also object-oriented to encourage you to deal with structured data with their associated logic. An [ORM &#40;Object-Relational Mapping&#41;](ORM---Object-Relational-Mapping) totally hide the Ajax transactions and assure the consistency of data between front-end and back-end.
+Tetra.js framework is also object-oriented to encourage you to deal with structured data with their associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/ohory/tetra/wiki/ORM---Object-Relational-Mapping) totally hide the Ajax transactions and assure the consistency of data between front-end and back-end.
 
 Additionnally, the "[bootstrap](/ohory/tetra/wiki/Bootstrap)" feature manage dynamic loading of javascript scripts from data attributes on DOM elements and through a dependency management system.
 
@@ -66,7 +66,7 @@ By default, the Tetra.js framework recommands to use a directory tree to impleme
    * [View layer](/ohory/tetra/wiki/View-layer)
    * [Controller layer](/ohory/tetra/wiki/Controller-layer)
    * [Model layer](/ohory/tetra/wiki/Model-layer)
-   * [ORM &#40;Object-Relational Mapping&#41;](ORM---Object-Relational-Mapping)
+   * [ORM &#40;Object-Relational Mapping&#41;](/ohory/tetra/wiki/ORM---Object-Relational-Mapping)
    * [Templating system](/ohory/tetra/wiki/Templating-system)
    * [Bootstrap](/ohory/tetra/wiki/Bootstrap)
    * [Debugger](/ohory/tetra/wiki/Debugger)
