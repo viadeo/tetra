@@ -3,32 +3,32 @@ tetra ![travis](https://secure.travis-ci.org/ohory/tetra.png)
 
 ## A clean MVC javascript framework
 
-Tetra aims to help developers to build faster and easier a more maintainable code.
+Tetra aims to help developers build faster, more maintainable and better structured code.
 
-The idea is to use a completely MVC (for Model, View, Controller) framework which normalize all implementations with a simple structure splitting code in 3 different layers :
+Tetra is a complete MVC (Model, View, Controller) framework, normalizing all implementations through a simple structure that splits the code into 3 different layers :
    * [View](/ohory/tetra/wiki/View-layer): DOM access and UX behaviors 
    * [Controller](/ohory/tetra/wiki/Controller-layer): Programmatic logic
-   * [Model](/ohory/tetra/wiki/Model-layer): Structured data and Ajax requesting
+   * [Model](/ohory/tetra/wiki/Model-layer): Structured data and Ajax requests
    
-Interactions between layers are realized using an evenemential system managing asynchronous implementation. Each classes have an access to a communication pipe linked to potential listener.
+Each layer has access to a communication pipe linked to a potential listener, allowing asynchronous communication between each part of the application.
 
-Tetra.js framework is also object-oriented to encourage you to deal with structured data with their associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/ohory/tetra/wiki/ORM:-Object-Relational-Mapping) totally hide the Ajax transactions and assure the consistency of data between front-end and back-end.
+The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/ohory/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
 
-Additionnally, the "[bootstrap](/ohory/tetra/wiki/Bootstrap)" feature manage dynamic loading of javascript scripts from data attributes on DOM elements and through a dependency management system.
+Additionnally, the "[bootstrap](/ohory/tetra/wiki/Bootstrap)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
 
 ## Tetra core tree
 
    * **lib**
-      * **conf**: Configuration files of core.js for each plateform.
-      * **deps**: External dependencies of client-side framework.
-      * **mod**: Additonal modules of the core framework. Allows to extend native implementation with advanced features. Already implemented modules are:
-		 * **libAbstracted**: Abstracted library to use Tetra.js with other librairies than jQuery. Prototype and Node.js connectors are already implemented.
-		 * **require**: Configuration of RequireJS for Tetra.js use in client-side and server-side (Node.js)
-		 * **tmpl**: Templating system integrated to the controller and view layer in client and server environnement.
+      * **conf**: Tetra.js configuration files for each platform.
+      * **deps**: External dependencies of the client-side framework.
+      * **mod**: Additonal modules of the framework. Ability to extend native implementation with advanced features. Already implemented modules are:
+		 * **libAbstracted**: Abstracted library to use Tetra.js with librairies other than jQuery. Prototype and Node.js connectors are already implemented.
+		 * **require**: The RequireJS library, used client- and server-side (Node.js) dependency loading
+		 * **tmpl**: Templating system integrated into the controller and view layer in both the client and server environments.
       * _tetra-controller.js_: Controller layer
 	  * _tetra-model.js_: Model layer
 	  * _tetra-view.js_: View layer
-	  * _tetra.js_: Core of Tetra.js framework. Only give interfaces of MVC layers, extend and debug features.
+	  * _tetra.js_: Core of Tetra.js framework, an interface that provides acceess to the MVC layers, framework extensions and debug features.
 
 Configuration files are used to construct the core object needed to build mvc apps. It must have the following structure :
 
@@ -42,14 +42,14 @@ tetra.extend({
 }).start();
 ```
 
-If the default settings are sufficient, you can only call the start function (as in /conf/default.js):
+If the default settings are sufficient, you need only call the start function (as in /conf/default.js):
 
 ```js
 tetra.start();
 ```
 
 ## Applications tree
-By default, the Tetra.js framework recommands to use a directory tree to implement applications. This structure allows you to use the bootstrap feature to load dynamically your javascript resources.
+By default, the Tetra.js framework expects a particular directory tree structure. Following this convention allows you to use the bootstrap feature to dynamically load JavaScript resources.
 
    * **coremvc**
       * **apps**
