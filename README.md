@@ -1,7 +1,7 @@
-tetra ![travis](https://secure.travis-ci.org/ohory/tetra.png)  
+![tetra logo](https://raw.github.com/ohory/tetra/master/tetra.png) ![travis](https://secure.travis-ci.org/ohory/tetra.png)  
 =====
 
-## A clean MVC javascript framework
+## Tetra, a clean MVC javascript framework
 
 Tetra aims to help developers build faster, more maintainable and better structured code.
 
