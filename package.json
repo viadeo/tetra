@@ -29,6 +29,9 @@
     "mysql": ">= 0.9.5",
     "requirejs": "*"
   },
+  "devDependencies": {
+    "grunt": "~0.3.14"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/ohory/tetra"
