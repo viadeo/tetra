@@ -10,5 +10,5 @@ before_script:
 script:
   - "rake"
   - "npm test"
-  - "git config --global user.name 'Olivier Hory'; git config --global user.email olivier.hory@gmail.com; git remote set-url origin git@github.com:ohory/tetra.git"
-  - "git add dist/*.min.js; git commit -m 'auto-generated tetra packages'; echo 'yes' | git push"
+  - "git config --global user.name 'Olivier Hory'; git config --global user.email olivier.hory@gmail.com; git remote set-url origin git@github.com:ohory/tetra.git; ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no github.com"
+  - "git add dist/*.min.js; git commit -m 'auto-generated tetra packages'; git push"
