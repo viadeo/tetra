@@ -3,7 +3,7 @@ module.exports = function( grunt ) {
 		meta: {
 			banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */"
 		},
-		build: {
+		concat: {
 			'dist/tetra.js': [
 				"lib/tetra.js",
 				"lib/deps/require.js",
