@@ -1,5 +1,6 @@
 module.exports = function( grunt ) {
 	grunt.initConfig({
+		pkg: "<json:package.json>",
 		meta: {
 			banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */"
 		},
