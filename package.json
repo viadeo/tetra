@@ -40,7 +40,7 @@
     "node": ">= 0.8.7"
   },
   "scripts": {
-    "preinstall": "npm i -g grunt; cd lib/deps/jquery && grunt",
-	"test": "grunt default --verbose"
+    "preinstall": "npm i -g grunt",
+	"test": "cd lib/deps/jquery && grunt; cd ../../ && grunt default --verbose"
   }
 }
