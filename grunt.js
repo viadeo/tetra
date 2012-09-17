@@ -1,19 +1,8 @@
-config.init({
+grunt.initConfig({
 	meta: {
-		title: 'Tetra.js',
-		name: "Viadeo/APVO Corp., Olivier Hory and other Tetra contributors",
-		homepage: 'http://www.viadeo.com',
-		banner: '/* \n' +
-				' * \tAuthor:\t\t{{meta.name}}\n' +
-				' * \tWebsite:\t{{meta.homepage}}\n' +
-				' * \n' +
-				' */'
+		banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */"
 	},
-	watch: {
-		files: ["lib/*.js"],
-		tasks: 'default'
-	},
-	concat: {
+	build: {
 		'dist/tetra.js': [
 			"lib/tetra.js",
 			"lib/deps/require.js",
@@ -42,8 +31,12 @@ config.init({
 	min: {
 		'dist/tetra.min.js': ['<banner>', 'dist/tetra.js'],
 		'dist/tetra-viadeo.min.js': ['<banner>', 'dist/tetra-viadeo.js']
+	},
+	watch: {
+		files: ["lib/*.js"],
+		tasks: 'default'
 	}
 });
 
 // Default task.
-task.registerTask('default', 'concat min watch');
+grunt.registerTask('default', 'concat min watch');
