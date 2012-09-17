@@ -36,9 +36,37 @@ module.exports = function( grunt ) {
 		min: {
 			'dist/tetra.min.js': ['<banner>', 'dist/tetra.js'],
 			'dist/tetra-viadeo.min.js': ['<banner>', 'dist/tetra-viadeo.js']
+		},
+		jasmine: {
+			folder: {
+				src: "spec/javascripts/specs/core"
+			}
 		}
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'concat min');
+	grunt.registerTask('default', 'jasmine concat min');
+	
+	// Tasks
+	grunt.registerMultiTask('jasmine', 'Test unit by jasmine.', function() {
+        var jasmine = require("jasmine-node").executeSpecsInFolder;
+        var specFolder = this.file.src,
+            isVerbose = false,
+            showColors = true;
+        var onComplete = function(runner, log) {
+            if (runner.results().failedCount === 0) {
+                grunt.log.writeln('Pass to jasmine unit test : ' + specFolder);
+                done(true);
+            } else {
+                grunt.verbose.error();
+                throw grunt.task.taskError("Can't pass to jasmine unit test");
+            }
+        };
+
+        var done = this.async();
+        jasmine(specFolder,
+            onComplete,
+            isVerbose,
+            showColors);
+    });
 };
