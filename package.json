@@ -30,8 +30,7 @@
     "requirejs": "*"
   },
   "devDependencies": {
-	"jasmine-node": "*",
-    "grunt": "~0.3.14"
+	"jasmine-node": "*"
   },
   "repository": {
     "type": "git",
@@ -41,6 +40,7 @@
     "node": ">= 0.8.7"
   },
   "scripts": {
-    "test": "grunt default --verbose"
+    "preinstall": "npm i -g grunt",
+	"test": "grunt default --verbose"
   }
 }

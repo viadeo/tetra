@@ -30,16 +30,15 @@ module.exports = function( grunt ) {
 				"lib/conf/viadeo-webapp.js"
 			]
 		},
+		lint: {
+			dist: "dist/*.js"
+		},
 		min: {
 			'dist/tetra.min.js': ['<banner>', 'dist/tetra.js'],
 			'dist/tetra-viadeo.min.js': ['<banner>', 'dist/tetra-viadeo.js']
-		},
-		watch: {
-			files: ["lib/*.js"],
-			tasks: 'default'
 		}
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'concat min watch');
+	grunt.registerTask('default', 'concat lint min');
 };
