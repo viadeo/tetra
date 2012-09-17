@@ -29,9 +29,6 @@
     "mysql": ">= 0.9.5",
     "requirejs": "*"
   },
-  "devDependencies": {
-	"jasmine-node": "*"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/ohory/tetra"

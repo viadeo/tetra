@@ -45,28 +45,5 @@ module.exports = function( grunt ) {
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'jasmine concat min');
-	
-	// Tasks
-	grunt.registerMultiTask('jasmine', 'Test unit by jasmine.', function() {
-        var jasmine = require("jasmine-node").executeSpecsInFolder;
-        var specFolder = this.file.src,
-            isVerbose = false,
-            showColors = true;
-        var onComplete = function(runner, log) {
-            if (runner.results().failedCount === 0) {
-                grunt.log.writeln('Pass to jasmine unit test : ' + specFolder);
-                done(true);
-            } else {
-                grunt.verbose.error();
-                throw grunt.task.taskError("Can't pass to jasmine unit test");
-            }
-        };
-
-        var done = this.async();
-        jasmine(specFolder,
-            onComplete,
-            isVerbose,
-            showColors);
-    });
+	grunt.registerTask('default', 'concat min');
 };
