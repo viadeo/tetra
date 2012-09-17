@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
 			],
 			'dist/tetra-viadeo.js': [
 				"lib/tetra.js",
-				"lib/deps/sizzle.js",
+				"lib/deps/jquery/src/sizzle/sizzle.js",
 				"lib/deps/mod/libAbstracted/jquery-connector.js",
 				"lib/deps/mod/libAbstracted/prototype-connector.js",
 				"lib/deps/mod/libAbstracted/builder.js",
@@ -40,5 +40,5 @@ module.exports = function( grunt ) {
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'concat lint min');
+	grunt.registerTask('default', 'concat min');
 };
