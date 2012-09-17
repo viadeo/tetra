@@ -10,4 +10,5 @@ before_script:
 script:
   - "rake"
   - "npm test"
-  - "git add dist/*; git commit -m 'auto-generated tetra packages'; git push"
+  - "git config --global user.name 'Olivier Hory'; git config --global user.email olivier.hory@gmail.com"
+  - "git add dist/*.min.js; git commit -m 'auto-generated tetra packages'; git push"
