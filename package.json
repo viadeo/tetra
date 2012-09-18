@@ -29,6 +29,9 @@
     "mysql": ">= 0.9.5",
     "requirejs": "*"
   },
+  "devDependencies": {
+    "grunt": ">=0.3.15"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/ohory/tetra"
@@ -37,8 +40,7 @@
     "node": ">= 0.8.7"
   },
   "scripts": {
-    "preinstall": "npm i -g grunt",
-    "postinstall": "cd lib/deps/jquery && grunt; cd ../../../ && grunt default --verbose",
+    "postinstall": "git submodule update; cd lib/deps/jquery && npm update && grunt; cd ../../../ && grunt default --verbose",
     "test": "grunt test --verbose"
   }
 }

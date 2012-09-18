@@ -32,11 +32,10 @@ module.exports = function( grunt ) {
 			]
 		},
 		lint: {
-			dist: ['dist/tetra-<%=meta.version%>.min.js', 'dist/tetra-viadeo-<%=meta.version%>.min.js']
+			files: ['dist/tetra-<%=meta.version%>.js']
 		},
 		jshint: {
 			options: {
-				curly: true,
 				eqeqeq: true,
 				immed: true,
 				latedef: true,
@@ -49,7 +48,9 @@ module.exports = function( grunt ) {
 				jquery: true,
 				prototypejs: true,
 				devel: true,
-				smarttabs: true
+				smarttabs: true,
+				asi: true,
+				lastsemic: true,
 			},
 			globals: {
 				tetra: true,

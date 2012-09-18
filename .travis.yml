@@ -9,4 +9,3 @@ before_script:
   - "bundle install"
 script:
   - "rake"
-  - "npm test"
