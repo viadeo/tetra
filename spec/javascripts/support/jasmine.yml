@@ -1,7 +1,7 @@
 src_files:
-  - lib/deps/jquery-1.8.js
+  - lib/deps/jquery/dist/jquery.js
+  - lib/deps/requirejs/require.js
   - lib/deps/json2.js
-  - lib/deps/require.js
   - lib/tetra.js
   - lib/mod/require/client.js
   - lib/mod/tmpl/client-micro-tmpl.js

@@ -7,7 +7,7 @@ module.exports = function( grunt ) {
 		concat: {
 			'dist/tetra-<%= pkg.version %>.js': [
 				"lib/tetra.js",
-				"lib/deps/require.js",
+				"lib/deps/requirejs/require.js",
 				"lib/mod/require/client.js",
 				"lib/mod/tmpl/client-micro-tmpl.js",
 				"lib/tetra-view.js",
@@ -21,7 +21,7 @@ module.exports = function( grunt ) {
 				"lib/deps/mod/libAbstracted/jquery-connector.js",
 				"lib/deps/mod/libAbstracted/prototype-connector.js",
 				"lib/deps/mod/libAbstracted/builder.js",
-				"lib/deps/require.js",
+				"lib/deps/requirejs/require.js",
 				"lib/mod/require/client.js",
 				"lib/mod/tmpl/client-micro-tmpl.js",
 				"lib/tetra-view.js",
