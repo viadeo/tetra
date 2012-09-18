@@ -40,7 +40,7 @@
     "node": ">= 0.8.7"
   },
   "scripts": {
-    "postinstall": "git submodule update; cd lib/deps/jquery && npm install && grunt; cd ../../../ && grunt default --verbose",
+    "postinstall": "git submodule update; cd lib/deps/jquery && git submodule update && npm install && grunt; cd ../../../ && grunt default --verbose",
     "test": "grunt test --verbose"
   }
 }
