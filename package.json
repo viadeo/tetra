@@ -1,7 +1,7 @@
 {
   "name": "tetra",
   "description": "Tetra.js MVC framework for client-side and server-side (with Node.js/Express)",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "author": {
     "name": "Olivier Hory",
     "email": "olivier.hory@gmail.com"
@@ -38,7 +38,7 @@
   },
   "scripts": {
     "preinstall": "npm i -g grunt",
-    "postinstall": "cd lib/deps/jquery && grunt; cd ../../ && grunt default --verbose",
+    "postinstall": "cd lib/deps/jquery && grunt; cd ../../../ && grunt default --verbose",
     "test": "grunt test --verbose"
   }
 }

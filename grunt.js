@@ -2,10 +2,11 @@ module.exports = function( grunt ) {
 	grunt.initConfig({
 		pkg: "<json:package.json>",
 		meta: {
+			version: "<%= pkg.version %>",
 			banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */"
 		},
 		concat: {
-			'dist/tetra-<%= pkg.version %>.js': [
+			'dist/tetra-<%=meta.version%>.js': [
 				"lib/tetra.js",
 				"lib/deps/requirejs/require.js",
 				"lib/mod/require/client.js",
@@ -15,7 +16,7 @@ module.exports = function( grunt ) {
 				"lib/tetra-model.js",
 				"lib/conf/default.js"
 			],
-			'dist/tetra-viadeo-<%= pkg.version %>.js': [
+			'dist/tetra-viadeo-<%=meta.version%>.js': [
 				"lib/tetra.js",
 				"lib/deps/jquery/src/sizzle/sizzle.js",
 				"lib/deps/mod/libAbstracted/jquery-connector.js",
@@ -31,7 +32,7 @@ module.exports = function( grunt ) {
 			]
 		},
 		lint: {
-			dist: ['dist/tetra-<%= pkg.version %>.min.js', 'dist/tetra-viadeo-<%= pkg.version %>.min.js']
+			dist: ['dist/tetra-<%=meta.version%>.min.js', 'dist/tetra-viadeo-<%=meta.version%>.min.js']
 		},
 		jshint: {
 			options: {
@@ -58,8 +59,8 @@ module.exports = function( grunt ) {
 			}
 		},
 		min: {
-			'dist/tetra-<%= pkg.version %>.min.js': ['<banner>', 'dist/tetra-<%= pkg.version %>.js'],
-			'dist/tetra-viadeo-<%= pkg.version %>.min.js': ['<banner>', 'dist/tetra-viadeo-<%= pkg.version %>.js']
+			'dist/tetra-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-<%=meta.version%>.js'],
+			'dist/tetra-viadeo-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-viadeo-<%=meta.version%>.js']
 		},
 		jasmine: {
 			folder: {
