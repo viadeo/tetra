@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>{%=head.title%}</title>
+
+    <link href="{%=head.favicon%}" rel="shortcut icon" type="images/x-icon">
+
+    {% for(var h in head.meta){ %}
+    <meta {% for(attr in head.meta[h]) { %}{%=attr%}="{%=head.meta[h][attr]%}"{% } %}>
+    {% } %}
+
+    {% for(h in head.css){ %}
+    {% if(head.css[h]){ %}<link type="text/css" href="{%=h %}" rel="stylesheet">{% } %}
+    {% } %}
+
+    {% for(h in head.js){ %}
+    {% if(head.js[h]){ %}<script type="text/javascript" src="{%=h %}"></script>{% } %}
+    {% } %}
+</head>
+<body>
+    <h1>Viadeo</h1>
+    {%-body%}
+<body>
+</html>

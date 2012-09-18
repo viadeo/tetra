@@ -1,0 +1,27 @@
+{
+  "appenders": [
+    { 
+      "type": "console"
+    }
+  ],
+  
+  "levels": {
+    "api/network": "DEBUG",
+    "api/network/data": "DEBUG",
+    "func/getInternalAccessToken": "DEBUG",
+    "sdkapi": "DEBUG",
+    "server": "DEBUG",
+    "server/cache": "DEBUG",
+    "server/controllers/combo": "DEBUG",
+    "server/controllers/components": "DEBUG",
+    "server/config": "DEBUG",
+    "server/controllers/exec": "DEBUG",
+    "server/controllers/loader": "DEBUG",
+    "server/controllers/loader/deps": "DEBUG",
+    "server/serverfunc": "DEBUG",
+    "server/uglify": "DEBUG",
+    "server/template": "DEBUG",
+    "console": "DEBUG",
+    "tests": "DEBUG"
+  }
+}

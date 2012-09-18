@@ -1,0 +1,15 @@
+{
+    "name": "application-name"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "tetra": ">= 0.9.0"
+    , "express": ">= 3.0.0"
+    , "ejs": ">= 0.6.1"
+    , "memcached": "*"
+    , "connect-memcached": "*"
+    , "log4js": "*"
+    , "uglify-js": "*"
+    , "gzippo": "*"
+  }
+}

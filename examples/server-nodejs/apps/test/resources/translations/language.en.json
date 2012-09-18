@@ -1,0 +1,8 @@
+{
+    "firstname": {
+        "value": "Firstname"
+    },
+    "hello": {
+        "value": "Hello @var0 @var1"
+    }
+}
