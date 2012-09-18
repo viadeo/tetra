@@ -38,6 +38,7 @@
   },
   "scripts": {
     "preinstall": "npm i -g grunt",
-	"test": "cd lib/deps/jquery && grunt; cd ../../ && grunt default --verbose"
+	"install": "cd lib/deps/jquery && grunt; cd ../../ && grunt default --verbose"
+	"test": "cd lib/deps/jquery && grunt; cd ../../ && grunt test --verbose"
   }
 }
