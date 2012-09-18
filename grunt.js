@@ -70,5 +70,5 @@ module.exports = function( grunt ) {
 
 	// Default task.
 	grunt.registerTask('default', 'concat min');
-	grunt.registerTask('default', 'jshint');
+	grunt.registerTask('test', 'lint');
 };
