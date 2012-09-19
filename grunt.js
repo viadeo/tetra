@@ -19,9 +19,9 @@ module.exports = function( grunt ) {
 			'dist/tetra-viadeo-<%=meta.version%>.js': [
 				"lib/tetra.js",
 				"lib/deps/jquery/src/sizzle/sizzle.js",
-				"lib/deps/mod/libAbstracted/jquery-connector.js",
-				"lib/deps/mod/libAbstracted/prototype-connector.js",
-				"lib/deps/mod/libAbstracted/builder.js",
+				"lib/mod/libAbstracted/jquery-connector.js",
+				"lib/mod/libAbstracted/prototype-connector.js",
+				"lib/mod/libAbstracted/builder.js",
 				"lib/deps/requirejs/require.js",
 				"lib/mod/require/client.js",
 				"lib/mod/tmpl/client-micro-tmpl.js",
