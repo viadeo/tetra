@@ -2435,7 +2435,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	// John Resig - http://ejohn.org/ - MIT Licensed
 	(function(){
 	  var
-	  	cache = {},
+		cache = {},
 		left = "<%",
 		right = "%>",
 		key = "%",
