@@ -1,4 +1,4 @@
-![tetra logo](https://raw.github.com/ohory/tetra/master/tetra.png) ![travis](https://secure.travis-ci.org/ohory/tetra.png)  
+![tetra logo](https://raw.github.com/viadeo/tetra/master/tetra.png) ![travis](https://secure.travis-ci.org/viadeo/tetra.png)  
 =====
 
 ## Tetra, a clean MVC javascript framework
@@ -6,15 +6,15 @@
 Tetra aims to help developers build faster, more maintainable and better structured code.
 
 Tetra is a complete MVC (Model, View, Controller) framework, normalizing all implementations through a simple structure that splits the code into 3 different layers :
-   * [View](/ohory/tetra/wiki/View-layer): DOM access and UX behaviors 
-   * [Controller](/ohory/tetra/wiki/Controller-layer): Programmatic logic
-   * [Model](/ohory/tetra/wiki/Model-layer): Structured data and Ajax requests
+   * [View](/viadeo/tetra/wiki/View-layer): DOM access and UX behaviors 
+   * [Controller](/viadeo/tetra/wiki/Controller-layer): Programmatic logic
+   * [Model](/viadeo/tetra/wiki/Model-layer): Structured data and Ajax requests
    
 Each layer has access to a communication pipe linked to a potential listener, allowing asynchronous communication between each part of the application.
 
-The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/ohory/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
+The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
 
-Additionnally, the "[bootstrap](/ohory/tetra/wiki/Bootstrap)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
+Additionnally, the "[bootstrap](/viadeo/tetra/wiki/Bootstrap)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
 
 ## Tetra core tree
 
@@ -63,13 +63,13 @@ By default, the Tetra.js framework expects a particular directory tree structure
       * **model**: Global model classes
 
 ## Table of content
-   * [View layer](/ohory/tetra/wiki/View-layer)
-   * [Controller layer](/ohory/tetra/wiki/Controller-layer)
-   * [Model layer](/ohory/tetra/wiki/Model-layer)
-   * [ORM: Object-Relational Mapping](/ohory/tetra/wiki/ORM:-Object-Relational-Mapping)
-   * [Templating system](/ohory/tetra/wiki/Templating-system)
-   * [Bootstrap](/ohory/tetra/wiki/Bootstrap)
-   * [Debugger](/ohory/tetra/wiki/Debugger)
+   * [View layer](/viadeo/tetra/wiki/View-layer)
+   * [Controller layer](/viadeo/tetra/wiki/Controller-layer)
+   * [Model layer](/viadeo/tetra/wiki/Model-layer)
+   * [ORM: Object-Relational Mapping](/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping)
+   * [Templating system](/viadeo/tetra/wiki/Templating-system)
+   * [Bootstrap](/viadeo/tetra/wiki/Bootstrap)
+   * [Debugger](/viadeo/tetra/wiki/Debugger)
 	  
 ## Licence
 (The MIT License)
