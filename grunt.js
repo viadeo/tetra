@@ -6,14 +6,17 @@ module.exports = function( grunt ) {
 			banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */"
 		},
 		concat: {
+			'dist/tetra-core-<%=meta.version%>.js': [
+                                "lib/tetra.js",
+                                "lib/deps/requirejs/require.js",
+                                "lib/mod/require/client.js",
+                                "lib/mod/tmpl/client-micro-tmpl.js",
+                                "lib/tetra-view.js",
+                                "lib/tetra-controller.js",
+                                "lib/tetra-model.js"
+                        ],
 			'dist/tetra-<%=meta.version%>.js': [
-				"lib/tetra.js",
-				"lib/deps/requirejs/require.js",
-				"lib/mod/require/client.js",
-				"lib/mod/tmpl/client-micro-tmpl.js",
-				"lib/tetra-view.js",
-				"lib/tetra-controller.js",
-				"lib/tetra-model.js",
+				"dist/tetra-core-<%=meta.version%>.js",
 				"lib/conf/default.js"
 			],
 			'dist/tetra-viadeo-<%=meta.version%>.js': [
@@ -60,6 +63,7 @@ module.exports = function( grunt ) {
 			}
 		},
 		min: {
+			'dist/tetra-core-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-core-<%=meta.version%>.js'],
 			'dist/tetra-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-<%=meta.version%>.js'],
 			'dist/tetra-viadeo-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-viadeo-<%=meta.version%>.js']
 		},
