@@ -51,7 +51,7 @@ tetra.start();
 ## Applications tree
 By default, the Tetra.js framework expects a particular directory tree structure. Following this convention allows you to use the bootstrap feature to dynamically load JavaScript resources.
 
-   * **coremvc**
+   * **tetramvc**
       * **apps**
 		 * _application name_
 		    * **controller**: Controller classes of the application

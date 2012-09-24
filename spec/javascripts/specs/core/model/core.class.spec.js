@@ -469,7 +469,7 @@ describe("the tetra MVC model", function() {
             var hasLoaded = false;
             var successResponse;
 
-            tetra.debug.model("myScope", "myModel").find(response.id).success(function(data){
+            tetra.debug.model("myScope", "myModel").find(response.id, function(data){
                 successResponse = data.getResponse();
                 hasLoaded = true;
             });
@@ -547,7 +547,7 @@ describe("the tetra MVC model", function() {
             
             runs(function(){
                 // This should succeed
-                tetra.debug.model("myScope", "mySecondModel").find("myUniqueId").success(function(data){
+                tetra.debug.model("myScope", "mySecondModel").find("myUniqueId", function(data){
                     response = data.getResponse();
                     hasLoaded = true;
                 });
@@ -619,10 +619,18 @@ describe("the tetra MVC model", function() {
             // Retrieve the object Ref and find the object
             var 
                 response = this.spy.getCall(0).args[0],
-                failObj = tetra.debug.model("myScope", "myModel").findByRef("blarg"),
-                successObj = tetra.debug.model("myScope", "myModel").findByRef(response.ref),
+                failObj,
+                successObj,
                 successResponse
             ;
+			
+			tetra.debug.model("myScope", "myModel").findByRef("blarg", function(obj) {
+				failObj = obj;
+			});
+			
+			tetra.debug.model("myScope", "myModel").findByRef(response.ref, function(obj) {
+				successObj = obj;
+			});
             
             expect(failObj).toBeNull();
             expect(successObj).toBeDefined();
@@ -693,7 +701,7 @@ describe("the tetra MVC model", function() {
                 tetra.debug.model("myScope", "myModel").findByCond({
                     id: "myIncorrectId",
                     success: true
-                }).success(function(data){
+                }, function(data){
                     successResponse = data;
                     hasLoaded = true;
                 });
@@ -713,7 +721,7 @@ describe("the tetra MVC model", function() {
                 tetra.debug.model("myScope", "myModel").findByCond({
                     id: "myUniqueId",
                     success: true
-                }).success(function(data){
+                }, function(data){
                     successResponse = data.getResponse();
                     hasLoaded = true;
                 });
@@ -781,7 +789,7 @@ describe("the tetra MVC model", function() {
                 tetra.debug.model("myScope", "myModel").select({
                     id: "myUniqueId",
                     success: true
-                }).success(function(data) {
+                }, function(data) {
                     response = data[0].getResponse();
                     hasLoaded = true;
                 });
@@ -806,7 +814,7 @@ describe("the tetra MVC model", function() {
                 tetra.debug.model("myScope", "myModel").select({
                     id: "myUniqueId",
                     success: true
-                }).success(function(data) {
+                }, function(data) {
                     response = data[0].getResponse();
                     hasLoaded = true;
                 });

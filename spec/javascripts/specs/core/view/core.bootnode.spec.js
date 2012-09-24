@@ -1,4 +1,4 @@
-// Testing the MVC tetra bootstrap functionality
+// Testing the MVC tetra bootnode functionality
 // ====================================
 
 // For documentation, see
@@ -11,7 +11,7 @@
 //  * Just like in the view tests, focus/blur are not behaving correctly under IE8 and under
 //  * page IDs appear to be loaded as global variables, so be careful of the naming of your local vars
 
-describe("the tetra MVC bootstrap mode", function() {
+describe("the tetra MVC bootnode mode", function() {
 
 	"use strict";
 
@@ -20,13 +20,13 @@ describe("the tetra MVC bootstrap mode", function() {
 		_asyncLoaderTimeout = 5000
 	;
 
-	// Setting up a bootstrapped component
+	// Setting up a bootnoded component
 	// ----------------------------------------
-	describe("setting up a bootstrapped page component", function(){
+	describe("setting up a bootnoded page component", function(){
 		
 		beforeEach(function() {
 			// Enable debug on a non-existent scope, to suppress messages
-			loadFixtures("bootstrap.html");
+			loadFixtures("bootnode.html");
 		});
 		
 		afterEach(function() {
@@ -46,7 +46,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			tetra.model.destroy("myGlobalModel");
 		});
 		
-		it("should load the resources for bootstrapped components invoked via a click event handler", function(){
+		it("should load the resources for bootnoded components invoked via a click event handler", function(){
 			var 
 				views,
 				node
@@ -54,7 +54,7 @@ describe("the tetra MVC bootstrap mode", function() {
 
 			runs(function() {
 				views = tetra.debug.view.list();
-				node = d.getElementById("bootstrapClickTestNode");
+				node = d.getElementById("bootnodeClickTestNode");
 				expect(views.myScope).toBeUndefined();
 				
 				// Trigger the dependency loading
@@ -68,7 +68,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			}, _asyncLoaderTimeout);
 		});
 		
-		it("should load the resources for bootstrapped components invoked via a mouseover event handler", function(){
+		it("should load the resources for bootnoded components invoked via a mouseover event handler", function(){
 			var 
 				views,
 				node
@@ -76,7 +76,7 @@ describe("the tetra MVC bootstrap mode", function() {
 		
 			runs(function() {
 				views = tetra.debug.view.list();
-				node = d.getElementById("bootstrapMouseoverTestNode");
+				node = d.getElementById("bootnodeMouseoverTestNode");
 				expect(views.myScope).toBeUndefined();
 				
 				// Trigger the dependency loading
@@ -90,7 +90,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			}, _asyncLoaderTimeout);
 		});
 
-		it("should load the resources for bootstrapped components invoked via a focus event handler", function(){
+		it("should load the resources for bootnoded components invoked via a focus event handler", function(){
 			var 
 				node,
 				go = node && node.focus && (typeof node.focus === "function"),
@@ -99,7 +99,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			if(go) {
 				runs(function() {
 					views = tetra.debug.view.list();
-					node = d.getElementById("bootstrapFocusTestNode");
+					node = d.getElementById("bootnodeFocusTestNode");
 					expect(views.myScope).toBeUndefined();
 					
 					// Trigger the dependency loading
@@ -114,7 +114,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			}
 		});
 		
-		it("should load a view and its referenced controller for a bootstrapped component", function(){
+		it("should load a view and its referenced controller for a bootnoded component", function(){
 			var 
 				views,
 				controllers,
@@ -124,7 +124,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			runs(function() {
 				views = tetra.debug.view.list();
 				controllers =  tetra.debug.ctrl.list();
-				node = d.getElementById("bootstrapVCTestNode");
+				node = d.getElementById("bootnodeVCTestNode");
 				expect(views.myScope).toBeUndefined();
 				expect(controllers.myScope).toBeUndefined();
 				
@@ -141,7 +141,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			}, _asyncLoaderTimeout);
 		});	
 		
-		it("should load a view, its controller & its model for a bootstrapped component", function(){
+		it("should load a view, its controller & its model for a bootnoded component", function(){
 			var 
 				views,
 				controllers,
@@ -153,7 +153,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				controllers =  tetra.debug.ctrl.list();
 				models = tetra.debug.model.list();
-				node = d.getElementById("bootstrapVCMTestNode");
+				node = d.getElementById("bootnodeVCMTestNode");
 				
 				expect(views.myScope).toBeUndefined();
 				expect(controllers.myScope).toBeUndefined();
@@ -174,7 +174,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			}, _asyncLoaderTimeout);
 		});
 		
-		it("should load a view, its controller & its global model for a bootstrapped component", function(){
+		it("should load a view, its controller & its global model for a bootnoded component", function(){
 			var 
 				views,
 				controllers,
@@ -186,7 +186,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				controllers =  tetra.debug.ctrl.list();
 				models = tetra.debug.model.list();
-				node = d.getElementById("bootstrapGlobalTestNode");
+				node = d.getElementById("bootnodeGlobalTestNode");
 				
 				expect(views.myScope).toBeUndefined();
 				expect(controllers.myScope).toBeUndefined();
@@ -210,7 +210,7 @@ describe("the tetra MVC bootstrap mode", function() {
 
 		// ### Error states ###
 	
-		it("should not attempt to reload components already loaded for a bootstrapped component", function(){
+		it("should not attempt to reload components already loaded for a bootnoded component", function(){
 			var 
 				scriptTagsLength,
 				className,
@@ -222,8 +222,8 @@ describe("the tetra MVC bootstrap mode", function() {
 			;
 
 			runs(function() {
-				node = d.getElementById("bootstrapVCMTestNode");
-				alreadyLoadedNode = d.getElementById("bootstrapAlreadyLoadedTestNode");
+				node = d.getElementById("bootnodeVCMTestNode");
+				alreadyLoadedNode = d.getElementById("bootnodeAlreadyLoadedTestNode");
 			
 				// Trigger the dependency loading
 				VNS.test.triggerEvent(node, "click");
@@ -257,7 +257,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 		
-		it("should fail to load resources for bootstrapped components invoked via mouseout", function(){
+		it("should fail to load resources for bootnoded components invoked via mouseout", function(){
 			var 
 				views,
 				node,
@@ -267,7 +267,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			runs(function(){
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
-				node = d.getElementById("bootstrapMouseoutTestNode");
+				node = d.getElementById("bootnodeMouseoutTestNode");
 				className = node.className;
 				
 				VNS.test.triggerEvent(node, "mouseout");
@@ -284,7 +284,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 	
-		it("should fail to load resources for bootstrapped components invoked via mousemove", function(){
+		it("should fail to load resources for bootnoded components invoked via mousemove", function(){
 			var 
 				views,
 				node,
@@ -294,7 +294,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			runs(function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
-				node = d.getElementById("bootstrapMousemoveTestNode");
+				node = d.getElementById("bootnodeMousemoveTestNode");
 				className = node.className;
 				VNS.test.triggerEvent(node, "mousemove");
 			});
@@ -310,7 +310,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 	
-		it("should fail to load resources for bootstrapped components invoked via dblClick", function(){
+		it("should fail to load resources for bootnoded components invoked via dblClick", function(){
 			var 
 				views,
 				node,
@@ -321,7 +321,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstraponDblClickTestNode");
+				node = d.getElementById("bootnodeonDblClickTestNode");
 				className = node.className;
 				
 				VNS.test.triggerEvent(node, "dblClick");
@@ -338,7 +338,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 	
-		it("should fail to load resources for bootstrapped components invoked via change", function(){
+		it("should fail to load resources for bootnoded components invoked via change", function(){
 			var 
 				views,
 				node, 
@@ -349,7 +349,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapChangeTestNode");
+				node = d.getElementById("bootnodeChangeTestNode");
 				className = node.className;
 
 				VNS.test.triggerEvent(node, "change");
@@ -366,7 +366,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 	
-		it("should fail to load resources for bootstrapped components invoked via keydown", function(){
+		it("should fail to load resources for bootnoded components invoked via keydown", function(){
 			var 
 				views,
 				node,
@@ -377,7 +377,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapKeyDownNode");
+				node = d.getElementById("bootnodeKeyDownNode");
 				className = node.className;
 
 				VNS.test.triggerEvent(node, "keydown");
@@ -394,7 +394,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 
-		it("should fail to load resources for bootstrapped components invoked via blur", function(){
+		it("should fail to load resources for bootnoded components invoked via blur", function(){
 			var 
 				views,
 				node,
@@ -405,7 +405,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapBlurNode");
+				node = d.getElementById("bootnodeBlurNode");
 				className = node.className;
 				
 				VNS.test.triggerEvent(node, "blur");
@@ -434,7 +434,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapNonExistantTestNode");
+				node = d.getElementById("bootnodeNonExistantTestNode");
 				lastScriptsLength = VNS.test.query("script[id]").length;
 				VNS.test.triggerEvent(node, "click");
 			});
@@ -475,7 +475,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				controllers = tetra.debug.ctrl.list();
 				expect(controllers.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapNonExistantControllerTestNode");
+				node = d.getElementById("bootnodeNonExistantControllerTestNode");
 				lastScriptsLength = VNS.test.query("script[id]").length;
 				
 				VNS.test.triggerEvent(node, "click");
@@ -524,7 +524,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				models = tetra.debug.model.list();
 				expect(models.length).toBe(0);
 				
-				node = d.getElementById("bootstrapNonExistantModelTestNode");
+				node = d.getElementById("bootnodeNonExistantModelTestNode");
 				lastScriptsLength = VNS.test.query("script[id]").length;
 
 				VNS.test.triggerEvent(node, "click");
@@ -568,7 +568,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				expect(views.myScope).toBeUndefined();
 				expect(views.myMissingScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapIncorrectScopeTestNode");
+				node = d.getElementById("bootnodeIncorrectScopeTestNode");
 				lastScriptsLength = VNS.test.query("script[id]").length;
 
 				VNS.test.triggerEvent(node, "click");
@@ -594,7 +594,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 	
-		it("should fail when a bootstrapped component does not possess the 'bootnode' class", function() {
+		it("should fail when a bootnoded component does not possess the 'bootnode' class", function() {
 			var 
 				views,
 				node,
@@ -606,7 +606,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapNoBootnodeTestNode");
+				node = d.getElementById("bootnodeNoBootnodeTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 				
@@ -626,7 +626,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 
-		it("should fail when a bootstrapped component possesses an empty 'data-view' attribute", function() {
+		it("should fail when a bootnoded component possesses an empty 'data-view' attribute", function() {
 			var 
 				views,
 				node,
@@ -638,7 +638,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapNoViewTestNode");
+				node = d.getElementById("bootnodeNoViewTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 		
@@ -658,7 +658,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 
-		it("should fail when a bootstrapped component does not possess the 'data-view' attribute", function() {
+		it("should fail when a bootnoded component does not possess the 'data-view' attribute", function() {
 			var 
 				views,
 				node,
@@ -670,7 +670,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapViewNotPresentTestNode");
+				node = d.getElementById("bootnodeViewNotPresentTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 
@@ -691,7 +691,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 
-		it("should fail when a bootstrapped component possesses an empty 'data-event' attribute", function() {
+		it("should fail when a bootnoded component possesses an empty 'data-event' attribute", function() {
 			var 
 				views,
 				node,
@@ -703,7 +703,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapNoEventTestNode");
+				node = d.getElementById("bootnodeNoEventTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 
@@ -724,7 +724,7 @@ describe("the tetra MVC bootstrap mode", function() {
 			});
 		});
 	
-		it("should fail when a bootstrapped component does not possess the 'data-event' attribute", function() {
+		it("should fail when a bootnoded component does not possess the 'data-event' attribute", function() {
 			var 
 				views,
 				node,
@@ -736,7 +736,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapEventNotPresentTestNode");
+				node = d.getElementById("bootnodeEventNotPresentTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 				
@@ -766,7 +766,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapInvalidViewTestNode");
+				node = d.getElementById("bootnodeInvalidViewTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 
@@ -796,7 +796,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapInvalidControllerTestNode");
+				node = d.getElementById("bootnodeInvalidControllerTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 
@@ -826,7 +826,7 @@ describe("the tetra MVC bootstrap mode", function() {
 				views = tetra.debug.view.list();
 				expect(views.myScope).toBeUndefined();
 				
-				node = d.getElementById("bootstrapInvalidModelTestNode");
+				node = d.getElementById("bootnodeInvalidModelTestNode");
 				className = node.className;
 				scriptTagsLength = VNS.test.query("script[id]").length;
 

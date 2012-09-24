@@ -41,7 +41,7 @@
     				tns.ajaxBox.close();
     			}
     		},
-    		enableBootstrap: true,
+    		enableBootnode: true,
     		APPS_PATH : '/spec/javascripts/specs/fixtures/bootstrap',
     		GLOBAL_PATH : '/spec/javascripts/specs/fixtures/global',
         	disableViewInit: true
