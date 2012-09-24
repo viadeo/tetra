@@ -1826,7 +1826,7 @@ describe("the tetra MVC model", function() {
             // Revert the changes
             response.revert();
             
-            // Check they've been restored
+            // Check they've been resaved
             expect(response.get("success")).toBeTruthy();
             expect(response.get("myTestString")).toBe("bye");
             expect(response.get("myTestNumber")).toBe(12);
@@ -3093,7 +3093,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data){
+                                    "saved": function(data){
                                         that.spy(data.getResponse());
                                     },
                                     "error": function(data) {
@@ -3164,7 +3164,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data){
+                                    "saved": function(data){
                                         that.spy(data.getResponse());
                                     },
                                     "error": function(data) {
@@ -3234,7 +3234,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data){
+                                    "saved": function(data){
                                         that.spy(data.getResponse());
                                     },
                                     "error": function(data) {
@@ -3328,7 +3328,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data){
+                                    "saved": function(data){
                                         that.spy(data.getResponse());
                                     },
                                     "error": function(data) {
@@ -3419,7 +3419,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data) {
+                                    "saved": function(data) {
                                         // Should never be called
                                         that.spy();
                                     },
@@ -3509,7 +3509,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data) {
+                                    "saved": function(data) {
                                         // Shouldn't be called
                                         that.spy();
                                     },
@@ -3599,7 +3599,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data) {
+                                    "saved": function(data) {
                                         // Shouldn' be called
                                         that.spy();
                                     },
@@ -3682,7 +3682,7 @@ describe("the tetra MVC model", function() {
 //                                    "error": function(error) {
 //                                        that.spy(error);
 //                                    },
-//                                    "stored": function(data) {
+//                                    "saved": function(data) {
 //                                        // Shouldn't be called
 //                                        that.spy();
 //                                    }
@@ -3788,7 +3788,7 @@ describe("the tetra MVC model", function() {
                         events: {
                             model: {
                                 "myModel": {
-                                    "stored": function(data) {
+                                    "saved": function(data) {
                                         that.spy(data.getResponse());
                                     },
                                     "error": function(error) {
