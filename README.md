@@ -14,7 +14,7 @@ Each layer has access to a communication pipe linked to a potential listener, al
 
 The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
 
-Additionnally, the "[bootstrap](/viadeo/tetra/wiki/Bootstrap)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
+Additionnally, the "[bootnode](/viadeo/tetra/wiki/Bootnode)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
 
 ## Tetra core tree
 
@@ -37,7 +37,7 @@ tetra.extend({
 	conf: {
 		env: 'jQuery',
 		jsVersion: 347,
-		enableBootstrap: true
+		enableBootnode: true
 	}
 }).start();
 ```
@@ -49,7 +49,7 @@ tetra.start();
 ```
 
 ## Applications tree
-By default, the Tetra.js framework expects a particular directory tree structure. Following this convention allows you to use the bootstrap feature to dynamically load JavaScript resources.
+By default, the Tetra.js framework expects a particular directory tree structure. Following this convention allows you to use the bootnode feature to dynamically load JavaScript resources.
 
    * **tetramvc**
       * **apps**
@@ -68,7 +68,7 @@ By default, the Tetra.js framework expects a particular directory tree structure
    * [Model layer](/viadeo/tetra/wiki/Model-layer)
    * [ORM: Object-Relational Mapping](/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping)
    * [Templating system](/viadeo/tetra/wiki/Templating-system)
-   * [Bootstrap](/viadeo/tetra/wiki/Bootstrap)
+   * [Bootnode](/viadeo/tetra/wiki/Bootnode)
    * [Debugger](/viadeo/tetra/wiki/Debugger)
 	  
 ## Licence
