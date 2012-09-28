@@ -1,7 +1,7 @@
-core.view.register("myInvalidModelView", {
+tetra.view.register("myInvalidModelView", {
 	scope: "myScope",
 	use: ["myInvalidModelController"],
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};

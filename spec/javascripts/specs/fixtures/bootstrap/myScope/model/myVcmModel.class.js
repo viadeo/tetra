@@ -1,3 +1,3 @@
-core.model.register("myVcmModel", {
+tetra.model.register("myVcmModel", {
 	scope: "myScope"
 });

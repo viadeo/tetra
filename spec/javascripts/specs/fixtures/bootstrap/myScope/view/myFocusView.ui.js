@@ -1,6 +1,6 @@
-core.view.register("myFocusView", {
+tetra.view.register("myFocusView", {
 	scope: "myScope",
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};

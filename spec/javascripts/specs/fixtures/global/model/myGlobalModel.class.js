@@ -1,3 +1,3 @@
-core.model.register("myGlobalModel", {
+tetra.model.register("myGlobalModel", {
 	
 });

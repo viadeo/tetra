@@ -1,7 +1,7 @@
-core.view.register("myNonExistantControllerView", {
+tetra.view.register("myNonExistantControllerView", {
 	scope: "myScope",
 	use: ["myControllerThatDoesntExist"],
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};

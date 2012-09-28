@@ -1,6 +1,6 @@
-core.view.register("myMouseoutView", {
+tetra.view.register("myMouseoutView", {
 	scope: "myScope",
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {},
 			methods: {

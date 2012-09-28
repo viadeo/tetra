@@ -1,4 +1,4 @@
-core.controller.register("myInvalidController", {
+tetra.controller.register("myInvalidController", {
 	scope:ts: {}
 		};
 	}

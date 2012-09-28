@@ -1,4 +1,4 @@
-core.view.register("myInvalidView", {
+tetra.view.register("myInvalidView", {
 	scope: "myScope",
 	}
 });

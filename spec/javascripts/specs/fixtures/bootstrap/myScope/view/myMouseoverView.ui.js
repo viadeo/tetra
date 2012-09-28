@@ -1,6 +1,6 @@
-core.view.register("myMouseoverView", {
+tetra.view.register("myMouseoverView", {
 	scope: "myScope",
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};

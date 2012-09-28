@@ -1,6 +1,6 @@
-core.view.register("myBlurView", {
+tetra.view.register("myBlurView", {
 	scope: "myScope",
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};

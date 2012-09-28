@@ -1,7 +1,7 @@
-core.view.register("myNonExistantModelView", {
+tetra.view.register("myNonExistantModelView", {
 	scope: "myScope",
 	use: ["myNonExistantModelController"],
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};

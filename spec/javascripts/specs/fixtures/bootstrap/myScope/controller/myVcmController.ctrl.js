@@ -1,4 +1,4 @@
-core.controller.register("myVcmController", {
+tetra.controller.register("myVcmController", {
 	use: ["myVcmModel"],
 	scope: "myScope",
 	constr: function(me, app, page, orm) {

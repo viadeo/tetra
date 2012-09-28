@@ -1,4 +1,4 @@
-core.controller.register("myGlobalController", {
+tetra.controller.register("myGlobalController", {
 	use: ["g/myGlobalModel"],
 	scope: "myScope",
 	constr: function(me, app, page, orm) {

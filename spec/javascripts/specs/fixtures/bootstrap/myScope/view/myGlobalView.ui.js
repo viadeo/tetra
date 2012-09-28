@@ -1,7 +1,7 @@
-core.view.register("myGlobalView", {
+tetra.view.register("myGlobalView", {
 	use: ["myGlobalController"],
 	scope: "myScope",
-	constr: function(me, app, page, orm) {
+	constr: function(me, app, _) {
 		return {
 			events: {}
 		};
