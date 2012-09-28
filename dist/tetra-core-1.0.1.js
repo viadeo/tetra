@@ -3811,7 +3811,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					},
 					
 					// Saves the object to the server
-					_save = function(attributes) {
+					_save = function(attributes, success) {
 						
 						var
 							id = attributes.id,
@@ -3901,7 +3901,12 @@ tetra.extend('model', function(_conf, _mod, _) {
 											obj.update(respObj.data[objId]);
 										}
 									}
-									_notify('saved')(obj, respObj);
+									
+									if(typeof success !== 'undefined') {
+										success(obj, respObj);
+									} else {
+										_notify('saved')(obj, respObj);
+									}
 								}
 							},
 							error : function(code, respObj) {
@@ -4162,7 +4167,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						}
 					},
 					
-					_del = function(ref, attr) {
+					_del = function(ref, attr, success) {
 						
 						var obj = model.objects[ref];
 						_notify('delete')(obj);
@@ -4196,7 +4201,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 								
 								if(respObj.status === 'SUCCESS' || typeof respObj.status === 'undefined') {
 									// confirm deletion
-									_notify('deleted')(obj, respObj);
+									if(typeof success !== 'undefined') {
+										success(obj, respObj);
+									} else {
+										_notify('deleted')(obj, respObj);
+									}
 									
 									// delete object in cache
 									delete model.ids[obj.get('id')];
@@ -4245,7 +4254,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						};
 					},
 					
-					_reset = function(cond){
+					_reset = function(cond, success){
 						_notify('reset')(model.objects);
 						model.ids = {};
 						model.objects = {};
@@ -4265,7 +4274,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 										alerts: respObj.alerts ? respObj.alerts : {}
 									}, respObj);
 								} else {
-									_notify('resetted')(name, respObj);
+									if(typeof success !== 'undefined') {
+										success(name, respObj);
+									} else {
+										_notify('resetted')(name, respObj);
+									}
 								}
 							},
 							error : function(code, respObj) {
@@ -4471,9 +4484,9 @@ tetra.extend('model', function(_conf, _mod, _) {
 				},
 				
 				// Save the object to the server. Will call the ORM.
-				save: function(params) {
+				save: function(params, success) {
 					if(validAttr(attr, this)) {
-						_mod.orm(modelScope)(modelName).save(_.extend(attr, params)); // REFACTOR !
+						_mod.orm(modelScope)(modelName).save(_.extend(attr, params), success);
 						return attr.id;
 					} else {
 						return false;
@@ -4481,8 +4494,8 @@ tetra.extend('model', function(_conf, _mod, _) {
 				},
 				
 				// Delete the object from the server. Will call the ORM.
-				remove: function(params) {
-					_mod.orm(modelScope)(modelName).del(attr.ref, _.extend(attr, params)); // REFACTOR !
+				remove: function(params, success) {
+					_mod.orm(modelScope)(modelName).del(attr.ref, _.extend(attr, params), success);
 				}
 			}, modelMethods(attr));
 			

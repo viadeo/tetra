@@ -1878,164 +1878,166 @@ if ( typeof define === "function" && define.amd ) {
 // ------------------------------------------------------------------------------
 
 (function(){
-	
-	var _isJSON = function(data) {
-	    data = $.trim(data);
-	    if(!data || data.length === 0) {
-	        return false;
-	    }
-		return (/^[\],:{}\s]*$/
-                		.test(data.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
-                        .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
-                        .replace(/(?:^|:|,)(?:\s*\[)+/g, '')));
-	};
-	
-	// API client
-	var _VDinit = false;
-	
-	if(!tns.libs) tns.libs = [];
-	tns.libs.push((function($){return{
-		name: "jQuery",
-		s: $,
-		elm: function(domElm) {
-			return $(domElm);
-		},
-	//	hasClass:		"hasClass",
-	//	addClass:		"addClass",
-	//	removeClass:	"removeClass",
-	//	attr:			"attr",
-	//	parents:		"parents",
-	//	find:			"find",
-	//	is:				"is",
-	//	
-	//	val:			"val",
-	//	html:			"html",
-		serialize: function(getObj) {
-			var
-				str = '',
-				obj = {},
-				n,
-				v
-			;
-			if(getObj) {
-			    $.each( $(this).serializeArray(), function(i,o){
-			    	n = o.name;
-			        v = o.value;
-			        
-			        obj[n] = obj[n] === undefined ? v
-			          : $.isArray( obj[n] ) ? obj[n].concat( v )
-			          : [ obj[n], v ];
-			    });
-			    
-			    return obj;
-			} else {
-				str = $(this).serialize();
-				return str;
-			}
-		},
-	//	
-	//	siblings: 		"siblings",
-	//	prev: 			"prev",
-	//	next: 			"next",
-	//	
-	//	append: 		"append",
-	//	prepend: 		"prepend",
-	//	before: 		"before",
-	//	after: 			"after",
-	//	replaceWith: 	"replaceWith",
-	//	remove: 		"remove",
-	//	
-	//	animate: 		"animate",
-	//  css:			"css",
-	//  height:			"height",
-	//  width:			"width",
-	//  offset:         "offset",
-	//	
-	//	ready: 			"ready",
-	//	bind: 			"bind",
-	//  unbind:			"unbind",
+	if(typeof jQuery !== "undefined") {
 		
-		ajax: function(url, options) {
-			var
-				params = options.data,
-				reqParams = {},
-				p
-			;
-			
-			if(options.type === "delete" || options.type === "put") {
-				options.headers["X-HTTP-Method-Override"] = options.type;
-				options.data._method = options.type;
-				options.type = "post";
-			}
-			
-			// remove object parameters that must not be sent to the server
-			if(!options.headers["Content-Type"] || options.headers["Content-Type"].indexOf("application/x-www-form-urlencoded") === 1) {
-				for(p in params) {
-					if(!params.hasOwnProperty(p) || params[p] === null) continue;
-					if(typeof params[p] !== 'object' || params[p].splice) {
-						reqParams[p] = params[p];
-					}
-				}
-			} else {
-				reqParams = params;
-			}
-			
-			$.ajax({
-				url: url,
-				type: options.type,
-				headers: options.headers,
-				data: reqParams,
-				traditional: true,
-				processData: options.processData,
-				create: options.create,
-				complete: options.complete,
-				success: options.success,
-				error: options.error
-			});
-		},
-		initApi: function(conf) {
-			VD.init(conf);
-			_VDinit = true;
-		},
-		api: function(url, options) {
-			if(!_VDinit) {
-				options.error(500, {errors:["API client not initialized"]});
+		var _isJSON = function(data) {
+			data = $.trim(data);
+			if(!data || data.length === 0) {
 				return false;
 			}
-			
-			VD.api(
-				url,
-				options.type,
-				options.data,
-				function(resp) {
-					options.success(resp);
-					// TODO error ?!
+			return (/^[\],:{}\s]*$/
+							.test(data.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+							.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+							.replace(/(?:^|:|,)(?:\s*\[)+/g, '')));
+		};
+		
+		// API client
+		var _VDinit = false;
+		
+		if(!tns.libs) tns.libs = [];
+		tns.libs.push((function($){return{
+			name: "jQuery",
+			s: $,
+			elm: function(domElm) {
+				return $(domElm);
+			},
+		//	hasClass:		"hasClass",
+		//	addClass:		"addClass",
+		//	removeClass:	"removeClass",
+		//	attr:			"attr",
+		//	parents:		"parents",
+		//	find:			"find",
+		//	is:				"is",
+		//	
+		//	val:			"val",
+		//	html:			"html",
+			serialize: function(getObj) {
+				var
+					str = '',
+					obj = {},
+					n,
+					v
+				;
+				if(getObj) {
+					$.each( $(this).serializeArray(), function(i,o){
+						n = o.name;
+						v = o.value;
+						
+						obj[n] = obj[n] === undefined ? v
+						  : $.isArray( obj[n] ) ? obj[n].concat( v )
+						  : [ obj[n], v ];
+					});
+					
+					return obj;
+				} else {
+					str = $(this).serialize();
+					return str;
 				}
-			);
-		},
-		mysql: function(dbTable, options) {
-			options.error(500, {errors:["not implemented"]});
-		},
-		/*bind: function(eventName, callback) {
-			if(eventName === "domLoaded") {
-				eventName = "ready";
-			}
+			},
+		//	
+		//	siblings: 		"siblings",
+		//	prev: 			"prev",
+		//	next: 			"next",
+		//	
+		//	append: 		"append",
+		//	prepend: 		"prepend",
+		//	before: 		"before",
+		//	after: 			"after",
+		//	replaceWith: 	"replaceWith",
+		//	remove: 		"remove",
+		//	
+		//	animate: 		"animate",
+		//  css:			"css",
+		//  height:			"height",
+		//  width:			"width",
+		//  offset:         "offset",
+		//	
+		//	ready: 			"ready",
+		//	bind: 			"bind",
+		//  unbind:			"unbind",
 			
-			$(this).bind(eventName, callback);
-		},
-		unbind: function(eventName, callback) {
-			if(eventName === "domLoaded") {
-				eventName = "ready";
-			}
-			
-			$(this).unbind(eventName, callback);
-		},*/
-		extend: $.extend,
-		inArray: $.inArray,
-		toJSON: JSON.stringify,
-		parseJSON: $.parseJSON,
-		trim: $.trim
-	};})(jQuery));
+			ajax: function(url, options) {
+				var
+					params = options.data,
+					reqParams = {},
+					p
+				;
+				
+				if(options.type === "delete" || options.type === "put") {
+					options.headers["X-HTTP-Method-Override"] = options.type;
+					options.data._method = options.type;
+					options.type = "post";
+				}
+				
+				// remove object parameters that must not be sent to the server
+				if(!options.headers["Content-Type"] || options.headers["Content-Type"].indexOf("application/x-www-form-urlencoded") === 1) {
+					for(p in params) {
+						if(!params.hasOwnProperty(p) || params[p] === null) continue;
+						if(typeof params[p] !== 'object' || params[p].splice) {
+							reqParams[p] = params[p];
+						}
+					}
+				} else {
+					reqParams = params;
+				}
+				
+				$.ajax({
+					url: url,
+					type: options.type,
+					headers: options.headers,
+					data: reqParams,
+					traditional: true,
+					processData: options.processData,
+					create: options.create,
+					complete: options.complete,
+					success: options.success,
+					error: options.error
+				});
+			},
+			initApi: function(conf) {
+				VD.init(conf);
+				_VDinit = true;
+			},
+			api: function(url, options) {
+				if(!_VDinit) {
+					options.error(500, {errors:["API client not initialized"]});
+					return false;
+				}
+				
+				VD.api(
+					url,
+					options.type,
+					options.data,
+					function(resp) {
+						options.success(resp);
+						// TODO error ?!
+					}
+				);
+			},
+			mysql: function(dbTable, options) {
+				options.error(500, {errors:["not implemented"]});
+			},
+			/*bind: function(eventName, callback) {
+				if(eventName === "domLoaded") {
+					eventName = "ready";
+				}
+				
+				$(this).bind(eventName, callback);
+			},
+			unbind: function(eventName, callback) {
+				if(eventName === "domLoaded") {
+					eventName = "ready";
+				}
+				
+				$(this).unbind(eventName, callback);
+			},*/
+			extend: $.extend,
+			inArray: $.inArray,
+			toJSON: JSON.stringify,
+			parseJSON: $.parseJSON,
+			trim: $.trim
+		};})(jQuery));
+	}
 })();
 // ------------------------------------------------------------------------------
 // Tetra.js
@@ -2066,339 +2068,342 @@ if ( typeof define === "function" && define.amd ) {
 // ------------------------------------------------------------------------------
 
 (function(){
-	delete(Array.prototype.toJSON);
-	// Remove the dash from CSS properties and camel-case them
-	function _toCamelCase(str) {
-		return str.replace(/\-[a-z]/g, function(s){
-			return s.toUpperCase().replace("-","");
-		});
-	}
-	
-	// Insert an element or array of elements into the dom. Expects an
-	// element or an object that specifies the position e.g.
-	//	{
-	//		before: "ddfsdf"
-	//	}
-	function _insert(content, position) {
-		for(var i = 0, len = this.length; i < len; i++) {
-			var 
-				targetContent = (typeof content === "string") ? content : $(content).clone(),
-				targetNode = this[i]
-			;
-			
-			if(!targetNode.insert) {
-				targetNode = $(targetNode);
-			}
-			if(position) {
-				var targetObj = {};
-				targetObj[position] = targetContent;
-				targetNode.insert(targetObj);		
-			} else {
-				targetNode.insert(targetContent);
-			}
+	if(typeof Prototype !== "undefined") {
+		
+		delete(Array.prototype.toJSON);
+		// Remove the dash from CSS properties and camel-case them
+		function _toCamelCase(str) {
+			return str.replace(/\-[a-z]/g, function(s){
+				return s.toUpperCase().replace("-","");
+			});
 		}
 		
-		return this;
-	}
-	
-	function _booleanFct(fct, arg) {
-		if(!this || (!this.splice && !this[fct]) || this.length === 0 || (this.splice && !this[0][fct])) {
-			return false;
-		}
-		if(this.splice) {
+		// Insert an element or array of elements into the dom. Expects an
+		// element or an object that specifies the position e.g.
+		//	{
+		//		before: "ddfsdf"
+		//	}
+		function _insert(content, position) {
 			for(var i = 0, len = this.length; i < len; i++) {
-				if(this[i][fct].apply(this[i], arg)) return true;
-			}
-			return false;
-		} else {
-			return this[fct].apply(this, arg);
-		}
-	}
-	
-	function _chainableFct(fct, arg) {
-		if(!this || (!this.splice && !this[fct]) || this.length === 0 || (this.splice && !this[0][fct])) {
-			return this;
-		}
-		if(this.splice) {
-			for(var i = 0, len = this.length; i < len; i++) {
-				var elt = Element.extend(this[i]);
-				elt[fct].apply(elt, arg);
-			}
-			return this;
-		} else {
-			return this[fct].apply(this, arg);
-		}
-	}
-
-	// API client
-	var _VDinit = false;
-	
-	if(!tns.libs) tns.libs = [];
-	tns.libs.push({
-		name: "Prototype",
-		s: $,
-		elm: function(domElm) {
-			return Element.extend(domElm);
-		},
-		hasClass: function() {
-			return _booleanFct.call(this, "hasClassName", arguments);
-		},
-		addClass: function() {
-			return _chainableFct.call(this, "addClassName", arguments);
-		},
-		removeClass: function() {
-			return _chainableFct.call(this, "removeClassName", arguments);
-		},
-		attr: function(name, value) {
-			if(this && !this.splice) {
-				if(typeof value === "undefined") { 
-					return this.getAttribute(name);
+				var 
+					targetContent = (typeof content === "string") ? content : $(content).clone(),
+					targetNode = this[i]
+				;
+				
+				if(!targetNode.insert) {
+					targetNode = $(targetNode);
+				}
+				if(position) {
+					var targetObj = {};
+					targetObj[position] = targetContent;
+					targetNode.insert(targetObj);		
 				} else {
-					this.setAttribute(name, value);
-					return this;
+					targetNode.insert(targetContent);
 				}
-			}
-			
-			return null;
-		},
-		parents: function(selector) {
-			var parents = (this && !this.splice && this.ancestors) ? this.ancestors() : [];
-			
-			if(selector) {
-				for(var p = 0, len = parents.length; p < len;) {
-					if(!parents[p].match(selector)) {
-						parents.splice(p,1);
-						len--;
-					} else p++;
-				}
-			}
-			
-			return parents;
-		},
-		find: function() {
-			return _chainableFct.call(this, "select", arguments);
-		},
-		is: function() {
-			return _booleanFct.call(this, "match", arguments);
-		},
-		val: function(value) {
-			if(typeof value === "undefined") { 
-				return this.value;
-			} else {
-				this.value = value;
-				return this;
-			}
-		},
-		html: function(markup) {
-			if(typeof markup === "undefined") { 
-				return this.innerHTML;
-			} else {
-				this.innerHTML = markup;
-				return this;
-			}
-		},
-		serialize: function(getObj) {
-			return this.serialize(getObj);
-		},
-		siblings: function() {
-			return _chainableFct.call(this, "siblings", arguments);
-		},
-		prev: function() {
-			return _chainableFct.call(this, "previous", arguments);
-		},
-		next: function() {
-			return _chainableFct.call(this, "next", arguments);
-		},
-		append: function(content) {
-			return _insert.call(this, content);
-		},
-		prepend: function(content) {
-			return _insert.call(this, content, "top");
-		},
-		before: function(content) {
-			if(this && this.length > 0) {
-				return _insert.call(this, content, "before");
-			}
-			
-			var div = document.createElement("div");
-			div.innerHTML = content;
-			
-			return div.childNodes;			
-		},
-		after: function(content) { 
-			if(this && this.length > 0) {
-				return _insert.call(this, content, "after");
-			} 
-			
-			var div = document.createElement("div");
-			div.innerHTML = content;
-			
-			return div.childNodes;
-		},
-		replaceWith: 	function(content) {
-			for(var i = 0, len = this.length; i < len; i++) {
-				this[i].replace(content);
 			}
 			
 			return this;
-		},
-		css: function() {
-			var map = {};
-			
-			if(typeof arguments[0] === "string") {
-				if(arguments.length === 1) {
-					return this.getStyle(arguments[0]);
-				}
-				else if(arguments.length === 2) {
-					map[_toCamelCase(arguments[0])] = arguments[1];
-				}
-			}
-			
-			if(typeof arguments[0] === "object") {
-				for(var rule in arguments[0]) {
-					map[_toCamelCase(rule)] = arguments[0][rule];
-				}
-			}
-			
-			if(map.hasOwnProperty("float")) {
-				map.cssFloat = map["float"];
-				delete map["float"];
-			}
-			this.setStyle(map);
-			
-			return this;
-		},
-		height: function() {
-			return this.getHeight();
-		},
-		width: function() {
-			return this.getWidth();
-		},
-		offset: function(coords) {
-			return this.cumulativeOffset(coords);
-		},
-		remove: function() {
-			for(var i = 0, len = this.length; i < len; i++) {
-				this[i].remove();
-			}
-			
-			return this;
-		},
-		animate: function() {
-			var
-				arg = arguments,
-				properties = arg[0],
-				duration = 400,
-				easing = 'swing',
-				complete
-			;
-			
-			if(arg[1]) {
-				if(typeof arg[1] === 'object') {
-					if(arg[1].duration) duration = arg[1].duration;
-					if(arg[1].easing) easing = arg[1].easing;
-					if(arg[1].complete) complete = arg[1].complete;
-				} else {
-					duration = arg[1];
-					if(arg[2]) easing = arg[2];
-					if(arg[3]) complete = arg[3];
-				}
-			}
+		}
 		
-			// mapping with scriptaculous
-			
-		},
-		ready: function(callback) {
-			Event.observe(document, "dom:loaded", callback);
-		},
-		bind: function(eventName, callback) {
-			if(this.splice) {
-				for(var i = 0, len = this.length; i < len; i++) {
-					Event.observe(this[i], eventName, callback);
-				}
-			} else {
-				Event.observe(this, eventName, callback);
-			}
-		},
-		unbind: function(eventName, callback) {
-			if(eventName === "ready") {
-				Event.stopObserving(document, "dom:loaded", callback);
-				return;
-			}
-			
-			if(this.splice) {
-				for(var i = 0, len = this.length; i < len; i++) {
-					Event.stopObserving(this[i], eventName, callback);
-				}
-			} else {
-				Event.stopObserving(this, eventName, callback);
-			}
-		},
-		ajax: function(url, options) {
-			if(options.type === "delete" || options.type === "put") {
-				options.headers["X-HTTP-Method-Override"] = options.type;
-			}
-			
-			new Ajax.Request(url,
-				{
-					method: options.type,
-					requestHeaders: options.headers,
-					parameters: options.data,
-					postBody: options.processData ? "" : options.data,
-					onCreate: options.create,
-					onComplete: options.complete,
-					onSuccess: function(transport) {
-						var respObj = transport.responseText;
-						
-						if (transport.responseJSON) {
-							respObj = transport.responseJSON;
-						}/*
-						else if(transport.responseXML) {
-							respObj = transport.responseXML;
-						}*/
-						
-						options.success(respObj);	
-					},
-					onFailure: options.error
-				});
-		},
-		initApi: function(conf) {
-			VD.init(conf);
-			_VDinit = true;
-		},
-		api: function(url, options) {
-			if(!_VDinit) {
-				options.error(500, {errors:["API client not initialized"]});
+		function _booleanFct(fct, arg) {
+			if(!this || (!this.splice && !this[fct]) || this.length === 0 || (this.splice && !this[0][fct])) {
 				return false;
 			}
-			
-			VD.api(
-				url,
-				options.type,
-				options.data,
-				function(resp) {
-					options.success(resp);
-					// TODO error ?!
+			if(this.splice) {
+				for(var i = 0, len = this.length; i < len; i++) {
+					if(this[i][fct].apply(this[i], arg)) return true;
 				}
-			);
-		},
-		mysql: function(dbTable, options) {
-			options.error(500, {errors:["not implemented"]});
-		},
-		extend: function(obj, mixin) {
-			return (obj) ? Object.extend(obj, mixin) : mixin;
-		},
-		inArray: function(value, array) {
-			return (array) ? array.indexOf(value) : -1;
-		},
-		toJSON: Object.toJSON,
-		parseJSON: function(str) {
-			return str.evalJSON();
-		},
-		trim: function(str) {
-			return (str) ? str.strip() : "";
+				return false;
+			} else {
+				return this[fct].apply(this, arg);
+			}
 		}
-	});
+		
+		function _chainableFct(fct, arg) {
+			if(!this || (!this.splice && !this[fct]) || this.length === 0 || (this.splice && !this[0][fct])) {
+				return this;
+			}
+			if(this.splice) {
+				for(var i = 0, len = this.length; i < len; i++) {
+					var elt = Element.extend(this[i]);
+					elt[fct].apply(elt, arg);
+				}
+				return this;
+			} else {
+				return this[fct].apply(this, arg);
+			}
+		}
+
+		// API client
+		var _VDinit = false;
+		
+		if(!tns.libs) tns.libs = [];
+		tns.libs.push({
+			name: "Prototype",
+			s: $,
+			elm: function(domElm) {
+				return Element.extend(domElm);
+			},
+			hasClass: function() {
+				return _booleanFct.call(this, "hasClassName", arguments);
+			},
+			addClass: function() {
+				return _chainableFct.call(this, "addClassName", arguments);
+			},
+			removeClass: function() {
+				return _chainableFct.call(this, "removeClassName", arguments);
+			},
+			attr: function(name, value) {
+				if(this && !this.splice) {
+					if(typeof value === "undefined") { 
+						return this.getAttribute(name);
+					} else {
+						this.setAttribute(name, value);
+						return this;
+					}
+				}
+				
+				return null;
+			},
+			parents: function(selector) {
+				var parents = (this && !this.splice && this.ancestors) ? this.ancestors() : [];
+				
+				if(selector) {
+					for(var p = 0, len = parents.length; p < len;) {
+						if(!parents[p].match(selector)) {
+							parents.splice(p,1);
+							len--;
+						} else p++;
+					}
+				}
+				
+				return parents;
+			},
+			find: function() {
+				return _chainableFct.call(this, "select", arguments);
+			},
+			is: function() {
+				return _booleanFct.call(this, "match", arguments);
+			},
+			val: function(value) {
+				if(typeof value === "undefined") { 
+					return this.value;
+				} else {
+					this.value = value;
+					return this;
+				}
+			},
+			html: function(markup) {
+				if(typeof markup === "undefined") { 
+					return this.innerHTML;
+				} else {
+					this.innerHTML = markup;
+					return this;
+				}
+			},
+			serialize: function(getObj) {
+				return this.serialize(getObj);
+			},
+			siblings: function() {
+				return _chainableFct.call(this, "siblings", arguments);
+			},
+			prev: function() {
+				return _chainableFct.call(this, "previous", arguments);
+			},
+			next: function() {
+				return _chainableFct.call(this, "next", arguments);
+			},
+			append: function(content) {
+				return _insert.call(this, content);
+			},
+			prepend: function(content) {
+				return _insert.call(this, content, "top");
+			},
+			before: function(content) {
+				if(this && this.length > 0) {
+					return _insert.call(this, content, "before");
+				}
+				
+				var div = document.createElement("div");
+				div.innerHTML = content;
+				
+				return div.childNodes;			
+			},
+			after: function(content) { 
+				if(this && this.length > 0) {
+					return _insert.call(this, content, "after");
+				} 
+				
+				var div = document.createElement("div");
+				div.innerHTML = content;
+				
+				return div.childNodes;
+			},
+			replaceWith: 	function(content) {
+				for(var i = 0, len = this.length; i < len; i++) {
+					this[i].replace(content);
+				}
+				
+				return this;
+			},
+			css: function() {
+				var map = {};
+				
+				if(typeof arguments[0] === "string") {
+					if(arguments.length === 1) {
+						return this.getStyle(arguments[0]);
+					}
+					else if(arguments.length === 2) {
+						map[_toCamelCase(arguments[0])] = arguments[1];
+					}
+				}
+				
+				if(typeof arguments[0] === "object") {
+					for(var rule in arguments[0]) {
+						map[_toCamelCase(rule)] = arguments[0][rule];
+					}
+				}
+				
+				if(map.hasOwnProperty("float")) {
+					map.cssFloat = map["float"];
+					delete map["float"];
+				}
+				this.setStyle(map);
+				
+				return this;
+			},
+			height: function() {
+				return this.getHeight();
+			},
+			width: function() {
+				return this.getWidth();
+			},
+			offset: function(coords) {
+				return this.cumulativeOffset(coords);
+			},
+			remove: function() {
+				for(var i = 0, len = this.length; i < len; i++) {
+					this[i].remove();
+				}
+				
+				return this;
+			},
+			animate: function() {
+				var
+					arg = arguments,
+					properties = arg[0],
+					duration = 400,
+					easing = 'swing',
+					complete
+				;
+				
+				if(arg[1]) {
+					if(typeof arg[1] === 'object') {
+						if(arg[1].duration) duration = arg[1].duration;
+						if(arg[1].easing) easing = arg[1].easing;
+						if(arg[1].complete) complete = arg[1].complete;
+					} else {
+						duration = arg[1];
+						if(arg[2]) easing = arg[2];
+						if(arg[3]) complete = arg[3];
+					}
+				}
+			
+				// mapping with scriptaculous
+				
+			},
+			ready: function(callback) {
+				Event.observe(document, "dom:loaded", callback);
+			},
+			bind: function(eventName, callback) {
+				if(this.splice) {
+					for(var i = 0, len = this.length; i < len; i++) {
+						Event.observe(this[i], eventName, callback);
+					}
+				} else {
+					Event.observe(this, eventName, callback);
+				}
+			},
+			unbind: function(eventName, callback) {
+				if(eventName === "ready") {
+					Event.stopObserving(document, "dom:loaded", callback);
+					return;
+				}
+				
+				if(this.splice) {
+					for(var i = 0, len = this.length; i < len; i++) {
+						Event.stopObserving(this[i], eventName, callback);
+					}
+				} else {
+					Event.stopObserving(this, eventName, callback);
+				}
+			},
+			ajax: function(url, options) {
+				if(options.type === "delete" || options.type === "put") {
+					options.headers["X-HTTP-Method-Override"] = options.type;
+				}
+				
+				new Ajax.Request(url,
+					{
+						method: options.type,
+						requestHeaders: options.headers,
+						parameters: options.data,
+						postBody: options.processData ? "" : options.data,
+						onCreate: options.create,
+						onComplete: options.complete,
+						onSuccess: function(transport) {
+							var respObj = transport.responseText;
+							
+							if (transport.responseJSON) {
+								respObj = transport.responseJSON;
+							}/*
+							else if(transport.responseXML) {
+								respObj = transport.responseXML;
+							}*/
+							
+							options.success(respObj);	
+						},
+						onFailure: options.error
+					});
+			},
+			initApi: function(conf) {
+				VD.init(conf);
+				_VDinit = true;
+			},
+			api: function(url, options) {
+				if(!_VDinit) {
+					options.error(500, {errors:["API client not initialized"]});
+					return false;
+				}
+				
+				VD.api(
+					url,
+					options.type,
+					options.data,
+					function(resp) {
+						options.success(resp);
+						// TODO error ?!
+					}
+				);
+			},
+			mysql: function(dbTable, options) {
+				options.error(500, {errors:["not implemented"]});
+			},
+			extend: function(obj, mixin) {
+				return (obj) ? Object.extend(obj, mixin) : mixin;
+			},
+			inArray: function(value, array) {
+				return (array) ? array.indexOf(value) : -1;
+			},
+			toJSON: Object.toJSON,
+			parseJSON: function(str) {
+				return str.evalJSON();
+			},
+			trim: function(str) {
+				return (str) ? str.strip() : "";
+			}
+		});
+	}
 })();
 // ------------------------------------------------------------------------------
 // Tetra.js
@@ -6072,7 +6077,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					},
 					
 					// Saves the object to the server
-					_save = function(attributes) {
+					_save = function(attributes, success) {
 						
 						var
 							id = attributes.id,
@@ -6162,7 +6167,12 @@ tetra.extend('model', function(_conf, _mod, _) {
 											obj.update(respObj.data[objId]);
 										}
 									}
-									_notify('saved')(obj, respObj);
+									
+									if(typeof success !== 'undefined') {
+										success(obj, respObj);
+									} else {
+										_notify('saved')(obj, respObj);
+									}
 								}
 							},
 							error : function(code, respObj) {
@@ -6423,7 +6433,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						}
 					},
 					
-					_del = function(ref, attr) {
+					_del = function(ref, attr, success) {
 						
 						var obj = model.objects[ref];
 						_notify('delete')(obj);
@@ -6457,7 +6467,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 								
 								if(respObj.status === 'SUCCESS' || typeof respObj.status === 'undefined') {
 									// confirm deletion
-									_notify('deleted')(obj, respObj);
+									if(typeof success !== 'undefined') {
+										success(obj, respObj);
+									} else {
+										_notify('deleted')(obj, respObj);
+									}
 									
 									// delete object in cache
 									delete model.ids[obj.get('id')];
@@ -6506,7 +6520,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						};
 					},
 					
-					_reset = function(cond){
+					_reset = function(cond, success){
 						_notify('reset')(model.objects);
 						model.ids = {};
 						model.objects = {};
@@ -6526,7 +6540,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 										alerts: respObj.alerts ? respObj.alerts : {}
 									}, respObj);
 								} else {
-									_notify('resetted')(name, respObj);
+									if(typeof success !== 'undefined') {
+										success(name, respObj);
+									} else {
+										_notify('resetted')(name, respObj);
+									}
 								}
 							},
 							error : function(code, respObj) {
@@ -6732,9 +6750,9 @@ tetra.extend('model', function(_conf, _mod, _) {
 				},
 				
 				// Save the object to the server. Will call the ORM.
-				save: function(params) {
+				save: function(params, success) {
 					if(validAttr(attr, this)) {
-						_mod.orm(modelScope)(modelName).save(_.extend(attr, params)); // REFACTOR !
+						_mod.orm(modelScope)(modelName).save(_.extend(attr, params), success);
 						return attr.id;
 					} else {
 						return false;
@@ -6742,8 +6760,8 @@ tetra.extend('model', function(_conf, _mod, _) {
 				},
 				
 				// Delete the object from the server. Will call the ORM.
-				remove: function(params) {
-					_mod.orm(modelScope)(modelName).del(attr.ref, _.extend(attr, params)); // REFACTOR !
+				remove: function(params, success) {
+					_mod.orm(modelScope)(modelName).del(attr.ref, _.extend(attr, params), success);
 				}
 			}, modelMethods(attr));
 			
