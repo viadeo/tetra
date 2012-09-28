@@ -24,29 +24,28 @@
     VNS.os = {};
 
     // Setup the tetra default values
-    tetra.extend(
-            {
-                conf : {
-                    env : 'jQuery',
-                    jsVersion : VNS.context.scriptsVersion,
-                    authCallback : function() {
-                        tns.ajaxBox = new VNS.util.AjaxPopupBox(
-                                '/r/account/authentication/', {
-                                    callback : 'tns.currentRequest',
-                                    allowEscape : false,
-                                    popupVar : 'tns.ajaxBox'
-                                });
-                    },
-                    currentRequestCallback : function() {
-                        if (tns.ajaxBox) {
-                            tns.ajaxBox.close();
-                        }
-                    },
-                    enableBootnode : true,
-                    APPS_PATH : '/spec/javascripts/specs/fixtures/bootstrap',
-                    GLOBAL_PATH : '/spec/javascripts/specs/fixtures/global'
-                }
-            }).start();
+    tetra.extend({
+		conf : {
+			env : 'jQuery',
+			jsVersion : VNS.context.scriptsVersion,
+			authCallback : function() {
+				tns.ajaxBox = new VNS.util.AjaxPopupBox(
+						'/r/account/authentication/', {
+							callback : 'tns.currentRequest',
+							allowEscape : false,
+							popupVar : 'tns.ajaxBox'
+						});
+			},
+			currentRequestCallback : function() {
+				if (tns.ajaxBox) {
+					tns.ajaxBox.close();
+				}
+			},
+			enableBootnode : true,
+			APPS_PATH : '/src/main/javascript/tetra/spec/javascripts/specs/fixtures/bootstrap',
+			GLOBAL_PATH : '/src/main/javascript/tetra/spec/javascripts/specs/fixtures/global'
+		}
+	}).start();
 
     // Enable debug mode, with a random string to suppress console messages
     tetra.debug.enable("blarg");
