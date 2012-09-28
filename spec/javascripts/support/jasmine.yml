@@ -19,7 +19,7 @@ spec_files:
   - core/core.spec.js
   - core/model/*.spec.js
   - core/controller/*.spec.js
-#  - core/view/core.bootstrap.spec.js
+  - core/view/core.bootnode.spec.js
   - core/view/core.templating.spec.js
   - core/view/core.view.spec.js
   - core/view/underscore.ui.spec.js
