@@ -7,14 +7,14 @@ module.exports = function( grunt ) {
 		},
 		concat: {
 			'dist/tetra-core-<%=meta.version%>.js': [
-                                "lib/tetra.js",
-                                "lib/deps/requirejs/require.js",
-                                "lib/mod/require/client.js",
-                                "lib/mod/tmpl/client-micro-tmpl.js",
-                                "lib/tetra-view.js",
-                                "lib/tetra-controller.js",
-                                "lib/tetra-model.js"
-                        ],
+				"lib/tetra.js",
+				"lib/deps/requirejs/require.js",
+				"lib/mod/require/client.js",
+				"lib/mod/tmpl/client-micro-tmpl.js",
+				"lib/tetra-view.js",
+				"lib/tetra-controller.js",
+				"lib/tetra-model.js"
+			],
 			'dist/tetra-<%=meta.version%>.js': [
 				"dist/tetra-core-<%=meta.version%>.js",
 				"lib/conf/default.js"
