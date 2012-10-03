@@ -5114,7 +5114,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 								
 								if(elm) {
 									// TODO Lot of matching and DOM access here
-									if(!(target.hasClass('no-prevent') || target.parents('.no-prevent').length > 0 ||
+									if(!(target.hasClass('no-prevent') || target.parents('.no-prevent').length > 0 || elm.is('body') || 
 											((elm.is('input') || elm.is('textarea')) &&
 											(eventName === 'keydown' || elm.attr('type') === 'checkbox' ||
 											elm.attr('type') === 'radio')))) {
