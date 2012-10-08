@@ -4703,8 +4703,8 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	(function(){
 	  var
 		cache = {},
-		left = "<%",
-		right = "%>",
+		left = "{%",
+		right = "%}",
 		key = "%",
 		rg1 = new RegExp("'(?=[^" + key + "]*" + right + ")", "g"),
 		rg2 = new RegExp(left + "[=-](.+?)" + right, "g")
@@ -4767,7 +4767,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	})();
 	
 	var
-		_tmplConf = {left: '{%', right: '%}'}
+		_tmplConf = _conf.tmpl,
 		_tmplStack = {},
 		
 		_component = function(uid, scope, ctrl, parentid) {
