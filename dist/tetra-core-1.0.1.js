@@ -2437,22 +2437,14 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	(function(){
 	  var
 		cache = {},
-		left = "{%",
-		right = "%}",
-		key = "%",
+		left = (_conf.tmpl && _conf.tmpl.left) ? _conf.tmpl.left : "{%",
+		right = (_conf.tmpl && _conf.tmpl.right) ? _conf.tmpl.right : "%}",
+		key = (_conf.tmpl && _conf.tmpl.right) ? _conf.tmpl.right[0] : "%",
 		rg1 = new RegExp("'(?=[^" + key + "]*" + right + ")", "g"),
 		rg2 = new RegExp(left + "[=-](.+?)" + right, "g")
 	  ;
-	 
+	  
 	  this.tmpl = function tmpl(str, data, tag){
-		
-		if(tag) {
-			left = tag.left || left;
-			right = tag.right || right;
-			key = tag.right[0] || key;
-			rg1 = new RegExp("'(?=[^" + key + "]*" + right + ")", "g");
-			rg2 = new RegExp(left + "[=-](.+?)" + right, "g");
-		}
 		
 		try {
 		    // Figure out if we're getting a template, or if we need to
@@ -2501,7 +2493,6 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	})();
 	
 	var
-		_tmplConf = _conf.tmpl,
 		_tmplStack = {},
 		
 		_component = function(uid, scope, ctrl, parentid) {
@@ -2547,7 +2538,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 				
 				// Render the full template
 				_tmplStack[uid].countid = 0;
-				html = tmpl(_tmplStack[uid].id, _tmplStack[uid].data, _tmplConf);
+				html = tmpl(_tmplStack[uid].id, _tmplStack[uid].data);
 				
 				if(_tmplStack[uid]) {
 					// Return generated html to the view callback
@@ -2566,7 +2557,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 				// Evaluate the component of all his children are available
 				if(comp.html === false && comp.count == 0) {
 					_tmplStack[uid].comp[cid].countid = 0;
-					comp.html = tmpl(comp.id, comp.data, _tmplConf);
+					comp.html = tmpl(comp.id, comp.data);
 					_tmplStack[uid].count--;
 				}
 				
@@ -2605,7 +2596,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 		
 		// Process the current template
 		data.component = _component(uid, scope, tpl[0], isComp ? cid : undefined);
-		html = tmpl(id, data, _tmplConf);
+		html = tmpl(id, data);
 		
 		if(_tmplStack[uid]) {
 			
@@ -2630,7 +2621,6 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	};
 	
 });
-
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native view functions of Tetra.js
