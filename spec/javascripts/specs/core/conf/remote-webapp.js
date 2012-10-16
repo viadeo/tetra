@@ -29,10 +29,12 @@
 			env : 'jQuery',
 			jsVersion : VNS.context.scriptsVersion,
 			authCallback : function() {
-				if(!tns.ajaxBox) {
-    				tns.ajaxBox = new VNS.util.SecureLoginModalBox();
-    			}
-    			tns.ajaxBox.show();
+				tns.ajaxBox = new VNS.util.AjaxPopupBox(
+						'/r/account/authentication/', {
+							callback : 'tns.currentRequest',
+							allowEscape : false,
+							popupVar : 'tns.ajaxBox'
+						});
 			},
 			currentRequestCallback : function() {
 				if (tns.ajaxBox) {
