@@ -53,7 +53,7 @@ module.exports = function( grunt ) {
 				devel: true,
 				smarttabs: true,
 				asi: true,
-				lastsemic: true,
+				lastsemic: true
 			},
 			globals: {
 				tetra: true,
