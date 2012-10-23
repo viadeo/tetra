@@ -31,7 +31,6 @@ module.exports = function( grunt ) {
 				"lib/tetra-view.js",
 				"lib/tetra-controller.js",
 				"lib/tetra-model.js",
-				"lib/conf/viadeo-webapp.js"
 			]
 		},
 		lint: {
