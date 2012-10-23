@@ -215,14 +215,16 @@ if(typeof tetra === 'undefined') {
 			env: 'Node',
 			APPS_PATH: __dirname,
 			GLOBAL_PATH: __dirname + '/../../',
-			cache: memcached,
 			cacheTimeout: _conf.cache.timeout,
 			mysql: {
 				db: '',
 				user: '',
 				password: ''
 			}
-		}
+		},
+        cache: function(_conf, _mod, _) {
+            return memcached;
+        }
 	}).start();
 	if ( RUN_MODE != 'development' ) tetra.debug.enable();
 }
