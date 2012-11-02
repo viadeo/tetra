@@ -89,16 +89,7 @@
   <script type="text/javascript" src="javascripts/lib/jasmine/jasmine-html.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/deps/json2.js"></script>
-  <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
-  <script type="text/javascript" src="javascripts/lib/Sinon.JS/sinon-1.4.2.js"></script>
-  <script type="text/javascript" src="javascripts/lib/Sinon.JS/sinon-ie-1.4.2.js"></script>
-  <script type="text/javascript" src="javascripts/lib/jasmine/lib/jasmine-jquery.js"></script>
-  <script type="text/javascript">
-  if(typeof jasmine !== "undefined") {
-    jasmine.getFixtures().fixturesPath = 'javascripts/specs/fixtures';
-  }
-  </script>
-  <script type="text/javascript" src="javascripts/lib/utils.js"></script>
+  <script type="text/javascript" src="../lib/deps/requirejs/require.js"></script>
   <script type="text/javascript" src="../lib/tetra.js"></script>
   <script type="text/javascript" src="../lib/mod/require/client.js"></script>
   <script type="text/javascript" src="../lib/mod/tmpl/client-micro-tmpl.js"></script>
@@ -150,8 +141,8 @@
           }
         },
         enableBootnode : true,
-        APPS_PATH : 'javascripts/specs/fixtures/bootstrap',
-        GLOBAL_PATH : 'javascripts/specs/fixtures/global'
+        APPS_PATH : window.location.href.replace('runner.html', '') + 'javascripts/specs/fixtures/bootstrap',
+        GLOBAL_PATH : window.location.href.replace('runner.html', '') + 'javascripts/specs/fixtures/global'
       }
     }).start();
 
@@ -170,6 +161,17 @@
       };
   })();
   </script>
+
+  <script type="text/javascript" src="javascripts/lib/Sinon.JS/sinon-1.4.2.js"></script>
+  <script type="text/javascript" src="javascripts/lib/Sinon.JS/sinon-ie-1.4.2.js"></script>
+  <script type="text/javascript" src="javascripts/lib/jasmine/lib/jasmine-jquery.js"></script>
+  <script type="text/javascript">
+  if(typeof jasmine !== "undefined") {
+    jasmine.getFixtures().fixturesPath = 'javascripts/specs/fixtures';
+  }
+  </script>
+  <script type="text/javascript" src="javascripts/lib/utils.js"></script>
+
   <script type="text/javascript" src="javascripts/specs/core/core.spec.js"></script>
   <script type="text/javascript" src="javascripts/specs/core/model/core.class.spec.js"></script>
   <script type="text/javascript" src="javascripts/specs/core/controller/core.ctrl.spec.js"></script>
