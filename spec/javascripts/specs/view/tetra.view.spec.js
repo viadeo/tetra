@@ -28,11 +28,10 @@
 //  * Focus/Blur non-bubbling event handlers exhibit an odd race condition under IE8 and under; the page element is already
 //    removed by the time the events fire. Hence, for the moment, we execute such tests only if a valid focus() function 
 //    can be found on the page element
-//  * onLoad and onUnLoad testing is not possible as they interfere with the functioning of Jasmine/JsTestDriver 
 //  * window events cannot be tested on IE6/7/8 as there is no window.dispatchEvent
 //  * the :disabled and :enabled pseudoselectors do not work under Firefox + Prototype
 
-describe("the tetra MVC view", function() {
+describe("the tetra view", function() {
 
     "use strict";    
     
@@ -40,7 +39,7 @@ describe("the tetra MVC view", function() {
     
     // View Instantiation
     // ------------------
-    describe("view instantiation", function() {
+    describe("instantiation", function() {
         
         afterEach(function(){
             tetra.view.destroy("myView", "myScope");
@@ -180,7 +179,7 @@ describe("the tetra MVC view", function() {
             expect(views.mySecondView).toBeUndefined();
         });
         
-        it("should conditionally register a view *only* if its dependencies have already been loaded or could be retrieve using requireJS", function() {
+        it("should conditionally register a view *only* if its dependencies have already been loaded or could be retrieved using requireJS", function() {
             var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
             
@@ -329,11 +328,40 @@ describe("the tetra MVC view", function() {
             expect(views.myScope).toBeUndefined();
             expect(VNS.test.getObjectLength(views)).toBe(0);
         });
+        
+        it("should throw an exception when a view with the same name exists on the same scope", function(){
+            var views = tetra.debug.view.list();
+            expect(views.myScope).toBeUndefined();
+
+            tetra.view.register("myView", {
+                scope: "myScope",
+                constr: function(me, app) {
+                    return {
+                        events: {}
+                    };
+                }
+            });
+            
+            views = tetra.debug.view.list();
+            expect(views.myScope).toBeDefined();
+            expect(views.myScope[0]).toBe("myScope/myView");
+            
+            expect(function(){
+                tetra.view.register("myView", {
+                    scope: "myScope",
+                    constr: function(me, app) {
+                        return {
+                            events: {}
+                        };
+                    }
+                });
+            }).toThrow();
+        });
     });
     
     // Configuring a View
     // --------------------
-    describe("view configuration", function() {
+    describe("configuration", function() {
         
         afterEach(function() {
             tetra.view.destroy("myView", "myScope");
@@ -476,8 +504,12 @@ describe("the tetra MVC view", function() {
             this.bubblingTestFieldParent = null;
         });
         
+        it("should handle bubbling events not in the isSupported list", function() {
+            // TODO Implement & rewrite description
+        })
+        
         it("should respond appropriately to an onClick", function() {
-            /*VNS.test.triggerEvent(this.bubblingTestNode, "click");
+            VNS.test.triggerEvent(this.bubblingTestNode, "click");
             
             // Spy should have been called twice, once for the element 'link' and once
             // when the event bubbles to the #parent 
@@ -487,7 +519,7 @@ describe("the tetra MVC view", function() {
             
             // Check the arguments returned for the target and its parent
             VNS.test.validateEventArguments(this.spy.getCall(0).args, this.bubblingTestNode, "click");
-            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.bubblingTestNodeParent, "click");*/
+            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.bubblingTestNodeParent, "click");
         });
         
         it("should respond appropriately to an onChange", function() {
@@ -524,16 +556,18 @@ describe("the tetra MVC view", function() {
             VNS.test.validateEventArguments(this.spy.getCall(1).args, this.bubblingTestFieldParent, "select");
         });
         
-//        it("should respond appropriately to a custom event", function() {
-//            this.bubblingTestNode.fire("baz:bar");
-//            
-//            expect(this.spy.called).toBeTruthy();
-//            expect(this.spy.calledTwice).toBeTruthy("as the custom event should fire on the target element and its parent");
-//            
-//            // Check the arguments returned for the target and its parent
-//            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.bubblingTestField, "select");
-//            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.bubblingTestFieldParent, "select");
-//        });
+        // NOTE not enabled yet, as Prototype.js does not support custom events
+        //TODO Implement look at line 341
+        xit("should respond appropriately to a custom event", function() {
+            this.bubblingTestNode.fire("baz:bar");
+            
+            expect(this.spy.called).toBeTruthy();
+            expect(this.spy.calledTwice).toBeTruthy("as the custom event should fire on the target element and its parent");
+            
+            // Check the arguments returned for the target and its parent
+            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.bubblingTestField, "select");
+            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.bubblingTestFieldParent, "select");
+        });
         
         // Register another view that mirrors some of the event handlers of the main view
         it("should allow multiple views to handle the same type of bubbling events, with no side-effects", function() {
@@ -702,6 +736,10 @@ describe("the tetra MVC view", function() {
             // Check the arguments returned for the target and its parent
             VNS.test.validateEventArguments(this.spy.getCall(0).args, this.mouseTestNode, "mouseout");
             VNS.test.validateEventArguments(this.spy.getCall(1).args, this.mouseTestNodeParent, "mouseout");
+        });
+        
+        it("should handle special mouseout cases, see line 177", function() {
+            // TODO Implement & rewrite description
         });
 
         it("should respond appropriately to an onMouseDown", function() {
@@ -1105,7 +1143,7 @@ describe("the tetra MVC view", function() {
         });
     });
     
-    describe("view handling of non-bubbling events that are listened for on all nodes", function() {
+    describe("handling of non-bubbling events that are listened for on all nodes", function() {
 
         beforeEach(function() {
             loadFixtures("nonBubblingEventHandlers.html");
@@ -1170,33 +1208,28 @@ describe("the tetra MVC view", function() {
             this.nonBubblingTestFieldParent = null;
         });        
         
-        // TODO Works locally, but not on JSTD
         it("should respond appropriately to an onScroll on a div with overflow auto or scroll", function() {
-            if(typeof jstestdriver !== "undefined") {
-                var listBoxNode = d.getElementById("listBox");
+            var listBoxNode = d.getElementById("listBox");
 
-                VNS.test.triggerEvent(listBoxNode, "scroll");
-    
-                expect(this.spy.called).toBeTruthy();
-                expect(this.spy.callCount).toBe(3, "as even for a single call, the synthetic event fires 3 times");
-                
-                VNS.test.validateEventArguments(this.spy.getCall(0).args, listBoxNode, "scroll");
-                listBoxNode = null;
-           }
+            VNS.test.triggerEvent(listBoxNode, "scroll");
+
+            expect(this.spy.called).toBeTruthy();
+            expect(this.spy.callCount).toBe(3, "as even for a single call, the synthetic event fires 3 times");
+            
+            VNS.test.validateEventArguments(this.spy.getCall(0).args, listBoxNode, "scroll");
+            listBoxNode = null;
         });
         
         it("should respond appropriately to an onScroll on a textarea", function() {
-            if(typeof jstestdriver !== "undefined") {
-                var testScrollTextarea = d.getElementById("testScrollTextarea");
+            var testScrollTextarea = d.getElementById("testScrollTextarea");
 
-                VNS.test.triggerEvent(testScrollTextarea, "scroll");
-    
-                expect(this.spy.called).toBeTruthy();
-                expect(this.spy.callCount).toBe(3, "as even for a single call, the synthetic event fires 3 times");
-                
-                VNS.test.validateEventArguments(this.spy.getCall(0).args, testScrollTextarea, "scroll");
-                testScrollTextarea = null;
-           }
+            VNS.test.triggerEvent(testScrollTextarea, "scroll");
+
+            expect(this.spy.called).toBeTruthy();
+            expect(this.spy.callCount).toBe(3, "as even for a single call, the synthetic event fires 3 times");
+            
+            VNS.test.validateEventArguments(this.spy.getCall(0).args, testScrollTextarea, "scroll");
+            testScrollTextarea = null;
         });
         
         it("should respond appropriately to an onSubmit", function() {
@@ -1234,7 +1267,7 @@ describe("the tetra MVC view", function() {
         });
     });
     
-    describe("view handling of a window event", function() {
+    describe("handling of a window event", function() {
         
         beforeEach(function() {
             // setup the spy and view
@@ -1359,7 +1392,7 @@ describe("the tetra MVC view", function() {
         });
     });
 
-    describe("view handling of a standard CSS selector", function(){
+    describe("handling of a standard CSS selector", function(){
     
         beforeEach(function() {
             // Load the test fixture
@@ -1618,7 +1651,7 @@ describe("the tetra MVC view", function() {
         });
     });
     
-    describe("view handling of an attribute CSS selector", function(){
+    describe("handling of an attribute CSS selector", function(){
 
         beforeEach(function() {
             // Load the test fixture
@@ -1796,7 +1829,7 @@ describe("the tetra MVC view", function() {
         });
     });
 
-    describe("view handling of a structural pseudoclass CSS selector", function(){
+    describe("handling of a structural pseudoclass CSS selector", function(){
 
         beforeEach(function() {
             // Load the test fixture
@@ -1931,7 +1964,7 @@ describe("the tetra MVC view", function() {
         });
     });
     
-    describe("view handling of controller notifications", function(){
+    describe("handling of controller notifications", function(){
         
         afterEach(function() {
             tetra.view.destroy("myView", "myScope");

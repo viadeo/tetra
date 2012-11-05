@@ -1,6 +1,6 @@
 // Testing the MVC tetra `model` functionality
 
-describe("the tetra MVC model", function() {
+describe("the model; ", function() {
     
     "use strict";
     
@@ -35,15 +35,26 @@ describe("the tetra MVC model", function() {
 
     // Model Instantiation
     // ------------------
-    describe("model instantiation", function() {
+    describe("instantiation", function() {
 
         afterEach(function() {
             tetra.model.destroy("myModel", "myScope");
             tetra.model.destroy("mySecondModel", "myScope");
             tetra.model.destroy("myBrokenModel", "myScope");
+            tetra.model.destroy("myModel", "g");
         });
         
-        it("should register a successfully created model", function() {
+        it("should be able to create a global model", function() {
+            var models = tetra.debug.model.list();
+            expect(models).not.toContain("g/myModel");
+            
+            tetra.model.register("myModel");
+            
+            models = tetra.debug.model.list();
+            expect(models).toContain("g/myModel");
+        });
+        
+        it("should be able to create a model in a given scope", function() {
             var models = tetra.debug.model.list();
             expect(models).not.toContain("myScope/myModel");
             expect(models).not.toContain("myScope/mySecondModel");
@@ -53,7 +64,7 @@ describe("the tetra MVC model", function() {
             
             // a model with all properties populated
             tetra.model.register("mySecondModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/fake/fetch/url"
@@ -111,7 +122,7 @@ describe("the tetra MVC model", function() {
         it("should throw an exception when the model has no name", function() {
             expect(tetra.model.register).toThrow();
             expect(function(){tetra.model.register(null);}).toThrow();
-            expect(function(){tetra.model.register(null, {});}).toThrow();
+            expect(function(){tetra.model.register(null);}).toThrow();
         });
         
         it("should throw an exception if we try to register a model that already exists", function() {
@@ -143,7 +154,7 @@ describe("the tetra MVC model", function() {
             
             var that = this;
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -271,7 +282,7 @@ describe("the tetra MVC model", function() {
     
     // Fetching data
     // -----------------
-    describe("fetching data with a model", function() {
+    describe("fetching data", function() {
         
         beforeEach(function() {
             this.spy = sinon.spy();
@@ -296,7 +307,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -305,13 +316,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -323,7 +328,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -348,34 +353,26 @@ describe("the tetra MVC model", function() {
             expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
         });
         
-        it("should send json parameter in request body when method is POST and Content-Type is 'application/json'", function() {
+        it("should handle JSON strings in the fetch success callback", function() {
             var 
                 that = this,
-                jsonServer = sinon.fakeServer.create()
+                jsonStringServer = sinon.fakeServer.create()
             ;
             
-            jsonServer.respondWith("POST", /\/my\/test\/jsonFetch.json\?ts=.*/,
-                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
+            jsonStringServer.respondWith("GET", /\/my\/test/,
+                    [200, {"Content-type": "text/plain"}, JSON.stringify(successResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
-                        method: "POST",
-                        url: "/my/test/jsonFetch.json",
-                        headers: {"Content-type": "application/json"}
+                        url: "/my/test/fetch.json"
                     }
                 },
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -387,7 +384,184 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myModel").fetch({});
+                                jsonStringServer.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            // Inspect the response
+            var response = this.spy.getCall(0).args[0];
+
+            expect(response).toBeDefined("as we should have received a valid response");
+            expect(response.id).toBeDefined();
+            expect(response.ref).toBeDefined();
+            expect(response.success).toBeDefined();
+            expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+            
+            jsonStringServer.restore();
+        });
+        
+        it("should add a timestamp to the request, even if uri params are already present", function() {
+            var 
+                that = this,
+                parameterizedServer = sinon.fakeServer.create()
+            ;
+        
+            parameterizedServer.respondWith("GET", /\/my\/test\/fetch.json\?ts=.*&part1=me/,
+                [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
+            
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        url: "/my/test/fetch.json",
+                        uriParams: ["part1"]
+                    }
+                },
+                attr: {
+                    success: false
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "append": function(data){
+                                        that.spy(data[0].getAll());
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myModel").fetch({
+                                    part1: "me"
+                                });
+                                parameterizedServer.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            // Inspect the response
+            var response = this.spy.getCall(0).args[0];
+            
+            expect(response).toBeDefined("as we should have received a valid response");
+            expect(response.id).toBeDefined();
+            expect(response.ref).toBeDefined();
+            expect(response.success).toBeDefined();
+            expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+            
+            parameterizedServer.restore();
+        });
+        
+        it("should expose all attributes on the return object via getAll", function() {
+            var that = this;
+            
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        url: "/my/test/fetch.json"
+                    }
+                },
+                attr: {
+                    success: false,
+                    test: "foo",
+                    test2: ["bar"],
+                    test3: 5
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "append": function(data){
+                                        that.spy(data[0].getAll());
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myModel").fetch({});
+                                that.server.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            // Inspect the response
+            var response = this.spy.getCall(0).args[0];
+
+            expect(response).toBeDefined("as we should have received a valid response");
+            expect(response.id).toBeDefined();
+            expect(response.ref).toBeDefined();
+            expect(response.success).toBeDefined();
+            expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+            expect(response.test).toBe("foo");
+            expect(response.test2).toEqual(["bar"]);
+            expect(response.test3).toBe(5);
+        });
+        
+        it("should send json parameter in request body when method is POST and Content-Type is 'application/json'", function() {
+            var 
+                that = this,
+                jsonServer = sinon.fakeServer.create()
+            ;
+            
+            jsonServer.respondWith("POST", /\/my\/test\/jsonFetch.json\?ts=.*/,
+                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
+            
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        method: "POST",
+                        url: "/my/test/jsonFetch.json",
+                        headers: {"Content-type": "application/json"}
+                    }
+                },
+                attr: {
+                    success: false
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "append": function(data){
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -422,7 +596,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -431,13 +605,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -449,7 +617,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -465,12 +633,14 @@ describe("the tetra MVC model", function() {
             });
             
             // Retrieve the object ID and find the object
-            var response = this.spy.getCall(0).args[0];
-            var hasLoaded = false;
-            var successResponse;
+            var 
+                response = this.spy.getCall(0).args[0],
+                hasLoaded = false,
+                successResponse
+            ;
 
             tetra.debug.model("myScope", "myModel").find(response.id, function(data){
-                successResponse = data.getResponse();
+                successResponse = data.getAll();
                 hasLoaded = true;
             });
             
@@ -504,10 +674,11 @@ describe("the tetra MVC model", function() {
             ;
             
             findServer.respondWith("GET", /\/my\/test\/fetch.json\?ts=.*&id=myUniqueId/,
-                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithAttr)]);
+                    [200, {"Content-type": "application/json"}, 
+                     JSON.stringify(successResponseWithAttr)]);
             
             tetra.model.register("mySecondModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -517,30 +688,13 @@ describe("the tetra MVC model", function() {
                     success: false,
                     dataAttr: "abc"
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("mySecondController", {
                 scope: "myScope",
                 use: ["mySecondModel"],
-                constr: function(me, app, page, orm) {
-                    return {
-                        events: {
-                            
-                        },
-                        methods: {
-                            init: function(){
-                                // nothing to do
-                            }
-                        }
-                    };
-                }
+                constr: function() {}
             });
             
             var response;
@@ -548,7 +702,7 @@ describe("the tetra MVC model", function() {
             runs(function(){
                 // This should succeed
                 tetra.debug.model("myScope", "mySecondModel").find("myUniqueId", function(data){
-                    response = data.getResponse();
+                    response = data.getAll();
                     hasLoaded = true;
                 });
                 findServer.respond();
@@ -574,7 +728,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -583,13 +737,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -601,7 +749,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -623,19 +771,19 @@ describe("the tetra MVC model", function() {
                 successObj,
                 successResponse
             ;
-			
-			tetra.debug.model("myScope", "myModel").findByRef("blarg", function(obj) {
-				failObj = obj;
-			});
-			
-			tetra.debug.model("myScope", "myModel").findByRef(response.ref, function(obj) {
-				successObj = obj;
-			});
+            
+            tetra.debug.model("myScope", "myModel").findByRef("blarg", function(obj) {
+                failObj = obj;
+            });
+            
+            tetra.debug.model("myScope", "myModel").findByRef(response.ref, function(obj) {
+                successObj = obj;
+            });
             
             expect(failObj).toBeNull();
             expect(successObj).toBeDefined();
 
-            successResponse = successObj.getResponse();
+            successResponse = successObj.getAll();
             expect(successResponse).toBeDefined("as we should have received a valid response from the success callback");
             expect(successResponse.id).toBeDefined();
             expect(successResponse.ref).toBeDefined();
@@ -645,9 +793,9 @@ describe("the tetra MVC model", function() {
         
         it("should retrieve previously fetched data from local cache, using the 'findByCond' function", function(){
             var that = this;
-            
+
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -656,13 +804,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -674,7 +816,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -722,7 +864,7 @@ describe("the tetra MVC model", function() {
                     id: "myUniqueId",
                     success: true
                 }, function(data){
-                    successResponse = data.getResponse();
+                    successResponse = data.getAll();
                     hasLoaded = true;
                 });
             });
@@ -740,11 +882,130 @@ describe("the tetra MVC model", function() {
             });
         });
         
+        it("should handle findByCond calls that return more than one object", function() {
+            var 
+                that = this,
+                server = sinon.fakeServer.create(),
+                successResponse
+            ;
+
+            var firstCallResponse = {
+                status: "SUCCESS",
+                data: {
+                    myFirstCall: {
+                        success: true,
+                        dataAttr: "test1"
+                    }
+                }
+            };
+            var secondCallResponse = {
+                status: "SUCCESS",
+                data: {
+                    mySecondCall: {
+                        success: true,
+                        dataAttr: "test2"
+                    }
+                }
+            };
+            
+            server.respondWith("GET", /\/my\/test\/fetch.json\?ts=.*&id=myFirstCall/,
+                    [200, {"Content-type": "application/json"}, 
+                     JSON.stringify(firstCallResponse)]);
+            server.respondWith("GET", /\/my\/test\/fetch.json\?ts=.*&id=mySecondCall/,
+                    [200, {"Content-type": "application/json"}, 
+                     JSON.stringify(secondCallResponse)]);
+
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        url: "/my/test/fetch.json"
+                    }
+                },
+                attr: {
+                    success: false,
+                    dataAttr: ""
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "append": function(data){
+                                        that.spy(data[0].getAll());
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+
+                            }
+                        }
+                    };
+                }
+            });
+            
+            // Retrieve the object Ref and find the object
+            var hasLoaded = false;
+
+            runs(function(){
+                tetra.debug.model("myScope", "myModel").find("myFirstCall", function(){
+                    hasLoaded = true;
+                });
+                server.respond();
+            });
+
+            waitsFor(function(){
+                return hasLoaded;
+            });
+            
+            runs(function(){
+                hasLoaded = false;
+                tetra.debug.model("myScope", "myModel").find("mySecondCall", function(){
+                    hasLoaded = true;
+                });
+                server.respond();
+            });
+
+            waitsFor(function(){
+                return hasLoaded;
+            });
+            
+            runs(function(){
+                hasLoaded = false;
+                tetra.debug.model("myScope", "myModel").findByCond({
+                    success: true
+                }, function(data){
+                    successResponse = data;
+                    hasLoaded = true;
+                });
+            });
+            
+            waitsFor(function(){
+                return hasLoaded;
+            });
+            
+            runs(function() {
+                // Two responses should have been returned from the cache
+                expect(successResponse.length).toBe(2);
+                expect(successResponse[0].get("dataAttr")).toBe("test1");
+                expect(successResponse[1].get("dataAttr")).toBe("test2");
+                server.restore();
+            });
+        });
+        
         it("should retrieve previously fetched data using the 'select' function", function(){
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -753,13 +1014,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -790,7 +1045,7 @@ describe("the tetra MVC model", function() {
                     id: "myUniqueId",
                     success: true
                 }, function(data) {
-                    response = data[0].getResponse();
+                    response = data[0].getAll();
                     hasLoaded = true;
                 });
                 this.server.respond();
@@ -815,7 +1070,7 @@ describe("the tetra MVC model", function() {
                     id: "myUniqueId",
                     success: true
                 }, function(data) {
-                    response = data[0].getResponse();
+                    response = data[0].getAll();
                     hasLoaded = true;
                 });
             });
@@ -834,6 +1089,10 @@ describe("the tetra MVC model", function() {
                 // Check that the server was only polled once
                 expect(this.server.requests.length).toBe(1);
             });
+        });
+        
+        it("should handle select calls that use uri parameters", function() {
+            
         });
         
         it("should store meta data on the models meta property, accessible via the getMeta function", function() {
@@ -855,7 +1114,7 @@ describe("the tetra MVC model", function() {
                 [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithCount)]);
 
             tetra.model.register("mySecondModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -864,14 +1123,11 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
+            
+            // Meta is not sent yet
+            expect(tetra.debug.model("myScope", "mySecondModel").getMeta("count")).not.toBe(2);
             
             tetra.controller.register("mySecondController", {
                 scope: "myScope",
@@ -882,7 +1138,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "mySecondModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -923,7 +1179,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/{0}/{1}/{2}.json",
@@ -933,13 +1189,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -951,7 +1201,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -992,7 +1242,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json",
@@ -1002,13 +1252,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1021,7 +1265,7 @@ describe("the tetra MVC model", function() {
                                 "myModel": {
                                     "append": function(data){
                                         // Append will be called if the URL matches the server expectation
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -1064,7 +1308,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json",
@@ -1074,22 +1318,16 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             var constructorFnc = function(me, app, page, orm) {
-            	return {
+                return {
                     events: {
                         model: {
                             "myModel": {
                                 "append": function(data){
-                                    that.spy(data[0].getResponse());
+                                    that.spy(data[0].getAll());
                                 }
                             }
                         }
@@ -1109,7 +1347,7 @@ describe("the tetra MVC model", function() {
                 constr: constructorFnc
             });
             
-            expect(this.spy.called).toBeFalsy("as the mock server is setup to accept GET requests only");
+            expect(this.spy.called).toBeFalsy("as the server will only respond to GET requests");
             
             // Now setup a POST server and confirm it succeeds
             postServer.respondWith("POST", /\/my\/test/,
@@ -1122,7 +1360,7 @@ describe("the tetra MVC model", function() {
             });
             
             // -- BAM -- 
-            expect(this.spy.called).toBeTruthy("as we have reset the mock server to accept POST requests");
+            expect(this.spy.called).toBeTruthy("as the server will now respond to POST requests");
             
             var data = this.spy.getCall(0).args[0];
             expect(data.success).toBeTruthy();
@@ -1138,7 +1376,7 @@ describe("the tetra MVC model", function() {
             
             var that = this;
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json",
@@ -1156,13 +1394,7 @@ describe("the tetra MVC model", function() {
                         }
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1174,7 +1406,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -1207,7 +1439,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json",
@@ -1225,13 +1457,7 @@ describe("the tetra MVC model", function() {
                         }
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1322,7 +1548,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithContent)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/attr/test/fetch.json",
@@ -1338,13 +1564,7 @@ describe("the tetra MVC model", function() {
                         bar: "foo"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1355,7 +1575,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -1400,7 +1620,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(response)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/attr/test/fetch.json",
@@ -1416,13 +1636,7 @@ describe("the tetra MVC model", function() {
                         bar: "foo"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1433,7 +1647,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     }
                                 }
                             }
@@ -1470,7 +1684,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithContent)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/attr/test/fetch.json",
@@ -1486,13 +1700,7 @@ describe("the tetra MVC model", function() {
                         bar: "foo"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1540,7 +1748,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithContent)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/attr/test/fetch.json",
@@ -1556,13 +1764,7 @@ describe("the tetra MVC model", function() {
                         bar: "foo"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -1624,7 +1826,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithContent)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/attr/test/fetch.json",
@@ -1642,9 +1844,6 @@ describe("the tetra MVC model", function() {
                 },
                 methods : function(attr){
                     return {
-                        getResponse: function() {
-                            return attr;
-                        },
                         validate: function(attr, errors) {
                             if(typeof attr.myTestString !== "string") {
                                 errors.push("bar");
@@ -1746,7 +1945,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponseWithContent)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/attr/test/fetch.json",
@@ -1764,9 +1963,6 @@ describe("the tetra MVC model", function() {
                 },
                 methods : function(attr){
                     return {
-                        getResponse: function() {
-                            return attr;
-                        },
                         validate: function(attr, errors) {
                             if(typeof attr.myTestString !== "string") {
                                 errors.push("bar");
@@ -1865,7 +2061,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(falseResponse)]);
 
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/validate/test/fetch.json",
@@ -1877,9 +2073,6 @@ describe("the tetra MVC model", function() {
                 },
                 methods : function(attr){
                     return {
-                        getResponse: function() {
-                            return attr;
-                        },
                         validate: function(attr, errors) {
                             if(!attr.bar) {
                                 errors.push("bar");
@@ -1926,7 +2119,7 @@ describe("the tetra MVC model", function() {
             });
             
             // Send a valid request
-            tetra.debug.ctrl.app("myScope").notify("testValidRequest", {});
+            tetra.debug.ctrl.app("myScope").notify("testValidRequest");
             
             // Check that `append` was called
             expect(that.spy.called).toBeTruthy();
@@ -1935,7 +2128,7 @@ describe("the tetra MVC model", function() {
             // Reset the spy and send an invalid request
             this.spy = sinon.spy();
 
-            tetra.debug.ctrl.app("myScope").notify("testInvalidRequest", {});
+            tetra.debug.ctrl.app("myScope").notify("testInvalidRequest");
             expect(this.spy.called).toBeTruthy();
             expect(that.spy.calledTwice).toBeTruthy("as the 'invalid' callback should fire, calling spy() for a 2nd time");
 
@@ -1947,20 +2140,15 @@ describe("the tetra MVC model", function() {
         });
         
         it("should not validate the data of an object created manually", function(){
-            var
-                that = this
-            ;
+            var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 attr: {
                     bar: false
                 },
                 methods : function(attr){
                     return {
-                        getResponse: function() {
-                            return attr;
-                        },
                         validate: function(attr, errors) {
                             if(!attr.bar) {
                                 errors.push("bar");
@@ -2002,7 +2190,7 @@ describe("the tetra MVC model", function() {
             });
             
             // Send a valid request
-            tetra.debug.ctrl.app("myScope").notify("createInvalidOject", {});
+            tetra.debug.ctrl.app("myScope").notify("createInvalidOject");
             
             // Check that `append` was called
             expect(that.spy.called).toBeTruthy();
@@ -2022,7 +2210,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "text/html"}, "<!doctype HTML><div><p>TEST</p></div>"]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/html/test/fetch.json",
@@ -2036,13 +2224,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     html: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2092,10 +2274,10 @@ describe("the tetra MVC model", function() {
                         
             // TODO Inject HTML and use our own ID
             protoServer.respondWith("GET", /\/my\/prototype\/test\/fetch.json/, 
-                    [200, {"Content-type": "text/plain"}, "__jasmine_TrivialReporter_showPassed__"]);
+                    [200, {"Content-type": "text/plain"}, "HTMLReporter"]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/prototype/test/fetch.json",
@@ -2105,13 +2287,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     html: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2196,20 +2372,14 @@ describe("the tetra MVC model", function() {
                     [405, {"Content-type": "application/json"}, JSON.stringify(response405)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/error/test/fetch.json",
                         method: "GET"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2261,7 +2431,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 400 (Bad request) response ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("test400Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test400Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 400 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2279,7 +2449,7 @@ describe("the tetra MVC model", function() {
             
             expect(tetra.ajaxBox).toBeUndefined();
             
-            tetra.debug.ctrl.app("myScope").notify("test401Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test401Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 401 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2296,7 +2466,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 403 (Forbidden) Response ###
             this.spy = sinon.spy();
 
-            tetra.debug.ctrl.app("myScope").notify("test403Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test403Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 403 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2313,7 +2483,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 404 (Not Found) response ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("test404Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test404Response");
             
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 404 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
@@ -2328,7 +2498,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 405 (Method not allowed) response ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("test405Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test405Response");
             
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 405 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
@@ -2374,20 +2544,14 @@ describe("the tetra MVC model", function() {
                     [503, {"Content-type": "application/json"}, JSON.stringify(response503)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/error/test/fetch.json",
                         method: "GET"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2434,7 +2598,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 500 (Internal Server Error) response ###
             this.spy = sinon.spy();
 
-            tetra.debug.ctrl.app("myScope").notify("test500Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test500Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 500 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2448,7 +2612,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 501 (Not implemented) response ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("test501Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test501Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 501 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2462,7 +2626,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 503 (Service not available) response ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("test503Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test503Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 503 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2497,20 +2661,14 @@ describe("the tetra MVC model", function() {
                              JSON.stringify(response301)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/error/test/fetch.json",
                         method: "GET"
                     }
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2547,7 +2705,7 @@ describe("the tetra MVC model", function() {
             // ### Test a 301 (Moved Permanently) response ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("test301Response", {});
+            tetra.debug.ctrl.app("myScope").notify("test301Response");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 301 error callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2629,7 +2787,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "multipart/form-data"}, "multipart"]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/mime/test/fetch.json",
@@ -2648,13 +2806,7 @@ describe("the tetra MVC model", function() {
                     mime: "",
                     response: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2665,7 +2817,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     },
                                     "error": function(data) {
                                         // This should never be called
@@ -2746,7 +2898,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `text/plain` ###
             this.spy = sinon.spy();
     
-            tetra.debug.ctrl.app("myScope").notify("testPlaintext", {});
+            tetra.debug.ctrl.app("myScope").notify("testPlaintext");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2756,7 +2908,7 @@ describe("the tetra MVC model", function() {
             
             // ### Test a response with mimetype `text/css` ###
             this.spy = sinon.spy();
-            tetra.debug.ctrl.app("myScope").notify("testCss", {});
+            tetra.debug.ctrl.app("myScope").notify("testCss");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2766,7 +2918,7 @@ describe("the tetra MVC model", function() {
             
             // ### Test a response with mimetype `text/csv` ###
             this.spy = sinon.spy();
-            tetra.debug.ctrl.app("myScope").notify("testCsv", {});
+            tetra.debug.ctrl.app("myScope").notify("testCsv");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2776,7 +2928,7 @@ describe("the tetra MVC model", function() {
             
             // ### Test a response with mimetype `text/xml` ###
             this.spy = sinon.spy();
-            tetra.debug.ctrl.app("myScope").notify("testXml", {});
+            tetra.debug.ctrl.app("myScope").notify("testXml");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2786,7 +2938,7 @@ describe("the tetra MVC model", function() {
 
             // ### Test a response with mimetype `application/xhtml+xml` ###
             this.spy = sinon.spy();
-            tetra.debug.ctrl.app("myScope").notify("testXhtml", {});
+            tetra.debug.ctrl.app("myScope").notify("testXhtml");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2795,7 +2947,7 @@ describe("the tetra MVC model", function() {
 
             // ### Test a response with mimetype `application/soap+xml` ###
             this.spy = sinon.spy();
-            tetra.debug.ctrl.app("myScope").notify("testSoap", {});
+            tetra.debug.ctrl.app("myScope").notify("testSoap");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2806,7 +2958,7 @@ describe("the tetra MVC model", function() {
             this.spy = sinon.spy();
             expect(window.hasJsTextCallback).toBeUndefined();
             
-            tetra.debug.ctrl.app("myScope").notify("testJavaScriptText", {});
+            tetra.debug.ctrl.app("myScope").notify("testJavaScriptText");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             expect(window.hasJsTextCallback).toBeTruthy("as it should have been created in the JavaScript evaluation");
@@ -2820,7 +2972,7 @@ describe("the tetra MVC model", function() {
             this.spy = sinon.spy();
             expect(window.hasJsAppCallback).toBeUndefined();
             
-            tetra.debug.ctrl.app("myScope").notify("testJavaScriptApplication", {});
+            tetra.debug.ctrl.app("myScope").notify("testJavaScriptApplication");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             expect(window.hasJsAppCallback).toBeTruthy("as it should have been created in the JavaScript app evaluation");
@@ -2834,7 +2986,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `application/octet-stream` ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("testOctetStream", {});
+            tetra.debug.ctrl.app("myScope").notify("testOctetStream");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2845,7 +2997,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `application/pdf` ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("testPdf", {});
+            tetra.debug.ctrl.app("myScope").notify("testPdf");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2856,7 +3008,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `image/gif` ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("testImage", {});
+            tetra.debug.ctrl.app("myScope").notify("testImage");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2867,7 +3019,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `audio/mpg` ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("testAudio", {});
+            tetra.debug.ctrl.app("myScope").notify("testAudio");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2878,7 +3030,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `video/mpeg` ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("testVideo", {});
+            tetra.debug.ctrl.app("myScope").notify("testVideo");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2889,7 +3041,7 @@ describe("the tetra MVC model", function() {
             // ### Test a response with mimetype `multipart/form-data` ###
             this.spy = sinon.spy();
             
-            tetra.debug.ctrl.app("myScope").notify("testMultipart", {});
+            tetra.debug.ctrl.app("myScope").notify("testMultipart");
             expect(that.spy.called).toBeTruthy("as the spy should have been invoked in the 'append' callback");
             expect(that.spy.calledOnce).toBeTruthy("as the spy should only have been invoked once");
             
@@ -2911,7 +3063,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, ""]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/empty/test/fetch.json"
@@ -2920,13 +3072,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -2968,73 +3114,11 @@ describe("the tetra MVC model", function() {
             
             emptyJsonServer.restore();
         });
-        
-//        it("should correctly handle invalid JSON responses", function(){
-//            var
-//                invalidJsonServer = sinon.fakeServer.create(),
-//                that = this
-//            ;
-//            
-//            invalidJsonServer.respondWith("GET", /\/my\/invalid\/test\/fetch.json/, 
-//                    [200, {"Content-type": "application/json"},
-//                     "{{"]);
-//    
-//            tetra.model.register("myModel", {
-//        		  scope: "myScope",
-//                req: {
-//                    fetch: {
-//                        url: "/my/invalid/test/fetch.json"
-//                    }
-//                },
-//                attr: {
-//                    success: false
-//                },
-//                methods : function(attr){
-//                    return {
-//                        getResponse: function() {
-//                            return attr;
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            tetra.controller.register("myController", {
-//                scope: "myScope",
-//                use: ["myModel"],
-//                constr: function(me, app, page, orm) {
-//                    return {
-//                        events: {
-//                            model: {
-//                                "myModel": {
-//                                    "append": function() {
-//                                        // Shouldn't be called
-//                                    },
-//                                    "error": function(error) {
-//                                        that.spy(error);
-//                                    }
-//                                }
-//                            }
-//                        },
-//                        methods: {
-//                            init: function(){
-//                                orm("myModel").fetch({});
-//                                invalidJsonServer.respond();
-//                            }
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            expect(this.spy.called).toBeTruthy();
-//            expect(this.spy.calledOnce).toBeTruthy();
-//            
-//            invalidJsonServer.restore();
-//        });
     });
     
     // Saving data
     // -----------------
-    describe("saving data to a model", function() {
+    describe("saving data", function() {
         
         beforeEach(function() {
             var response = {
@@ -3065,7 +3149,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/test/save.json",
@@ -3076,13 +3160,7 @@ describe("the tetra MVC model", function() {
                     myDataToSave: "",
                     foo: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3094,7 +3172,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "saved": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -3136,7 +3214,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
 
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/{0}/{1}/{2}/save.json",
@@ -3147,13 +3225,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToSave: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3165,7 +3237,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "saved": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         that.spy();
@@ -3203,7 +3275,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/test/save.json",
@@ -3217,13 +3289,7 @@ describe("the tetra MVC model", function() {
                     myTestObj: {},
                     myTestArray: []
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3235,7 +3301,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "saved": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -3297,7 +3363,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/test/save.json",
@@ -3311,13 +3377,7 @@ describe("the tetra MVC model", function() {
                     myTestObj: {"foo":"baz"},
                     myTestArray: [1, 2]
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3329,7 +3389,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "saved": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -3392,7 +3452,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(response)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/test/save.json",
@@ -3402,13 +3462,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToSave: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3442,7 +3496,7 @@ describe("the tetra MVC model", function() {
             // TODO Use of "obj" here, does it match naming conventions elsewhere?  
             var 
                 args = this.spy.getCall(0).args[0],
-                obj = args.obj.getResponse()
+                obj = args.obj.getAll()
             ;
             
             // Check the response alerts
@@ -3482,7 +3536,7 @@ describe("the tetra MVC model", function() {
                     [500, {"Content-type": "application/json"}, JSON.stringify(response)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/test/save.json",
@@ -3492,13 +3546,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToSave: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3514,7 +3562,8 @@ describe("the tetra MVC model", function() {
                                         that.spy();
                                     },
                                     "error": function(data) {
-                                        that.spy(data);
+                                        console.log("Error get all", data.obj.getAll());
+                                        that.spy(data, data.obj.getAll());
                                     }
                                 }
                             }
@@ -3529,23 +3578,21 @@ describe("the tetra MVC model", function() {
                 }
             });
             
-            
             // Inspect the response
             // TODO Use of "obj" here, does it match naming conventions elsewhere?  
             var 
-                args = this.spy.getCall(0).args[0],
+                args = this.spy.getCall(0).args,
                 obj
             ;
-            
-            expect(args).toBeDefined("as the invalid callback should have been invoked");
-            expect(args.errors).toBeDefined("as the alerts messages should have been returned");
-            expect(args.errors[0]).toBe("msg1");
-            expect(args.errors[1]).toBe("msg2");
 
-            obj = args.obj.getResponse();
-            expect(obj).toBeDefined();
-            expect(obj.myDataToSave).toBeDefined();
-            expect(obj.myDataToSave).toBe("foo");
+            expect(args[0]).toBeDefined("as the invalid callback should have been invoked");
+            expect(args[0].errors).toBeDefined("as the alerts messages should have been returned");
+            expect(args[0].errors[0]).toBe("msg1");
+            expect(args[0].errors[1]).toBe("msg2");
+
+            expect(args[1]).toBeDefined();
+            expect(args[1].myDataToSave).toBeDefined();
+            expect(args[1].myDataToSave).toBe("foo");
 
             errorServer.restore();
         });
@@ -3565,14 +3612,11 @@ describe("the tetra MVC model", function() {
                 }
             ;
             
-            // TODO Errors vs. alerts, sometimes its errors sometimes its alerts
-            // TODO In this case, docs say alerts but object has errors
-            // TODO If the response code is 500, it goes to "error", if its 200 it goes to "invalid"
             errorServer.respondWith("POST", /\/my\/test\/save.json\?ts=.*/,
                     [404, {"Content-type": "application/json"}, JSON.stringify(response)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/test/save.json",
@@ -3582,13 +3626,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToSave: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3604,7 +3642,7 @@ describe("the tetra MVC model", function() {
                                         that.spy();
                                     },
                                     "error": function(data) {
-                                        that.spy(data);
+                                        that.spy(data, data.obj.getAll());
                                     }
                                 }
                             }
@@ -3620,92 +3658,23 @@ describe("the tetra MVC model", function() {
             });
             
             var 
-                args = this.spy.getCall(0).args[0],
+                args = this.spy.getCall(0).args,
                 obj
             ;
             
             // Check the response alerts
-            expect(args).toBeDefined("as the invalid callback should have been invoked");
-            expect(args.errors).toBeDefined();
-            expect(args.errors[0]).toBe("msg1");
-            expect(args.errors[1]).toBe("msg2");
+            expect(args[0]).toBeDefined("as the invalid callback should have been invoked");
+            expect(args[0].errors).toBeDefined();
+            expect(args[0].errors[0]).toBe("msg1");
+            expect(args[0].errors[1]).toBe("msg2");
     
             // Check the response object
-            obj = args.obj.getResponse();
-            expect(obj).toBeDefined();
-            expect(obj.myDataToSave).toBeDefined();
-            expect(obj.myDataToSave).toBe("foo");
+            expect(args[1]).toBeDefined();
+            expect(args[1].myDataToSave).toBeDefined();
+            expect(args[1].myDataToSave).toBe("foo");
 
             errorServer.restore();
         });
-        
-//        it("should correctly handle invalid JSON responses", function(){
-//            var 
-//                that = this,
-//                errorServer = sinon.fakeServer.create()
-//            ;
-//            
-//            // Note that JSON response is missing a curly bracket
-//            errorServer.respondWith("POST", /\/my\/test\/save.json\?ts=.*/,
-//                    [200, {"Content-type": "application/json"},
-//                          "{\"status\": \"SUCCESS\", \"data\": {\"id10\": {\"foo\": \"bar\""]);
-//    
-//            tetra.model.register("myModel", {
-//                req: {
-//                    save: {
-//                        url: "/my/test/save.json",
-//                        method: "POST"
-//                    }
-//                },
-//                attr: {
-//                    myDataToSave: "",
-//                    foo: ""
-//                },
-//                methods : function(attr){
-//                    return {
-//                        getResponse: function() {
-//                            return attr;
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            tetra.controller.register("myController", {
-//                scope: "myScope",
-//                use: ["myModel"],
-//                constr: function(me, app, page, orm) {
-//                    return {
-//                        events: {
-//                            model: {
-//                                "myModel": {
-//                                    // TODO Not sure if such responses should be invalid or error
-//                                    "error": function(error) {
-//                                        that.spy(error);
-//                                    },
-//                                    "saved": function(data) {
-//                                        // Shouldn't be called
-//                                        that.spy();
-//                                    }
-//                                }
-//                            }
-//                        },
-//                        methods: {
-//                            init: function(){                        
-//                                orm("myModel").create({myDataToSave: "foo"}).save();
-//                                errorServer.respond();
-//                            }
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            expect(this.spy.called).toBeTruthy();
-//            expect(this.spy.calledOnce).toBeTruthy();
-//            
-//            // TODO Inspect data here
-//
-//            errorServer.restore();
-//        });
         
         it("should fail to save if anything other than POST is attempted", function() {
             var 
@@ -3727,7 +3696,7 @@ describe("the tetra MVC model", function() {
             var 
                 that = this,
                 init = {
-            		scope: "myScope",
+                    scope: "myScope",
                     req: {
                         save: {
                             url: "/my/test/save.json",
@@ -3737,20 +3706,14 @@ describe("the tetra MVC model", function() {
                     attr: {
                         myDataToSave: ""
                     },
-                    methods : function(attr){
-                        return {
-                            getResponse: function() {
-                                return attr;
-                            }
-                        };
-                    }
+                    methods : function(){}
             };
             
             expect(function(){tetra.model.register("myModel", init);}).toThrow();
             saveServer.restore();
         });
         
-        // An empty response is valid for a save
+        // NOTE An empty response is valid for a save
         it("should correctly handle empty JSON responses", function(){
             var
                 emptyJsonServer = sinon.fakeServer.create(),
@@ -3762,7 +3725,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, ""]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     save: {
                         url: "/my/empty/test/post.json"
@@ -3771,13 +3734,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3789,7 +3746,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "saved": function(data) {
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(error) {
                                         // Shouldn't be called
@@ -3821,7 +3778,7 @@ describe("the tetra MVC model", function() {
     
     // Deleting data
     // -----------------    
-    describe("when deleting data from a model", function() {
+    describe("deleting data", function() {
         
         beforeEach(function() {
             this.spy = sinon.spy();
@@ -3843,7 +3800,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -3853,13 +3810,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3871,7 +3822,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -3903,7 +3854,7 @@ describe("the tetra MVC model", function() {
             expect(response.myDataToDelete).toEqual("foo");
         });
         
-        it("should be able to delete using POST or DELETE", function() {
+        it("should delete using POST or DELETE", function() {
             var 
                 that = this,
                 deleteServer = sinon.fakeServer.create()
@@ -3913,7 +3864,7 @@ describe("the tetra MVC model", function() {
                 [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -3923,13 +3874,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -3941,7 +3886,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -3972,7 +3917,7 @@ describe("the tetra MVC model", function() {
             deleteServer.restore();
         });
             
-        it("should delete from a parameterized URL, returning the expected response", function(){
+        it("should delete using a parameterized URL", function(){
             var 
                 that = this,
                 parameterizedServer = sinon.fakeServer.create()
@@ -3982,7 +3927,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/{0}/{1}/{2}/delete.json",
@@ -3993,13 +3938,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4011,7 +3950,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Shouldn't be called
@@ -4050,7 +3989,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -4064,13 +4003,7 @@ describe("the tetra MVC model", function() {
                     myTestNumber: 0,
                     myTestBoolean: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4082,7 +4015,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -4134,7 +4067,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -4148,13 +4081,7 @@ describe("the tetra MVC model", function() {
                     myTestNumber: 50,
                     myTestBoolean: true
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4166,7 +4093,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data){
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "error": function(data) {
                                         // Should never be called
@@ -4228,7 +4155,7 @@ describe("the tetra MVC model", function() {
                 [200, {"Content-type": "application/json"}, JSON.stringify(response)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -4238,13 +4165,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4291,7 +4212,7 @@ describe("the tetra MVC model", function() {
             expect(args.alerts.msg2).toBe("msg2 body");
             
             // Check the `response` object
-            obj = args.obj.getResponse();
+            obj = args.obj.getAll();
             expect(obj).toBeDefined();
             expect(obj.myDataToDelete).toBeDefined();
             expect(obj.myDataToDelete).toBe("foo");
@@ -4305,7 +4226,7 @@ describe("the tetra MVC model", function() {
                 that = this,
                 deleteServer = sinon.fakeServer.create(),
                 init = {
-            		scope: "myScope",
+                    scope: "myScope",
                     req: {
                         del: {
                             url: "/my/test/delete.json",
@@ -4315,13 +4236,7 @@ describe("the tetra MVC model", function() {
                     attr: {
                         myDataToDelete: ""
                     },
-                    methods : function(attr){
-                        return {
-                            getResponse: function() {
-                                return attr;
-                            }
-                        };
-                    }
+                    methods : function(){}
                 }
             ;
     
@@ -4344,7 +4259,7 @@ describe("the tetra MVC model", function() {
                 [500, {"Content-type": "application/json"}, JSON.stringify(failResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -4354,13 +4269,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4397,7 +4306,7 @@ describe("the tetra MVC model", function() {
             expect(this.spy.called).toBeTruthy();
             expect(this.spy.calledOnce).toBeTruthy();
 
-            var obj = response.obj.getResponse();
+            var obj = response.obj.getAll();
             expect(obj.id).toBeDefined();
             expect(obj.ref).toBeDefined();    
             expect(obj.myDataToDelete).toBeDefined();
@@ -4416,7 +4325,7 @@ describe("the tetra MVC model", function() {
                 [404, {"Content-type": "application/json"}, JSON.stringify(failResponse)]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -4426,13 +4335,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4468,7 +4371,7 @@ describe("the tetra MVC model", function() {
             expect(this.spy.called).toBeTruthy();
             expect(this.spy.calledOnce).toBeTruthy();
             
-            var obj = response.obj.getResponse();
+            var obj = response.obj.getAll();
             expect(obj.id).toBeDefined();
             expect(obj.ref).toBeDefined();    
             expect(obj.myDataToDelete).toBeDefined();
@@ -4476,78 +4379,8 @@ describe("the tetra MVC model", function() {
             
             errorServer.restore();            
         });
-
-//        it("should correctly handle invalid JSON responses", function(){
-//            var 
-//                that = this,
-//                errorServer = sinon.fakeServer.create()
-//            ;
-//    
-//            errorServer.respondWith("POST", /\/my\/test\/delete.json\?ts=.*/,
-//                [200, {"Content-type": "application/json"},
-//                      "{\"status\": \"\""]);
-//            
-//            tetra.model.register("myModel", {
-//                req: {
-//                    del: {
-//                        url: "/my/test/delete.json",
-//                        method: "POST"
-//                    }
-//                },
-//                attr: {
-//                    myDataToDelete: ""
-//                },
-//                methods : function(attr){
-//                    return {
-//                        getResponse: function() {
-//                            return attr;
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            tetra.controller.register("myController", {
-//                scope: "myScope",
-//                use: ["myModel"],
-//                constr: function(me, app, page, orm) {
-//                    return {
-//                        events: {
-//                            model: {
-//                                "myModel": {
-//                                    "deleted": function(data) {
-//                                        // Shouldn't be called
-//                                        that.spy();
-//                                    },
-//                                    "error": function(error) {
-//                                        that.spy(error);
-//                                    }
-//                                }
-//                            }
-//                        },
-//                        methods: {
-//                            init: function(){
-//                                orm("myModel").create({myDataToDelete: "foo"}).remove();
-//                                errorServer.respond();
-//                            }
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            // Inspect the response
-//            var response = this.spy.getCall(0).args[0];
-//    
-//            expect(this.spy.called).toBeTruthy();
-//            expect(this.spy.calledOnce).toBeTruthy();
-////            expect(response.id).toBeDefined();
-////            expect(response.ref).toBeDefined();    
-////            expect(response.myDataToDelete).toBeDefined();
-////            expect(response.myDataToDelete).toEqual("foo");
-//            
-//            errorServer.restore();    
-//        });
         
-        // For a delete, an empty response is acceptable
+        // NOTE For a delete, an empty response is acceptable
         it("should correctly handle empty JSON responses", function(){
             var 
                 that = this,
@@ -4558,7 +4391,7 @@ describe("the tetra MVC model", function() {
                 [200, {"Content-type": "application/json"}, ""]);
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     del: {
                         url: "/my/test/delete.json",
@@ -4568,13 +4401,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     myDataToDelete: ""
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4586,7 +4413,7 @@ describe("the tetra MVC model", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data) {
-                                        that.spy(data.getResponse());
+                                        that.spy(data.getAll());
                                     },
                                     "alert": function(data) {
                                         // Should never be called
@@ -4623,7 +4450,7 @@ describe("the tetra MVC model", function() {
     
     // Resetting model data
     // -----------------
-    describe("resetting a model", function() {
+    describe("resetting data", function() {
         
         beforeEach(function() {
             
@@ -4667,7 +4494,7 @@ describe("the tetra MVC model", function() {
             var that = this;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -4683,13 +4510,7 @@ describe("the tetra MVC model", function() {
                     myTestArray: [],
                     myTestNumber: 0
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4702,7 +4523,7 @@ describe("the tetra MVC model", function() {
                                 "myModel": {
                                     // TODO Append returns an array, resetted returns an object with ref as the first element
                                     "append": function(data){
-                                        that.spy(data[0].getResponse());
+                                        that.spy(data[0].getAll());
                                     },
                                     "resetted": function(data) {
                                         that.spy(data);
@@ -4768,7 +4589,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, ""]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/parameterized/fetch.json"
@@ -4782,13 +4603,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4841,7 +4656,7 @@ describe("the tetra MVC model", function() {
             ;
             
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -4857,13 +4672,7 @@ describe("the tetra MVC model", function() {
                     myTestArray: [],
                     myTestNumber: 0
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -4937,7 +4746,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -4950,13 +4759,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -5024,7 +4827,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -5037,13 +4840,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -5110,7 +4907,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
     
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
@@ -5123,13 +4920,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
             
             tetra.controller.register("myController", {
@@ -5182,7 +4973,7 @@ describe("the tetra MVC model", function() {
                 that = this,
                 resetServer = sinon.fakeServer.create(),
                 init = {
-            		scope: "myScope",
+                    scope: "myScope",
                     req: {
                         reset: {
                             url: "/my/test/delete.json",
@@ -5192,13 +4983,7 @@ describe("the tetra MVC model", function() {
                     attr: {
                         success: true
                     },
-                    methods : function(attr){
-                        return {
-                            getResponse: function() {
-                                return attr;
-                            }
-                        };
-                    }
+                    methods : function(){}
                 }
             ;
     
@@ -5210,86 +4995,6 @@ describe("the tetra MVC model", function() {
             // Cleanup
             resetServer.restore();
         });
-        
-//        it("should correctly handle invalid JSON responses", function(){
-//            var 
-//                that = this,
-//                errorServer = sinon.fakeServer.create()
-//            ;
-//            
-//            errorServer.respondWith("POST", /\/my\/test\/reset.json/,
-//                    [200, {"Content-type": "application/json"}, 
-//                     "{\"status\": \"SUCCESS\", \"alerts\": {\"msg1\""]);
-//            errorServer.respondWith("DELETE", /\/my\/test\/reset.json/,
-//                    [200, {"Content-type": "application/json"}, 
-//                     "{\"status\": \"SUCCESS\", \"alerts\": {\"msg1\""]);
-//            errorServer.respondWith("GET", /\/my\/test\/fetch.json\?ts=*/,
-//                    [200, {"Content-type": "application/json"},
-//                     "{\"status\": \"SUCCESS\", \"data\": {\"myUniqueId\": {\"success\": true}}}"]);
-//    
-//            tetra.model.register("myModel", {
-//                req: {
-//                    fetch: {
-//                        url: "/my/test/fetch.json"
-//                    },
-//                    reset: {
-//                        url: "/my/test/reset.json",
-//                        method: "POST"
-//                    }
-//                },
-//                attr: {
-//                    success: false
-//                },
-//                methods : function(attr){
-//                    return {
-//                        getResponse: function() {
-//                            return attr;
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            tetra.controller.register("myController", {
-//                scope: "myScope",
-//                use: ["myModel"],
-//                constr: function(me, app, page, orm) {
-//                    return {
-//                        events: {
-//                            model: {
-//                                "myModel": {
-//                                    "resetted": function(data) {
-//                                        // This shouldn't be called
-//                                        that.spy();
-//                                    },
-//                                    "error": function(data) {
-//                                        that.spy(data);
-//                                    }
-//                                }
-//                            }
-//                        },
-//                        methods: {
-//                            init: function(){                        
-//                                orm("myModel").fetch({});
-//                                errorServer.respond();
-//                                orm("myModel").reset();
-//                                errorServer.respond();
-//                            }
-//                        }
-//                    };
-//                }
-//            });
-//            
-//            // Inspect the response
-//            expect(this.spy.called).toBeTruthy();
-//            expect(this.spy.calledOnce).toBeTruthy("as the spy() should have been invoked once in the error callback");
-//    
-//            var response = this.spy.getCall(0).args[0];
-//            expect(response).toBeDefined();
-//            
-//            // TODO Check data here
-//            
-//            errorServer.restore();
-//        });
         
         it("should handle empty JSON responses", function(){
             var
@@ -5307,7 +5012,7 @@ describe("the tetra MVC model", function() {
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
 
             tetra.model.register("myModel", {
-            	scope: "myScope",
+                scope: "myScope",
                 req: {
                     fetch: {
                         url: "/my/empty/test/fetch.json"
@@ -5319,13 +5024,7 @@ describe("the tetra MVC model", function() {
                 attr: {
                     success: false
                 },
-                methods : function(attr){
-                    return {
-                        getResponse: function() {
-                            return attr;
-                        }
-                    };
-                }
+                methods : function(){}
             });
         
             tetra.controller.register("myController", {
@@ -5366,6 +5065,1087 @@ describe("the tetra MVC model", function() {
             emptyJsonServer.restore();
         });
     });
-});
+    
+    describe("model global callbacks", function() {
+      
+      beforeEach(function() {
+        this.spy = sinon.spy();
+        this.server = sinon.fakeServer.create();
+        this.server.respondWith("GET", /\/my\/test/,
+                [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
+        this.server.respondWith("POST", /\/my\/test/,
+                [200, {"Content-type": "application/json"}, ""]);
+        this.server.respondWith("PUT", /\/my\/test/,
+                [200, {"Content-type": "application/json"}, ""]);
+        
+        this.server.respondWith("GET", /\/my\/error/,
+                [500, {"Content-type": "application/json"}, ""]);
+        this.server.respondWith("GET", /\/my\/fail/,
+                [200, {"Content-type": "application/json"}, JSON.stringify(failResponse)]);
 
-// TODO Have we tested all callbacks (complete, error, etc?)
+        this.server.respondWith("POST", /\/my\/error/,
+                [500, {"Content-type": "application/json"}, ""]);
+        this.server.respondWith("POST", /\/my\/fail/,
+                [200, {"Content-type": "application/json"}, JSON.stringify(failResponse)]);
+        
+        this.server.respondWith("PUT", /\/my\/error/,
+                [500, {"Content-type": "application/json"}, ""]);
+        this.server.respondWith("PUT", /\/my\/fail/,
+                [200, {"Content-type": "application/json"}, JSON.stringify(failResponse)]);
+        
+        var that = this;
+        tetra.model.register("myModel", {
+            scope: "myScope",
+            req: {
+                fetch: {
+                    url: "/my/test/fetch.json"
+                },
+                save: {
+                    url: "/my/test/save.json",
+                    method: "POST"
+                },
+                del: {
+                    url: "/my/test/delete.json",
+                    method: "POST"
+                },
+                reset: {
+                    url: "/my/test/reset.json",
+                    method: "PUT"
+                }
+            },
+            attr: {
+                success: false,
+                myTestString: "foo"
+            },
+            methods: function(attr) {
+                return {
+                    myMethod: function() {
+                        that.spy();
+                        return attr;
+                    },
+          
+                    validate: function(attr, errors) {
+                        if(attr.myTestString && typeof attr.myTestString !== "string") {
+                            errors.push("BAM");
+                        }
+                        return errors;
+                    }
+ 
+                
+                };
+            }
+        });
+        
+        tetra.model.register("myErrorModel", {
+            scope: "myScope",
+            req: {
+                fetch: {
+                    url: "/my/error/fetch.json"
+                },
+                save: {
+                    url: "/my/error/save.json",
+                    method: "POST"
+                },
+                del: {
+                    url: "/my/error/delete.json",
+                    method: "POST"
+                },
+                reset: {
+                    url: "/my/error/reset.json"
+                }
+            },
+            attr: {
+                success: false
+            },
+            methods: function(attr) {
+                return {
+                    myMethod: function() {
+                        that.spy();
+                        return attr;
+                    }
+                };
+            }
+         });
+        
+         tetra.model.register("myFailModel", {
+            scope: "myScope",
+            req: {
+                fetch: {
+                    url: "/my/fail/fetch.json"
+                },
+                save: {
+                    url: "/my/fail/save.json",
+                    method: "POST"
+                },
+                del: {
+                    url: "/my/fail/delete.json",
+                    method: "POST"
+                },
+                reset: {
+                    url: "/my/fail/reset.json"
+                }
+            },
+            attr: {
+                success: false
+            },
+            methods: function(attr) {
+                return {
+                    myMethod: function() {
+                        that.spy();
+                        return attr;
+                    }
+                };
+            }
+         });
+       });
+      
+      afterEach(function() {
+        this.server.restore();
+        this.spy = null;
+        
+        tetra.controller.destroy("myController", "myScope");
+        tetra.model.destroy("myModel", "myScope");
+        tetra.model.destroy("myErrorModel", "myScope");
+        tetra.model.destroy("myFailModel", "myScope");
+      });
+      
+      it("should fire the callbacks in the order 'fetch', 'call', 'append', 'complete' during a fetch", function() {  
+        var that = this;
+        
+        tetra.controller.register("myController", {
+            scope: "myScope",
+            use: ["myModel"],
+            constr: function(me, app, page, orm) {
+                return {
+                    events: {
+                        model: {
+                            "myModel": {
+                                "fetch": function(data) {
+                                    that.spy(1);
+                                },
+                                "call": function(data){
+                                    that.spy(2);
+                                },
+                                "append": function(data) {
+                                    that.spy(3);
+                                },
+                                "complete": function(data) {
+                                    that.spy(4);
+                                },
+                                "error": function(data) {
+                                    // Never called
+                                    that.spy('foo');
+                                },
+                                "alert": function(data) {
+                                    // Never called
+                                    that.spy('bar');
+                                }
+                            }
+                        }
+                    },
+                    methods: {
+                        init: function(){
+                            orm("myModel").fetch({});
+                            that.server.respond();
+                        }
+                    }
+                };
+            }
+        });
+        
+        expect(this.spy.callCount).toBe(4);
+        
+        // Check the order
+        expect(this.spy.getCall(0).args[0]).toBe(1);
+        expect(this.spy.getCall(1).args[0]).toBe(2);
+        expect(this.spy.getCall(2).args[0]).toBe(3);
+        expect(this.spy.getCall(3).args[0]).toBe(4);
+        
+      });
+      
+      it("should fire the callbacks in the order 'fetch', 'call', 'error', 'complete' when a fetch returns an error", function() {  
+          var that = this;
+          
+          tetra.controller.register("myController", {
+              scope: "myScope",
+              use: ["myErrorModel"],
+              constr: function(me, app, page, orm) {
+                  return {
+                      events: {
+                          model: {
+                              "myErrorModel": {
+                                  "fetch": function(data) {
+                                      that.spy(1);
+                                  },
+                                  "call": function(data){
+                                      that.spy(2);
+                                  },
+                                  "append": function(data) {
+                                      // Never called
+                                      that.spy('foo');
+                                  },
+                                  "complete": function(data) {
+                                      that.spy(4);
+                                  },
+                                  "error": function(data) {
+                                      // Never called
+                                      that.spy(3);
+                                  },
+                                  "alert": function(data) {
+                                      // Never called
+                                      that.spy('bar');
+                                  }
+                              }
+                          }
+                      },
+                      methods: {
+                          init: function(){
+                              orm("myErrorModel").fetch({});
+                              that.server.respond();
+                          }
+                      }
+                  };
+              }
+          });
+          
+          expect(this.spy.callCount).toBe(4);
+          
+          // Check the order
+          expect(this.spy.getCall(0).args[0]).toBe(1);
+          expect(this.spy.getCall(1).args[0]).toBe(2);
+          expect(this.spy.getCall(2).args[0]).toBe(3);
+          expect(this.spy.getCall(3).args[0]).toBe(4);
+          
+      });
+      
+      it("should fire the callbacks in the order 'fetch', 'call', 'alert', 'complete' when a fetch returns FAIL", function() {  
+          var that = this;
+          
+          tetra.controller.register("myController", {
+              scope: "myScope",
+              use: ["myFailModel"],
+              constr: function(me, app, page, orm) {
+                  return {
+                      events: {
+                          model: {
+                              "myFailModel": {
+                                  "fetch": function(data) {
+                                      that.spy(1);
+                                  },
+                                  "call": function(data){
+                                      that.spy(2);
+                                  },
+                                  "append": function(data) {
+                                      // Never called
+                                      that.spy('foo');
+                                  },
+                                  "complete": function(data) {
+                                      that.spy(4);
+                                  },
+                                  "error": function(data) {
+                                      // Never called
+                                      that.spy('bar');
+                                  },
+                                  "alert": function(data) {
+                                      // Never called
+                                      that.spy(3);
+                                  }
+                              }
+                          }
+                      },
+                      methods: {
+                          init: function(){
+                              orm("myFailModel").fetch({});
+                              that.server.respond();
+                          }
+                      }
+                  };
+              }
+          });
+          
+          expect(this.spy.callCount).toBe(4);
+          
+          // Check the order
+          expect(this.spy.getCall(0).args[0]).toBe(1);
+          expect(this.spy.getCall(1).args[0]).toBe(2);
+          expect(this.spy.getCall(2).args[0]).toBe(3);
+          expect(this.spy.getCall(3).args[0]).toBe(4);
+          
+      });
+      
+      it("should *not* fire 'append' if a custom callback is passed to fetch", function() {  
+          var that = this;
+          
+          tetra.controller.register("myController", {
+              scope: "myScope",
+              use: ["myModel"],
+              constr: function(me, app, page, orm) {
+                  return {
+                      events: {
+                          model: {
+                              "myModel": {
+                                  "fetch": function(data) {
+                                      that.spy(1);
+                                  },
+                                  "call": function(data){
+                                      that.spy(2);
+                                  },
+                                  "append": function(data) {
+                                      // Never called
+                                      that.spy('foo');
+                                  },
+                                  "complete": function(data) {
+                                      that.spy(4);
+                                  },
+                                  "error": function(data) {
+                                      // Never called
+                                      that.spy(5);
+                                  },
+                                  "alert": function(data) {
+                                      // Never called
+                                      that.spy(6);
+                                  }
+                              }
+                          }
+                      },
+                      methods: {
+                          init: function(){
+                              orm("myModel").fetch({}, function() {
+                                  that.spy(3);
+                              });
+                              that.server.respond();
+                          }
+                      }
+                  };
+              }
+          });
+          
+          expect(this.spy.callCount).toBe(4);
+          
+          // Check the order
+          expect(this.spy.getCall(0).args[0]).toBe(1);
+          expect(this.spy.getCall(1).args[0]).toBe(2);
+          expect(this.spy.getCall(2).args[0]).toBe(3);
+          expect(this.spy.getCall(3).args[0]).toBe(4);
+      });
+      
+      it("should handle mySql models", function() {
+          // TODO Implement
+      });
+      
+      it("should fire the callbacks in the order 'save', 'call', 'saved', 'complete' during a save", function() {  
+          var that = this;
+          
+          tetra.controller.register("myController", {
+              scope: "myScope",
+              use: ["myModel"],
+              constr: function(me, app, page, orm) {
+                  return {
+                      events: {
+                          model: {
+                              "myModel": {
+                                  "save": function(data) {
+                                      that.spy(1);
+                                  },
+                                  "call": function(data){
+                                      that.spy(2);
+                                  },
+                                  "saved": function(data) {
+                                      that.spy(3);
+                                  },
+                                  "complete": function(data) {
+                                      that.spy(4);
+                                  },
+                                  "error": function(data) {
+                                      // Never called
+                                      that.spy('foo');
+                                  },
+                                  "alert": function(data) {
+                                      // Never called
+                                      that.spy('bar');
+                                  }
+                              }
+                          }
+                      },
+                      methods: {
+                          init: function(){
+                              orm("myModel").create({}).save();
+                              that.server.respond();
+                          }
+                      }
+                  };
+              }
+          });
+          
+          expect(this.spy.callCount).toBe(4);
+          
+          // Check the order
+          expect(this.spy.getCall(0).args[0]).toBe(1);
+          expect(this.spy.getCall(1).args[0]).toBe(2);
+          expect(this.spy.getCall(2).args[0]).toBe(3);
+          expect(this.spy.getCall(3).args[0]).toBe(4);
+          
+        });
+      
+      it("should fire the callbacks in the order 'save', 'call', 'error', 'complete' when a save returns an error", function() {  
+          var that = this;
+          
+          tetra.controller.register("myController", {
+              scope: "myScope",
+              use: ["myErrorModel"],
+              constr: function(me, app, page, orm) {
+                  return {
+                      events: {
+                          model: {
+                              "myErrorModel": {
+                                  "save": function(data) {
+                                      that.spy(1);
+                                  },
+                                  "call": function(data){
+                                      that.spy(2);
+                                  },
+                                  "saved": function(data) {
+                                      // Never called
+                                      that.spy('foo');
+                                  },
+                                  "complete": function(data) {
+                                      that.spy(4);
+                                  },
+                                  "error": function(data) {
+                                      that.spy(3);
+                                  },
+                                  "alert": function(data) {
+                                      // Never called
+                                      that.spy('bar');
+                                  }
+                              }
+                          }
+                      },
+                      methods: {
+                          init: function(){
+                              orm("myErrorModel").create({}).save();
+                              that.server.respond();
+                          }
+                      }
+                  };
+              }
+          });
+          
+          expect(this.spy.callCount).toBe(4);
+          
+          // Check the order
+          expect(this.spy.getCall(0).args[0]).toBe(1);
+          expect(this.spy.getCall(1).args[0]).toBe(2);
+          expect(this.spy.getCall(2).args[0]).toBe(3);
+          expect(this.spy.getCall(3).args[0]).toBe(4);
+          
+        });
+      
+        it("should fire the callbacks in the order 'save', 'call', 'alert', 'complete' when a save returns a FAIL", function() {  
+          var that = this;
+          
+          tetra.controller.register("myController", {
+              scope: "myScope",
+              use: ["myFailModel"],
+              constr: function(me, app, page, orm) {
+                  return {
+                      events: {
+                          model: {
+                              "myFailModel": {
+                                  "save": function(data) {
+                                      that.spy(1);
+                                  },
+                                  "call": function(data){
+                                      that.spy(2);
+                                  },
+                                  "saved": function(data) {
+                                      // Never called
+                                      that.spy('foo');
+                                  },
+                                  "complete": function(data) {
+                                      that.spy(4);
+                                  },
+                                  "error": function(data) {
+                                      // Never called
+                                      that.spy('bar');
+                                  },
+                                  "alert": function(data) {
+                                      that.spy(3);
+                                  }
+                              }
+                          }
+                      },
+                      methods: {
+                          init: function(){
+                              orm("myFailModel").create({}).save();
+                              that.server.respond();
+                          }
+                      }
+                  };
+              }
+          });
+          
+          expect(this.spy.callCount).toBe(4);
+          
+          // Check the order
+          expect(this.spy.getCall(0).args[0]).toBe(1);
+          expect(this.spy.getCall(1).args[0]).toBe(2);
+          expect(this.spy.getCall(2).args[0]).toBe(3);
+          expect(this.spy.getCall(3).args[0]).toBe(4);
+          
+        });
+        
+        it("should *not* fire 'saved' if a custom callback is passed to the save function", function() {  
+            var that = this;
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "save": function(data) {
+                                        that.spy(1);
+                                    },
+                                    "call": function(data){
+                                        that.spy(2);
+                                    },
+                                    "saved": function(data) {
+                                        // Never called
+                                        that.spy('foo');
+                                    },
+                                    "complete": function(data) {
+                                        that.spy(4);
+                                    },
+                                    "error": function(data) {
+                                        // Never called
+                                        that.spy('bar');
+                                    },
+                                    "alert": function(data) {
+                                        // Never called
+                                        that.spy('baz');
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myModel").create({}).save({}, function(){
+                                    that.spy(3);
+                                });
+                                that.server.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            expect(this.spy.callCount).toBe(4);
+            
+            // Check the order
+            expect(this.spy.getCall(0).args[0]).toBe(1);
+            expect(this.spy.getCall(1).args[0]).toBe(2);
+            expect(this.spy.getCall(2).args[0]).toBe(3);
+            expect(this.spy.getCall(3).args[0]).toBe(4);
+            
+          });
+        
+          it("should fire only the 'invalid' callback, if validate() returns false during a save", function() {  
+            var that = this;
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "save": function(data) {
+                                        // never called
+                                        that.spy('save');
+                                    },
+                                    "call": function(data){
+                                        // never called
+                                        that.spy('call');
+                                    },
+                                    "saved": function(data) {
+                                        // never called
+                                        that.spy('saved');
+                                    },
+                                    "complete": function(data) {
+                                        // never called
+                                        that.spy('complete');
+                                    },
+                                    "error": function(data) {
+                                        // Never called
+                                        that.spy('error');
+                                    },
+                                    "alert": function(data) {
+                                        // Never called
+                                        that.spy('alert');
+                                    },
+                                    "invalid": function() {
+                                        that.spy(1);
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myModel").create({myTestString: 1}).save();
+                                that.server.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            expect(this.spy.callCount).toBe(1);
+            expect(this.spy.getCall(0).args[0]).toBe(1);
+          });
+          
+          it("should fire the callbacks in the order 'delete', 'call', 'deleted', 'complete' during a remove", function() {  
+              var that = this;
+              
+              tetra.controller.register("myController", {
+                  scope: "myScope",
+                  use: ["myModel"],
+                  constr: function(me, app, page, orm) {
+                      return {
+                          events: {
+                              model: {
+                                  "myModel": {
+                                      "delete": function(data) {
+                                          that.spy(1);
+                                      },
+                                      "call": function(data){
+                                          that.spy(2);
+                                      },
+                                      "deleted": function(data) {
+                                          that.spy(3);
+                                      },
+                                      "complete": function(data) {
+                                          that.spy(4);
+                                      },
+                                      "error": function(data) {
+                                          // Never called
+                                          that.spy('foo');
+                                      },
+                                      "alert": function(data) {
+                                          // Never called
+                                          that.spy('bar');
+                                      }
+                                  }
+                              }
+                          },
+                          methods: {
+                              init: function(){
+                                  orm("myModel").create({}).remove();
+                                  that.server.respond();
+                              }
+                          }
+                      };
+                  }
+              });
+              
+              expect(this.spy.callCount).toBe(4);
+              
+              // Check the order
+              expect(this.spy.getCall(0).args[0]).toBe(1);
+              expect(this.spy.getCall(1).args[0]).toBe(2);
+              expect(this.spy.getCall(2).args[0]).toBe(3);
+              expect(this.spy.getCall(3).args[0]).toBe(4);
+              
+            });
+            
+            it("should fire the callbacks in the order 'delete', 'call', 'error', 'complete' when a remove returns an error", function() {  
+                var that = this;
+                
+                tetra.controller.register("myController", {
+                    scope: "myScope",
+                    use: ["myErrorModel"],
+                    constr: function(me, app, page, orm) {
+                        return {
+                            events: {
+                                model: {
+                                    "myErrorModel": {
+                                        "delete": function(data) {
+                                            that.spy(1);
+                                        },
+                                        "call": function(data){
+                                            that.spy(2);
+                                        },
+                                        "deleted": function(data) {
+                                            // Never called
+                                            that.spy('foo');
+                                        },
+                                        "complete": function(data) {
+                                            that.spy(4);
+                                        },
+                                        "error": function(data) {
+                                            // Never called
+                                            that.spy(3);
+                                        },
+                                        "alert": function(data) {
+                                            // Never called
+                                            that.spy('bar');
+                                        }
+                                    }
+                                }
+                            },
+                            methods: {
+                                init: function(){
+                                    orm("myErrorModel").create({}).remove();
+                                    that.server.respond();
+                                }
+                            }
+                        };
+                    }
+                });
+                
+                expect(this.spy.callCount).toBe(4);
+                
+                // Check the order
+                expect(this.spy.getCall(0).args[0]).toBe(1);
+                expect(this.spy.getCall(1).args[0]).toBe(2);
+                expect(this.spy.getCall(2).args[0]).toBe(3);
+                expect(this.spy.getCall(3).args[0]).toBe(4);
+                
+            });
+            
+            it("should fire the callbacks in the order 'fetch', 'call', 'alert', 'complete' when a delete returns FAIL", function() {  
+                var that = this;
+                
+                tetra.controller.register("myController", {
+                    scope: "myScope",
+                    use: ["myFailModel"],
+                    constr: function(me, app, page, orm) {
+                        return {
+                            events: {
+                                model: {
+                                    "myFailModel": {
+                                        "delete": function(data) {
+                                            that.spy(1);
+                                        },
+                                        "call": function(data){
+                                            that.spy(2);
+                                        },
+                                        "deleted": function(data) {
+                                            // Never called
+                                            that.spy('foo');
+                                        },
+                                        "complete": function(data) {
+                                            that.spy(4);
+                                        },
+                                        "error": function(data) {
+                                            // Never called
+                                            that.spy('bar');
+                                        },
+                                        "alert": function(data) {
+                                            // Never called
+                                            that.spy(3);
+                                        }
+                                    }
+                                }
+                            },
+                            methods: {
+                                init: function(){
+                                    orm("myFailModel").create({}).remove();
+                                    that.server.respond();
+                                }
+                            }
+                        };
+                    }
+                });
+                
+                expect(this.spy.callCount).toBe(4);
+                
+                // Check the order
+                expect(this.spy.getCall(0).args[0]).toBe(1);
+                expect(this.spy.getCall(1).args[0]).toBe(2);
+                expect(this.spy.getCall(2).args[0]).toBe(3);
+                expect(this.spy.getCall(3).args[0]).toBe(4);
+                
+            });
+            
+            it("should *not* fire 'deleted' if a custom callback is passed to remove", function() {  
+                var that = this;
+                
+                tetra.controller.register("myController", {
+                    scope: "myScope",
+                    use: ["myModel"],
+                    constr: function(me, app, page, orm) {
+                        return {
+                            events: {
+                                model: {
+                                    "myModel": {
+                                        "delete": function(data) {
+                                            that.spy(1);
+                                        },
+                                        "call": function(data){
+                                            that.spy(2);
+                                        },
+                                        "deleted": function(data) {
+                                            // Never called
+                                            that.spy('foo');
+                                        },
+                                        "complete": function(data) {
+                                            that.spy(4);
+                                        },
+                                        "error": function(data) {
+                                            // Never called
+                                            that.spy(5);
+                                        },
+                                        "alert": function(data) {
+                                            // Never called
+                                            that.spy(6);
+                                        }
+                                    }
+                                }
+                            },
+                            methods: {
+                                init: function(){
+                                    orm("myModel").create({}).remove({}, function(){
+                                        that.spy(3);
+                                    });
+                                    that.server.respond();
+                                }
+                            }
+                        };
+                    }
+                });
+                
+                expect(this.spy.callCount).toBe(4);
+                
+                // Check the order
+                expect(this.spy.getCall(0).args[0]).toBe(1);
+                expect(this.spy.getCall(1).args[0]).toBe(2);
+                expect(this.spy.getCall(2).args[0]).toBe(3);
+                expect(this.spy.getCall(3).args[0]).toBe(4);
+            });
+            
+            it("should fire the callbacks in the order 'reset', 'call', 'resetted', 'complete' during a reset", function() {  
+                var that = this;
+                
+                tetra.controller.register("myController", {
+                    scope: "myScope",
+                    use: ["myModel"],
+                    constr: function(me, app, page, orm) {
+                        return {
+                            events: {
+                                model: {
+                                    "myModel": {
+                                        "reset": function(data) {
+                                            that.spy(1);
+                                        },
+                                        "call": function(data){
+                                            that.spy(2);
+                                        },
+                                        "resetted": function(data) {
+                                            that.spy(3);
+                                        },
+                                        "complete": function(data) {
+                                            that.spy(4);
+                                        },
+                                        "error": function(data) {
+                                            // Never called
+                                            that.spy('foo');
+                                        },
+                                        "alert": function(data) {
+                                            // Never called
+                                            that.spy('bar');
+                                        }
+                                    }
+                                }
+                            },
+                            methods: {
+                                init: function(){
+                                    orm("myModel").reset();
+                                    that.server.respond();
+                                }
+                            }
+                        };
+                    }
+                });
+                
+                expect(this.spy.callCount).toBe(4);
+                
+                // Check the order
+                expect(this.spy.getCall(0).args[0]).toBe(1);
+                expect(this.spy.getCall(1).args[0]).toBe(2);
+                expect(this.spy.getCall(2).args[0]).toBe(3);
+                expect(this.spy.getCall(3).args[0]).toBe(4);
+                
+              });
+              
+              it("should fire the callbacks in the order 'reset', 'call', 'error', 'complete' when a reset returns an error", function() {  
+                  var that = this;
+                  
+                  tetra.controller.register("myController", {
+                      scope: "myScope",
+                      use: ["myErrorModel"],
+                      constr: function(me, app, page, orm) {
+                          return {
+                              events: {
+                                  model: {
+                                      "myErrorModel": {
+                                          "reset": function(data) {
+                                              that.spy(1);
+                                          },
+                                          "call": function(data){
+                                              that.spy(2);
+                                          },
+                                          "resetted": function(data) {
+                                              // Never called
+                                              that.spy('foo');
+                                          },
+                                          "complete": function(data) {
+                                              that.spy(4);
+                                          },
+                                          "error": function(data) {
+                                              // Never called
+                                              that.spy(3);
+                                          },
+                                          "alert": function(data) {
+                                              // Never called
+                                              that.spy('bar');
+                                          }
+                                      }
+                                  }
+                              },
+                              methods: {
+                                  init: function(){
+                                      orm("myErrorModel").reset();
+                                      that.server.respond();
+                                  }
+                              }
+                          };
+                      }
+                  });
+                  
+                  expect(this.spy.callCount).toBe(4);
+                  
+                  // Check the order
+                  expect(this.spy.getCall(0).args[0]).toBe(1);
+                  expect(this.spy.getCall(1).args[0]).toBe(2);
+                  expect(this.spy.getCall(2).args[0]).toBe(3);
+                  expect(this.spy.getCall(3).args[0]).toBe(4);
+                  
+              });
+              
+              it("should fire the callbacks in the order 'reset', 'call', 'alert', 'complete' when a reset returns FAIL", function() {  
+                  var that = this;
+                  
+                  tetra.controller.register("myController", {
+                      scope: "myScope",
+                      use: ["myFailModel"],
+                      constr: function(me, app, page, orm) {
+                          return {
+                              events: {
+                                  model: {
+                                      "myFailModel": {
+                                          "reset": function(data) {
+                                              that.spy(1);
+                                          },
+                                          "call": function(data){
+                                              that.spy(2);
+                                          },
+                                          "resetted": function(data) {
+                                              // Never called
+                                              that.spy('foo');
+                                          },
+                                          "complete": function(data) {
+                                              that.spy(4);
+                                          },
+                                          "error": function(data) {
+                                              // Never called
+                                              that.spy('bar');
+                                          },
+                                          "alert": function(data) {
+                                              // Never called
+                                              that.spy(3);
+                                          }
+                                      }
+                                  }
+                              },
+                              methods: {
+                                  init: function(){
+                                      orm("myFailModel").reset();
+                                      that.server.respond();
+                                  }
+                              }
+                          };
+                      }
+                  });
+                  
+                  expect(this.spy.callCount).toBe(4);
+                  
+                  // Check the order
+                  expect(this.spy.getCall(0).args[0]).toBe(1);
+                  expect(this.spy.getCall(1).args[0]).toBe(2);
+                  expect(this.spy.getCall(2).args[0]).toBe(3);
+                  expect(this.spy.getCall(3).args[0]).toBe(4);
+                  
+              });
+              
+              it("should *not* fire 'resetted' if a custom callback is passed to remove", function() {  
+                  var that = this;
+                  
+                  tetra.controller.register("myController", {
+                      scope: "myScope",
+                      use: ["myModel"],
+                      constr: function(me, app, page, orm) {
+                          return {
+                              events: {
+                                  model: {
+                                      "myModel": {
+                                          "reset": function(data) {
+                                              that.spy(1);
+                                          },
+                                          "call": function(data){
+                                              that.spy(2);
+                                          },
+                                          "resetted": function(data) {
+                                              // Never called
+                                              that.spy('foo');
+                                          },
+                                          "complete": function(data) {
+                                              that.spy(4);
+                                          },
+                                          "error": function(data) {
+                                              // Never called
+                                              that.spy(5);
+                                          },
+                                          "alert": function(data) {
+                                              // Never called
+                                              that.spy(6);
+                                          }
+                                      }
+                                  }
+                              },
+                              methods: {
+                                  init: function(){
+                                      orm("myModel").reset({}, function(){
+                                          that.spy(3);
+                                      });
+                                      that.server.respond();
+                                  }
+                              }
+                          };
+                      }
+                  });
+                  
+                  expect(this.spy.callCount).toBe(4);
+                  
+                  // Check the order
+                  expect(this.spy.getCall(0).args[0]).toBe(1);
+                  expect(this.spy.getCall(1).args[0]).toBe(2);
+                  expect(this.spy.getCall(2).args[0]).toBe(3);
+                  expect(this.spy.getCall(3).args[0]).toBe(4);
+              });
+            
+    });
+});

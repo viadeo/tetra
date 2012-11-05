@@ -1,6 +1,8 @@
 ![tetra logo](https://raw.github.com/viadeo/tetra/master/tetra.png) ![travis](https://secure.travis-ci.org/viadeo/tetra.png)  
 =====
 
+HELLO
+
 ## Tetra, a clean MVC javascript framework
 
 Tetra aims to help developers build faster, more maintainable and better structured code.

@@ -111,7 +111,7 @@
           scriptsVersion : "test"
       };
       VNS.util = {
-          AjaxPopupBox : function() {
+          AjaxPopupBox : function(name, args) {
               this.init = true;
           }
       };
@@ -133,7 +133,7 @@
                 callback : 'tns.currentRequest',
                 allowEscape : false,
                 popupVar : 'tns.ajaxBox'
-              });
+          });
         },
         currentRequestCallback : function() {
           if (tns.ajaxBox) {
