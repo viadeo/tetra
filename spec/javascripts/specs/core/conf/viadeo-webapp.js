@@ -5,7 +5,8 @@
 (function() {
 
     "use strict";
-
+    
+    // Setup the VNS object. This must come *before* the call to tetra.extend
     var VNS = (typeof VNS === 'undefined') ? {} : VNS;
 
     VNS.context = {
@@ -30,11 +31,11 @@
 			jsVersion : VNS.context.scriptsVersion,
 			authCallback : function() {
 				tns.ajaxBox = new VNS.util.AjaxPopupBox(
-						'/r/account/authentication/', {
-							callback : 'tns.currentRequest',
-							allowEscape : false,
-							popupVar : 'tns.ajaxBox'
-						});
+					'/r/account/authentication/', {
+						callback : 'tns.currentRequest',
+						allowEscape : false,
+						popupVar : 'tns.ajaxBox'
+					});
 			},
 			currentRequestCallback : function() {
 				if (tns.ajaxBox) {
@@ -56,7 +57,8 @@
             if (typeof console !== "undefined") {
                 console.warn("Requirejs failed to load the module(s)", err.requireModules, "with error", err);
             }
-        } else {
+        } 
+        else {
             throw err;
         }
     };
