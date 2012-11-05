@@ -68,7 +68,7 @@ module.exports = function( grunt ) {
 		},
 		jasmine: {
 			folder: {
-				src: "spec/javascripts/specs/core"
+				src: "spec/javascripts/specs"
 			}
 		}
 	});

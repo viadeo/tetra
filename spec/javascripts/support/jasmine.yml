@@ -8,7 +8,7 @@ src_files:
   - lib/tetra-view.js
   - lib/tetra-controller.js
   - lib/tetra-model.js
-  - spec/javascripts/specs/core/conf/remote-webapp.js
+  - spec/javascripts/specs/conf/remote-webapp.js
   - spec/javascripts/lib/Sinon.JS/sinon-1.4.2.js
   - spec/javascripts/lib/Sinon.JS/sinon-ie-1.4.2.js
   - spec/javascripts/lib/jasmine/lib/jasmine-jquery.js
@@ -16,10 +16,10 @@ src_files:
   - spec/javascripts/lib/utils.js
 
 spec_files:
-  - core/core.spec.js
-  - core/model/*.spec.js
-  - core/controller/*.spec.js
-  - core/view/*.spec.js
+  - core.spec.js
+  - model/*.spec.js
+  - controller/*.spec.js
+  - view/*.spec.js
 
 src_dir: 
 spec_dir: 'spec/javascripts/specs'
