@@ -307,6 +307,2272 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 	exports.tetra = tetra;
 }
 
+/*!
+ * Sizzle CSS Selector Engine
+ * Copyright 2012 jQuery Foundation and other contributors
+ * Released under the MIT license
+ * http://sizzlejs.com/
+ */
+(function( window, undefined ) {
+
+var dirruns,
+	cachedruns,
+	assertGetIdNotName,
+	Expr,
+	getText,
+	isXML,
+	contains,
+	compile,
+	sortOrder,
+	hasDuplicate,
+
+	baseHasDuplicate = true,
+	strundefined = "undefined",
+
+	expando = ( "sizcache" + Math.random() ).replace( ".", "" ),
+
+	document = window.document,
+	docElem = document.documentElement,
+	done = 0,
+	slice = [].slice,
+	push = [].push,
+
+	// Augment a function for special use by Sizzle
+	markFunction = function( fn, value ) {
+		fn[ expando ] = value || true;
+		return fn;
+	},
+
+	createCache = function() {
+		var cache = {},
+			keys = [];
+
+		return markFunction(function( key, value ) {
+			// Only keep the most recent entries
+			if ( keys.push( key ) > Expr.cacheLength ) {
+				delete cache[ keys.shift() ];
+			}
+
+			return (cache[ key ] = value);
+		}, cache );
+	},
+
+	classCache = createCache(),
+	tokenCache = createCache(),
+	compilerCache = createCache(),
+
+	// Regex
+
+	// Whitespace characters http://www.w3.org/TR/css3-selectors/#whitespace
+	whitespace = "[\\x20\\t\\r\\n\\f]",
+	// http://www.w3.org/TR/css3-syntax/#characters
+	characterEncoding = "(?:\\\\.|[-\\w]|[^\\x00-\\xa0])+",
+
+	// Loosely modeled on CSS identifier characters
+	// An unquoted value should be a CSS identifier (http://www.w3.org/TR/css3-selectors/#attribute-selectors)
+	// Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
+	identifier = characterEncoding.replace( "w", "w#" ),
+
+	// Acceptable operators http://www.w3.org/TR/selectors/#attribute-selectors
+	operators = "([*^$|!~]?=)",
+	attributes = "\\[" + whitespace + "*(" + characterEncoding + ")" + whitespace +
+		"*(?:" + operators + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + identifier + ")|)|)" + whitespace + "*\\]",
+
+	// Prefer arguments not in parens/brackets,
+	//   then attribute selectors and non-pseudos (denoted by :),
+	//   then anything else
+	// These preferences are here to reduce the number of selectors
+	//   needing tokenize in the PSEUDO preFilter
+	pseudos = ":(" + characterEncoding + ")(?:\\((?:(['\"])((?:\\\\.|[^\\\\])*?)\\2|([^()[\\]]*|(?:(?:" + attributes + ")|[^:]|\\\\.)*|.*))\\)|)",
+
+	// For matchExpr.POS and matchExpr.needsContext
+	pos = ":(nth|eq|gt|lt|first|last|even|odd)(?:\\(((?:-\\d)?\\d*)\\)|)(?=[^-]|$)",
+
+	// Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
+	rtrim = new RegExp( "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$", "g" ),
+
+	rcomma = new RegExp( "^" + whitespace + "*," + whitespace + "*" ),
+	rcombinators = new RegExp( "^" + whitespace + "*([\\x20\\t\\r\\n\\f>+~])" + whitespace + "*" ),
+	rpseudo = new RegExp( pseudos ),
+
+	// Easily-parseable/retrievable ID or TAG or CLASS selectors
+	rquickExpr = /^(?:#([\w\-]+)|(\w+)|\.([\w\-]+))$/,
+
+	rnot = /^:not/,
+	rsibling = /[\x20\t\r\n\f]*[+~]/,
+	rendsWithNot = /:not\($/,
+
+	rheader = /h\d/i,
+	rinputs = /input|select|textarea|button/i,
+
+	rbackslash = /\\(?!\\)/g,
+
+	matchExpr = {
+		"ID": new RegExp( "^#(" + characterEncoding + ")" ),
+		"CLASS": new RegExp( "^\\.(" + characterEncoding + ")" ),
+		"NAME": new RegExp( "^\\[name=['\"]?(" + characterEncoding + ")['\"]?\\]" ),
+		"TAG": new RegExp( "^(" + characterEncoding.replace( "w", "w*" ) + ")" ),
+		"ATTR": new RegExp( "^" + attributes ),
+		"PSEUDO": new RegExp( "^" + pseudos ),
+		"CHILD": new RegExp( "^:(only|nth|last|first)-child(?:\\(" + whitespace +
+			"*(even|odd|(([+-]|)(\\d*)n|)" + whitespace + "*(?:([+-]|)" + whitespace +
+			"*(\\d+)|))" + whitespace + "*\\)|)", "i" ),
+		"POS": new RegExp( pos, "ig" ),
+		// For use in libraries implementing .is()
+		"needsContext": new RegExp( "^" + whitespace + "*[>+~]|" + pos, "i" )
+	},
+
+	// Support
+
+	// Used for testing something on an element
+	assert = function( fn ) {
+		var div = document.createElement("div");
+
+		try {
+			return fn( div );
+		} catch (e) {
+			return false;
+		} finally {
+			// release memory in IE
+			div = null;
+		}
+	},
+
+	// Check if getElementsByTagName("*") returns only elements
+	assertTagNameNoComments = assert(function( div ) {
+		div.appendChild( document.createComment("") );
+		return !div.getElementsByTagName("*").length;
+	}),
+
+	// Check if getAttribute returns normalized href attributes
+	assertHrefNotNormalized = assert(function( div ) {
+		div.innerHTML = "<a href='#'></a>";
+		return div.firstChild && typeof div.firstChild.getAttribute !== strundefined &&
+			div.firstChild.getAttribute("href") === "#";
+	}),
+
+	// Check if attributes should be retrieved by attribute nodes
+	assertAttributes = assert(function( div ) {
+		div.innerHTML = "<select></select>";
+		var type = typeof div.lastChild.getAttribute("multiple");
+		// IE8 returns a string for some attributes even when not present
+		return type !== "boolean" && type !== "string";
+	}),
+
+	// Check if getElementsByClassName can be trusted
+	assertUsableClassName = assert(function( div ) {
+		// Opera can't find a second classname (in 9.6)
+		div.innerHTML = "<div class='hidden e'></div><div class='hidden'></div>";
+		if ( !div.getElementsByClassName || !div.getElementsByClassName("e").length ) {
+			return false;
+		}
+
+		// Safari 3.2 caches class attributes and doesn't catch changes
+		div.lastChild.className = "e";
+		return div.getElementsByClassName("e").length === 2;
+	}),
+
+	// Check if getElementById returns elements by name
+	// Check if getElementsByName privileges form controls or returns elements by ID
+	assertUsableName = assert(function( div ) {
+		// Inject content
+		div.id = expando + 0;
+		div.innerHTML = "<a name='" + expando + "'></a><div name='" + expando + "'></div>";
+		docElem.insertBefore( div, docElem.firstChild );
+
+		// Test
+		var pass = document.getElementsByName &&
+			// buggy browsers will return fewer than the correct 2
+			document.getElementsByName( expando ).length === 2 +
+			// buggy browsers will return more than the correct 0
+			document.getElementsByName( expando + 0 ).length;
+		assertGetIdNotName = !document.getElementById( expando );
+
+		// Cleanup
+		docElem.removeChild( div );
+
+		return pass;
+	});
+
+// If slice is not available, provide a backup
+try {
+	slice.call( docElem.childNodes, 0 )[0].nodeType;
+} catch ( e ) {
+	slice = function( i ) {
+		var elem, results = [];
+		for ( ; (elem = this[i]); i++ ) {
+			results.push( elem );
+		}
+		return results;
+	};
+}
+
+function Sizzle( selector, context, results, seed ) {
+	results = results || [];
+	context = context || document;
+	var match, elem, xml, m,
+		nodeType = context.nodeType;
+
+	if ( nodeType !== 1 && nodeType !== 9 ) {
+		return [];
+	}
+
+	if ( !selector || typeof selector !== "string" ) {
+		return results;
+	}
+
+	xml = isXML( context );
+
+	if ( !xml && !seed ) {
+		if ( (match = rquickExpr.exec( selector )) ) {
+			// Speed-up: Sizzle("#ID")
+			if ( (m = match[1]) ) {
+				if ( nodeType === 9 ) {
+					elem = context.getElementById( m );
+					// Check parentNode to catch when Blackberry 4.6 returns
+					// nodes that are no longer in the document #6963
+					if ( elem && elem.parentNode ) {
+						// Handle the case where IE, Opera, and Webkit return items
+						// by name instead of ID
+						if ( elem.id === m ) {
+							results.push( elem );
+							return results;
+						}
+					} else {
+						return results;
+					}
+				} else {
+					// Context is not a document
+					if ( context.ownerDocument && (elem = context.ownerDocument.getElementById( m )) &&
+						contains( context, elem ) && elem.id === m ) {
+						results.push( elem );
+						return results;
+					}
+				}
+
+			// Speed-up: Sizzle("TAG")
+			} else if ( match[2] ) {
+				push.apply( results, slice.call(context.getElementsByTagName( selector ), 0) );
+				return results;
+
+			// Speed-up: Sizzle(".CLASS")
+			} else if ( (m = match[3]) && assertUsableClassName && context.getElementsByClassName ) {
+				push.apply( results, slice.call(context.getElementsByClassName( m ), 0) );
+				return results;
+			}
+		}
+	}
+
+	// All others
+	return select( selector, context, results, seed, xml );
+}
+
+Sizzle.matches = function( expr, elements ) {
+	return Sizzle( expr, null, null, elements );
+};
+
+Sizzle.matchesSelector = function( elem, expr ) {
+	return Sizzle( expr, null, null, [ elem ] ).length > 0;
+};
+
+// Returns a function to use in pseudos for input types
+function createInputPseudo( type ) {
+	return function( elem ) {
+		var name = elem.nodeName.toLowerCase();
+		return name === "input" && elem.type === type;
+	};
+}
+
+// Returns a function to use in pseudos for buttons
+function createButtonPseudo( type ) {
+	return function( elem ) {
+		var name = elem.nodeName.toLowerCase();
+		return (name === "input" || name === "button") && elem.type === type;
+	};
+}
+
+/**
+ * Utility function for retrieving the text value of an array of DOM nodes
+ * @param {Array|Element} elem
+ */
+getText = Sizzle.getText = function( elem ) {
+	var node,
+		ret = "",
+		i = 0,
+		nodeType = elem.nodeType;
+
+	if ( nodeType ) {
+		if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+			// Use textContent for elements
+			// innerText usage removed for consistency of new lines (see #11153)
+			if ( typeof elem.textContent === "string" ) {
+				return elem.textContent;
+			} else {
+				// Traverse its children
+				for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
+					ret += getText( elem );
+				}
+			}
+		} else if ( nodeType === 3 || nodeType === 4 ) {
+			return elem.nodeValue;
+		}
+		// Do not include comment or processing instruction nodes
+	} else {
+
+		// If no nodeType, this is expected to be an array
+		for ( ; (node = elem[i]); i++ ) {
+			// Do not traverse comment nodes
+			ret += getText( node );
+		}
+	}
+	return ret;
+};
+
+isXML = Sizzle.isXML = function isXML( elem ) {
+	// documentElement is verified for cases where it doesn't yet exist
+	// (such as loading iframes in IE - #4833)
+	var documentElement = elem && (elem.ownerDocument || elem).documentElement;
+	return documentElement ? documentElement.nodeName !== "HTML" : false;
+};
+
+// Element contains another
+contains = Sizzle.contains = docElem.contains ?
+	function( a, b ) {
+		var adown = a.nodeType === 9 ? a.documentElement : a,
+			bup = b && b.parentNode;
+		return a === bup || !!( bup && bup.nodeType === 1 && adown.contains && adown.contains(bup) );
+	} :
+	docElem.compareDocumentPosition ?
+	function( a, b ) {
+		return b && !!( a.compareDocumentPosition( b ) & 16 );
+	} :
+	function( a, b ) {
+		while ( (b = b.parentNode) ) {
+			if ( b === a ) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+Sizzle.attr = function( elem, name ) {
+	var attr,
+		xml = isXML( elem );
+
+	if ( !xml ) {
+		name = name.toLowerCase();
+	}
+	if ( Expr.attrHandle[ name ] ) {
+		return Expr.attrHandle[ name ]( elem );
+	}
+	if ( assertAttributes || xml ) {
+		return elem.getAttribute( name );
+	}
+	attr = elem.getAttributeNode( name );
+	return attr ?
+		typeof elem[ name ] === "boolean" ?
+			elem[ name ] ? name : null :
+			attr.specified ? attr.value : null :
+		null;
+};
+
+Expr = Sizzle.selectors = {
+
+	// Can be adjusted by the user
+	cacheLength: 50,
+
+	createPseudo: markFunction,
+
+	match: matchExpr,
+
+	order: new RegExp( "ID|TAG" +
+		(assertUsableName ? "|NAME" : "") +
+		(assertUsableClassName ? "|CLASS" : "")
+	),
+
+	// IE6/7 return a modified href
+	attrHandle: assertHrefNotNormalized ?
+		{} :
+		{
+			"href": function( elem ) {
+				return elem.getAttribute( "href", 2 );
+			},
+			"type": function( elem ) {
+				return elem.getAttribute("type");
+			}
+		},
+
+	find: {
+		"ID": assertGetIdNotName ?
+			function( id, context, xml ) {
+				if ( typeof context.getElementById !== strundefined && !xml ) {
+					var m = context.getElementById( id );
+					// Check parentNode to catch when Blackberry 4.6 returns
+					// nodes that are no longer in the document #6963
+					return m && m.parentNode ? [m] : [];
+				}
+			} :
+			function( id, context, xml ) {
+				if ( typeof context.getElementById !== strundefined && !xml ) {
+					var m = context.getElementById( id );
+
+					return m ?
+						m.id === id || typeof m.getAttributeNode !== strundefined && m.getAttributeNode("id").value === id ?
+							[m] :
+							undefined :
+						[];
+				}
+			},
+
+		"TAG": assertTagNameNoComments ?
+			function( tag, context ) {
+				if ( typeof context.getElementsByTagName !== strundefined ) {
+					return context.getElementsByTagName( tag );
+				}
+			} :
+			function( tag, context ) {
+				var results = context.getElementsByTagName( tag );
+
+				// Filter out possible comments
+				if ( tag === "*" ) {
+					var elem,
+						tmp = [],
+						i = 0;
+
+					for ( ; (elem = results[i]); i++ ) {
+						if ( elem.nodeType === 1 ) {
+							tmp.push( elem );
+						}
+					}
+
+					return tmp;
+				}
+				return results;
+			},
+
+		"NAME": function( tag, context ) {
+			if ( typeof context.getElementsByName !== strundefined ) {
+				return context.getElementsByName( name );
+			}
+		},
+
+		"CLASS": function( className, context, xml ) {
+			if ( typeof context.getElementsByClassName !== strundefined && !xml ) {
+				return context.getElementsByClassName( className );
+			}
+		}
+	},
+
+	relative: {
+		">": { dir: "parentNode", first: true },
+		" ": { dir: "parentNode" },
+		"+": { dir: "previousSibling", first: true },
+		"~": { dir: "previousSibling" }
+	},
+
+	preFilter: {
+		"ATTR": function( match ) {
+			match[1] = match[1].replace( rbackslash, "" );
+
+			// Move the given value to match[3] whether quoted or unquoted
+			match[3] = ( match[4] || match[5] || "" ).replace( rbackslash, "" );
+
+			if ( match[2] === "~=" ) {
+				match[3] = " " + match[3] + " ";
+			}
+
+			return match.slice( 0, 4 );
+		},
+
+		"CHILD": function( match ) {
+			/* matches from matchExpr.CHILD
+				1 type (only|nth|...)
+				2 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
+				3 xn-component of xn+y argument ([+-]?\d*n|)
+				4 sign of xn-component
+				5 x of xn-component
+				6 sign of y-component
+				7 y of y-component
+			*/
+			match[1] = match[1].toLowerCase();
+
+			if ( match[1] === "nth" ) {
+				// nth-child requires argument
+				if ( !match[2] ) {
+					Sizzle.error( match[0] );
+				}
+
+				// numeric x and y parameters for Expr.filter.CHILD
+				// remember that false/true cast respectively to 0/1
+				match[3] = +( match[3] ? match[4] + (match[5] || 1) : 2 * ( match[2] === "even" || match[2] === "odd" ) );
+				match[4] = +( ( match[6] + match[7] ) || match[2] === "odd" );
+
+			// other types prohibit arguments
+			} else if ( match[2] ) {
+				Sizzle.error( match[0] );
+			}
+
+			return match;
+		},
+
+		"PSEUDO": function( match, context, xml ) {
+			var unquoted, excess;
+			if ( matchExpr["CHILD"].test( match[0] ) ) {
+				return null;
+			}
+
+			if ( match[3] ) {
+				match[2] = match[3];
+			} else if ( (unquoted = match[4]) ) {
+				// Only check arguments that contain a pseudo
+				if ( rpseudo.test(unquoted) &&
+					// Get excess from tokenize (recursively)
+					(excess = tokenize( unquoted, context, xml, true )) &&
+					// advance to the next closing parenthesis
+					(excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length) ) {
+
+					// excess is a negative index
+					unquoted = unquoted.slice( 0, excess );
+					match[0] = match[0].slice( 0, excess );
+				}
+				match[2] = unquoted;
+			}
+
+			// Return only captures needed by the pseudo filter method (type and argument)
+			return match.slice( 0, 3 );
+		}
+	},
+
+	filter: {
+		"ID": assertGetIdNotName ?
+			function( id ) {
+				id = id.replace( rbackslash, "" );
+				return function( elem ) {
+					return elem.getAttribute("id") === id;
+				};
+			} :
+			function( id ) {
+				id = id.replace( rbackslash, "" );
+				return function( elem ) {
+					var node = typeof elem.getAttributeNode !== strundefined && elem.getAttributeNode("id");
+					return node && node.value === id;
+				};
+			},
+
+		"TAG": function( nodeName ) {
+			if ( nodeName === "*" ) {
+				return function() { return true; };
+			}
+			nodeName = nodeName.replace( rbackslash, "" ).toLowerCase();
+
+			return function( elem ) {
+				return elem.nodeName && elem.nodeName.toLowerCase() === nodeName;
+			};
+		},
+
+		"CLASS": function( className ) {
+			var pattern = classCache[ expando ][ className ];
+			if ( !pattern ) {
+				pattern = classCache( className, new RegExp("(^|" + whitespace + ")" + className + "(" + whitespace + "|$)") );
+			}
+			return function( elem ) {
+				return pattern.test( elem.className || (typeof elem.getAttribute !== strundefined && elem.getAttribute("class")) || "" );
+			};
+		},
+
+		"ATTR": function( name, operator, check ) {
+			if ( !operator ) {
+				return function( elem ) {
+					return Sizzle.attr( elem, name ) != null;
+				};
+			}
+
+			return function( elem ) {
+				var result = Sizzle.attr( elem, name ),
+					value = result + "";
+
+				if ( result == null ) {
+					return operator === "!=";
+				}
+
+				switch ( operator ) {
+					case "=":
+						return value === check;
+					case "!=":
+						return value !== check;
+					case "^=":
+						return check && value.indexOf( check ) === 0;
+					case "*=":
+						return check && value.indexOf( check ) > -1;
+					case "$=":
+						return check && value.substr( value.length - check.length ) === check;
+					case "~=":
+						return ( " " + value + " " ).indexOf( check ) > -1;
+					case "|=":
+						return value === check || value.substr( 0, check.length + 1 ) === check + "-";
+				}
+			};
+		},
+
+		"CHILD": function( type, argument, first, last ) {
+
+			if ( type === "nth" ) {
+				var doneName = done++;
+
+				return function( elem ) {
+					var parent, diff,
+						count = 0,
+						node = elem;
+
+					if ( first === 1 && last === 0 ) {
+						return true;
+					}
+
+					parent = elem.parentNode;
+
+					if ( parent && (parent[ expando ] !== doneName || !elem.sizset) ) {
+						for ( node = parent.firstChild; node; node = node.nextSibling ) {
+							if ( node.nodeType === 1 ) {
+								node.sizset = ++count;
+								if ( node === elem ) {
+									break;
+								}
+							}
+						}
+
+						parent[ expando ] = doneName;
+					}
+
+					diff = elem.sizset - last;
+
+					if ( first === 0 ) {
+						return diff === 0;
+
+					} else {
+						return ( diff % first === 0 && diff / first >= 0 );
+					}
+				};
+			}
+
+			return function( elem ) {
+				var node = elem;
+
+				switch ( type ) {
+					case "only":
+					case "first":
+						while ( (node = node.previousSibling) ) {
+							if ( node.nodeType === 1 ) {
+								return false;
+							}
+						}
+
+						if ( type === "first" ) {
+							return true;
+						}
+
+						node = elem;
+
+						/* falls through */
+					case "last":
+						while ( (node = node.nextSibling) ) {
+							if ( node.nodeType === 1 ) {
+								return false;
+							}
+						}
+
+						return true;
+				}
+			};
+		},
+
+		"PSEUDO": function( pseudo, argument, context, xml ) {
+			// pseudo-class names are case-insensitive
+			// http://www.w3.org/TR/selectors/#pseudo-classes
+			// Prioritize by case sensitivity in case custom pseudos are added with uppercase letters
+			var args,
+				fn = Expr.pseudos[ pseudo ] || Expr.pseudos[ pseudo.toLowerCase() ];
+
+			if ( !fn ) {
+				Sizzle.error( "unsupported pseudo: " + pseudo );
+			}
+
+			// The user may use createPseudo to indicate that
+			// arguments are needed to create the filter function
+			// just as Sizzle does
+			if ( !fn[ expando ] ) {
+				if ( fn.length > 1 ) {
+					args = [ pseudo, pseudo, "", argument ];
+					return function( elem ) {
+						return fn( elem, 0, args );
+					};
+				}
+				return fn;
+			}
+
+			return fn( argument, context, xml );
+		}
+	},
+
+	pseudos: {
+		"not": markFunction(function( selector, context, xml ) {
+			// Trim the selector passed to compile
+			// to avoid treating leading and trailing
+			// spaces as combinators
+			var matcher = compile( selector.replace( rtrim, "$1" ), context, xml );
+			return function( elem ) {
+				return !matcher( elem );
+			};
+		}),
+
+		"enabled": function( elem ) {
+			return elem.disabled === false;
+		},
+
+		"disabled": function( elem ) {
+			return elem.disabled === true;
+		},
+
+		"checked": function( elem ) {
+			// In CSS3, :checked should return both checked and selected elements
+			// http://www.w3.org/TR/2011/REC-css3-selectors-20110929/#checked
+			var nodeName = elem.nodeName.toLowerCase();
+			return (nodeName === "input" && !!elem.checked) || (nodeName === "option" && !!elem.selected);
+		},
+
+		"selected": function( elem ) {
+			// Accessing this property makes selected-by-default
+			// options in Safari work properly
+			if ( elem.parentNode ) {
+				elem.parentNode.selectedIndex;
+			}
+
+			return elem.selected === true;
+		},
+
+		"parent": function( elem ) {
+			return !Expr.pseudos["empty"]( elem );
+		},
+
+		"empty": function( elem ) {
+			// http://www.w3.org/TR/selectors/#empty-pseudo
+			// :empty is only affected by element nodes and content nodes(including text(3), cdata(4)),
+			//   not comment, processing instructions, or others
+			// Thanks to Diego Perini for the nodeName shortcut
+			//   Greater than "@" means alpha characters (specifically not starting with "#" or "?")
+			var nodeType;
+			elem = elem.firstChild;
+			while ( elem ) {
+				if ( elem.nodeName > "@" || (nodeType = elem.nodeType) === 3 || nodeType === 4 ) {
+					return false;
+				}
+				elem = elem.nextSibling;
+			}
+			return true;
+		},
+
+		"contains": markFunction(function( text ) {
+			return function( elem ) {
+				return ( elem.textContent || elem.innerText || getText( elem ) ).indexOf( text ) > -1;
+			};
+		}),
+
+		"has": markFunction(function( selector ) {
+			return function( elem ) {
+				return Sizzle( selector, elem ).length > 0;
+			};
+		}),
+
+		"header": function( elem ) {
+			return rheader.test( elem.nodeName );
+		},
+
+		"text": function( elem ) {
+			var type, attr;
+			// IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc)
+			// use getAttribute instead to test this case
+			return elem.nodeName.toLowerCase() === "input" &&
+				(type = elem.type) === "text" &&
+				( (attr = elem.getAttribute("type")) == null || attr.toLowerCase() === type );
+		},
+
+		// Input types
+		"radio": createInputPseudo("radio"),
+		"checkbox": createInputPseudo("checkbox"),
+		"file": createInputPseudo("file"),
+		"password": createInputPseudo("password"),
+		"image": createInputPseudo("image"),
+
+		"submit": createButtonPseudo("submit"),
+		"reset": createButtonPseudo("reset"),
+
+		"button": function( elem ) {
+			var name = elem.nodeName.toLowerCase();
+			return name === "input" && elem.type === "button" || name === "button";
+		},
+
+		"input": function( elem ) {
+			return rinputs.test( elem.nodeName );
+		},
+
+		"focus": function( elem ) {
+			var doc = elem.ownerDocument;
+			return elem === doc.activeElement && (!doc.hasFocus || doc.hasFocus()) && !!(elem.type || elem.href);
+		},
+
+		"active": function( elem ) {
+			return elem === elem.ownerDocument.activeElement;
+		}
+	},
+
+	setFilters: {
+		"first": function( elements, argument, not ) {
+			return not ? elements.slice( 1 ) : [ elements[0] ];
+		},
+
+		"last": function( elements, argument, not ) {
+			var elem = elements.pop();
+			return not ? elements : [ elem ];
+		},
+
+		"even": function( elements, argument, not ) {
+			var results = [],
+				i = not ? 1 : 0,
+				len = elements.length;
+			for ( ; i < len; i = i + 2 ) {
+				results.push( elements[i] );
+			}
+			return results;
+		},
+
+		"odd": function( elements, argument, not ) {
+			var results = [],
+				i = not ? 0 : 1,
+				len = elements.length;
+			for ( ; i < len; i = i + 2 ) {
+				results.push( elements[i] );
+			}
+			return results;
+		},
+
+		"lt": function( elements, argument, not ) {
+			return not ? elements.slice( +argument ) : elements.slice( 0, +argument );
+		},
+
+		"gt": function( elements, argument, not ) {
+			return not ? elements.slice( 0, +argument + 1 ) : elements.slice( +argument + 1 );
+		},
+
+		"eq": function( elements, argument, not ) {
+			var elem = elements.splice( +argument, 1 );
+			return not ? elements : elem;
+		}
+	}
+};
+
+function siblingCheck( a, b, ret ) {
+	if ( a === b ) {
+		return ret;
+	}
+
+	var cur = a.nextSibling;
+
+	while ( cur ) {
+		if ( cur === b ) {
+			return -1;
+		}
+
+		cur = cur.nextSibling;
+	}
+
+	return 1;
+}
+
+sortOrder = docElem.compareDocumentPosition ?
+	function( a, b ) {
+		if ( a === b ) {
+			hasDuplicate = true;
+			return 0;
+		}
+
+		return ( !a.compareDocumentPosition || !b.compareDocumentPosition ?
+			a.compareDocumentPosition :
+			a.compareDocumentPosition(b) & 4
+		) ? -1 : 1;
+	} :
+	function( a, b ) {
+		// The nodes are identical, we can exit early
+		if ( a === b ) {
+			hasDuplicate = true;
+			return 0;
+
+		// Fallback to using sourceIndex (in IE) if it's available on both nodes
+		} else if ( a.sourceIndex && b.sourceIndex ) {
+			return a.sourceIndex - b.sourceIndex;
+		}
+
+		var al, bl,
+			ap = [],
+			bp = [],
+			aup = a.parentNode,
+			bup = b.parentNode,
+			cur = aup;
+
+		// If the nodes are siblings (or identical) we can do a quick check
+		if ( aup === bup ) {
+			return siblingCheck( a, b );
+
+		// If no parents were found then the nodes are disconnected
+		} else if ( !aup ) {
+			return -1;
+
+		} else if ( !bup ) {
+			return 1;
+		}
+
+		// Otherwise they're somewhere else in the tree so we need
+		// to build up a full list of the parentNodes for comparison
+		while ( cur ) {
+			ap.unshift( cur );
+			cur = cur.parentNode;
+		}
+
+		cur = bup;
+
+		while ( cur ) {
+			bp.unshift( cur );
+			cur = cur.parentNode;
+		}
+
+		al = ap.length;
+		bl = bp.length;
+
+		// Start walking down the tree looking for a discrepancy
+		for ( var i = 0; i < al && i < bl; i++ ) {
+			if ( ap[i] !== bp[i] ) {
+				return siblingCheck( ap[i], bp[i] );
+			}
+		}
+
+		// We ended someplace up the tree so do a sibling check
+		return i === al ?
+			siblingCheck( a, bp[i], -1 ) :
+			siblingCheck( ap[i], b, 1 );
+	};
+
+// Always assume the presence of duplicates if sort doesn't
+// pass them to our comparison function (as in Google Chrome).
+[0, 0].sort( sortOrder );
+baseHasDuplicate = !hasDuplicate;
+
+// Document sorting and removing duplicates
+Sizzle.uniqueSort = function( results ) {
+	var elem,
+		i = 1;
+
+	hasDuplicate = baseHasDuplicate;
+	results.sort( sortOrder );
+
+	if ( hasDuplicate ) {
+		for ( ; (elem = results[i]); i++ ) {
+			if ( elem === results[ i - 1 ] ) {
+				results.splice( i--, 1 );
+			}
+		}
+	}
+
+	return results;
+};
+
+Sizzle.error = function( msg ) {
+	throw new Error( "Syntax error, unrecognized expression: " + msg );
+};
+
+function tokenize( selector, context, xml, parseOnly ) {
+	var matched, match, tokens, type,
+		soFar, groups, group, i,
+		preFilters, filters,
+		checkContext = !xml && context !== document,
+		// Token cache should maintain spaces
+		key = ( checkContext ? "<s>" : "" ) + selector.replace( rtrim, "$1<s>" ),
+		cached = tokenCache[ expando ][ key ];
+
+	if ( cached ) {
+		return parseOnly ? 0 : slice.call( cached, 0 );
+	}
+
+	soFar = selector;
+	groups = [];
+	i = 0;
+	preFilters = Expr.preFilter;
+	filters = Expr.filter;
+
+	while ( soFar ) {
+
+		// Comma and first run
+		if ( !matched || (match = rcomma.exec( soFar )) ) {
+			if ( match ) {
+				soFar = soFar.slice( match[0].length );
+				tokens.selector = group;
+			}
+			groups.push( tokens = [] );
+			group = "";
+
+			// Need to make sure we're within a narrower context if necessary
+			// Adding a descendant combinator will generate what is needed
+			if ( checkContext ) {
+				soFar = " " + soFar;
+			}
+		}
+
+		matched = false;
+
+		// Combinators
+		if ( (match = rcombinators.exec( soFar )) ) {
+			group += match[0];
+			soFar = soFar.slice( match[0].length );
+
+			// Cast descendant combinators to space
+			matched = tokens.push({
+				part: match.pop().replace( rtrim, " " ),
+				string: match[0],
+				captures: match
+			});
+		}
+
+		// Filters
+		for ( type in filters ) {
+			if ( (match = matchExpr[ type ].exec( soFar )) && (!preFilters[ type ] ||
+				( match = preFilters[ type ](match, context, xml) )) ) {
+
+				group += match[0];
+				soFar = soFar.slice( match[0].length );
+				matched = tokens.push({
+					part: type,
+					string: match.shift(),
+					captures: match
+				});
+			}
+		}
+
+		if ( !matched ) {
+			break;
+		}
+	}
+
+	// Attach the full group as a selector
+	if ( group ) {
+		tokens.selector = group;
+	}
+
+	// Return the length of the invalid excess
+	// if we're just parsing
+	// Otherwise, throw an error or return tokens
+	return parseOnly ?
+		soFar.length :
+		soFar ?
+			Sizzle.error( selector ) :
+			// Cache the tokens
+			slice.call( tokenCache(key, groups), 0 );
+}
+
+function addCombinator( matcher, combinator, context, xml ) {
+	var dir = combinator.dir,
+		doneName = done++;
+
+	if ( !matcher ) {
+		// If there is no matcher to check, check against the context
+		matcher = function( elem ) {
+			return elem === context;
+		};
+	}
+	return combinator.first ?
+		function( elem ) {
+			while ( (elem = elem[ dir ]) ) {
+				if ( elem.nodeType === 1 ) {
+					return matcher( elem ) && elem;
+				}
+			}
+		} :
+		xml ?
+			function( elem ) {
+				while ( (elem = elem[ dir ]) ) {
+					if ( elem.nodeType === 1 ) {
+						if ( matcher( elem ) ) {
+							return elem;
+						}
+					}
+				}
+			} :
+			function( elem ) {
+				var cache,
+					dirkey = doneName + "." + dirruns,
+					cachedkey = dirkey + "." + cachedruns;
+				while ( (elem = elem[ dir ]) ) {
+					if ( elem.nodeType === 1 ) {
+						if ( (cache = elem[ expando ]) === cachedkey ) {
+							return elem.sizset;
+						} else if ( typeof cache === "string" && cache.indexOf(dirkey) === 0 ) {
+							if ( elem.sizset ) {
+								return elem;
+							}
+						} else {
+							elem[ expando ] = cachedkey;
+							if ( matcher( elem ) ) {
+								elem.sizset = true;
+								return elem;
+							}
+							elem.sizset = false;
+						}
+					}
+				}
+			};
+}
+
+function addMatcher( higher, deeper ) {
+	return higher ?
+		function( elem ) {
+			var result = deeper( elem );
+			return result && higher( result === true ? elem : result );
+		} :
+		deeper;
+}
+
+// ["TAG", ">", "ID", " ", "CLASS"]
+function matcherFromTokens( tokens, context, xml ) {
+	var token, matcher,
+		i = 0;
+
+	for ( ; (token = tokens[i]); i++ ) {
+		if ( Expr.relative[ token.part ] ) {
+			matcher = addCombinator( matcher, Expr.relative[ token.part ], context, xml );
+		} else {
+			matcher = addMatcher( matcher, Expr.filter[ token.part ].apply(null, token.captures.concat( context, xml )) );
+		}
+	}
+
+	return matcher;
+}
+
+function matcherFromGroupMatchers( matchers ) {
+	return function( elem ) {
+		var matcher,
+			j = 0;
+		for ( ; (matcher = matchers[j]); j++ ) {
+			if ( matcher(elem) ) {
+				return true;
+			}
+		}
+		return false;
+	};
+}
+
+compile = Sizzle.compile = function( selector, context, xml ) {
+	var group, i, len,
+		cached = compilerCache[ expando ][ selector ];
+
+	// Return a cached group function if already generated (context dependent)
+	if ( cached && cached.context === context ) {
+		return cached;
+	}
+
+	// Generate a function of recursive functions that can be used to check each element
+	group = tokenize( selector, context, xml );
+	for ( i = 0, len = group.length; i < len; i++ ) {
+		group[i] = matcherFromTokens(group[i], context, xml);
+	}
+
+	// Cache the compiled function
+	cached = compilerCache( selector, matcherFromGroupMatchers(group) );
+	cached.context = context;
+	cached.runs = cached.dirruns = 0;
+	return cached;
+};
+
+function multipleContexts( selector, contexts, results, seed ) {
+	var i = 0,
+		len = contexts.length;
+	for ( ; i < len; i++ ) {
+		Sizzle( selector, contexts[i], results, seed );
+	}
+}
+
+function handlePOSGroup( selector, posfilter, argument, contexts, seed, not ) {
+	var results,
+		fn = Expr.setFilters[ posfilter.toLowerCase() ];
+
+	if ( !fn ) {
+		Sizzle.error( posfilter );
+	}
+
+	if ( selector || !(results = seed) ) {
+		multipleContexts( selector || "*", contexts, (results = []), seed );
+	}
+
+	return results.length > 0 ? fn( results, argument, not ) : [];
+}
+
+function handlePOS( groups, context, results, seed ) {
+	var group, part, j, groupLen, token, selector,
+		anchor, elements, match, matched,
+		lastIndex, currentContexts, not,
+		i = 0,
+		len = groups.length,
+		rpos = matchExpr["POS"],
+		// This is generated here in case matchExpr["POS"] is extended
+		rposgroups = new RegExp( "^" + rpos.source + "(?!" + whitespace + ")", "i" ),
+		// This is for making sure non-participating
+		// matching groups are represented cross-browser (IE6-8)
+		setUndefined = function() {
+			var i = 1,
+				len = arguments.length - 2;
+			for ( ; i < len; i++ ) {
+				if ( arguments[i] === undefined ) {
+					match[i] = undefined;
+				}
+			}
+		};
+
+	for ( ; i < len; i++ ) {
+		group = groups[i];
+		part = "";
+		elements = seed;
+		for ( j = 0, groupLen = group.length; j < groupLen; j++ ) {
+			token = group[j];
+			selector = token.string;
+			if ( token.part === "PSEUDO" ) {
+				// Reset regex index to 0
+				rpos.exec("");
+				anchor = 0;
+				while ( (match = rpos.exec( selector )) ) {
+					matched = true;
+					lastIndex = rpos.lastIndex = match.index + match[0].length;
+					if ( lastIndex > anchor ) {
+						part += selector.slice( anchor, match.index );
+						anchor = lastIndex;
+						currentContexts = [ context ];
+
+						if ( rcombinators.test(part) ) {
+							if ( elements ) {
+								currentContexts = elements;
+							}
+							elements = seed;
+						}
+
+						if ( (not = rendsWithNot.test( part )) ) {
+							part = part.slice( 0, -5 ).replace( rcombinators, "$&*" );
+							anchor++;
+						}
+
+						if ( match.length > 1 ) {
+							match[0].replace( rposgroups, setUndefined );
+						}
+						elements = handlePOSGroup( part, match[1], match[2], currentContexts, elements, not );
+					}
+					part = "";
+				}
+
+			}
+
+			if ( !matched ) {
+				part += selector;
+			}
+			matched = false;
+		}
+
+		if ( part ) {
+			if ( rcombinators.test(part) ) {
+				multipleContexts( part, elements || [ context ], results, seed );
+			} else {
+				Sizzle( part, context, results, seed ? seed.concat(elements) : elements );
+			}
+		} else {
+			push.apply( results, elements );
+		}
+	}
+
+	// Do not sort if this is a single filter
+	return len === 1 ? results : Sizzle.uniqueSort( results );
+}
+
+function select( selector, context, results, seed, xml ) {
+	// Remove excessive whitespace
+	selector = selector.replace( rtrim, "$1" );
+	var elements, matcher, cached, elem,
+		i, tokens, token, lastToken, findContext, type,
+		match = tokenize( selector, context, xml ),
+		contextNodeType = context.nodeType;
+
+	// POS handling
+	if ( matchExpr["POS"].test(selector) ) {
+		return handlePOS( match, context, results, seed );
+	}
+
+	if ( seed ) {
+		elements = slice.call( seed, 0 );
+
+	// To maintain document order, only narrow the
+	// set if there is one group
+	} else if ( match.length === 1 ) {
+
+		// Take a shortcut and set the context if the root selector is an ID
+		if ( (tokens = slice.call( match[0], 0 )).length > 2 &&
+				(token = tokens[0]).part === "ID" &&
+				contextNodeType === 9 && !xml &&
+				Expr.relative[ tokens[1].part ] ) {
+
+			context = Expr.find["ID"]( token.captures[0].replace( rbackslash, "" ), context, xml )[0];
+			if ( !context ) {
+				return results;
+			}
+
+			selector = selector.slice( tokens.shift().string.length );
+		}
+
+		findContext = ( (match = rsibling.exec( tokens[0].string )) && !match.index && context.parentNode ) || context;
+
+		// Reduce the set if possible
+		lastToken = "";
+		for ( i = tokens.length - 1; i >= 0; i-- ) {
+			token = tokens[i];
+			type = token.part;
+			lastToken = token.string + lastToken;
+			if ( Expr.relative[ type ] ) {
+				break;
+			}
+			if ( Expr.order.test(type) ) {
+				elements = Expr.find[ type ]( token.captures[0].replace( rbackslash, "" ), findContext, xml );
+				if ( elements == null ) {
+					continue;
+				} else {
+					selector = selector.slice( 0, selector.length - lastToken.length ) +
+						lastToken.replace( matchExpr[ type ], "" );
+
+					if ( !selector ) {
+						push.apply( results, slice.call(elements, 0) );
+					}
+
+					break;
+				}
+			}
+		}
+	}
+
+	// Only loop over the given elements once
+	if ( selector ) {
+		matcher = compile( selector, context, xml );
+		dirruns = matcher.dirruns++;
+		if ( elements == null ) {
+			elements = Expr.find["TAG"]( "*", (rsibling.test( selector ) && context.parentNode) || context );
+		}
+
+		for ( i = 0; (elem = elements[i]); i++ ) {
+			cachedruns = matcher.runs++;
+			if ( matcher(elem) ) {
+				results.push( elem );
+			}
+		}
+	}
+
+	return results;
+}
+
+if ( document.querySelectorAll ) {
+	(function() {
+		var disconnectedMatch,
+			oldSelect = select,
+			rescape = /'|\\/g,
+			rattributeQuotes = /\=[\x20\t\r\n\f]*([^'"\]]*)[\x20\t\r\n\f]*\]/g,
+
+			// qSa(:focus) reports false when true (Chrome 21),
+			// A support test would require too much code (would include document ready)
+			rbuggyQSA = [":focus"],
+
+			// matchesSelector(:focus) reports false when true (Chrome 21),
+			// matchesSelector(:active) reports false when true (IE9/Opera 11.5)
+			// A support test would require too much code (would include document ready)
+			// just skip matchesSelector for :active
+			rbuggyMatches = [ ":active", ":focus" ],
+			matches = docElem.matchesSelector ||
+				docElem.mozMatchesSelector ||
+				docElem.webkitMatchesSelector ||
+				docElem.oMatchesSelector ||
+				docElem.msMatchesSelector;
+
+		// Build QSA regex
+		// Regex strategy adopted from Diego Perini
+		assert(function( div ) {
+			// Select is set to empty string on purpose
+			// This is to test IE's treatment of not explictly
+			// setting a boolean content attribute,
+			// since its presence should be enough
+			// http://bugs.jquery.com/ticket/12359
+			div.innerHTML = "<select><option selected=''></option></select>";
+
+			// IE8 - Some boolean attributes are not treated correctly
+			if ( !div.querySelectorAll("[selected]").length ) {
+				rbuggyQSA.push( "\\[" + whitespace + "*(?:checked|disabled|ismap|multiple|readonly|selected|value)" );
+			}
+
+			// Webkit/Opera - :checked should return selected option elements
+			// http://www.w3.org/TR/2011/REC-css3-selectors-20110929/#checked
+			// IE8 throws error here (do not put tests after this one)
+			if ( !div.querySelectorAll(":checked").length ) {
+				rbuggyQSA.push(":checked");
+			}
+		});
+
+		assert(function( div ) {
+
+			// Opera 10-12/IE9 - ^= $= *= and empty values
+			// Should not select anything
+			div.innerHTML = "<p test=''></p>";
+			if ( div.querySelectorAll("[test^='']").length ) {
+				rbuggyQSA.push( "[*^$]=" + whitespace + "*(?:\"\"|'')" );
+			}
+
+			// FF 3.5 - :enabled/:disabled and hidden elements (hidden elements are still enabled)
+			// IE8 throws error here (do not put tests after this one)
+			div.innerHTML = "<input type='hidden'/>";
+			if ( !div.querySelectorAll(":enabled").length ) {
+				rbuggyQSA.push(":enabled", ":disabled");
+			}
+		});
+
+		// rbuggyQSA always contains :focus, so no need for a length check
+		rbuggyQSA = /* rbuggyQSA.length && */ new RegExp( rbuggyQSA.join("|") );
+
+		select = function( selector, context, results, seed, xml ) {
+			// Only use querySelectorAll when not filtering,
+			// when this is not xml,
+			// and when no QSA bugs apply
+			if ( !seed && !xml && (!rbuggyQSA || !rbuggyQSA.test( selector )) ) {
+				if ( context.nodeType === 9 ) {
+					try {
+						push.apply( results, slice.call(context.querySelectorAll( selector ), 0) );
+						return results;
+					} catch(qsaError) {}
+				// qSA works strangely on Element-rooted queries
+				// We can work around this by specifying an extra ID on the root
+				// and working up from there (Thanks to Andrew Dupont for the technique)
+				// IE 8 doesn't work on object elements
+				} else if ( context.nodeType === 1 && context.nodeName.toLowerCase() !== "object" ) {
+					var groups, i, len,
+						old = context.getAttribute("id"),
+						nid = old || expando,
+						newContext = rsibling.test( selector ) && context.parentNode || context;
+
+					if ( old ) {
+						nid = nid.replace( rescape, "\\$&" );
+					} else {
+						context.setAttribute( "id", nid );
+					}
+
+					groups = tokenize(selector, context, xml);
+					// Trailing space is unnecessary
+					// There is always a context check
+					nid = "[id='" + nid + "']";
+					for ( i = 0, len = groups.length; i < len; i++ ) {
+						groups[i] = nid + groups[i].selector;
+					}
+					try {
+						push.apply( results, slice.call( newContext.querySelectorAll(
+							groups.join(",")
+						), 0 ) );
+						return results;
+					} catch(qsaError) {
+					} finally {
+						if ( !old ) {
+							context.removeAttribute("id");
+						}
+					}
+				}
+			}
+
+			return oldSelect( selector, context, results, seed, xml );
+		};
+
+		if ( matches ) {
+			assert(function( div ) {
+				// Check to see if it's possible to do matchesSelector
+				// on a disconnected node (IE 9)
+				disconnectedMatch = matches.call( div, "div" );
+
+				// This should fail with an exception
+				// Gecko does not error, returns false instead
+				try {
+					matches.call( div, "[test!='']:sizzle" );
+					rbuggyMatches.push( matchExpr["PSEUDO"].source, matchExpr["POS"].source, "!=" );
+				} catch ( e ) {}
+			});
+
+			// rbuggyMatches always contains :active and :focus, so no need for a length check
+			rbuggyMatches = /* rbuggyMatches.length && */ new RegExp( rbuggyMatches.join("|") );
+
+			Sizzle.matchesSelector = function( elem, expr ) {
+				// Make sure that attribute selectors are quoted
+				expr = expr.replace( rattributeQuotes, "='$1']" );
+
+				// rbuggyMatches always contains :active, so no need for an existence check
+				if ( !isXML( elem ) && !rbuggyMatches.test( expr ) && (!rbuggyQSA || !rbuggyQSA.test( expr )) ) {
+					try {
+						var ret = matches.call( elem, expr );
+
+						// IE 9's matchesSelector returns false on disconnected nodes
+						if ( ret || disconnectedMatch ||
+								// As well, disconnected nodes are said to be in a document
+								// fragment in IE 9
+								elem.document && elem.document.nodeType !== 11 ) {
+							return ret;
+						}
+					} catch(e) {}
+				}
+
+				return Sizzle( expr, null, null, [ elem ] ).length > 0;
+			};
+		}
+	})();
+}
+
+// Deprecated
+Expr.setFilters["nth"] = Expr.setFilters["eq"];
+
+// Back-compat
+Expr.filters = Expr.pseudos;
+
+// EXPOSE
+if ( typeof define === "function" && define.amd ) {
+	define(function() { return Sizzle; });
+} else {
+	window.Sizzle = Sizzle;
+}
+// EXPOSE
+
+})( window );
+
+// ------------------------------------------------------------------------------
+// Tetra.js
+//
+// jQuery connector for libAbstracted module
+// used for DOM access and advanced js methods
+// ------------------------------------------------------------------------------
+// Copyright (c) Viadeo/APVO Corp., Olivier Hory and other Tetra contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+// ------------------------------------------------------------------------------
+
+(function(){
+	if(typeof jQuery !== "undefined") {
+		
+		var _isJSON = function(data) {
+			data = $.trim(data);
+			if(!data || data.length === 0) {
+				return false;
+			}
+			return (/^[\],:{}\s]*$/
+							.test(data.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+							.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+							.replace(/(?:^|:|,)(?:\s*\[)+/g, '')));
+		};
+		
+		// API client
+		var _VDinit = false;
+		
+		if(!tns.libs) tns.libs = [];
+		tns.libs.push((function($){return{
+			name: "jQuery",
+			s: $,
+			elm: function(domElm) {
+				return $(domElm);
+			},
+		//	hasClass:		"hasClass",
+		//	addClass:		"addClass",
+		//	removeClass:	"removeClass",
+		//	attr:			"attr",
+		//	parents:		"parents",
+		//	find:			"find",
+		//	is:				"is",
+		//	
+		//	val:			"val",
+		//	html:			"html",
+			serialize: function(getObj) {
+				var
+					str = '',
+					obj = {},
+					n,
+					v
+				;
+				if(getObj) {
+					$.each( $(this).serializeArray(), function(i,o){
+						n = o.name;
+						v = o.value;
+						
+						obj[n] = obj[n] === undefined ? v
+						  : $.isArray( obj[n] ) ? obj[n].concat( v )
+						  : [ obj[n], v ];
+					});
+					
+					return obj;
+				} else {
+					str = $(this).serialize();
+					return str;
+				}
+			},
+		//	
+		//	siblings: 		"siblings",
+		//	prev: 			"prev",
+		//	next: 			"next",
+		//	
+		//	append: 		"append",
+		//	prepend: 		"prepend",
+		//	before: 		"before",
+		//	after: 			"after",
+		//	replaceWith: 	"replaceWith",
+		//	remove: 		"remove",
+		//	
+		//	animate: 		"animate",
+		//  css:			"css",
+		//  height:			"height",
+		//  width:			"width",
+		//  offset:         "offset",
+		//	
+		//	ready: 			"ready",
+		//	bind: 			"bind",
+		//  unbind:			"unbind",
+			
+			ajax: function(url, options) {
+				var
+					params = options.data,
+					reqParams = {},
+					p
+				;
+				
+				if(options.type === "delete" || options.type === "put") {
+					options.headers["X-HTTP-Method-Override"] = options.type;
+					options.data._method = options.type;
+					options.type = "post";
+				}
+				
+				// remove object parameters that must not be sent to the server
+				if(!options.headers["Content-Type"] || options.headers["Content-Type"].indexOf("application/x-www-form-urlencoded") === 1) {
+					for(p in params) {
+						if(!params.hasOwnProperty(p) || params[p] === null) continue;
+						if(typeof params[p] !== 'object' || params[p].splice) {
+							reqParams[p] = params[p];
+						}
+					}
+				} else {
+					reqParams = params;
+				}
+				
+				$.ajax({
+					url: url,
+					type: options.type,
+					headers: options.headers,
+					data: reqParams,
+					traditional: true,
+					processData: options.processData,
+					create: options.create,
+					complete: options.complete,
+					success: options.success,
+					error: options.error
+				});
+			},
+			initApi: function(conf) {
+				VD.init(conf);
+				_VDinit = true;
+			},
+			api: function(url, options) {
+				if(!_VDinit) {
+					options.error(500, {errors:["API client not initialized"]});
+					return false;
+				}
+				
+				VD.api(
+					url,
+					options.type,
+					options.data,
+					function(resp) {
+						options.success(resp);
+						// TODO error ?!
+					}
+				);
+			},
+			mysql: function(dbTable, options) {
+				options.error(500, {errors:["not implemented"]});
+			},
+			/*bind: function(eventName, callback) {
+				if(eventName === "domLoaded") {
+					eventName = "ready";
+				}
+				
+				$(this).bind(eventName, callback);
+			},
+			unbind: function(eventName, callback) {
+				if(eventName === "domLoaded") {
+					eventName = "ready";
+				}
+				
+				$(this).unbind(eventName, callback);
+			},*/
+			extend: $.extend,
+			inArray: $.inArray,
+			toJSON: JSON.stringify,
+			parseJSON: $.parseJSON,
+			trim: $.trim
+		};})(jQuery));
+	}
+})();
+// ------------------------------------------------------------------------------
+// Tetra.js
+//
+// Prototype connector for libAbstracted module
+// used for DOM access and advanced js methods
+// ------------------------------------------------------------------------------
+// Copyright (c) Viadeo/APVO Corp., Olivier Hory and other Tetra contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+// ------------------------------------------------------------------------------
+
+(function(){
+	if(typeof Prototype !== "undefined") {
+		
+		delete(Array.prototype.toJSON);
+		// Remove the dash from CSS properties and camel-case them
+		function _toCamelCase(str) {
+			return str.replace(/\-[a-z]/g, function(s){
+				return s.toUpperCase().replace("-","");
+			});
+		}
+		
+		// Insert an element or array of elements into the dom. Expects an
+		// element or an object that specifies the position e.g.
+		//	{
+		//		before: "ddfsdf"
+		//	}
+		function _insert(content, position) {
+			for(var i = 0, len = this.length; i < len; i++) {
+				var 
+					targetContent = (typeof content === "string") ? content : $(content).clone(),
+					targetNode = this[i]
+				;
+				
+				if(!targetNode.insert) {
+					targetNode = $(targetNode);
+				}
+				if(position) {
+					var targetObj = {};
+					targetObj[position] = targetContent;
+					targetNode.insert(targetObj);		
+				} else {
+					targetNode.insert(targetContent);
+				}
+			}
+			
+			return this;
+		}
+		
+		function _booleanFct(fct, arg) {
+			if(!this || (!this.splice && !this[fct]) || this.length === 0 || (this.splice && !this[0][fct])) {
+				return false;
+			}
+			if(this.splice) {
+				for(var i = 0, len = this.length; i < len; i++) {
+					if(this[i][fct].apply(this[i], arg)) return true;
+				}
+				return false;
+			} else {
+				return this[fct].apply(this, arg);
+			}
+		}
+		
+		function _chainableFct(fct, arg) {
+			if(!this || (!this.splice && !this[fct]) || this.length === 0 || (this.splice && !this[0][fct])) {
+				return this;
+			}
+			if(this.splice) {
+				for(var i = 0, len = this.length; i < len; i++) {
+					var elt = Element.extend(this[i]);
+					elt[fct].apply(elt, arg);
+				}
+				return this;
+			} else {
+				return this[fct].apply(this, arg);
+			}
+		}
+
+		// API client
+		var _VDinit = false;
+		
+		if(!tns.libs) tns.libs = [];
+		tns.libs.push({
+			name: "Prototype",
+			s: $,
+			elm: function(domElm) {
+				return Element.extend(domElm);
+			},
+			hasClass: function() {
+				return _booleanFct.call(this, "hasClassName", arguments);
+			},
+			addClass: function() {
+				return _chainableFct.call(this, "addClassName", arguments);
+			},
+			removeClass: function() {
+				return _chainableFct.call(this, "removeClassName", arguments);
+			},
+			attr: function(name, value) {
+				if(this && !this.splice) {
+					if(typeof value === "undefined") { 
+						return this.getAttribute(name);
+					} else {
+						this.setAttribute(name, value);
+						return this;
+					}
+				}
+				
+				return null;
+			},
+			parents: function(selector) {
+				var parents = (this && !this.splice && this.ancestors) ? this.ancestors() : [];
+				
+				if(selector) {
+					for(var p = 0, len = parents.length; p < len;) {
+						if(!parents[p].match(selector)) {
+							parents.splice(p,1);
+							len--;
+						} else p++;
+					}
+				}
+				
+				return parents;
+			},
+			find: function() {
+				return _chainableFct.call(this, "select", arguments);
+			},
+			is: function() {
+				return _booleanFct.call(this, "match", arguments);
+			},
+			val: function(value) {
+				if(typeof value === "undefined") { 
+					return this.value;
+				} else {
+					this.value = value;
+					return this;
+				}
+			},
+			html: function(markup) {
+				if(typeof markup === "undefined") { 
+					return this.innerHTML;
+				} else {
+					this.innerHTML = markup;
+					return this;
+				}
+			},
+			serialize: function(getObj) {
+				return this.serialize(getObj);
+			},
+			siblings: function() {
+				return _chainableFct.call(this, "siblings", arguments);
+			},
+			prev: function() {
+				return _chainableFct.call(this, "previous", arguments);
+			},
+			next: function() {
+				return _chainableFct.call(this, "next", arguments);
+			},
+			append: function(content) {
+				return _insert.call(this, content);
+			},
+			prepend: function(content) {
+				return _insert.call(this, content, "top");
+			},
+			before: function(content) {
+				if(this && this.length > 0) {
+					return _insert.call(this, content, "before");
+				}
+				
+				var div = document.createElement("div");
+				div.innerHTML = content;
+				
+				return div.childNodes;			
+			},
+			after: function(content) { 
+				if(this && this.length > 0) {
+					return _insert.call(this, content, "after");
+				} 
+				
+				var div = document.createElement("div");
+				div.innerHTML = content;
+				
+				return div.childNodes;
+			},
+			replaceWith: 	function(content) {
+				for(var i = 0, len = this.length; i < len; i++) {
+					this[i].replace(content);
+				}
+				
+				return this;
+			},
+			css: function() {
+				var map = {};
+				
+				if(typeof arguments[0] === "string") {
+					if(arguments.length === 1) {
+						return this.getStyle(arguments[0]);
+					}
+					else if(arguments.length === 2) {
+						map[_toCamelCase(arguments[0])] = arguments[1];
+					}
+				}
+				
+				if(typeof arguments[0] === "object") {
+					for(var rule in arguments[0]) {
+						map[_toCamelCase(rule)] = arguments[0][rule];
+					}
+				}
+				
+				if(map.hasOwnProperty("float")) {
+					map.cssFloat = map["float"];
+					delete map["float"];
+				}
+				this.setStyle(map);
+				
+				return this;
+			},
+			height: function() {
+				return this.getHeight();
+			},
+			width: function() {
+				return this.getWidth();
+			},
+			offset: function(coords) {
+				return this.cumulativeOffset(coords);
+			},
+			remove: function() {
+				for(var i = 0, len = this.length; i < len; i++) {
+					this[i].remove();
+				}
+				
+				return this;
+			},
+			animate: function() {
+				var
+					arg = arguments,
+					properties = arg[0],
+					duration = 400,
+					easing = 'swing',
+					complete
+				;
+				
+				if(arg[1]) {
+					if(typeof arg[1] === 'object') {
+						if(arg[1].duration) duration = arg[1].duration;
+						if(arg[1].easing) easing = arg[1].easing;
+						if(arg[1].complete) complete = arg[1].complete;
+					} else {
+						duration = arg[1];
+						if(arg[2]) easing = arg[2];
+						if(arg[3]) complete = arg[3];
+					}
+				}
+			
+				// mapping with scriptaculous
+				
+			},
+			ready: function(callback) {
+				Event.observe(document, "dom:loaded", callback);
+			},
+			bind: function(eventName, callback) {
+				if(this.splice) {
+					for(var i = 0, len = this.length; i < len; i++) {
+						Event.observe(this[i], eventName, callback);
+					}
+				} else {
+					Event.observe(this, eventName, callback);
+				}
+			},
+			unbind: function(eventName, callback) {
+				if(eventName === "ready") {
+					Event.stopObserving(document, "dom:loaded", callback);
+					return;
+				}
+				
+				if(this.splice) {
+					for(var i = 0, len = this.length; i < len; i++) {
+						Event.stopObserving(this[i], eventName, callback);
+					}
+				} else {
+					Event.stopObserving(this, eventName, callback);
+				}
+			},
+			ajax: function(url, options) {
+				if(options.type === "delete" || options.type === "put") {
+					options.headers["X-HTTP-Method-Override"] = options.type;
+				}
+				
+				new Ajax.Request(url,
+					{
+						method: options.type,
+						requestHeaders: options.headers,
+						parameters: options.data,
+						postBody: options.processData ? "" : options.data,
+						onCreate: options.create,
+						onComplete: options.complete,
+						onSuccess: function(transport) {
+							var respObj = transport.responseText;
+							
+							if (transport.responseJSON) {
+								respObj = transport.responseJSON;
+							}/*
+							else if(transport.responseXML) {
+								respObj = transport.responseXML;
+							}*/
+							
+							options.success(respObj);	
+						},
+						onFailure: options.error
+					});
+			},
+			initApi: function(conf) {
+				VD.init(conf);
+				_VDinit = true;
+			},
+			api: function(url, options) {
+				if(!_VDinit) {
+					options.error(500, {errors:["API client not initialized"]});
+					return false;
+				}
+				
+				VD.api(
+					url,
+					options.type,
+					options.data,
+					function(resp) {
+						options.success(resp);
+						// TODO error ?!
+					}
+				);
+			},
+			mysql: function(dbTable, options) {
+				options.error(500, {errors:["not implemented"]});
+			},
+			extend: function(obj, mixin) {
+				return (obj) ? Object.extend(obj, mixin) : mixin;
+			},
+			inArray: function(value, array) {
+				return (array) ? array.indexOf(value) : -1;
+			},
+			toJSON: Object.toJSON,
+			parseJSON: function(str) {
+				return str.evalJSON();
+			},
+			trim: function(str) {
+				return (str) ? str.strip() : "";
+			}
+		});
+	}
+})();
+// ------------------------------------------------------------------------------
+// Tetra.js
+//
+// Abstracted lib to use available javascript library (jQuery, Prototype, ...)
+// ------------------------------------------------------------------------------
+// Copyright (c) Viadeo/APVO Corp., Olivier Hory and other Tetra contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+// ------------------------------------------------------------------------------
+tetra.extend('lib', function(_conf, _mod, _) {
+	return (function(libs) {
+		
+		var
+			_exposedDOMFcts = ['attr', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset'],
+			_exposedDOMFctsOnArray = ['hasClass', 'addClass', 'removeClass', 'append', 'prepend', 'before', 'after', 'replaceWith', 'remove', 'animate', 'bind', 'unbind', 'ready'],
+			_exposedDOMFctsWithExtendedOutput = ['parents', 'find', 'siblings', 'prev', 'next'],
+			_exposedHelpers = ['elm', 'ajax', 'initApi', 'api', 'initMysql', 'mysql', 'extend', 'toJSON', 'parseJSON', 'inArray', 'trim', 'render', 'send', 'jsonSend'],
+			
+			_helpers = {},
+			
+			_addDOMFct = function(list, elt, name, fct) {
+				if(typeof fct !== 'undefined') list[name] = function() { return fct.apply(elt, arguments); };
+				return list;
+			},
+			
+			_addDOMFctWithExtendedOutput = function(list, elt, name, fct) {
+				if(typeof fct !== 'undefined') list[name] = function() { return _(fct.apply(elt, arguments)); };
+				return list;
+			},
+			
+			_addHelper = function(list, name, fct) {
+				list[name] = fct;
+				return list;
+			},
+			
+			i = 0,
+			envLib = _conf.env,
+			lib = false,
+			libLen = libs.length,
+			libList = {},
+			_lList = {},
+			l
+		;
+		
+		for(; i < libLen; i++) {
+			
+			l = libs[i];
+			libList[l.name] = l;
+			
+			var
+				_l = function(selector) {
+					
+					var
+						domElm = l.elm([]),
+						elt = domElm,
+						elmFcts = {}
+					;
+					
+					if(selector && typeof selector !== 'undefined') {
+						
+						if(typeof selector === 'string') {
+							domElm = Sizzle(selector);
+						} else if(selector.splice) {
+							domElm = selector;
+						} else {
+							domElm = [selector];
+						}
+						
+						domElm = l.elm(domElm);
+						
+						if(domElm.length > 0) {
+							elt = domElm[0];
+							if(l.name === 'Prototype' && !elt.hasClassName) {
+								elt = l.elm(elt);
+							}
+						}
+						
+					}
+					
+					var libFct;
+					for(var f = 0, len = _exposedDOMFcts.length; f < len; f++) {
+						libFct = (typeof l[_exposedDOMFcts[f]] === "string") ? elt[l[_exposedDOMFcts[f]]] : l[_exposedDOMFcts[f]];
+						_addDOMFct(elmFcts, elt, _exposedDOMFcts[f], libFct);
+					}
+					
+					len = _exposedDOMFctsOnArray.length;
+					for(var g = 0; g < len; g++) {
+					   libFct = (typeof l[_exposedDOMFctsOnArray[g]] === "string") ? domElm[l[_exposedDOMFctsOnArray[g]]] : l[_exposedDOMFctsOnArray[g]];
+						_addDOMFct(elmFcts, domElm, _exposedDOMFctsOnArray[g], libFct);
+					}
+					
+					len = _exposedDOMFctsWithExtendedOutput.length;
+					for(var h = 0; h < len; h++) {
+					   libFct = (typeof l[_exposedDOMFctsWithExtendedOutput[h]] === "string") ? elt[l[_exposedDOMFctsWithExtendedOutput[h]]] : l[_exposedDOMFctsWithExtendedOutput[h]];
+						_addDOMFctWithExtendedOutput(elmFcts, elt, _exposedDOMFctsWithExtendedOutput[h], libFct);
+					}
+					
+					domElm = l.extend(domElm, elmFcts);
+					
+					return domElm;
+				}
+			;
+			
+			// generic helpers
+			for(var f = 0, len = _exposedHelpers.length; f < len; f++) {
+				var libHelper = l[_exposedHelpers[f]];
+				_addHelper(_helpers, _exposedHelpers[f], libHelper);
+			}
+			
+			// special event listener helpers
+			var _convertEventName = function(eventName) {
+				if(eventName === 'clickout') {
+					return 'click';
+				} else {
+					var addEvent = !!document.addEventListener;
+					if (!addEvent && eventName === 'focus') {
+						return 'focusin';
+					} else if (!addEvent && eventName === 'blur') {
+						return 'focusout';
+					}
+				}
+				return eventName;
+			};
+			
+			// switch on the best lib connector according to the context
+			_helpers.toggleLib = function(isAllLibCapable) {
+				_init(isAllLibCapable);
+				l = lib;
+			};
+			
+			_lList[l.name] = l.extend(_l, _helpers);
+		}
+		
+		var _init = function(isAllLibCapable) {
+			var prefLib = envLib;
+			if(!isAllLibCapable) {
+				prefLib = 'Prototype';
+			}
+			
+			if(!lib || prefLib !== lib.name) {
+				lib = (libList[prefLib]) ? libList[prefLib] : libs[0];
+				_ = _lList[lib.name];
+			}
+			
+			return _;
+		};
+		
+		return _init();
+		
+	})(tns.libs);
+});
 /** vim: et:ts=4:sw=4:sts=4
  * @license RequireJS 2.0.6 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -2675,7 +4941,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 			select: true
 		},
 		
-		_mouse = {},
+		_mouseout = {},
 		_clickout = {},
 		
 		_isBubblingSupported = function(eventName) {
@@ -2690,6 +4956,41 @@ tetra.extend('view', function(_conf, _mod, _) {
 			
 			elm = null;
 			return isSupported;
+		},
+
+		_callClickout = function(e, target) {
+			
+			var
+				viewName,
+				thisView,
+				selector,
+				elm,
+				isCurClass,
+				hasParents
+			;
+
+			// call clickout callbacks
+			for(viewName in _clickout) {
+				for(selector in _clickout[viewName]) {
+					if(_clickout[viewName][selector]) {
+						thisView = _views[viewName];
+
+						if(_.toggleLib) _.toggleLib(thisView.has_);
+						
+						isCurClass = _(e.target).hasClass('cur-clickout');
+						hasParents = _(e.target).parents('.cur-clickout').length > 0;
+						
+						if(!isCurClass && !hasParents) {
+							elm = _(selector + '.cur-clickout');
+							_mod.debug.log('view ' + viewName + ' : call clickout callback on ' + selector, thisView.scope, 'info');
+							elm.removeClass('cur-clickout');
+							thisView.events.user.clickout[selector](e,(thisView.has_) ? elm : _(elm[0])[0]);
+						}
+						
+						_clickout[viewName][selector] = false;
+					}
+				}
+			}
 		},
 		
 		_callEventListener = function(e, target, boot) {
@@ -2731,12 +5032,17 @@ tetra.extend('view', function(_conf, _mod, _) {
 						viewName = listenedEvents[i],
 						thisView = _views[viewName],
 						userEvents,
-						mouseOverCalled = false
+						mouseOverCalled = false,
+						from, fromTarget
 					;
 					
 					if((typeof thisView.root === 'undefined' && e.target.tagName !== 'HTML' && e.target.parentNode && e.target.parentNode.tagName) ||
 							(target.parents('#' + thisView.root).length > 0)) {
 						
+						if(eventName === 'click') {
+							_callClickout(e, target);
+						}
+
 						userEvents = thisView.events.user[eventName];
 						for(var selector in userEvents) {
 							if(userEvents.hasOwnProperty(selector)) {
@@ -2750,83 +5056,49 @@ tetra.extend('view', function(_conf, _mod, _) {
 								
 								if(elm) {
 									
-									// clickout management
-									if(eventName === 'click' &&
-											typeof thisView.events.user.clickout !== 'undefined' &&
+									// init clickout callback
+									if(eventName === 'click') {
+										
+										if(typeof thisView.events.user.clickout !== 'undefined' &&
 											typeof thisView.events.user.clickout[selector] !== 'undefined' &&
 											(!elm.hasClass('cur-clickout') || typeof _clickout[viewName] === 'undefined' || typeof _clickout[viewName][selector] === 'undefined')) {
-									   
-										if(!_clickout[viewName]) _clickout[viewName] = {};
-										if(!_clickout[viewName][selector]) _clickout[viewName][selector] = 1;
-										else _clickout[viewName][selector]++;
-									   
-										var
-											cur = {
-												view: thisView,
-												viewName: viewName,
-												eventName: eventName,
-												elm: elm,
-												selector: selector
-											},
-											curClass = "clickout-" + _clickout[viewName][selector]
-										;
-										
-										var clickoutCbk = function(e) {
-											if(_.toggleLib) _.toggleLib(cur.view.has_);
 											
-											var isCurClass = _(e.target).is('.' + curClass);
-											var hasParents = _(e.target).parents('.' + curClass).length > 0;
-											
-											if(!isCurClass && !hasParents) {
-												_mod.debug.log('view ' + cur.viewName + ' : call clickout callback on ' + cur.selector, cur.view.scope, 'info');
-												cur.elm.removeClass('cur-clickout').removeClass(curClass);
-												_unbindEvent(document, 'click', clickoutCbk);
-												cur.view.events.user.clickout[cur.selector](e,(cur.view.has_) ? cur.elm : _(cur.elm[0])[0]);
-											}
-										};
-										
-										elm.addClass('cur-clickout').addClass(curClass);
-										
-										_bindEvent(document, 'click', clickoutCbk);
+											if(!_clickout[viewName]) _clickout[viewName] = {};
+											if(!_clickout[viewName][selector]) _clickout[viewName][selector] = true;
+
+											elm.addClass('cur-clickout');
+										}
 									}
 									
-									// mouseout spam removing (equivalent to mouseleave)
+									// mouseover spam removing (equivalent to mouseenter)
 									else if(eventName === 'mouseover') {
 										if(_.toggleLib) _.toggleLib(thisView.has_);
 										
-										if(elm.hasClass('cur-mouseout') && elm.hasClass('cur-mouse-'+ viewName.replace('/', '-'))) {
+										if(elm.hasClass('cur-mouseover') && elm.hasClass('cur-mouse-'+ viewName.replace('/', '-'))) {
 											elm = false;
 										} else {
-											for(m in _mouse) {
-												_mouse[m].view.events.user.mouseout[_mouse[m].selector](_mouse[m].event, (_mouse[m].view.has_) ? _mouse[m].elm : _mouse[m].elm[0]);
-												_mouse[m].elm.removeClass('cur-mouseout').removeClass('cur-mouse-'+ _mouse[m].viewName);
-												delete _mouse[m];
-											}
 											if(typeof thisView.events.user.mouseout !== 'undefined' && 
 												typeof thisView.events.user.mouseout[selector] != 'undefined') {
-												elm.addClass('cur-mouseout').addClass('cur-mouse-'+ viewName.replace('/', '-'));
+												elm.addClass('cur-mouseover').addClass('cur-mouse-'+ viewName.replace('/', '-'));
 											}
 										}
-										
-										mouseOverCalled = true;
 									}
 									
+									// mouseout spam removing (equivalent to mouseleave)
 									else if (eventName === 'mouseout') {
-										var ev = _.extend({},e);
-										
-										ev.type = eventName;
-										ev.target = e.target;
-										ev.preventDefault = emptyFnc;
-										
-										_mouse[viewName + '/' + selector] = {
-											view: thisView,
-											viewName: viewName.replace('/', '-'),
-											event: ev,
-											elm: elm,
-											selector: selector
-										};
-										
-										elm = false;
+										from = e.relatedTarget || e.toElement;
+										fromTarget = _(from);
+
+										// continue if mouse is in browser
+										if(from && from.nodeName !== "HTML") {
+
+											// clean event if mouse is in mouseover element
+											if(fromTarget.hasClass('cur-mouseover') || fromTarget.parents('.cur-mouseover').length > 0) {
+												elm = false;
+											} else {
+												elm.removeClass('cur-mouseover').removeClass('cur-mouse-'+ viewName.replace('/', '-'));
+											}
+										}
 									}
 									
 									// scroll event cleaning on parent element
@@ -2859,14 +5131,6 @@ tetra.extend('view', function(_conf, _mod, _) {
 									found = true;
 								}
 							}
-						}
-					}
-					
-					if(eventName === 'mouseover' && !mouseOverCalled && target.parents('.cur-mouseout').length === 0) {
-						for(m in _mouse) {
-							_mouse[m].view.events.user.mouseout[_mouse[m].selector](_mouse[m].event, (_mouse[m].view.has_) ? _mouse[m].elm : _mouse[m].elm[0]);
-							_mouse[m].elm.removeClass('cur-mouseout').removeClass('cur-mouse-'+ _mouse[m].viewName);
-							delete _mouse[m];
 						}
 					}
 				}
@@ -3308,6 +5572,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 		debug: _debug
 	};
 });
+
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native controller functions of Tetra.js
@@ -3783,7 +6048,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						obj.update(attributes, skipValid);
 						
 						model.objects[obj.get('ref')] = obj;
-						if((obj.get('id') !== 0) && (obj.get('id') != '0020')) {
+						if((obj.get('id') !== 0)) {
 							model.ids[obj.get('id')] = obj.get('ref');
 						
 							if(cache && (typeof skipCache === 'undefined' || (typeof skipCache !== 'undefined' && !skipCache))) {
@@ -3870,7 +6135,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 											
 											// Manage object creation case
 											// TODO Viadeo specific thing here
-											if(id === 0 || id === '0020') {
+											if(id === 0) {
 												// Clean model cache
 												model.cache = {};
 	

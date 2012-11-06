@@ -16,7 +16,7 @@ src_files:
   - spec/javascripts/lib/utils.js
 
 spec_files:
-  - core.spec.js
+  - tetra.spec.js
   - model/*.spec.js
   - controller/*.spec.js
   - view/*.spec.js
