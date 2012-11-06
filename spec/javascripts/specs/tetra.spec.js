@@ -43,6 +43,24 @@ describe("public methods on the global 'tetra' object", function() {
 			tetra.debug.enable("blarg");
 			expect(tetra.debug.man).toBeDefined();
 		});
+		
+		it("should print out the man text to the console", function() {
+		    tetra.debug.enable("blarg");
+		    var result = tetra.debug.man();
+		    expect(result).toBeTruthy();
+		    
+		    result = false;
+		    result = tetra.debug.view.man();
+		    expect(result).toBeTruthy();
+		    
+		    result = false;
+            result = tetra.debug.ctrl.man();
+            expect(result).toBeTruthy();
+            
+            result = false;
+            result = tetra.debug.model.man();
+            expect(result).toBeTruthy();
+		});
 	});
 	
 	describe("the tetra MVC debug mode", function() {

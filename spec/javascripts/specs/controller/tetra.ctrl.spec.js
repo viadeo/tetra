@@ -222,26 +222,6 @@ describe("the controller; ", function() {
             // Verify that the controller has *not* been created
             controllers = tetra.debug.ctrl.list();
             expect(controllers.myScope).toBeUndefined();
-
-            runs(function(){
-              tetra.controller.register("myNewController", {
-                use: ["myVcmModel"],
-                scope: "myScope",
-                constr: function() {}
-              });
-            });
-            
-            waitsFor(function() {
-              controllers = tetra.debug.ctrl.list();
-              return controllers.myScope;
-            });
-
-            runs(function() {
-                // Verify that the controller *has* been created
-                controllers = tetra.debug.ctrl.list();
-                expect(controllers.myScope).toBeDefined();
-                expect(controllers.myScope[0]).toEqual("myScope/myNewController");
-            });
         });
         
         it("should be able to destroy a controller", function() {
