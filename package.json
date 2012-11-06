@@ -1,7 +1,7 @@
 {
   "name": "tetra",
   "description": "Tetra.js MVC framework for client-side and server-side (with Node.js/Express)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "Olivier Hory",
     "email": "olivier.hory@gmail.com"
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/viadeo/tetra"
+    "url": "git://github.com/ohory/tetra"
   },
   "engines": {
     "node": ">= 0.8.7"
