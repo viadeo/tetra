@@ -22,7 +22,7 @@
 // We also make use of the `spy()` function, provided by the Sinon.js library.
 // The spy object should always be reset in the `afterEach`.
 
-describe("the tetra MVC controller", function() {
+describe("the controller; ", function() {
 
     "use strict";
     

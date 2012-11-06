@@ -11,7 +11,7 @@
 //  * Just like in the view tests, focus/blur are not behaving correctly under IE8 and under
 //  * page IDs appear to be loaded as global variables, so be careful of the naming of your local vars
 
-describe("the tetra bootnode mode", function() {
+describe("bootnode", function() {
 
 	"use strict";
 
@@ -22,7 +22,7 @@ describe("the tetra bootnode mode", function() {
 
 	// Setting up a bootnoded component
 	// ----------------------------------------
-	describe("setting up a bootnoded page component", function(){
+	describe("setting up a bootnoded component", function(){
 		
 		beforeEach(function() {
 			// Enable debug on a non-existent scope, to suppress messages

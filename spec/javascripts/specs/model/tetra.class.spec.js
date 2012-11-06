@@ -143,7 +143,7 @@ describe("the model; ", function() {
 
     // Model Configuration
     // --------------------
-    describe("model configuration", function() {
+    describe("configuration", function() {
         
         beforeEach(function() {
 
@@ -282,7 +282,7 @@ describe("the model; ", function() {
     
     // Fetching data
     // -----------------
-    describe("fetching data", function() {
+    describe("fetching", function() {
         
         beforeEach(function() {
             this.spy = sinon.spy();
@@ -3118,7 +3118,7 @@ describe("the model; ", function() {
     
     // Saving data
     // -----------------
-    describe("saving data", function() {
+    describe("saving", function() {
         
         beforeEach(function() {
             var response = {
@@ -3562,7 +3562,6 @@ describe("the model; ", function() {
                                         that.spy();
                                     },
                                     "error": function(data) {
-                                        console.log("Error get all", data.obj.getAll());
                                         that.spy(data, data.obj.getAll());
                                     }
                                 }
@@ -3778,7 +3777,7 @@ describe("the model; ", function() {
     
     // Deleting data
     // -----------------    
-    describe("deleting data", function() {
+    describe("deleting", function() {
         
         beforeEach(function() {
             this.spy = sinon.spy();
@@ -4450,7 +4449,7 @@ describe("the model; ", function() {
     
     // Resetting model data
     // -----------------
-    describe("resetting data", function() {
+    describe("resetting", function() {
         
         beforeEach(function() {
             
@@ -5066,7 +5065,7 @@ describe("the model; ", function() {
         });
     });
     
-    describe("model global callbacks", function() {
+    describe("global callbacks", function() {
       
       beforeEach(function() {
         this.spy = sinon.spy();

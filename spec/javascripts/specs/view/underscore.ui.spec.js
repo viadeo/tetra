@@ -7,7 +7,7 @@
 // * Sinon - http://sinonjs.org/
 // * Markdown - http://daringfireball.net/projects/markdown/
 
-describe("functions exposed on the underscore object", function() {
+describe("underscore library; ", function() {
 
 	"use strict";
 	

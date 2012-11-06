@@ -31,7 +31,7 @@
 //  * window events cannot be tested on IE6/7/8 as there is no window.dispatchEvent
 //  * the :disabled and :enabled pseudoselectors do not work under Firefox + Prototype
 
-describe("the tetra view", function() {
+describe("the view; ", function() {
 
     "use strict";    
     

@@ -1,6 +1,6 @@
 // Testing the MVC tetra templating functionality
 
-describe("the templating system; ", function() {
+describe("templating; ", function() {
 
 	"use strict";
 	
