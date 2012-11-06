@@ -1,7 +1,4 @@
 target/
-<<<<<<< HEAD
 node_modules/
-=======
 .project
 .settings/
->>>>>>> 504eb3ce9b6ebce528bc9800ee65e87016292962
