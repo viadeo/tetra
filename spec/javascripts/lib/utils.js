@@ -40,31 +40,21 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
         // Triggers an event.
         // We try to use the Prototype or jQuery bridge functions, if available. Otherwise we default to
         // native functions.
-        triggerEvent : function(node, type, from) {
+        triggerEvent : function(node, type) {
             var evt;
             
             if(document.createEvent) {
                 evt = document.createEvent("HTMLEvents");
                 evt.initEvent(type, true, true);
-                if(type === 'mouseout') {
-                    evt.relatedTarget = from;
-                }
                 node.dispatchEvent(evt);
             } else {
                 // If we can use jQuery to normalise events across dumb browsers, then do so
                 if(typeof jQuery !== "undefined" && 
                         (type === "focus" || type === "blur" || type === "change" || type === "scroll" || type === "reset")) {
-                    evt = jQuery.Event(type);
-                    if(type === 'mouseout') {
-                        evt.relatedTarget = from;
-                    }
-                    jQuery(node).trigger(evt);
+                    jQuery(node).trigger(type);
                 } else {
                     evt = document.createEventObject();
                     type = (type.toLowerCase() === "dblclick") ? type.toLowerCase() : type;
-                    if(type === 'mouseout') {
-                        evt.relatedTarget = from;
-                    }
                     node.fireEvent("on" + type, evt);
                 }
             }

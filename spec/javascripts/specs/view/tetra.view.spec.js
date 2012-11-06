@@ -725,19 +725,17 @@ describe("the view; ", function() {
         
         it("should respond appropriately to an onMouseOut", function() {
             var someOtherNode = d.getElementById('someOtherNode');
-           
-            VNS.test.triggerEvent(this.mouseTestNode, "mouseover");
-            VNS.test.triggerEvent(this.mouseTestNode, "mouseout", someOtherNode);
-
+            
+            VNS.test.triggerEvent(this.mouseTestNode, "mouseout");
+            VNS.test.triggerEvent(someOtherNode, "mouseover");
+            
             expect(this.spy.called).toBeTruthy();
-            expect(this.spy.callCount).toBe(4, "as both mouseover & mouseout should have been handled on the element & its parent");
+            expect(this.spy.calledTwice).toBeTruthy("as a mouseout should have been handled on the element & its parent");
             someOtherNode = null;
             
             // Check the arguments returned for the target and its parent
-            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.mouseTestNode, "mouseover");
-            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.mouseTestNodeParent, "mouseover");
-            VNS.test.validateEventArguments(this.spy.getCall(2).args, this.mouseTestNode, "mouseout");
-            VNS.test.validateEventArguments(this.spy.getCall(3).args, this.mouseTestNodeParent, "mouseout");
+            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.mouseTestNode, "mouseout");
+            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.mouseTestNodeParent, "mouseout");
         });
         
         it("should handle special mouseout cases, see line 177", function() {
@@ -1017,19 +1015,11 @@ describe("the view; ", function() {
                                 "click": {
                                     "#clickoutTestField" : function(e, elm) {
                                         // Activates the clickout event
-                                    },
-
-                                    ".clickoutTestField" : function(e, elm) {
-                                        // Activates the clickout event
                                     }
                                 },
                                 
                                 "clickout": {
                                     "#clickoutTestField" : function(e, elm) {
-                                        that.spy("clickout");
-                                    },
-
-                                    ".clickoutTestField" : function(e, elm) {
                                         that.spy("clickout");
                                     }
                                 }
@@ -1084,26 +1074,6 @@ describe("the view; ", function() {
             
             expect(this.spy.called).toBeTruthy();
             expect(this.spy.calledOnce).toBeTruthy();
-        });
-        
-        it("should respond appropriately to two clickout on two element with the same selector", function() {
-            var 
-                clickoutField1 = d.getElementById("clickoutTestField1"),
-                clickoutField2 = d.getElementById("clickoutTestField2"),
-                clickCaptureTestField = d.getElementById("clickCaptureTestField")
-            ;
-            
-            VNS.test.triggerEvent(clickoutField1, "click");
-            VNS.test.triggerEvent(clickoutField2, "click");
-
-            expect(this.spy.called).toBeTruthy();
-            expect(this.spy.calledOnce).toBeTruthy();
-
-            VNS.test.triggerEvent(clickCaptureTestField, "click");
-            
-            expect(this.spy.called).toBeTruthy();
-            expect(this.spy.calledOnce).toBeFalsy();
-            expect(this.spy.calledTwice).toBeTruthy();
         });
         
         it("should allow multiple views to handle the same type of cascading events, with no side-effects", function() {

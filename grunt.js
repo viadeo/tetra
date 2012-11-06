@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
 				"dist/tetra-core-<%=meta.version%>.js",
 				"lib/conf/default.js"
 			],
-			'dist/tetra-prototype-<%=meta.version%>.js': [
+			'dist/tetra-viadeo-<%=meta.version%>.js': [
 				"lib/tetra.js",
 				"lib/deps/jquery/src/sizzle/sizzle.js",
 				"lib/mod/libAbstracted/jquery-connector.js",
@@ -64,7 +64,7 @@ module.exports = function( grunt ) {
 		min: {
 			'dist/tetra-core-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-core-<%=meta.version%>.js'],
 			'dist/tetra-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-<%=meta.version%>.js'],
-			'dist/tetra-prototype-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-prototype-<%=meta.version%>.js']
+			'dist/tetra-viadeo-<%=meta.version%>.min.js': ['<banner>', 'dist/tetra-viadeo-<%=meta.version%>.js']
 		},
 		jasmine: {
 			folder: {
