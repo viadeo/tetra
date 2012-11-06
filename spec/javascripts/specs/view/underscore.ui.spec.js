@@ -7,7 +7,7 @@
 // * Sinon - http://sinonjs.org/
 // * Markdown - http://daringfireball.net/projects/markdown/
 
-describe("functions exposed on the underscore object", function() {
+describe("underscore library; ", function() {
 
 	"use strict";
 	
@@ -30,7 +30,8 @@ describe("functions exposed on the underscore object", function() {
 		it("should retrieve an element using `_()`", function() {
 			var 
 				that = this,
-				_node
+				_node,
+				_noNode
 			;
 			
 			this.node = d.getElementById("classTestNode");
@@ -43,6 +44,7 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								_node = _("#classTestNode");
+								_noNode = _("#nodeThatDoesntExist");
 							}
 						}
 					};
@@ -50,12 +52,14 @@ describe("functions exposed on the underscore object", function() {
 			});
 
 			expect(_node[0]).toEqual(this.node);
+			expect(_noNode.length).toBe(0);
 		});
 		
 		it("should confirm the presence of an element class using `hasClass`", function() {
 			var 
 				that = this,
-				hasClass = false
+				hasClass = false,
+				doesNotHaveClass = true
 			;
 			
 			this.node = d.getElementById("classTestNode");
@@ -68,6 +72,10 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								hasClass = _(that.node).hasClass("foo");
+								doesNotHaveClass = _(that.node).hasClass("baz");
+								expect(function(){
+								    _("#blah").hasClass("baz") // non-existent node
+                                }).not.toThrow();
 							}
 						}
 					};
@@ -75,6 +83,7 @@ describe("functions exposed on the underscore object", function() {
 			});
 			
 			expect(hasClass).toBeTruthy();
+			expect(doesNotHaveClass).toBeFalsy();
 		});
 		
 		it("should add a class to an element using `addClass`", function() {
@@ -94,6 +103,9 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								_(that.node).addClass("bar");
+								expect(function(){
+                                    _("#blah").addClass("baz"); // add on non-existent node
+                                }).not.toThrow();
 							}
 						}
 					};
@@ -120,6 +132,13 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								_(that.node).removeClass("foo");
+								expect(function(){
+								    _(that.node).removeClass("baz"); // remove non-existent class
+								}).not.toThrow();
+								expect(function(){
+                                    _("#blah").removeClass("baz"); // remove class on non-existent node
+                                }).not.toThrow();
+								
 							}
 						}
 					};
@@ -169,7 +188,8 @@ describe("functions exposed on the underscore object", function() {
 		it("should return the value of a field using `val`", function() {
 			var 
 				that = this,
-				value
+				value,
+				valueOfNonExistentNode
 			;
 
 			this.node = d.getElementById("testField");
@@ -182,6 +202,7 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								value = _(that.node).val();
+								valueOfNonExistentNode = _("#blah").val();
 							}
 						}
 					};
@@ -189,12 +210,14 @@ describe("functions exposed on the underscore object", function() {
 			});
 		
 			expect(value).toBe("lorem");
+			expect(valueOfNonExistentNode).toBeUndefined();
 		});
 		
 		it("should return the html content of an element using `html`", function() {
 			var 
 				that = this,
-				html
+				html,
+				htmlForNonExistentNode
 			;
 
 			this.node = d.getElementById("testPara");
@@ -207,6 +230,7 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								html = _(that.node).html().toLowerCase();
+								htmlForNonExistentNode = _("#blah").html();
 							}
 						}
 					};
@@ -214,12 +238,14 @@ describe("functions exposed on the underscore object", function() {
 			});
 		
 			expect(html).toBe("<b>lorem</b>");
+			expect(htmlForNonExistentNode).toBeUndefined();
 		});
 		
 		it("should return the query string of a form element using `serialize`", function() {
 			var 
 				that = this,
-				html
+				serializedString,
+				nonExistentForm
 			;
 
 			this.node = d.getElementById("testForm");
@@ -231,21 +257,24 @@ describe("functions exposed on the underscore object", function() {
 						events: {},
 						methods: {
 							init: function(){
-								html = _(that.node).serialize().toLowerCase();
+								serializedString = _(that.node).serialize().toLowerCase();
+								nonExistentForm = _("#blahform").serialize()
 							}
 						}
 					};
 				}
 			});
 		
-			expect(html).toBe("username=bob&age=5&hobbies=swimming&hobbies=hiking");
+			expect(serializedString).toBe("username=bob&age=5&hobbies=swimming&hobbies=hiking");
+			expect(nonExistentForm).toBeFalsy();
 		});
 		
 		it("should return the query object of a form element using `serialize` with parameter true if _ is the abstracted lib", function() {
 			if(_.toggleLib) {
 				var 
 					that = this,
-					html
+					html,
+					nonExistentForm
 				;
 	
 				this.node = d.getElementById("testForm");
@@ -258,6 +287,7 @@ describe("functions exposed on the underscore object", function() {
 							methods: {
 								init: function(){
 									html = _(that.node).serialize(true);
+									nonExistentForm = _("#blah").serialize(true);
 								}
 							}
 						};
@@ -265,6 +295,7 @@ describe("functions exposed on the underscore object", function() {
 				});
 			
 				expect(html).toEqual({username:"bob", age:"5", hobbies:["swimming", "hiking"]});
+				expect(nonExistentForm).toBeFalsy();
 			}
 		});
 		
@@ -288,6 +319,12 @@ describe("functions exposed on the underscore object", function() {
 								targets = _(".appendTarget");
 								targets.append(appendDiv);
 								targets.prepend(prependDiv);
+								
+								expect(function() {
+								    // node does not exist, but shouldn't throw
+								    _("#blah").append(appendDiv);
+								    _("#blah").prepend(appendDiv);
+								}).not.toThrow();
 							}
 						}
 					};
@@ -324,6 +361,12 @@ describe("functions exposed on the underscore object", function() {
 								_(".aroundTarget").before(beforeDiv);
 								_(".aroundTarget").after(afterDiv);
 								html = _.trim(_('#aroundParent')[0].innerHTML);
+								
+								expect(function() {
+                                    // node does not exist, but shouldn't throw
+                                    _("#blah").before(beforeDiv);
+                                    _("#blah").after(afterDiv);
+                                }).not.toThrow();
 							}
 						}
 					};
@@ -353,6 +396,14 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								_("#toReplace").replaceWith("<div id='replaced'>foo</div>");
+								expect(function() {
+                                    // node does not exist, but shouldn't throw
+                                    _("#blah").replaceWith("<div id='replaced'>foo</div>");
+                                }).not.toThrow();
+								
+								// Replace with undefined should remove element
+								_("#toReplaceWithNothing").replaceWith();
+								
 							}
 						}
 					};
@@ -361,6 +412,9 @@ describe("functions exposed on the underscore object", function() {
 		
 			expect(d.getElementById("toReplace")).toBeNull();
 			expect(d.getElementById("replaced")).not.toBeNull();
+			
+			// Should have been removed
+			expect(d.getElementById("toReplaceWithNothing")).toBeNull();
 		});
 		
 		it("should remove a set of elements using `remove`", function() {
@@ -378,6 +432,10 @@ describe("functions exposed on the underscore object", function() {
 						methods: {
 							init: function(){
 								_("#toRemove").remove();
+								expect(function() {
+                                    // node does not exist, but shouldn't throw
+                                    _("#blah").remove();
+                                }).not.toThrow();
 							}
 						}
 					};
@@ -409,6 +467,11 @@ describe("functions exposed on the underscore object", function() {
 								_("#changeCss").css("font-size", "22px");
 								after = _("#changeCss").css("font-size");
 								afterCamelised = _("#changeCss").css("fontSize");
+								
+								expect(function() {
+                                    // node does not exist, but shouldn't throw
+                                    _("#blah").css("font-size", "22px");
+                                }).not.toThrow();
 							}
 						}
 					};
@@ -440,6 +503,11 @@ describe("functions exposed on the underscore object", function() {
 							init: function(){
 								height = _("#dim").height();
 								width = _("#dim").width();
+								expect(function() {
+                                    // node does not exist, but shouldn't throw
+                                    _("#blah").height();
+                                    _("#blah").width();
+                                }).not.toThrow();
 							}
 						}
 					};
@@ -892,8 +960,7 @@ describe("functions exposed on the underscore object", function() {
 		it("should throw an exception if parseJSON is passed an invalid string", function() {
 			var 
 				that = this,
-				json = "{ foo\": \"bar\"}",
-				spy = sinon.spy()
+				json = "{ foo\": \"bar\"}"
 			;
 	
 			tetra.view.register("myView", {
@@ -903,18 +970,14 @@ describe("functions exposed on the underscore object", function() {
 						events: {},
 						methods: {
 							init: function(){
-								try{
-									_.parseJSON(json);
-								} catch(e) {
-									spy();
-								}
+							    expect(function(){
+							        _.parseJSON(json);
+							    }).toThrow();
 							}
 						}
 					};
 				}
 			});
-	
-			expect(spy.calledOnce).toBeTruthy();
 		});
 		
 		it("should return -1 from `inArray` if the array is null or undefined", function() {

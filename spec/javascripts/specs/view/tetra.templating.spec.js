@@ -1,6 +1,6 @@
 // Testing the MVC tetra templating functionality
 
-describe("the tetra MVC controller", function() {
+describe("templating; ", function() {
 
 	"use strict";
 	
@@ -19,9 +19,11 @@ describe("the tetra MVC controller", function() {
 			tetra.controller.destroy("myCtrl", "myScope");
 			tetra.controller.destroy("otherCtrl", "myScope");
 			tetra.controller.destroy("otherCtrl", "outOfTheScope");
+			
+			tetra.model.destroy("myModel", "myScope");
 		});
 		
-		it("should evaluate correctly a simple template", function() {			
+		it("should evaluate a simple template", function() {			
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController			
@@ -59,7 +61,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="box"><h1>Template</h1><p>Hello world!</p></div>');
 		});
 		
-		it("should evaluate correctly a simple template without controller", function() {			
+		it("should evaluate a simple template without controller", function() {			
 			var spy = sinon.spy();
 			
 			tetra.view.register('myView', {
@@ -85,7 +87,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="box"><h1>Template</h1><p>Hello world!</p></div>');
 		});
 		
-		it("should evaluate correctly a simple template in a javascript string", function() {			
+		it("should evaluate a simple template in a javascript string", function() {			
 			var spy = sinon.spy();
 			
 			tetra.view.register('myView', {
@@ -111,7 +113,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="box"><h1>Template</h1><p>Hello world!</p></div>');
 		});
 		
-		it("should evaluate correctly a simple template in a javascript string called in actions", function() {			
+		it("should evaluate a simple template in a javascript string called in actions", function() {			
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController			
@@ -149,7 +151,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="box2"><h1>Template</h1><p>Hello world!</p></div>');
 		});
 		
-		it("should evaluate correctly a template with component inclusion", function() {
+		it("should evaluate a template with component inclusion", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
@@ -191,7 +193,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="box"><h1>Template</h1><p>Hello world!</p></div>');
 		});
 		
-		it("should evaluate correctly a template in another controller", function() {
+		it("should evaluate a template in another controller", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
@@ -331,7 +333,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="box"><h1>Template</h1><p>Hello world!</p></div>');
 		});
 		
-		it("should evaluate correctly a template function with multiple inclusion of the same component", function() {
+		it("should evaluate a template function with multiple inclusion of the same component", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
@@ -363,7 +365,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<ol id="multiple"><li title="Template1">Template1</li><li title="Template2">Template2</li><li title="Template3">Template3</li><li title="Template4">Template4</li></ol>');
 		});
 		
-		it("should evaluate correctly a template function with cascading component inclusion", function() {
+		it("should evaluate a template function with cascading component inclusion", function() {
 			var spy = sinon.spy();
 			
 			// Creates myScope/myController
@@ -395,7 +397,7 @@ describe("the tetra MVC controller", function() {
 			expect(html.replace(/^\s+/g,'').replace(/\s+$/g,'').replace(/\s+</g,'<').replace(/>\s+/g,'>')).toEqual('<div id="parent"><div id="box"><h1>Template</h1><p>Hello world!</p></div></div>');
 		});
 		
-		it("should evaluate correctly a template with cascading component inclusion and asynchronous actions", function() {
+		it("should evaluate a template with cascading component inclusion and asynchronous actions", function() {
 			var spy = sinon.spy();
 			
 			// Create model for asynchronous call
@@ -480,6 +482,37 @@ describe("the tetra MVC controller", function() {
 
 				that.server.restore();
 			});
+		});
+		
+		// -- Error States -- 
+		
+		// TODO Currently we swallow all errors, but perhaps we should do this differently ..
+		xit("should handle invalid templates", function() {
+		    var spy = sinon.spy();
+            
+            tetra.view.register('myView', {
+                scope : 'myScope',
+                constr : function(me, app, _) { return {
+                    events : {},
+                    methods : {
+                        init : function() {
+                            expect(function(){
+                                app.exec('<div id="box"><h1>{%=title%}</h1><p>{%message%}</p></div>', {title: 'Template', message: 'Hello world!'}, function(html) {
+                                    spy(html);
+                                });
+                            }).toThrow();
+                        }
+                    }
+                };}
+            });
+		});
+		
+		it("should throw an exception if the template is not found", function() {
+		    
+		});
+		
+		it("should use components if the controller is not defined", function() {
+		    
 		});
 	});
 });

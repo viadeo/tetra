@@ -2,7 +2,7 @@
 // ====================================
 
 // For documentation, see
-// 
+//
 // * Jasmine - http://pivotal.github.com/jasmine/
 // * Sinon - http://sinonjs.org/
 // * Markdown - http://daringfireball.net/projects/markdown/
@@ -11,7 +11,7 @@
 //  * Just like in the view tests, focus/blur are not behaving correctly under IE8 and under
 //  * page IDs appear to be loaded as global variables, so be careful of the naming of your local vars
 
-describe("the tetra MVC bootnode mode", function() {
+describe("bootnode; ", function() {
 
 	"use strict";
 
@@ -22,7 +22,7 @@ describe("the tetra MVC bootnode mode", function() {
 
 	// Setting up a bootnoded component
 	// ----------------------------------------
-	describe("setting up a bootnoded page component", function(){
+	describe("setting up a bootnoded component", function(){
 		
 		beforeEach(function() {
 			// Enable debug on a non-existent scope, to suppress messages
@@ -206,6 +206,11 @@ describe("the tetra MVC bootnode mode", function() {
 					   controllers.myScope && controllers.myScope[0] === "myScope/myGlobalController" &&
 					   models[0] === "g/myGlobalModel";
 			}, _asyncLoaderTimeout);
+		});
+		
+		it("should handle the data-comp attribute", function(){
+		   // TODO Implement 
+		    // TODO Look at COMP_PATH in tetra.js
 		});
 
 		// ### Error states ###

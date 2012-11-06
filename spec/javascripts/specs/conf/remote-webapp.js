@@ -6,6 +6,7 @@
 
     "use strict";
 
+ // Setup the VNS object. This must come *before* the call to tetra.extend
     var VNS = (typeof VNS === 'undefined') ? {} : VNS;
 
     VNS.context = {
