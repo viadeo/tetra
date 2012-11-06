@@ -1,3 +1,4 @@
+// Source: https://github.com/bencates/Jasmine-Prototype
 var readFixtures = function() {
   return jasmine.getFixtures().proxyCallTo_('read', arguments);
 };
@@ -84,43 +85,9 @@ jasmine.Fixtures = Class.create({
     } else {
       container = '<div id="' + this.containerId + '">' + html + '</div>';
     }
- 
-    this._insert($$('body').first(), {bottom: container});
-  },
-  
-  // Copied from Prototype, to remove the automatic parsing and removal of <script> tags
-  _insert: function(element, insertions) {
-      element = $(element);
 
-      if (Object.isString(insertions) || Object.isNumber(insertions) ||
-          Object.isElement(insertions) || (insertions && (insertions.toElement || insertions.toHTML)))
-            insertions = {bottom:insertions};
-
-      var content, insert, tagName, childNodes
-
-      for (var position in insertions) {
-        content  = insertions[position];
-        position = position.toLowerCase();
-        insert = Element._insertionTranslations[position];
-
-        if (content && content.toElement) content = content.toElement();
-        if (Object.isElement(content)) {
-          insert(element, content);
-          continue;
-        }
-
-        content = Object.toHTML(content);
-
-        tagName = ((position == 'before' || position == 'after')
-          ? element.parentNode : element).tagName.toUpperCase();
-
-        childNodes = Element._getContentFromAnonymousElement(tagName, content);
-
-        if (position == 'top' || position == 'after') childNodes.reverse();
-        childNodes.each(insert.curry(element));
-      }
-
-      return element;
+    // NOTE Calling private function, to avoid parsing of script tags, Cormac
+    _insert($$('body').first(), {bottom: container});
   },
   
   getFixtureHtml_: function(url) {  
@@ -134,7 +101,6 @@ jasmine.Fixtures = Class.create({
     var url = this.fixturesPath.match('/$') ? this.fixturesPath + relativeUrl : this.fixturesPath + '/' + relativeUrl;
     new Ajax.Request(url, {
       method: 'get',
-      evalScripts: false,
       asynchronous: false, // must be synchronous to guarantee that no tests are run before fixture is loaded
       onSuccess: function(response) {
         this.fixturesCache_[relativeUrl] = response.responseText;
@@ -384,3 +350,38 @@ afterEach(function() {
   jasmine.getFixtures().cleanUp();
   jasmine.Prototype.events.cleanUp();
 });
+
+// NOTE - Copied from Prototype, to remove the automatic parsing and removal of <script> tags, Cormac
+function _insert(element, insertions) {
+    element = $(element);
+
+    if (Object.isString(insertions) || Object.isNumber(insertions) ||
+        Object.isElement(insertions) || (insertions && (insertions.toElement || insertions.toHTML)))
+          insertions = {bottom:insertions};
+
+    var content, insert, tagName, childNodes
+
+    for (var position in insertions) {
+      content  = insertions[position];
+      position = position.toLowerCase();
+      insert = Element._insertionTranslations[position];
+
+      if (content && content.toElement) content = content.toElement();
+      if (Object.isElement(content)) {
+        insert(element, content);
+        continue;
+      }
+
+      content = Object.toHTML(content);
+
+      tagName = ((position == 'before' || position == 'after')
+        ? element.parentNode : element).tagName.toUpperCase();
+
+      childNodes = Element._getContentFromAnonymousElement(tagName, content);
+
+      if (position == 'top' || position == 'after') childNodes.reverse();
+      childNodes.each(insert.curry(element));
+    }
+
+    return element;
+}
