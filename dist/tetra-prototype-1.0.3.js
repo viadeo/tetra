@@ -1918,6 +1918,7 @@ if ( typeof define === "function" && define.amd ) {
 					n,
 					v
 				;
+
 				if(getObj) {
 					$.each( $(this).serializeArray(), function(i,o){
 						n = o.name;
@@ -1988,7 +1989,7 @@ if ( typeof define === "function" && define.amd ) {
 					data: reqParams,
 					traditional: true,
 					processData: options.processData,
-					create: options.create,
+					beforeSend: options.beforeSend,
 					complete: options.complete,
 					success: options.success,
 					error: options.error
@@ -2202,7 +2203,7 @@ if ( typeof define === "function" && define.amd ) {
 				}
 			},
 			serialize: function(getObj) {
-				return this.serialize(getObj);
+				return (this.length) ? this.serialize(getObj) : '';
 			},
 			siblings: function() {
 				return _chainableFct.call(this, "siblings", arguments);
@@ -2248,35 +2249,38 @@ if ( typeof define === "function" && define.amd ) {
 			},
 			css: function() {
 				var map = {};
-				
-				if(typeof arguments[0] === "string") {
-					if(arguments.length === 1) {
-						return this.getStyle(arguments[0]);
-					}
-					else if(arguments.length === 2) {
-						map[_toCamelCase(arguments[0])] = arguments[1];
-					}
+
+				if(this.setStyle && this.getStyle) {
+				    if(typeof arguments[0] === "string") {
+	                    if(arguments.length === 1) {
+	                        return this.getStyle(arguments[0]);
+	                    }
+	                    else if(arguments.length === 2) {
+	                        map[_toCamelCase(arguments[0])] = arguments[1];
+	                    }
+	                }
+	                
+	                if(typeof arguments[0] === "object") {
+	                    for(var rule in arguments[0]) {
+	                        map[_toCamelCase(rule)] = arguments[0][rule];
+	                    }
+	                }
+	                
+	                if(map.hasOwnProperty("float")) {
+	                    map.cssFloat = map["float"];
+	                    delete map["float"];
+	                }
+
+	                this.setStyle(map);
 				}
-				
-				if(typeof arguments[0] === "object") {
-					for(var rule in arguments[0]) {
-						map[_toCamelCase(rule)] = arguments[0][rule];
-					}
-				}
-				
-				if(map.hasOwnProperty("float")) {
-					map.cssFloat = map["float"];
-					delete map["float"];
-				}
-				this.setStyle(map);
-				
+
 				return this;
 			},
 			height: function() {
-				return this.getHeight();
+				return (this.getHeight) ? this.getHeight() : undefined;
 			},
 			width: function() {
-				return this.getWidth();
+				return (this.getWidth) ? this.getWidth() : undefined;
 			},
 			offset: function(coords) {
 				return this.cumulativeOffset(coords);
@@ -2349,7 +2353,7 @@ if ( typeof define === "function" && define.amd ) {
 						requestHeaders: options.headers,
 						parameters: options.data,
 						postBody: options.processData ? "" : options.data,
-						onCreate: options.create,
+						onCreate: options.beforeSend,
 						onComplete: options.complete,
 						onSuccess: function(transport) {
 							var respObj = transport.responseText;
@@ -5032,7 +5036,6 @@ tetra.extend('view', function(_conf, _mod, _) {
 						viewName = listenedEvents[i],
 						thisView = _views[viewName],
 						userEvents,
-						mouseOverCalled = false,
 						from, fromTarget
 					;
 					
@@ -5062,7 +5065,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 										if(typeof thisView.events.user.clickout !== 'undefined' &&
 											typeof thisView.events.user.clickout[selector] !== 'undefined' &&
 											(!elm.hasClass('cur-clickout') || typeof _clickout[viewName] === 'undefined' || typeof _clickout[viewName][selector] === 'undefined')) {
-											
+									   
 											if(!_clickout[viewName]) _clickout[viewName] = {};
 											if(!_clickout[viewName][selector]) _clickout[viewName][selector] = true;
 
@@ -5683,10 +5686,10 @@ tetra.extend('controller', function(_conf, _mod, _) {
 		;
 		
 		this.scope = params.scope;
-		this.events = constr.events;
-		this.methods = constr.methods;
+		this.events = (constr) ? constr.events : {};
+		this.methods = (constr) ? constr.methods : {};
 		
-		_actions[ctrlName] = constr.actions;
+		_actions[ctrlName] = (constr) ? constr.actions : {};
 		
 		return this;
 	};
@@ -5996,7 +5999,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					} else {
 						defaultOptions = {
 							processData: (options.headers['Content-Type'] && options.headers["Content-Type"].indexOf("application/json") === 0) ? false : true,
-							create : function(req) {
+							beforeSend : function(req) {
 								src.model.notify('call')({
 									req: req,
 									obj: src.obj ? src.obj : {}
@@ -6019,7 +6022,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					
 					defaultOptions.success = _successCbk(options.success);
 					defaultOptions.error = _errorCbk(options.error, defaultOptions.error401);
-					
+
 					if(src.model.type === 'ajax') {
 						return _.ajax(url, _.extend(options, defaultOptions));
 					} else if(src.model.type === 'api') {
@@ -6048,7 +6051,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						obj.update(attributes, skipValid);
 						
 						model.objects[obj.get('ref')] = obj;
-						if((obj.get('id') !== 0)) {
+						if((obj.get('id') !== 0) && (obj.get('id') != '0020')) {
 							model.ids[obj.get('id')] = obj.get('ref');
 						
 							if(cache && (typeof skipCache === 'undefined' || (typeof skipCache !== 'undefined' && !skipCache))) {
@@ -6135,7 +6138,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 											
 											// Manage object creation case
 											// TODO Viadeo specific thing here
-											if(id === 0) {
+											if(id === 0 || id === '0020') {
 												// Clean model cache
 												model.cache = {};
 	

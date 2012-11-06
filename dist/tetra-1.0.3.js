@@ -2766,7 +2766,6 @@ tetra.extend('view', function(_conf, _mod, _) {
 						viewName = listenedEvents[i],
 						thisView = _views[viewName],
 						userEvents,
-						mouseOverCalled = false,
 						from, fromTarget
 					;
 					
@@ -2796,7 +2795,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 										if(typeof thisView.events.user.clickout !== 'undefined' &&
 											typeof thisView.events.user.clickout[selector] !== 'undefined' &&
 											(!elm.hasClass('cur-clickout') || typeof _clickout[viewName] === 'undefined' || typeof _clickout[viewName][selector] === 'undefined')) {
-											
+									   
 											if(!_clickout[viewName]) _clickout[viewName] = {};
 											if(!_clickout[viewName][selector]) _clickout[viewName][selector] = true;
 
@@ -3417,10 +3416,10 @@ tetra.extend('controller', function(_conf, _mod, _) {
 		;
 		
 		this.scope = params.scope;
-		this.events = constr.events;
-		this.methods = constr.methods;
+		this.events = (constr) ? constr.events : {};
+		this.methods = (constr) ? constr.methods : {};
 		
-		_actions[ctrlName] = constr.actions;
+		_actions[ctrlName] = (constr) ? constr.actions : {};
 		
 		return this;
 	};
@@ -3730,7 +3729,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					} else {
 						defaultOptions = {
 							processData: (options.headers['Content-Type'] && options.headers["Content-Type"].indexOf("application/json") === 0) ? false : true,
-							create : function(req) {
+							beforeSend : function(req) {
 								src.model.notify('call')({
 									req: req,
 									obj: src.obj ? src.obj : {}
@@ -3753,7 +3752,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					
 					defaultOptions.success = _successCbk(options.success);
 					defaultOptions.error = _errorCbk(options.error, defaultOptions.error401);
-					
+
 					if(src.model.type === 'ajax') {
 						return _.ajax(url, _.extend(options, defaultOptions));
 					} else if(src.model.type === 'api') {
@@ -3782,7 +3781,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						obj.update(attributes, skipValid);
 						
 						model.objects[obj.get('ref')] = obj;
-						if((obj.get('id') !== 0)) {
+						if((obj.get('id') !== 0) && (obj.get('id') != '0020')) {
 							model.ids[obj.get('id')] = obj.get('ref');
 						
 							if(cache && (typeof skipCache === 'undefined' || (typeof skipCache !== 'undefined' && !skipCache))) {
@@ -3869,7 +3868,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 											
 											// Manage object creation case
 											// TODO Viadeo specific thing here
-											if(id === 0) {
+											if(id === 0 || id === '0020') {
 												// Clean model cache
 												model.cache = {};
 	
