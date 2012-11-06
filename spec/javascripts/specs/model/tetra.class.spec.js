@@ -228,6 +228,68 @@ describe("the model; ", function() {
             data[0].myMethod();
             expect(this.spy.calledTwice).toBeTruthy("as having invoked the myMethod(), the spy should have been called twice");
         });
+        
+        it("should fire 'init' when the model is used, if the function is present", function() {
+            var 
+                spy = sinon.spy(),
+                that = this
+            ;
+
+            tetra.model.register("myInitModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        url: "/my/test/fetch.json"
+                    }
+                },
+                attr: {
+                    success: false
+                },
+                methods: function(attr) {
+                    return {
+                        myOtherMethod: function() {
+                            // not called
+                            spy();
+                            return attr;
+                        },
+                        
+                        init: function() {
+                            spy("init");
+                        }
+                        
+                    };
+                }
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myInitModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myInitModel": {
+                                    "append": function(data){
+                                        // Nothing to do
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myInitModel").fetch({});
+                                that.server.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            expect(spy.callCount).toBe(1);
+            expect(spy.getCall(0).args[0]).toBe("init");
+            
+            tetra.model.destroy("myInitModel", "myScope");
+        });
 
         it("should make 'attr' available to its methods functions", function(){
             var 
@@ -1001,7 +1063,7 @@ describe("the model; ", function() {
             });
         });
         
-        it("should retrieve previously fetched data using the 'select' function", function(){
+        it("should retrieve previously fetched data using the 'select' function and a success callback", function(){
             var that = this;
             
             tetra.model.register("myModel", {
@@ -1009,6 +1071,188 @@ describe("the model; ", function() {
                 req: {
                     fetch: {
                         url: "/my/test/fetch.json"
+                    }
+                },
+                attr: {
+                    success: false
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {},
+                        methods: {
+                            init: function(){
+                                // Nothing to do
+                            }
+                        }
+                    };
+                }
+            });
+            
+            // Retrieve the object Ref and find the object
+            var 
+                response,
+                hasLoaded = false
+            ;
+            
+            runs(function(){
+                hasLoaded = false;
+                tetra.debug.model("myScope", "myModel").select({
+                    id: "myUniqueId",
+                    success: true
+                }, function(data) {
+                    response = data[0].getAll();
+                    hasLoaded = true;
+                });
+                this.server.respond();
+            });
+            
+            waitsFor(function(){
+                return hasLoaded;
+            });
+            
+            runs(function(){
+                expect(response).toBeDefined("as we should have received a valid response from the success callback");
+                expect(response.id).toBeDefined();
+                expect(response.ref).toBeDefined();
+                expect(response.success).toBeDefined();
+                expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+            });
+            
+            // Call the function again, it should use the cache
+            runs(function(){
+                hasLoaded = false;
+                response = null;
+                tetra.debug.model("myScope", "myModel").select({
+                    id: "myUniqueId",
+                    success: true
+                }, function(data) {
+                    response = data[0].getAll();
+                    hasLoaded = true;
+                });
+            });
+            
+            waitsFor(function(){
+                return hasLoaded;
+            });
+
+            runs(function(){
+                expect(response).toBeDefined("as we should have received a valid response from the success callback");
+                expect(response.id).toBeDefined();
+                expect(response.ref).toBeDefined();
+                expect(response.success).toBeDefined();
+                expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+                
+                // Check that the server was only polled once
+                expect(this.server.requests.length).toBe(1);
+            });
+        });
+        
+        it("should retrieve previously fetched data using the 'select' function and the 'append' callback", function(){
+            var 
+                that = this,
+                hasLoaded = false,
+                response
+            ;
+            
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        url: "/my/test/fetch.json"
+                    }
+                },
+                attr: {
+                    success: false
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "append": function(data){
+                                        hasLoaded = true;
+                                        response = data[0].getAll();
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                // Nothing to do
+                            }
+                        }
+                    };
+                }
+            });
+
+            runs(function(){
+                hasLoaded = false;
+                tetra.debug.model("myScope", "myModel").select({
+                    id: "myUniqueId",
+                    success: true
+                });
+                this.server.respond();
+            });
+            
+            waitsFor(function(){
+                return hasLoaded;
+            });
+            
+            runs(function(){
+                expect(response).toBeDefined("as we should have received a valid response from the success callback");
+                expect(response.id).toBeDefined();
+                expect(response.ref).toBeDefined();
+                expect(response.success).toBeDefined();
+                expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+            });
+            
+            // Call the function again, it should use the cache
+            runs(function(){
+                hasLoaded = false;
+                response = null;
+                tetra.debug.model("myScope", "myModel").select({
+                    id: "myUniqueId",
+                    success: true
+                });
+            });
+            
+            waitsFor(function(){
+                return hasLoaded;
+            });
+
+            runs(function(){
+                expect(response).toBeDefined("as we should have received a valid response from the success callback");
+                expect(response.id).toBeDefined();
+                expect(response.ref).toBeDefined();
+                expect(response.success).toBeDefined();
+                expect(response.success).toBeTruthy("as the response should have set the 'success' attribute to 'true'");
+                
+                // Check that the server was only polled once
+                expect(this.server.requests.length).toBe(1);
+            });
+        });
+        
+        it("should handle select calls that use uri parameters", function() {
+            var that = this;
+            
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    fetch: {
+                        url: "/my/test/{0}.json",
+                        uriParams: ["part1"]
                     }
                 },
                 attr: {
@@ -1043,6 +1287,9 @@ describe("the model; ", function() {
                 hasLoaded = false;
                 tetra.debug.model("myScope", "myModel").select({
                     id: "myUniqueId",
+                    uriParams: {
+                        "part1": "fetch"
+                    },
                     success: true
                 }, function(data) {
                     response = data[0].getAll();
@@ -1066,8 +1313,12 @@ describe("the model; ", function() {
             // Call the function again, it should use the cache
             runs(function(){
                 hasLoaded = false;
+                response = null;
                 tetra.debug.model("myScope", "myModel").select({
                     id: "myUniqueId",
+                    uriParams: {
+                        "part1": "fetch"
+                    },
                     success: true
                 }, function(data) {
                     response = data[0].getAll();
@@ -1089,10 +1340,6 @@ describe("the model; ", function() {
                 // Check that the server was only polled once
                 expect(this.server.requests.length).toBe(1);
             });
-        });
-        
-        it("should handle select calls that use uri parameters", function() {
-            
         });
         
         it("should store meta data on the models meta property, accessible via the getMeta function", function() {
@@ -3131,10 +3378,14 @@ describe("the model; ", function() {
                     }
             };
             
+            var stringResponse = "SUCCESS STRING";
+            
             this.spy = sinon.spy();
             this.server = sinon.fakeServer.create();
             this.server.respondWith("POST", /\/my\/test\/save.json\?ts=.*/,
                     [200, {"Content-type": "application/json"}, JSON.stringify(response)]);
+            this.server.respondWith("POST", /\/my\/test\/save.string.json\?ts=.*/,
+                    [200, {"Content-type": "text/plain"}, stringResponse]);
         });
         
         afterEach(function() {
@@ -3202,6 +3453,61 @@ describe("the model; ", function() {
             expect(response.myDataToSave).toEqual("myData");
             expect(response.foo).toBeDefined();
             expect(response.foo).toBe("bar");
+        });
+        
+        it("should save model data and handle a non-JSON string response, storing it in the html attr", function() {
+            var that = this;
+            
+            tetra.model.register("myModel", {
+                scope: "myScope",
+                req: {
+                    save: {
+                        url: "/my/test/save.string.json",
+                        method: "POST"
+                    }
+                },
+                attr: {
+                    html: ""
+                },
+                methods : function(){}
+            });
+            
+            tetra.controller.register("myController", {
+                scope: "myScope",
+                use: ["myModel"],
+                constr: function(me, app, page, orm) {
+                    return {
+                        events: {
+                            model: {
+                                "myModel": {
+                                    "saved": function(data){
+                                        that.spy(data.getAll());
+                                    },
+                                    "error": function(data) {
+                                        // Should never be called
+                                        that.spy();
+                                    }
+                                }
+                            }
+                        },
+                        methods: {
+                            init: function(){
+                                orm("myModel").create({myDataToSave: "myData"}).save();
+                                that.server.respond();
+                            }
+                        }
+                    };
+                }
+            });
+            
+            var response = this.spy.getCall(0).args[0];
+            
+            expect(this.spy.called).toBeTruthy();
+            expect(this.spy.calledOnce).toBeTruthy();
+            expect(response.id).toBe("0");
+
+            expect(response.ref).toBeDefined();    
+            expect(response.html).toBe("SUCCESS STRING");
         });
         
         it("should save model data to a parameterized URL", function() {

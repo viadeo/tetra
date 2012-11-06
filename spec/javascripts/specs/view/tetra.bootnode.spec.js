@@ -22,7 +22,7 @@ describe("bootnode; ", function() {
 
 	// Setting up a bootnoded component
 	// ----------------------------------------
-	describe("setting up a bootnoded component", function(){
+	describe("setting up a bootnoded element", function(){
 		
 		beforeEach(function() {
 			// Enable debug on a non-existent scope, to suppress messages
@@ -208,10 +208,27 @@ describe("bootnode; ", function() {
 			}, _asyncLoaderTimeout);
 		});
 		
-		it("should handle the data-comp attribute", function(){
-		   // TODO Implement 
-		    // TODO Look at COMP_PATH in tetra.js
-		});
+		xit("should download a package defined in the data-comp attribute", function() {
+           var 
+               views,
+               node
+            ;
+
+           runs(function() {
+               views = tetra.debug.view.list();
+               node = d.getElementById("bootnodeLoadComponent");
+               expect(views.myScope).toBeUndefined();
+               
+               // Trigger the component loading
+               VNS.test.triggerEvent(node, "click");
+               node = null;
+           });
+    
+           waitsFor(function() {
+               views = tetra.debug.view.list();
+               return views.Comp && views.Comp[0] === "Comp/myCompView";
+           }, _asyncLoaderTimeout);
+       });
 
 		// ### Error states ###
 	

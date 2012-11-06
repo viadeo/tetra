@@ -1002,6 +1002,13 @@ describe("the view; ", function() {
                                     },
                                     "#nonBubblingTestFieldParent": function(e, elm) {
                                         that.spy(e, elm);
+                                    }  
+                                },
+                                
+                                "keyup": {
+                                    // This element does not exist yet
+                                    "#foo": function(e, elm) {
+                                        that.spy(e, elm);
                                     }
                                 },
                                 
@@ -1032,6 +1039,12 @@ describe("the view; ", function() {
                                     ".clickoutTestField" : function(e, elm) {
                                         that.spy("clickout");
                                     }
+                                }
+                            },
+                            
+                            controller: {
+                                "reattach keyup": function() {
+                                    me.listen("keyup");
                                 }
                             }
                         }
@@ -1170,6 +1183,30 @@ describe("the view; ", function() {
             expect(this.spy.callCount).toBe(1);
             expect(this.spy.getCall(0).args[0]).toBe("mySecondView someOtherTestField");
             someOtherField = null;
+        });
+        
+        it("should reattach event listeners to all applicable elements with me.listen", function() {
+            
+        });
+        
+        xit("should reattach event listeners to elements that satisfy the selector passed to me.listen", function() {
+            // First, create the "foo" element
+            var fooElement = d.createElement("input");
+            fooElement.id = "foo";
+            fooElement.type = "text";
+            d.getElementById("jasmine-fixtures").appendChild(fooElement);
+            
+            var fooInput = d.getElementById("foo");
+            
+            
+            
+            VNS.test.triggerEvent(fooInput, "keyup");
+            
+            
+            runs(function(){
+                console.log(this.spy.getCall(0).args);
+                //expect(this.spy.called).toBeFalsy();
+            });
         });
     });
     
@@ -1993,7 +2030,7 @@ describe("the view; ", function() {
             notEmpty = null;
         });
     });
-    
+
     describe("handling of controller notifications", function(){
         
         afterEach(function() {
