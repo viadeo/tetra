@@ -11,7 +11,7 @@
 //  * Just like in the view tests, focus/blur are not behaving correctly under IE8 and under
 //  * page IDs appear to be loaded as global variables, so be careful of the naming of your local vars
 
-describe("bootnode", function() {
+describe("bootnode; ", function() {
 
 	"use strict";
 
