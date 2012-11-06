@@ -1,4 +1,4 @@
-![tetra logo](https://raw.github.com/viadeo/tetra/master/tetra.png) ![travis](https://secure.travis-ci.org/viadeo/tetra.png)  
+![tetra logo](https://raw.github.com/ohory/tetra/master/tetra.png) ![travis](https://secure.travis-ci.org/ohory/tetra.png)  
 =====
 
 ## Tetra, a clean MVC javascript framework
