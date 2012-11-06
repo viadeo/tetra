@@ -5431,6 +5431,7 @@ describe("the model; ", function() {
       
       it("should handle mySql models", function() {
           // TODO Implement
+          // TODO For Node.js
       });
       
       it("should fire the callbacks in the order 'save', 'call', 'saved', 'complete' during a save", function() {  
