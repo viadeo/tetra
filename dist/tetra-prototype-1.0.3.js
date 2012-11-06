@@ -4989,9 +4989,9 @@ tetra.extend('view', function(_conf, _mod, _) {
 							_mod.debug.log('view ' + viewName + ' : call clickout callback on ' + selector, thisView.scope, 'info');
 							elm.removeClass('cur-clickout');
 							thisView.events.user.clickout[selector](e,(thisView.has_) ? elm : _(elm[0])[0]);
-						}
 						
-						_clickout[viewName][selector] = false;
+							_clickout[viewName][selector] = false;
+						}
 					}
 				}
 			}
@@ -6687,9 +6687,9 @@ tetra.extend('model', function(_conf, _mod, _) {
 			modelAttr = params.attr,
 			modelMethods = params.methods
 		;
-		
+
 		return function() {
-			
+
 			var attr = _.extend({
 					ref: 0,
 					id: 0
@@ -6790,6 +6790,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 			};
 			
 			genRef();
+			
 			if(typeof methods.init === 'function') {
 				methods.init();
 			}
