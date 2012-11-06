@@ -41,7 +41,8 @@ var tetra = (function() {
 	// ----------------------------------------
 	var _conf = {
 		env: 'jQuery',
-		enableBootstrap: false,
+		enableBootnode: false,
+		bootnodeEvents: ["click", "mouseover", "focus"],
 		
 		APPS_PATH : '/javascript/tetramvc/apps',
 		GLOBAL_PATH : '/javascript/tetramvc',
@@ -2436,22 +2437,14 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	(function(){
 	  var
 		cache = {},
-		left = "<%",
-		right = "%>",
-		key = "%",
+		left = (_conf.tmpl && _conf.tmpl.left) ? _conf.tmpl.left : "{%",
+		right = (_conf.tmpl && _conf.tmpl.right) ? _conf.tmpl.right : "%}",
+		key = (_conf.tmpl && _conf.tmpl.right) ? _conf.tmpl.right[0] : "%",
 		rg1 = new RegExp("'(?=[^" + key + "]*" + right + ")", "g"),
 		rg2 = new RegExp(left + "[=-](.+?)" + right, "g")
 	  ;
-	 
+	  
 	  this.tmpl = function tmpl(str, data, tag){
-		
-		if(tag) {
-			left = tag.left || left;
-			right = tag.right || right;
-			key = tag.right[0] || key;
-			rg1 = new RegExp("'(?=[^" + key + "]*" + right + ")", "g");
-			rg2 = new RegExp(left + "[=-](.+?)" + right, "g");
-		}
 		
 		try {
 		    // Figure out if we're getting a template, or if we need to
@@ -2500,7 +2493,6 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	})();
 	
 	var
-		_tmplConf = {left: '{%', right: '%}'}
 		_tmplStack = {},
 		
 		_component = function(uid, scope, ctrl, parentid) {
@@ -2546,7 +2538,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 				
 				// Render the full template
 				_tmplStack[uid].countid = 0;
-				html = tmpl(_tmplStack[uid].id, _tmplStack[uid].data, _tmplConf);
+				html = tmpl(_tmplStack[uid].id, _tmplStack[uid].data);
 				
 				if(_tmplStack[uid]) {
 					// Return generated html to the view callback
@@ -2565,7 +2557,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 				// Evaluate the component of all his children are available
 				if(comp.html === false && comp.count == 0) {
 					_tmplStack[uid].comp[cid].countid = 0;
-					comp.html = tmpl(comp.id, comp.data, _tmplConf);
+					comp.html = tmpl(comp.id, comp.data);
 					_tmplStack[uid].count--;
 				}
 				
@@ -2604,7 +2596,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 		
 		// Process the current template
 		data.component = _component(uid, scope, tpl[0], isComp ? cid : undefined);
-		html = tmpl(id, data, _tmplConf);
+		html = tmpl(id, data);
 		
 		if(_tmplStack[uid]) {
 			
@@ -2629,7 +2621,6 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
 	};
 	
 });
-
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native view functions of Tetra.js
@@ -2684,7 +2675,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 			select: true
 		},
 		
-		_mouse = {},
+		_mouseout = {},
 		_clickout = {},
 		
 		_isBubblingSupported = function(eventName) {
@@ -2699,6 +2690,41 @@ tetra.extend('view', function(_conf, _mod, _) {
 			
 			elm = null;
 			return isSupported;
+		},
+
+		_callClickout = function(e, target) {
+			
+			var
+				viewName,
+				thisView,
+				selector,
+				elm,
+				isCurClass,
+				hasParents
+			;
+
+			// call clickout callbacks
+			for(viewName in _clickout) {
+				for(selector in _clickout[viewName]) {
+					if(_clickout[viewName][selector]) {
+						thisView = _views[viewName];
+
+						if(_.toggleLib) _.toggleLib(thisView.has_);
+						
+						isCurClass = _(e.target).hasClass('cur-clickout');
+						hasParents = _(e.target).parents('.cur-clickout').length > 0;
+						
+						if(!isCurClass && !hasParents) {
+							elm = _(selector + '.cur-clickout');
+							_mod.debug.log('view ' + viewName + ' : call clickout callback on ' + selector, thisView.scope, 'info');
+							elm.removeClass('cur-clickout');
+							thisView.events.user.clickout[selector](e,(thisView.has_) ? elm : _(elm[0])[0]);
+						}
+						
+						_clickout[viewName][selector] = false;
+					}
+				}
+			}
 		},
 		
 		_callEventListener = function(e, target, boot) {
@@ -2740,12 +2766,17 @@ tetra.extend('view', function(_conf, _mod, _) {
 						viewName = listenedEvents[i],
 						thisView = _views[viewName],
 						userEvents,
-						mouseOverCalled = false
+						mouseOverCalled = false,
+						from, fromTarget
 					;
 					
 					if((typeof thisView.root === 'undefined' && e.target.tagName !== 'HTML' && e.target.parentNode && e.target.parentNode.tagName) ||
 							(target.parents('#' + thisView.root).length > 0)) {
 						
+						if(eventName === 'click') {
+							_callClickout(e, target);
+						}
+
 						userEvents = thisView.events.user[eventName];
 						for(var selector in userEvents) {
 							if(userEvents.hasOwnProperty(selector)) {
@@ -2759,83 +2790,49 @@ tetra.extend('view', function(_conf, _mod, _) {
 								
 								if(elm) {
 									
-									// clickout management
-									if(eventName === 'click' &&
-											typeof thisView.events.user.clickout !== 'undefined' &&
+									// init clickout callback
+									if(eventName === 'click') {
+										
+										if(typeof thisView.events.user.clickout !== 'undefined' &&
 											typeof thisView.events.user.clickout[selector] !== 'undefined' &&
 											(!elm.hasClass('cur-clickout') || typeof _clickout[viewName] === 'undefined' || typeof _clickout[viewName][selector] === 'undefined')) {
-									   
-										if(!_clickout[viewName]) _clickout[viewName] = {};
-										if(!_clickout[viewName][selector]) _clickout[viewName][selector] = 1;
-										else _clickout[viewName][selector]++;
-									   
-										var
-											cur = {
-												view: thisView,
-												viewName: viewName,
-												eventName: eventName,
-												elm: elm,
-												selector: selector
-											},
-											curClass = "clickout-" + _clickout[viewName][selector]
-										;
-										
-										var clickoutCbk = function(e) {
-											if(_.toggleLib) _.toggleLib(cur.view.has_);
 											
-											var isCurClass = _(e.target).is('.' + curClass);
-											var hasParents = _(e.target).parents('.' + curClass).length > 0;
-											
-											if(!isCurClass && !hasParents) {
-												_mod.debug.log('view ' + cur.viewName + ' : call clickout callback on ' + cur.selector, cur.view.scope, 'info');
-												cur.elm.removeClass('cur-clickout').removeClass(curClass);
-												_unbindEvent(document, 'click', clickoutCbk);
-												cur.view.events.user.clickout[cur.selector](e,(cur.view.has_) ? cur.elm : _(cur.elm[0])[0]);
-											}
-										};
-										
-										elm.addClass('cur-clickout').addClass(curClass);
-										
-										_bindEvent(document, 'click', clickoutCbk);
+											if(!_clickout[viewName]) _clickout[viewName] = {};
+											if(!_clickout[viewName][selector]) _clickout[viewName][selector] = true;
+
+											elm.addClass('cur-clickout');
+										}
 									}
 									
-									// mouseout spam removing (equivalent to mouseleave)
+									// mouseover spam removing (equivalent to mouseenter)
 									else if(eventName === 'mouseover') {
 										if(_.toggleLib) _.toggleLib(thisView.has_);
 										
-										if(elm.hasClass('cur-mouseout') && elm.hasClass('cur-mouse-'+ viewName.replace('/', '-'))) {
+										if(elm.hasClass('cur-mouseover') && elm.hasClass('cur-mouse-'+ viewName.replace('/', '-'))) {
 											elm = false;
 										} else {
-											for(m in _mouse) {
-												_mouse[m].view.events.user.mouseout[_mouse[m].selector](_mouse[m].event, (_mouse[m].view.has_) ? _mouse[m].elm : _mouse[m].elm[0]);
-												_mouse[m].elm.removeClass('cur-mouseout').removeClass('cur-mouse-'+ _mouse[m].viewName);
-												delete _mouse[m];
-											}
 											if(typeof thisView.events.user.mouseout !== 'undefined' && 
 												typeof thisView.events.user.mouseout[selector] != 'undefined') {
-												elm.addClass('cur-mouseout').addClass('cur-mouse-'+ viewName.replace('/', '-'));
+												elm.addClass('cur-mouseover').addClass('cur-mouse-'+ viewName.replace('/', '-'));
 											}
 										}
-										
-										mouseOverCalled = true;
 									}
 									
+									// mouseout spam removing (equivalent to mouseleave)
 									else if (eventName === 'mouseout') {
-										var ev = _.extend({},e);
-										
-										ev.type = eventName;
-										ev.target = e.target;
-										ev.preventDefault = emptyFnc;
-										
-										_mouse[viewName + '/' + selector] = {
-											view: thisView,
-											viewName: viewName.replace('/', '-'),
-											event: ev,
-											elm: elm,
-											selector: selector
-										};
-										
-										elm = false;
+										from = e.relatedTarget || e.toElement;
+										fromTarget = _(from);
+
+										// continue if mouse is in browser
+										if(from && from.nodeName !== "HTML") {
+
+											// clean event if mouse is in mouseover element
+											if(fromTarget.hasClass('cur-mouseover') || fromTarget.parents('.cur-mouseover').length > 0) {
+												elm = false;
+											} else {
+												elm.removeClass('cur-mouseover').removeClass('cur-mouse-'+ viewName.replace('/', '-'));
+											}
+										}
 									}
 									
 									// scroll event cleaning on parent element
@@ -2847,7 +2844,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 								
 								if(elm) {
 									// TODO Lot of matching and DOM access here
-									if(!(target.hasClass('no-prevent') || target.parents('.no-prevent').length > 0 ||
+									if(!(target.hasClass('no-prevent') || target.parents('.no-prevent').length > 0 || elm.is('body') || 
 											((elm.is('input') || elm.is('textarea')) &&
 											(eventName === 'keydown' || elm.attr('type') === 'checkbox' ||
 											elm.attr('type') === 'radio')))) {
@@ -2870,21 +2867,13 @@ tetra.extend('view', function(_conf, _mod, _) {
 							}
 						}
 					}
-					
-					if(eventName === 'mouseover' && !mouseOverCalled && target.parents('.cur-mouseout').length === 0) {
-						for(m in _mouse) {
-							_mouse[m].view.events.user.mouseout[_mouse[m].selector](_mouse[m].event, (_mouse[m].view.has_) ? _mouse[m].elm : _mouse[m].elm[0]);
-							_mouse[m].elm.removeClass('cur-mouseout').removeClass('cur-mouse-'+ _mouse[m].viewName);
-							delete _mouse[m];
-						}
-					}
 				}
 				
 				if (boot && !found) {
-					_callBootstrap(e, target);
+					_callBootnode(e, target);
 				}
 			} else if (boot) {
-				_callBootstrap(e, target);
+				_callBootnode(e, target);
 			}
 		},
 		
@@ -2980,12 +2969,12 @@ tetra.extend('view', function(_conf, _mod, _) {
 	;
 	
 	
-	// Bootstrap feature
+	// Bootnode feature
 	// --------------------
 	var
-		_bootstrapEvents = ["click", "mouseover", "focus"],
+		_bootnodeEvents = _conf.bootnodeEvents,
 		
-		_callBootstrap = function(e, target) {
+		_callBootnode = function(e, target) {
 			var 
 				bootnode,
 				viewName,
@@ -2995,8 +2984,8 @@ tetra.extend('view', function(_conf, _mod, _) {
 				ev
 			;
 			
-			// Retrict loading to the events defined in the array _bootstrapEvents
-			if(e.type && e.target.parentNode && e.target.parentNode.tagName && _.inArray(e.type.toLowerCase(), _bootstrapEvents) !== -1) {
+			// Retrict loading to the events defined in the array _bootnodeEvents
+			if(e.type && e.target.parentNode && e.target.parentNode.tagName && _.inArray(e.type.toLowerCase(), _bootnodeEvents) !== -1) {
 				bootnode = target.hasClass('bootnode') ? target : target.parents('.bootnode');
 				if (bootnode.length > 0) {
 					viewName = bootnode.attr('data-view');
@@ -3035,9 +3024,9 @@ tetra.extend('view', function(_conf, _mod, _) {
 			}
 		},
 		
-		_initBootstrap = function() {
-			for(var i = 0, len = _bootstrapEvents.length; i < len; i++) {
-				_addEventListener(_bootstrapEvents[i]);
+		_initBootnode = function() {
+			for(var i = 0, len = _bootnodeEvents.length; i < len; i++) {
+				_addEventListener(_bootnodeEvents[i]);
 			}
 		}
 	;
@@ -3178,8 +3167,8 @@ tetra.extend('view', function(_conf, _mod, _) {
 	}
 	
 	// Default Listeners
-	if(_conf.enableBootstrap) {
-		_initBootstrap();
+	if(_conf.enableBootnode) {
+		_initBootnode();
 	}
 	
 	
@@ -3317,6 +3306,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 		debug: _debug
 	};
 });
+
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native controller functions of Tetra.js
@@ -3523,20 +3513,20 @@ tetra.extend('controller', function(_conf, _mod, _) {
 		notify: function(message, data, scope) {
 			scope = scope || 'all';
 			
-			var ctrl, ctrlScope, ctrlView;
+			var ctrl, ctrlScope, ctrlListener;
 			
 			for(var name in _controllers) {
 				if(_controllers.hasOwnProperty(name)) {
 					ctrl = _controllers[name];
 					ctrlScope = ctrl.scope;
 					
-					if(ctrl.events.view) {
-						ctrlView = ctrl.events.view;
+					if(scope !== 'all' && ctrl.events.view || ctrl.events.controller) {
+						ctrlListener = (scope !== 'all') ? ctrl.events.view : ctrl.events.controller;
 	
 						if((scope === 'all' || scope === ctrlScope) &&
-								typeof ctrlView[message] !== 'undefined') {
+								typeof ctrlListener[message] !== 'undefined') {
 							_mod.debug.log('ctrl ' + name + ' : exec ' + message, scope, 'info');
-							ctrlView[message](data);
+							ctrlListener[message](data);
 						}
 					}
 				}
@@ -3792,7 +3782,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						obj.update(attributes, skipValid);
 						
 						model.objects[obj.get('ref')] = obj;
-						if((obj.get('id') !== 0) && (obj.get('id') != '0020')) {
+						if((obj.get('id') !== 0)) {
 							model.ids[obj.get('id')] = obj.get('ref');
 						
 							if(cache && (typeof skipCache === 'undefined' || (typeof skipCache !== 'undefined' && !skipCache))) {
@@ -3810,7 +3800,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 					},
 					
 					// Saves the object to the server
-					_save = function(attributes) {
+					_save = function(attributes, success) {
 						
 						var
 							id = attributes.id,
@@ -3818,7 +3808,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						;
 						
 						// Directly notify controllers
-						_notify('update')(obj);
+						_notify('save')(obj);
 						
 						_requester.queue({model:this, obj:obj}, _buildUrl(model.req.save, attributes), {
 							type : model.req.save.method,
@@ -3879,7 +3869,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 											
 											// Manage object creation case
 											// TODO Viadeo specific thing here
-											if(id === 0 || id === '0020') {
+											if(id === 0) {
 												// Clean model cache
 												model.cache = {};
 	
@@ -3900,7 +3890,12 @@ tetra.extend('model', function(_conf, _mod, _) {
 											obj.update(respObj.data[objId]);
 										}
 									}
-									_notify('stored')(obj, respObj);
+									
+									if(typeof success !== 'undefined') {
+										success(obj, respObj);
+									} else {
+										_notify('saved')(obj, respObj);
+									}
 								}
 							},
 							error : function(code, respObj) {
@@ -3925,6 +3920,10 @@ tetra.extend('model', function(_conf, _mod, _) {
 					},
 					
 					_fetch = function(cond, success, that) {
+						
+						// Directly notify controllers
+						_notify('fetch')(cond);
+						
 						var uriParams = cond.uriParams;
 						_requester.queue({model:(that)?that:this}, _buildUrl(model.req.fetch, cond), {
 							type : model.req.fetch.method,
@@ -4034,33 +4033,25 @@ tetra.extend('model', function(_conf, _mod, _) {
 					
 					// Retrieve an object by its id (returned by the server). Note that you must chain a call
 					// to _find to a success callback
-					_find = function(id) {
+					_find = function(id, success) {
 						if(typeof model.ids[id] === 'undefined') {
 							var that = this;
-							return {
-								success: function(fct) { 
-									_fetch({id: id}, (fct) ? function(col){ fct(col[0]); } : undefined, that); 
-								}
-							};
+							_fetch({id: id}, (success) ? function(col){ success(col[0]); } : undefined, that);
 						} else {
-							return {
-								success: function(fct) {
-									fct(model.objects[model.ids[id]]);
-								}
-							};
+							success(model.objects[model.ids[id]]);
 						}
 					},
 					
 					// Retrieve an object by its reference (generated by tetra.js). Will return the object, so no need
 					// for a success callback
-					_findByRef = function(ref) {
-						return model.objects[ref] || null;
+					_findByRef = function(ref, success) {
+						success(model.objects[ref] || null);
 					},
 					
 					// Retrieve a local object by passing in a cond object
 					// that represents the expected structure and values of the
 					// object in question. Again, should chain to a success callback
-					_findByCond = function(cond) {
+					_findByCond = function(cond, success) {
 						var 
 							col = [],
 							objs = model.objects,
@@ -4082,18 +4073,15 @@ tetra.extend('model', function(_conf, _mod, _) {
 								}
 							}
 						}
-						return {
-							success: function(fct) {
-								if(col.length <= 1) {
-									fct(col[0] || null);
-								} else {
-									fct(col);
-								}
-							}
-						};
+						
+						if(col.length <= 1) {
+							success(col[0] || null);
+						} else {
+							success(col);
+						}
 					},
 					
-					_select = function(cond) {
+					_select = function(cond, success) {
 						// Manage parameters order to get the same signature of the request
 						if(cond.uriParams) {
 							var uriParams = cond.uriParams;
@@ -4106,21 +4094,16 @@ tetra.extend('model', function(_conf, _mod, _) {
 						;
 						
 						if(_conf.env === 'Node') _mod.debug.log('ORM: SELECT ' + scope +'/'+ name + ' with cond: ' + condSign, 'all', 'log');
-	
-						var that = this;
-						return {
-							success: function(fct) {
-								if(cache) {
-									var cacheKey = 'NODE:' + scope +'-'+ name + '-req-' + condSign;
-									cache.get(cacheKey, function(err, data) {
-										if(_conf.env === 'Node') _mod.debug.log('ORM: SELECT: retrieve "' + cacheKey + '"', 'all', 'log', data);
-										_selectCbk(cond, data, fct, that);
-									});
-								} else {
-									_selectCbk(cond, model.cache[condSign], fct, that);
-								}
-							}
-						};
+						
+						if(cache) {
+							var cacheKey = 'NODE:' + scope +'-'+ name + '-req-' + condSign;
+							cache.get(cacheKey, function(err, data) {
+								if(_conf.env === 'Node') _mod.debug.log('ORM: SELECT: retrieve "' + cacheKey + '"', 'all', 'log', data);
+								_selectCbk(cond, data, success, this);
+							});
+						} else {
+							_selectCbk(cond, model.cache[condSign], success, this);
+						}
 					},
 	
 					_selectCbk = function(cond, cachedList, fct, that) {
@@ -4173,10 +4156,10 @@ tetra.extend('model', function(_conf, _mod, _) {
 						}
 					},
 					
-					_del = function(ref, attr) {
+					_del = function(ref, attr, success) {
 						
 						var obj = model.objects[ref];
-						_notify('remove')(obj);
+						_notify('delete')(obj);
 						
 						if(typeof attr === 'undefined') {
 							attr = {id: obj.get('id')};
@@ -4207,7 +4190,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 								
 								if(respObj.status === 'SUCCESS' || typeof respObj.status === 'undefined') {
 									// confirm deletion
-									_notify('deleted')(obj, respObj);
+									if(typeof success !== 'undefined') {
+										success(obj, respObj);
+									} else {
+										_notify('deleted')(obj, respObj);
+									}
 									
 									// delete object in cache
 									delete model.ids[obj.get('id')];
@@ -4256,7 +4243,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 						};
 					},
 					
-					_reset = function(cond){
+					_reset = function(cond, success){
 						_notify('reset')(model.objects);
 						model.ids = {};
 						model.objects = {};
@@ -4276,7 +4263,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 										alerts: respObj.alerts ? respObj.alerts : {}
 									}, respObj);
 								} else {
-									_notify('resetted')(name, respObj);
+									if(typeof success !== 'undefined') {
+										success(name, respObj);
+									} else {
+										_notify('resetted')(name, respObj);
+									}
 								}
 							},
 							error : function(code, respObj) {
@@ -4409,7 +4400,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 		_mod.debug.log('> Model specs:');
 		_mod.debug.log('		- retrieve an object and its ref		> tetra.debug.model(modelName).findByRef(ref)');
 		_mod.debug.log('		- notify all controllers as a model		> tetra.debug.model(modelName).notify(type)(data)');
-		_mod.debug.log('			  * types : call, complete, append, create, stored, update, delete, error');
+		_mod.debug.log('			  * types : call, complete, create, fetch, append, save, saved, delete, deleted, reset, resetted, error');
 		_mod.debug.log('		- list all models						> tetra.debug.model.list()');
 		_mod.debug.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 		
@@ -4449,6 +4440,11 @@ tetra.extend('model', function(_conf, _mod, _) {
 					return attr[attrName];
 				},
 				
+				// Retrieve all attributes from an object as described by the model
+				getAll: function() {
+					return attr;
+				},
+				
 				// Set the value of an attribute
 				set: function(attrName, value) {
 					bckAttr[attrName] = attr[attrName];
@@ -4477,9 +4473,9 @@ tetra.extend('model', function(_conf, _mod, _) {
 				},
 				
 				// Save the object to the server. Will call the ORM.
-				save: function(params) {
+				save: function(params, success) {
 					if(validAttr(attr, this)) {
-						_mod.orm(modelScope)(modelName).save(_.extend(attr, params)); // REFACTOR !
+						_mod.orm(modelScope)(modelName).save(_.extend(attr, params), success);
 						return attr.id;
 					} else {
 						return false;
@@ -4487,8 +4483,8 @@ tetra.extend('model', function(_conf, _mod, _) {
 				},
 				
 				// Delete the object from the server. Will call the ORM.
-				remove: function(params) {
-					_mod.orm(modelScope)(modelName).del(attr.ref, _.extend(attr, params)); // REFACTOR !
+				remove: function(params, success) {
+					_mod.orm(modelScope)(modelName).del(attr.ref, _.extend(attr, params), success);
 				}
 			}, modelMethods(attr));
 			
