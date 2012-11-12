@@ -739,6 +739,43 @@ describe("the view; ", function() {
             VNS.test.validateEventArguments(this.spy.getCall(2).args, this.mouseTestNode, "mouseout");
             VNS.test.validateEventArguments(this.spy.getCall(3).args, this.mouseTestNodeParent, "mouseout");
         });
+
+        it("should respond appropriately to an onMouseOut when mouse go out of the screen", function() {
+            var someOtherNode = d.getElementById('someOtherNode');
+           
+            VNS.test.triggerEvent(this.mouseTestNode, "mouseover");
+            VNS.test.triggerEvent(this.mouseTestNode, "mouseout", d.getElementsByTagName('html')[0]);
+
+            expect(this.spy.called).toBeTruthy();
+            expect(this.spy.callCount).toBe(4, "as both mouseover & mouseout should have been handled on the element & its parent");
+            someOtherNode = null;
+            
+            // Check the arguments returned for the target and its parent
+            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.mouseTestNode, "mouseover");
+            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.mouseTestNodeParent, "mouseover");
+            VNS.test.validateEventArguments(this.spy.getCall(2).args, this.mouseTestNode, "mouseout");
+            VNS.test.validateEventArguments(this.spy.getCall(3).args, this.mouseTestNodeParent, "mouseout");
+        });
+
+        it("should respond appropriately to an onMouseOver after an onMouseOut on the same element with mouse out of the screen", function() {
+            var someOtherNode = d.getElementById('someOtherNode');
+            
+            VNS.test.triggerEvent(this.mouseTestNode, "mouseover");
+            VNS.test.triggerEvent(this.mouseTestNode, "mouseout", d.getElementsByTagName('html')[0]);
+            VNS.test.triggerEvent(this.mouseTestNode, "mouseover");
+
+            expect(this.spy.called).toBeTruthy();
+            expect(this.spy.callCount).toBe(6, "as both mouseover & mouseout should have been handled on the element & its parent");
+            someOtherNode = null;
+            
+            // Check the arguments returned for the target and its parent
+            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.mouseTestNode, "mouseover");
+            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.mouseTestNodeParent, "mouseover");
+            VNS.test.validateEventArguments(this.spy.getCall(2).args, this.mouseTestNode, "mouseout");
+            VNS.test.validateEventArguments(this.spy.getCall(3).args, this.mouseTestNodeParent, "mouseout");
+            VNS.test.validateEventArguments(this.spy.getCall(4).args, this.mouseTestNode, "mouseover");
+            VNS.test.validateEventArguments(this.spy.getCall(5).args, this.mouseTestNodeParent, "mouseover");
+        });
         
         it("should handle special mouseout cases, see line 177", function() {
             // TODO Implement & rewrite description
