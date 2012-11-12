@@ -2807,12 +2807,12 @@ tetra.extend('view', function(_conf, _mod, _) {
 									else if(eventName === 'mouseover') {
 										if(_.toggleLib) _.toggleLib(thisView.has_);
 										
-										if(elm.hasClass('cur-mouseover') && elm.hasClass('cur-mouse-'+ viewName.replace('/', '-'))) {
+										if(elm.hasClass('cur-mouseover') && elm.attr('cur-mouse-view') == viewName) {
 											elm = false;
 										} else {
 											if(typeof thisView.events.user.mouseout !== 'undefined' && 
 												typeof thisView.events.user.mouseout[selector] != 'undefined') {
-												elm.addClass('cur-mouseover').addClass('cur-mouse-'+ viewName.replace('/', '-'));
+												elm.addClass('cur-mouseover').attr('cur-mouse-view', viewName);
 											}
 										}
 									}
@@ -2821,7 +2821,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 									else if (eventName === 'mouseout') {
 										from = e.relatedTarget || e.toElement;
 										fromTarget = _(from);
-
+										console.log('NODE NAME', from.nodeName);
 										// continue if mouse is in browser
 										if(from && from.nodeName !== "HTML") {
 
@@ -2829,8 +2829,10 @@ tetra.extend('view', function(_conf, _mod, _) {
 											if(fromTarget.hasClass('cur-mouseover') || fromTarget.parents('.cur-mouseover').length > 0) {
 												elm = false;
 											} else {
-												elm.removeClass('cur-mouseover').removeClass('cur-mouse-'+ viewName.replace('/', '-'));
+												elm.removeClass('cur-mouseover').attr('cur-mouse-view', '');
 											}
+										} else {
+											elm.removeClass('cur-mouseover').attr('cur-mouse-view', '');
 										}
 									}
 									
