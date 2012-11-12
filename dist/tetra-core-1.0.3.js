@@ -2821,7 +2821,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 									else if (eventName === 'mouseout') {
 										from = e.relatedTarget || e.toElement;
 										fromTarget = _(from);
-										console.log('NODE NAME', from.nodeName);
+										
 										// continue if mouse is in browser
 										if(from && from.nodeName !== "HTML") {
 
