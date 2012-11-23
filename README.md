@@ -16,6 +16,9 @@ The Tetra.js framework is also Object-oriented, encouraging the developer to bet
 
 Additionnally, the "[bootnode](/viadeo/tetra/wiki/Bootnode)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
 
+Slides about Tetra.js & Tetra UI for a quick overview:
+<http://viadeo.github.com/tetra-slides/2012-11-20/>
+
 ## Tetra core tree
 
    * **lib**
