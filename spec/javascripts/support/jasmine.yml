@@ -9,8 +9,8 @@ src_files:
   - lib/tetra-controller.js
   - lib/tetra-model.js
   - spec/javascripts/specs/conf/remote-webapp.js
-  - spec/javascripts/lib/Sinon.JS/sinon-1.4.2.js
-  - spec/javascripts/lib/Sinon.JS/sinon-ie-1.4.2.js
+  - spec/javascripts/lib/Sinon.JS/sinon-1.5.2.js
+  - spec/javascripts/lib/Sinon.JS/sinon-ie-1.5.2.js
   - spec/javascripts/lib/jasmine/lib/jasmine-jquery.js
   - spec/javascripts/lib/jasmine/conf/init_remote_fixtures.js
   - spec/javascripts/lib/utils.js
