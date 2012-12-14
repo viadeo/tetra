@@ -44,7 +44,8 @@
 			},
 			enableBootnode : true,
 			APPS_PATH : '/src/main/javascript/tetra/spec/javascripts/specs/fixtures/bootstrap',
-			GLOBAL_PATH : '/src/main/javascript/tetra/spec/javascripts/specs/fixtures/global'
+			GLOBAL_PATH : '/src/main/javascript/tetra/spec/javascripts/specs/fixtures/global',
+            COMP_PATH : '/src/main/javascript/tetra/spec/javascripts/specs/fixtures/comp'
 		}
 	}).start();
 

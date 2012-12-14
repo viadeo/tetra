@@ -44,7 +44,8 @@
 			},
 			enableBootnode : true,
 			APPS_PATH : '/spec/javascripts/specs/fixtures/bootstrap',
-			GLOBAL_PATH : '/spec/javascripts/specs/fixtures/global'
+			GLOBAL_PATH : '/spec/javascripts/specs/fixtures/global',
+            COMP_PATH : '/spec/javascripts/specs/fixtures/comp'
 		}
 	}).start();
 
