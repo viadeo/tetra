@@ -3004,7 +3004,6 @@ tetra.extend('view', function(_conf, _mod, _) {
 							bootnode.addClass('loading');
 
 							appPath = viewName.split('/');
-							
 							_mod.dep.require([appPath[0] +'/view/'+ appPath[1] +'.ui'], function() {
 								bootnode.removeClass('loading');
 								_callEventListener(ev, target, false);
@@ -3013,12 +3012,13 @@ tetra.extend('view', function(_conf, _mod, _) {
 					} else if(typeof compName != 'undefined') {
 						if(bootnode.attr('data-event') === eventName && typeof _comp[compName] === 'undefined') {
 							_comp[compName] = true;
-							
+
 							bootnode.addClass('loading');
-							_mod.dep.require(['comp/'+ compName], function() {
+							_mod.dep.require(['comp/' + compName], function() {
 								bootnode.removeClass('loading');
 								_callEventListener(ev, target, false);
 							});
+                            _mod.dep.define('comp/' + compName);
 						}
 					}
 				}
@@ -3206,10 +3206,13 @@ tetra.extend('view', function(_conf, _mod, _) {
 						"tetra.view.register(name, params) : " + 
 						"params must define a scope attribute and a constr method");
 			}
-			
+
+            // TODO Require should manage this, I think
 			if(_views[viewName]) {
-				throw new Error(
-						"A view with the scope/name " + viewName + " already exists");
+                if(typeof console !== "undefined") {
+                    console.warn('view ' + viewName + ' already registered');
+                }
+				return;
 			}
 			
 			var deps = [];
@@ -3218,7 +3221,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 					deps.push(params.scope +'/controller/'+ params.use[i] +'.ctrl');
 				}
 			}
-			
+
 			_mod.dep.define(params.scope + '/view/' + name +'.ui', deps, function(require) {
 				_register(viewName, params);
 			});
@@ -3477,9 +3480,12 @@ tetra.extend('controller', function(_conf, _mod, _) {
 						"params must define a scope attribute and a constr method");
 			}
 
+            // TODO Require should manage this
 			if(_controllers[ctrlName]) {
-				throw new Error(
-						"A controller with the scope/name " + ctrlName + " already exists");
+                if(typeof console !== "undefined") {
+                    console.warn('controller ' + ctrlName + ' already registered');
+                }
+				return;
 			}
 			
 			var deps = [], modelName;
@@ -4638,10 +4644,13 @@ tetra.extend('model', function(_conf, _mod, _) {
 						"tetra.model.register(name, params) : " + 
 						"Name is a required argument");
 			}
-			
+
+            // TODO Require should manage this
 			if(_models[modelName] || _models['g/' + name]) {
-				throw new Error(
-						"A model with the name " + name + " already exists");
+                if(typeof console !== "undefined") {
+                    console.warn('model ' + modelName + ' already registered');
+                }
+                return;
 			}
 			
 			_mod.dep.define(params.scope +'/model/'+ name +'.class', function() {

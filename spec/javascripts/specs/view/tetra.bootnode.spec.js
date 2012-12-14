@@ -38,11 +38,14 @@ describe("bootnode; ", function() {
 			tetra.view.destroy("myNonExistantControllerView", "myScope");
 			tetra.view.destroy("myRegisterNameDoesntMatchTheFileNameView", "myScope");
 			tetra.view.destroy("myGlobalView", "myScope");
+            tetra.view.destroy("myCompView", "Comp");
 			
 			tetra.controller.destroy("myVcController", "myScope");
 			tetra.controller.destroy("myVcmController", "myScope");
 			tetra.controller.destroy("myGlobalController", "myScope");
+            tetra.controller.destroy("myCompController", "Comp");
 			tetra.model.destroy("myVcmModel", "myScope");
+            tetra.model.destroy("myCompModel", "Comp");
 			tetra.model.destroy("myGlobalModel");
 		});
 		
@@ -208,7 +211,7 @@ describe("bootnode; ", function() {
 			}, _asyncLoaderTimeout);
 		});
 		
-		xit("should download a package defined in the data-comp attribute", function() {
+		it("should download a package defined in the data-comp attribute", function() {
            var 
                views,
                node

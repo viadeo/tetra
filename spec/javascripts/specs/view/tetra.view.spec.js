@@ -329,7 +329,7 @@ describe("the view; ", function() {
             expect(VNS.test.getObjectLength(views)).toBe(0);
         });
         
-        it("should throw an exception when a view with the same name exists on the same scope", function(){
+        it("should not be able to load the same view twice", function(){
             var views = tetra.debug.view.list();
             expect(views.myScope).toBeUndefined();
 
@@ -345,7 +345,14 @@ describe("the view; ", function() {
             views = tetra.debug.view.list();
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
-            
+
+            if(typeof window.console === "undefined") {
+                window.console = {
+                    warn: function(){}
+                };
+            }
+            var stub = sinon.stub(window.console, "warn");
+
             expect(function(){
                 tetra.view.register("myView", {
                     scope: "myScope",
@@ -355,7 +362,10 @@ describe("the view; ", function() {
                         };
                     }
                 });
-            }).toThrow();
+            }).not.toThrow();
+
+            expect(stub.callCount).toBe(1);
+            stub.restore();
         });
     });
     
@@ -1441,7 +1451,7 @@ describe("the view; ", function() {
                 VNS.test.validateWindowEventArguments(this.spy.getCall(0).args, "abort");
             }
         });
-        
+
         it("should respond appropriately to an onError", function() {
             if(window.dispatchEvent) {
                 VNS.test.triggerEvent(window, "error");

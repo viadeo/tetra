@@ -378,7 +378,7 @@ describe("the controller; ", function() {
         });
         
         // This test is just to confirm that errors are not being swallowed by the register method
-        it("should throw an exception if any kind of malformed data is present in a controller instantiation", function() {
+        it("should throw an exception if any error occurs in a controller", function() {
             var controllers = tetra.debug.ctrl.list();
             expect(controllers.myScope).toBeUndefined();
             
@@ -393,8 +393,8 @@ describe("the controller; ", function() {
                                 me.methods._myTestMethod();
                             },
                             _myTestMethod : function() {
-                                // -- Uh oh -- variable with no var declaration & it's undefined
-                                blarg;
+                                // -- Uh oh -- an error has occurred
+                                throw new Error();
                             }
                         }
                     };
@@ -405,31 +405,9 @@ describe("the controller; ", function() {
             
             controllers = tetra.debug.ctrl.list();
             expect(controllers.myScope).toBeUndefined();
-            
-            // One of our methods throws something
-            init = {
-                    scope: "mySecondScope",
-                    constr: function(me, app, page, orm) {
-                        return {
-                            events: {},
-                            methods: {
-                                init : function() {
-                                    me.methods._myTestMethod();
-                                },
-                                _myTestMethod : function() {
-                                    throw new Error("AIE!");
-                                }
-                            }
-                        };
-                    }
-            };
-            
-            expect(function(){tetra.controller.register("myController", init);}).toThrow();
-            controllers = tetra.debug.ctrl.list();
-            expect(controllers.myScope).toBeUndefined();
         });
         
-        it("should throw an exception if we try to register a controller that already exists", function() {            
+        it("should not be able to load a controller twice", function() {
             var init = {
                     scope: "myScope",
                     constr: function(me, app, page, orm) {
@@ -438,9 +416,19 @@ describe("the controller; ", function() {
                         };
                     }
             };
-            
+
+            if(typeof window.console === "undefined") {
+                window.console = {
+                    warn: function(){}
+                };
+            }
+            var stub = sinon.stub(window.console, "warn");
+
             expect(function(){tetra.controller.register("myController", init);}).not.toThrow();
-            expect(function(){tetra.controller.register("myController", init);}).toThrow();
+            expect(function(){tetra.controller.register("myController", init);}).not.toThrow();
+            expect(stub.callCount).toBe(1);
+
+            stub.restore();
         });
     });
     
