@@ -346,13 +346,6 @@ describe("the view; ", function() {
             expect(views.myScope).toBeDefined();
             expect(views.myScope[0]).toBe("myScope/myView");
 
-            if(typeof window.console === "undefined") {
-                window.console = {
-                    warn: function(){}
-                };
-            }
-            var stub = sinon.stub(window.console, "warn");
-
             expect(function(){
                 tetra.view.register("myView", {
                     scope: "myScope",
@@ -363,9 +356,6 @@ describe("the view; ", function() {
                     }
                 });
             }).not.toThrow();
-
-            expect(stub.callCount).toBe(1);
-            stub.restore();
         });
     });
     

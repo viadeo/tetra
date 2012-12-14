@@ -2997,7 +2997,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 					ev.type = eventName;
 					ev.preventDefault = function(){};
 					
-					if(typeof viewName != 'undefined') {
+					if(viewName != null) {
 						if(bootnode.attr('data-event') === eventName && typeof _views[viewName] === 'undefined') {
 							e.preventDefault();
 							
@@ -3009,16 +3009,16 @@ tetra.extend('view', function(_conf, _mod, _) {
 								_callEventListener(ev, target, false);
 							});
 						}
-					} else if(typeof compName != 'undefined') {
+					} else if(compName != null) {
 						if(bootnode.attr('data-event') === eventName && typeof _comp[compName] === 'undefined') {
 							_comp[compName] = true;
 
 							bootnode.addClass('loading');
-							_mod.dep.require(['comp/' + compName], function() {
+							_mod.dep.require(['comp/'+ compName], function() {
 								bootnode.removeClass('loading');
 								_callEventListener(ev, target, false);
 							});
-                            _mod.dep.define('comp/' + compName);
+                            _mod.dep.define('comp/'+ compName);
 						}
 					}
 				}
@@ -3207,7 +3207,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 						"params must define a scope attribute and a constr method");
 			}
 
-            // TODO Require should manage this, I think
+            // TODO Require should manage this
 			if(_views[viewName]) {
                 if(typeof console !== "undefined") {
                     console.warn('view ' + viewName + ' already registered');

@@ -417,18 +417,8 @@ describe("the controller; ", function() {
                     }
             };
 
-            if(typeof window.console === "undefined") {
-                window.console = {
-                    warn: function(){}
-                };
-            }
-            var stub = sinon.stub(window.console, "warn");
-
             expect(function(){tetra.controller.register("myController", init);}).not.toThrow();
             expect(function(){tetra.controller.register("myController", init);}).not.toThrow();
-            expect(stub.callCount).toBe(1);
-
-            stub.restore();
         });
     });
     

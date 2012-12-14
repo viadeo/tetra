@@ -129,18 +129,8 @@ describe("the model; ", function() {
             var models = tetra.debug.model.list();
             expect(models).not.toContain("myModel");
 
-            if(typeof window.console === "undefined") {
-                window.console = {
-                    warn: function(){}
-                };
-            }
-            var stub = sinon.stub(window.console, "warn");
-
             expect(function(){tetra.model.register("myModel", {scope: "myScope"});}).not.toThrow();
             expect(function(){tetra.model.register("myModel", {scope: "myScope"});}).not.toThrow();
-            expect(stub.callCount).toBe(1);
-
-            stub.restore();
         });
         
         it("should throw an exception if any kind of malformed data is present in a model instantiation", function() {

@@ -5275,7 +5275,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 					ev.type = eventName;
 					ev.preventDefault = function(){};
 					
-					if(typeof viewName != 'undefined') {
+					if(viewName != null) {
 						if(bootnode.attr('data-event') === eventName && typeof _views[viewName] === 'undefined') {
 							e.preventDefault();
 							
@@ -5287,7 +5287,7 @@ tetra.extend('view', function(_conf, _mod, _) {
 								_callEventListener(ev, target, false);
 							});
 						}
-					} else if(typeof compName != 'undefined') {
+					} else if(compName != null) {
 						if(bootnode.attr('data-event') === eventName && typeof _comp[compName] === 'undefined') {
 							_comp[compName] = true;
 
