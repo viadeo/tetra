@@ -1,13 +1,13 @@
 module.exports = function(api) {
     fs = require('fs');
-    var base = require('./lib/tetra.js');
+    var base = require('./src/tetra.js');
     module.exports = tns = base.tns;
     module.exports = tetra = base.tetra;
-    require('./lib/mod/libAbstracted/node-connector.js')(api);
-    require('./lib/mod/libAbstracted/builder.js');
-    require('./lib/mod/require/node.js');
-    require('./lib/mod/tmpl/node.js');
-    require('./lib/tetra-controller.js');
-    require('./lib/tetra-model.js');
+    require('./src/view/connector/node-connector.js')(api);
+    require('./src/view/connector/builder.js');
+    require('./src/conf/requirejs/node.js');
+    require('./src/view/node.js');
+    require('./src/controller/tetra-controller.js');
+    require('./src/model/tetra-model.js');
     return tetra;
 }

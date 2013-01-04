@@ -1,6 +1,13 @@
-[submodule "jquery"]
-	path = lib/deps/jquery
-	url = git://github.com/jquery/jquery.git
-[submodule "requirejs"]
-        path = lib/deps/requirejs
-        url = git://github.com/jrburke/requirejs.git
+
+[submodule "lib/requirejs"]
+	path = lib/requirejs
+	url = https://github.com/jrburke/requirejs.git
+[submodule "lib/JSON-js"]
+	path = lib/JSON-js
+	url = https://github.com/douglascrockford/JSON-js.git
+[submodule "lib/sizzle"]
+	path = lib/sizzle
+	url = https://github.com/jquery/sizzle.git
+[submodule "test/lib/jasmine-jquery"]
+	path = test/lib/jasmine-jquery
+	url = https://github.com/velesin/jasmine-jquery.git
