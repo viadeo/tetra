@@ -11,7 +11,7 @@ src_files:
   - test/conf/remote-webapp.js
   - test/lib/Sinon.JS/sinon-1.5.2.js
   - test/lib/Sinon.JS/sinon-ie-1.5.2.js
-  - test/lib/jasmine_jquery/lib/jasmine-jquery.js
+  - test/lib/jasmine-jquery/lib/jasmine-jquery.js
   - test/conf/jasmine/init_remote_fixtures.js
   - test/utils.js
 
