@@ -14,24 +14,21 @@ Each layer has access to a communication pipe linked to a potential listener, al
 
 The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
 
-Additionnally, the "[bootnode](/viadeo/tetra/wiki/Bootnode)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
+Additionally, the "[bootnode](/viadeo/tetra/wiki/Bootnode)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
 
 Slides about Tetra.js & Tetra UI for a quick overview:
 <http://viadeo.github.com/tetra-slides/2012-11-20/>
 
 ## Tetra core tree
 
-   * **lib**
-      * **conf**: Tetra.js configuration files for each platform.
-      * **deps**: External dependencies of the client-side framework.
-      * **mod**: Additonal modules of the framework. Ability to extend native implementation with advanced features. Already implemented modules are:
-		 * **libAbstracted**: Abstracted library to use Tetra.js with librairies other than jQuery. Prototype and Node.js connectors are already implemented.
-		 * **require**: The RequireJS library, used client- and server-side (Node.js) dependency loading
-		 * **tmpl**: Templating system integrated into the controller and view layer in both the client and server environments.
-      * _tetra-controller.js_: Controller layer
-	  * _tetra-model.js_: Model layer
-	  * _tetra-view.js_: View layer
-	  * _tetra.js_: Core of Tetra.js framework, an interface that provides acceess to the MVC layers, framework extensions and debug features.
+   * **lib**: External dependencies of the client-side framework.
+   * **src**
+      * **conf**: Tetra.js and RequireJS configuration files.
+      * **controller**: Controller layer
+      * **model**: Model layer
+      * **view**: View layer
+        * **connectors**: Abstracted library to use Tetra.js with librairies other than jQuery. Prototype and Node.js connectors are already implemented.
+	  * _tetra.js_: Core of Tetra.js framework, an interface that provides access to the MVC layers, framework extensions and debug features.
 
 Configuration files are used to construct the core object needed to build mvc apps. It must have the following structure :
 
