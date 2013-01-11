@@ -541,6 +541,11 @@ tetra.extend('view', function(_conf, _mod, _) {
             }
         }
 
+        if(_comp && _comp.current) {
+            _comp[_comp.current]();
+            delete _comp.current;
+        }
+
         return _views[viewName];
     };
 
