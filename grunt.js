@@ -6,7 +6,7 @@ module.exports = function( grunt ) {
 			banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */"
 		},
 		concat: {
-			"release/<%=meta.version%>/tetra-core.js": [
+			"release/tetra-core.js": [
 				"src/tetra.js",
 				"lib/requirejs/require.js",
 				"src/conf/requirejs/client.js",
@@ -15,11 +15,11 @@ module.exports = function( grunt ) {
 				"src/controller/tetra-controller.js",
 				"src/model/tetra-model.js"
 			],
-			"release/<%=meta.version%>/tetra.js": [
-				"release/<%=meta.version%>/tetra-core.js",
+			"release/tetra.js": [
+				"release/tetra-core.js",
 				"src/conf/default.js"
 			],
-			"release/<%=meta.version%>/tetra-prototype.js": [
+			"release/tetra-prototype.js": [
                 "lib/sizzle/sizzle.js",
                 "lib/jquery/1.8.3/jquery-nosizzle.js",
                 "lib/JSON-js/json2.js",
@@ -38,11 +38,11 @@ module.exports = function( grunt ) {
 				"src/view/client-micro-tmpl.js",
 				"src/view/tetra-view.js",
 				"src/controller/tetra-controller.js",
-				"src/model/tetra-model.js",
+				"src/model/tetra-model.js"
 			]
 		},
 		lint: {
-			files: ["release/<%=meta.version%>/tetra.js"]
+			files: ["release/tetra.js"]
 		},
 		jshint: {
 			options: {
@@ -74,9 +74,9 @@ module.exports = function( grunt ) {
 			}
 		},
 		min: {
-			"release/<%=meta.version%>/tetra-core.min.js": ["<banner>", "release/<%=meta.version%>/tetra-core.js"],
-			"release/<%=meta.version%>/tetra.min.js": ["<banner>", "release/<%=meta.version%>/tetra.js"],
-			"release/<%=meta.version%>/tetra-prototype.min.js": ["<banner>", "release/<%=meta.version%>/tetra-prototype.js"]
+			"release/<%=meta.version%>/tetra-core.min.js": ["<banner>", "release/tetra-core.js"],
+			"release/<%=meta.version%>/tetra.min.js": ["<banner>", "release/tetra.js"],
+			"release/<%=meta.version%>/tetra-prototype.min.js": ["<banner>", "release/tetra-prototype.js"]
 		},
 		jasmine: {
 			folder: {
