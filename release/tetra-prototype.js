@@ -23681,12 +23681,14 @@ tetra.extend('view', function(_conf, _mod, _) {
                         }
                     } else if(compName != null) {
                         if(bootnode.attr('data-event') === eventName && typeof _comp[compName] === 'undefined') {
-                            _comp[compName] = true;
+                            _comp.current = compName;
+                            _comp[compName] = function(){
+                                _callEventListener(ev, target, false);
+                            };
 
                             bootnode.addClass('loading');
                             _mod.dep.require(['comp/'+ compName], function() {
                                 bootnode.removeClass('loading');
-                                _callEventListener(ev, target, false);
                             });
                             _mod.dep.define('comp/'+ compName);
                         }
