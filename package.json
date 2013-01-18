@@ -1,7 +1,7 @@
 {
   "name": "tetra",
   "description": "Tetra.js MVC framework for client-side and server-side (with Node.js/Express)",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "author": {
     "name": "Olivier Hory",
     "email": "olivier.hory@gmail.com"
