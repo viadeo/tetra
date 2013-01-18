@@ -24119,7 +24119,9 @@ tetra.extend('controller', function(_conf, _mod, _) {
 
         if(typeof _controllers[ctrlName].methods !== 'undefined' &&
             typeof _controllers[ctrlName].methods.init !== 'undefined') {
-            _controllers[ctrlName].methods.init();
+            if(!_conf.hasOwnProperty('disableCtrlInit') || !_conf.disableCtrlInit) {
+                _controllers[ctrlName].methods.init();
+            }
         }
 
         return _controllers[ctrlName];
