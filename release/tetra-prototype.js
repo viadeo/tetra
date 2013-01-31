@@ -20655,8 +20655,8 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
                     }
 
                     if(map.hasOwnProperty('float')) {
-                        map.cssFloat = map.float;
-                        delete map.float;
+                        map.cssFloat = map['float'];
+                        delete map['float'];
                     }
 
                     this.setStyle(map);
