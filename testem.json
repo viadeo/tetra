@@ -15,7 +15,7 @@
         "src/view/tetra-view.js",
         "src/controller/tetra-controller.js",
         "src/model/tetra-model.js",
-        "test/conf/remote-webapp.js",
+        "test/conf/default.js",
         "test/specs/tetra.spec.js",
         "test/specs/model/*.spec.js",
         "test/specs/controller/*.spec.js",

@@ -8,7 +8,7 @@ src_files:
   - src/view/tetra-view.js
   - src/controller/tetra-controller.js
   - src/model/tetra-model.js
-  - test/conf/remote-webapp.js
+  - test/conf/default.js
   - test/lib/Sinon.JS/sinon-1.5.2.js
   - test/lib/Sinon.JS/sinon-ie-1.5.2.js
   - test/lib/jasmine-jquery/lib/jasmine-jquery.js
