@@ -24,35 +24,35 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ------------------------------------------------------------------------------
-tetra.extend('dep', function(_conf, _mod, _) {
-	
-	var requirejs = require('requirejs');
-	
-	requirejs.config({
-	    //By default load any module IDs from js/lib
-	    baseUrl: _conf.APPS_PATH,
-	    enforceDefine: true,
-	    //except, if the module ID starts with "app",
-	    //load it from the js/app directory. paths
-	    //config is relative to the baseUrl, and
-	    //never includes a ".js" extension since
-	    //the paths config could be for a directory.
-	    paths: {
-		node: _conf.APPS_PATH,
-	        g: _conf.GLOBAL_PATH,
-	        comp: _conf.COMP_PATH
-	    },
-	    
-	    //Pass the top-level main.js/index.js require
-	    //function to requirejs so that node modules
-	    //are loaded relative to the top-level JS file.
-	    nodeRequire: require
-	});
-	
-	return {
-		define: requirejs.define,
-		undef: requirejs.undef,
-		require: requirejs
-	};
-	
+tetra.extend('dep', function (_conf, _mod, _) {
+
+    var requirejs = require('requirejs');
+
+    requirejs.config({
+        //By default load any module IDs from js/lib
+        baseUrl:_conf.APPS_PATH,
+        enforceDefine:true,
+        //except, if the module ID starts with "app",
+        //load it from the js/app directory. paths
+        //config is relative to the baseUrl, and
+        //never includes a ".js" extension since
+        //the paths config could be for a directory.
+        paths:{
+            node:_conf.APPS_PATH,
+            g:_conf.GLOBAL_PATH,
+            comp:_conf.COMP_PATH
+        },
+
+        //Pass the top-level main.js/index.js require
+        //function to requirejs so that node modules
+        //are loaded relative to the top-level JS file.
+        nodeRequire:require
+    });
+
+    return {
+        define:requirejs.define,
+        undef:requirejs.undef,
+        require:requirejs
+    };
+
 });
