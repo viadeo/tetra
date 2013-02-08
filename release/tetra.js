@@ -2384,31 +2384,36 @@ var requirejs, require, define;
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ------------------------------------------------------------------------------
-tetra.extend('dep', function(_conf, _mod, _) {
-	
-	requirejs.config({
-	    //By default load any module IDs from js/lib
-	    baseUrl: _conf.APPS_PATH,
-	    enforceDefine: true,
-		urlArgs: _conf.jsVersion ? 'v=' + _conf.jsVersion : '',
-	    //except, if the module ID starts with "app",
-	    //load it from the js/app directory. paths
-	    //config is relative to the baseUrl, and
-	    //never includes a ".js" extension since
-	    //the paths config could be for a directory.
-	    paths: {
-	        g: _conf.GLOBAL_PATH,
-	        comp: _conf.COMP_PATH
-	    }
-	});
-	
-	return {
-		define: define,
-		undef: requirejs.undef,
-		require: require
-	};
-	
-});
+
+(function(){
+    tetra.extend('dep', function (_conf, _mod, _) {
+        requirejs.config({
+            //By default load any module IDs from js/lib
+            baseUrl: getStaticURL(_conf, _conf.APPS_PATH),
+            enforceDefine:true,
+            urlArgs:_conf.jsVersion ? 'v=' + _conf.jsVersion : '',
+            //except, if the module ID starts with "app",
+            //load it from the js/app directory. paths
+            //config is relative to the baseUrl, and
+            //never includes a ".js" extension since
+            //the paths config could be for a directory.
+            paths:{
+                g:getStaticURL(_conf, _conf.GLOBAL_PATH),
+                comp:getStaticURL(_conf, _conf.COMP_PATH)
+            }
+        });
+
+        return {
+            define:define,
+            undef:requirejs.undef,
+            require:require
+        };
+    });
+
+    function getStaticURL(_conf, url) {
+        return (_conf.BOOTNODE_HOST) ? _conf.BOOTNODE_HOST + url : url;
+    }
+})();
 // ------------------------------------------------------------------------------
 // Tetra.js
 //
@@ -4749,6 +4754,27 @@ tetra.extend('model', function(_conf, _mod, _) {
         debug: _debug
     };
 });
-// Start tetra.js environnement with default settings
+// Start tetra.js environment with default settings
 // ------------------------------------------------------------------------------
+//
+// You may also extend the tetra object to configure default settings
+//
+// tetra.extend({ .. options }).start()
+//
+// ## Options ##
+// - env: default JavaScript environment (jQuery, Prototype, etc.)
+// - jsVersion: library version
+// - authCallback: function to call for 401 response codes
+// - currentRequestCallback: default callback invoked after a re-authentication
+// - enableBootnode: enable on-demand loading of dependencies
+// - APPS_PATH: location of applications
+// - GLOBAL_PATH : location of global models
+// - COMP_PATH: location of compiled packages, loaded via data-comp
+// - BOOTNODE_HOST: host from which on-demand dependencies should be loaded
+// - api: {
+//      apiKey: viadeo API key
+//      status:
+//      cookie:
+// }
+
 tetra.start();
