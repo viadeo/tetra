@@ -401,7 +401,7 @@ describe("underscore library; ", function() {
                                     _("#blah").replaceWith("<div id='replaced'>foo</div>");
                                 }).not.toThrow();
 								
-								// Replace with undefined should remove element
+								// Replace with undefined should do nothing
 								_("#toReplaceWithNothing").replaceWith();
 								
 							}
@@ -414,7 +414,7 @@ describe("underscore library; ", function() {
 			expect(d.getElementById("replaced")).not.toBeNull();
 			
 			// Should have been removed
-			expect(d.getElementById("toReplaceWithNothing")).toBeNull();
+			expect(d.getElementById("toReplaceWithNothing")).not.toBeNull();
 		});
 		
 		it("should remove a set of elements using `remove`", function() {
@@ -611,7 +611,7 @@ describe("underscore library; ", function() {
 			}
 		});
 		
-		it("should return the argument if the element doesn't exist, for the given miscellaneous functions", function() {
+		it("should return undefined if the element doesn't exist, for the given miscellaneous functions", function() {
 			var 
 				that = this,
 				argResults = []
@@ -634,8 +634,8 @@ describe("underscore library; ", function() {
 				}
 			});
 	
-			expect(argResults[0][0].innerHTML).toBe("before");
-			expect(argResults[1][0].innerHTML).toBe("after");
+			expect(argResults[0][0]).toBeUndefined();
+			expect(argResults[1][0]).toBeUndefined();
 		});
 	});
 

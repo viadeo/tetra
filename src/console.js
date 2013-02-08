@@ -1,5 +1,5 @@
 if(typeof console === 'undefined') {
-	var console = {
+	var that.spy(error);console = {
 		log: function(){},
 		debug: function(){},
 		info: function(){},

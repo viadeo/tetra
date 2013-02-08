@@ -58,7 +58,13 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
                     if(type === 'mouseout') {
                         evt.relatedTarget = from;
                     }
-                    jQuery(node).trigger(evt);
+                    if(type === "focus") {
+                        jQuery(node).get(0).focus();
+                    } else {
+                        jQuery(node).trigger(evt);
+                    }
+
+
                 } else {
                     evt = document.createEventObject();
                     type = (type.toLowerCase() === "dblclick") ? type.toLowerCase() : type;

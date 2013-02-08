@@ -3300,7 +3300,7 @@ describe("the model; ", function() {
             mimeTypeServer.restore();
         });
         
-        it("should correctly handle empty JSON responses", function(){
+        it("should fire an error for empty JSON responses", function(){
             var
                 emptyJsonServer = sinon.fakeServer.create(),
                 that = this
@@ -3336,6 +3336,10 @@ describe("the model; ", function() {
                                         that.spy();
                                     },
                                     "alert": function(error) {
+                                        // This should never be called
+                                        that.spy();
+                                    },
+                                    "error": function(error) {
                                         that.spy(error);
                                     }
                                 }
@@ -3357,7 +3361,7 @@ describe("the model; ", function() {
             var args = that.spy.getCall(0).args[0];
             expect(args).toBeDefined();
             expect(args.type).toBe("fetch");
-            expect(args.alerts).toBeDefined();
+            expect(args.errors).toBeDefined();
             expect(args.cond).toBeDefined();
             
             emptyJsonServer.restore();
@@ -4018,9 +4022,8 @@ describe("the model; ", function() {
             expect(function(){tetra.model.register("myModel", init);}).toThrow();
             saveServer.restore();
         });
-        
-        // NOTE An empty response is valid for a save
-        it("should correctly handle empty JSON responses", function(){
+
+        it("should raise an error for empty JSON responses", function(){
             var
                 emptyJsonServer = sinon.fakeServer.create(),
                 that = this
@@ -4052,11 +4055,12 @@ describe("the model; ", function() {
                             model: {
                                 "myModel": {
                                     "saved": function(data) {
-                                        that.spy(data.getAll());
-                                    },
-                                    "error": function(error) {
                                         // Shouldn't be called
                                         that.spy();
+                                    },
+                                    "error": function(error) {
+
+                                        that.spy(error);
                                     }
                                 }
                             }
@@ -4076,7 +4080,8 @@ describe("the model; ", function() {
 
             var args = this.spy.getCall(0).args[0];
             expect(args).toBeDefined();
-            expect(args.success).toBeFalsy();
+            expect(args.type).toBe("save");
+            expect(args.errors).toBeTruthy();
 
             emptyJsonServer.restore();
         });
@@ -4686,8 +4691,7 @@ describe("the model; ", function() {
             errorServer.restore();            
         });
         
-        // NOTE For a delete, an empty response is acceptable
-        it("should correctly handle empty JSON responses", function(){
+        it("should raise an error for empty JSON responses", function(){
             var 
                 that = this,
                 errorServer = sinon.fakeServer.create()
@@ -4719,11 +4723,11 @@ describe("the model; ", function() {
                             model: {
                                 "myModel": {
                                     "deleted": function(data) {
-                                        that.spy(data.getAll());
-                                    },
-                                    "alert": function(data) {
                                         // Should never be called
                                         that.spy();
+                                    },
+                                    "error": function(error) {
+                                        that.spy(error);
                                     }
                                 }
                             }
@@ -4744,10 +4748,8 @@ describe("the model; ", function() {
             // Inspect the `response`
             var response = this.spy.getCall(0).args[0];
         
-            expect(response.id).toBeDefined();
-            expect(response.ref).toBeDefined();    
-            expect(response.myDataToDelete).toBeDefined();
-            expect(response.myDataToDelete).toEqual("foo");
+            expect(response.type).toBe("delete");
+            expect(response.errors).toBeDefined();
             
             // Cleanup
             errorServer.restore();    
@@ -4778,14 +4780,19 @@ describe("the model; ", function() {
             
             this.spy = sinon.spy();
             this.server = sinon.fakeServer.create();
+
+            var successResponse = {
+                "status": "SUCCESS"
+            };
+
             this.server.respondWith("GET", /\/my\/test\/fetch.json\?ts=.*/,
                     [200, {"Content-type": "application/json"}, JSON.stringify(response)]);
 
             this.server.respondWith("POST", /\/my\/test\/reset.json/,
-                    [200, {"Content-type": "application/json"}, ""]);
+                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             
             this.server.respondWith("PUT", /\/my\/test\/reset.json/,
-                    [200, {"Content-type": "application/json"}, ""]);
+                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
         });
         
         afterEach(function() {
@@ -4886,13 +4893,17 @@ describe("the model; ", function() {
                 that = this,
                 parameterizedServer = sinon.fakeServer.create()
             ;
-            
+
+            var successResponse = {
+                "status": "SUCCESS"
+            };
+
             parameterizedServer.respondWith("GET", /\/my\/test\/parameterized\/fetch.json/,
                     [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             parameterizedServer.respondWith("POST", /\/my\/test\/parameterized\/reset.json/,
-                    [200, {"Content-type": "application/json"}, ""]);
+                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
             parameterizedServer.respondWith("DELETE", /\/my\/test\/parameterized\/reset.json/,
-                    [200, {"Content-type": "application/json"}, ""]);
+                    [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
     
             tetra.model.register("myModel", {
                 scope: "myScope",
@@ -5302,7 +5313,7 @@ describe("the model; ", function() {
             resetServer.restore();
         });
         
-        it("should handle empty JSON responses", function(){
+        it("should raise an error for empty JSON responses", function(){
             var
                 emptyJsonServer = sinon.fakeServer.create(),
                 that = this
@@ -5345,7 +5356,8 @@ describe("the model; ", function() {
                                         that.spy(error);
                                     },
                                     "resetted": function(data) {
-                                        that.spy(data);
+                                        // Should never be called
+                                        that.spy();
                                     }
                                 }
                             }
@@ -5366,7 +5378,8 @@ describe("the model; ", function() {
             expect(this.spy.calledOnce).toBeTruthy();
     
             var response = this.spy.getCall(0).args[0];
-            expect(response).toBe("myModel");
+            expect(response.type).toBe("reset");
+            expect(response.errors).toBeDefined();
 
             emptyJsonServer.restore();
         });
@@ -5377,12 +5390,17 @@ describe("the model; ", function() {
       beforeEach(function() {
         this.spy = sinon.spy();
         this.server = sinon.fakeServer.create();
+
+        var successResponse = {
+            "status": "SUCCESS"
+        };
+
         this.server.respondWith("GET", /\/my\/test/,
                 [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
         this.server.respondWith("POST", /\/my\/test/,
-                [200, {"Content-type": "application/json"}, ""]);
+                [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
         this.server.respondWith("PUT", /\/my\/test/,
-                [200, {"Content-type": "application/json"}, ""]);
+                [200, {"Content-type": "application/json"}, JSON.stringify(successResponse)]);
         
         this.server.respondWith("GET", /\/my\/error/,
                 [500, {"Content-type": "application/json"}, ""]);

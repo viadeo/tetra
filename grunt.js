@@ -21,7 +21,8 @@ module.exports = function( grunt ) {
 			],
 			"release/tetra-prototype.js": [
                 "lib/sizzle/sizzle.js",
-                "lib/jquery/1.8.3/jquery-nosizzle.js",
+                "lib/jquery/1.9.1/jquery-nosizzle.js",
+                "lib/jquery/1.9.1/jquery.browser.js",
                 "lib/JSON-js/json2.js",
                 "lib/prototype/1.6.1/prototype.js",
                 "lib/scriptaculous/1.8.2/scriptaculous.js",

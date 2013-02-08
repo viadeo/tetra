@@ -196,28 +196,38 @@
                 return _insert.call(this, content, 'top');
             },
             before: function(content) {
-                if(this && this.length > 0) {
-                    return _insert.call(this, content, 'before');
+                if(this.length) {
+                    if(this && this.length > 0) {
+                        return _insert.call(this, content, 'before');
+                    }
+
+                    var div = document.createElement('div');
+                    div.innerHTML = content;
+
+                    return div.childNodes;
                 }
 
-                var div = document.createElement('div');
-                div.innerHTML = content;
-
-                return div.childNodes;
+                return this;
             },
             after: function(content) {
-                if(this && this.length > 0) {
-                    return _insert.call(this, content, 'after');
+                if(this.length) {
+                    if(this && this.length > 0) {
+                        return _insert.call(this, content, 'after');
+                    }
+
+                    var div = document.createElement('div');
+                    div.innerHTML = content;
+
+                    return div.childNodes;
                 }
 
-                var div = document.createElement('div');
-                div.innerHTML = content;
-
-                return div.childNodes;
+                return this;
             },
-            replaceWith:     function(content) {
-                for(var i = 0, len = this.length; i < len; i++) {
-                    this[i].replace(content);
+            replaceWith: function(content) {
+                if(content) {
+                    for(var i = 0, len = this.length; i < len; i++) {
+                        this[i].replace(content);
+                    }
                 }
 
                 return this;
@@ -343,17 +353,21 @@
                         postBody: options.processData ? '' : options.data,
                         onCreate: options.beforeSend,
                         onComplete: options.complete,
-                        onSuccess: function(transport) {
-                            var respObj = transport.responseText;
+                        onSuccess: function(response) {
+                            var responseContentType = (response.transport.responseHeaders) ?
+                                response.transport.responseHeaders['Content-type'] : '';
+                            var respObj = response.responseText;
 
-                            if (transport.responseJSON) {
-                                respObj = transport.responseJSON;
-                            }/*
-                             else if(transport.responseXML) {
-                             respObj = transport.responseXML;
-                             }*/
-
-                            options.success(respObj);
+                            // An empty response is not valid when JSON is expected
+                            if(responseContentType === "application/json") {
+                                if(!respObj) {
+                                    options.error(response);
+                                } else {
+                                    options.success(response.responseJSON);
+                                }
+                            } else {
+                                options.success(respObj);
+                            }
                         },
                         onFailure: options.error
                     });
