@@ -6,7 +6,7 @@
 Tetra aims to help developers build faster, more maintainable and better structured code.
 
 Tetra is a complete MVC (Model, View, Controller) framework, normalizing all implementations through a simple structure that splits the code into 3 different layers :
-   * [View](/viadeo/tetra/wiki/View-layer): DOM access and UX behaviors 
+   * [View](viadeo/tetra/wiki/View-layer): DOM access and UX behaviors 
    * [Controller](/viadeo/tetra/wiki/Controller-layer): Programmatic logic
    * [Model](/viadeo/tetra/wiki/Model-layer): Structured data and Ajax requests
    
