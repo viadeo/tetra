@@ -12,7 +12,7 @@ Tetra is a complete MVC (Model, View, Controller) framework, normalizing all imp
    
 Each layer has access to a communication pipe linked to a potential listener, allowing asynchronous communication between each part of the application.
 
-The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
+The Tetra.js framework is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic. An [ORM &#40;Object-Relational Mapping&#41;](https://github.com/viadeo/tetra/wiki/ORM:-Object-Relational-Mapping) encapsulates Ajax transactions and ensures data consistency between front- and back-end.
 
 Additionally, the "[bootnode](https://github.com/viadeo/tetra/wiki/Bootnode)" feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
 
