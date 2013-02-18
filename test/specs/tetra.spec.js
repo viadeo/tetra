@@ -104,9 +104,8 @@ describe("public methods on the global 'tetra' object", function() {
 			expect(views.myScope[0]).toBe("myScope/myView");
 			expect(VNS.test.getObjectLength(views)).toBe(1);
 		});
-		
-		
-		xit("should be able to retrieve a particular model, view or controller", function(){
+
+		it("should be able to retrieve a particular model, view or controller", function(){
 			tetra.model.register("myModel", {});
 			tetra.controller.register("myController", {
 				scope: "myScope",

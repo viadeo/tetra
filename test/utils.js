@@ -19,7 +19,12 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
             expect(args[0]).toBeDefined();
             expect(args[1]).toBeDefined();
 
-            expect(args[0].type).toBe(eventType, "as the event object type and the event that was originally fired should match");
+            // Match up event types
+            var passedType = args[0].type;
+            passedType = (passedType === "focusin") ? "focus" : passedType;
+            passedType = (passedType === "focusout") ? "blur" : passedType;
+
+            expect(passedType).toBe(eventType, "as the event object type and the event that was originally fired should match");
             
             // jQuery returns an array, so normalise here
             var eventTarget = args[1];
@@ -42,7 +47,7 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
         // native functions.
         triggerEvent : function(node, type, from) {
             var evt;
-            
+
             if(document.createEvent) {
                 evt = document.createEvent("HTMLEvents");
                 evt.initEvent(type, true, true);
@@ -52,12 +57,14 @@ var VNS = (typeof VNS === 'undefined') ? {} : VNS;
                 node.dispatchEvent(evt);
             } else {
                 // If we can use jQuery to normalise events across dumb browsers, then do so
-                if(typeof jQuery !== "undefined" && 
+                if(typeof jQuery !== "undefined" &&
                         (type === "focus" || type === "blur" || type === "change" || type === "scroll" || type === "reset")) {
+
                     evt = jQuery.Event(type);
                     if(type === 'mouseout') {
                         evt.relatedTarget = from;
                     }
+
                     jQuery(node).trigger(evt);
                 } else {
                     evt = document.createEventObject();

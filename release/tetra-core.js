@@ -2384,36 +2384,31 @@ var requirejs, require, define;
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ------------------------------------------------------------------------------
+tetra.extend('dep', function (_conf, _mod, _) {
 
-(function(){
-    tetra.extend('dep', function (_conf, _mod, _) {
-        requirejs.config({
-            //By default load any module IDs from js/lib
-            baseUrl: getStaticURL(_conf, _conf.APPS_PATH),
-            enforceDefine:true,
-            urlArgs:_conf.jsVersion ? 'v=' + _conf.jsVersion : '',
-            //except, if the module ID starts with "app",
-            //load it from the js/app directory. paths
-            //config is relative to the baseUrl, and
-            //never includes a ".js" extension since
-            //the paths config could be for a directory.
-            paths:{
-                g:getStaticURL(_conf, _conf.GLOBAL_PATH),
-                comp:getStaticURL(_conf, _conf.COMP_PATH)
-            }
-        });
-
-        return {
-            define:define,
-            undef:requirejs.undef,
-            require:require
-        };
+    requirejs.config({
+        //By default load any module IDs from js/lib
+        baseUrl:_conf.BOOTNODE_HOST ? _conf.BOOTNODE_HOST + _conf.APPS_PATH : _conf.APPS_PATH,
+        enforceDefine:true,
+        urlArgs:_conf.jsVersion ? 'v=' + _conf.jsVersion : '',
+        //except, if the module ID starts with "app",
+        //load it from the js/app directory. paths
+        //config is relative to the baseUrl, and
+        //never includes a ".js" extension since
+        //the paths config could be for a directory.
+        paths:{
+            g:_conf.GLOBAL_PATH,
+            comp:_conf.COMP_PATH
+        }
     });
 
-    function getStaticURL(_conf, url) {
-        return (_conf.BOOTNODE_HOST) ? _conf.BOOTNODE_HOST + url : url;
-    }
-})();
+    return {
+        define:define,
+        undef:requirejs.undef,
+        require:require
+    };
+
+});
 // ------------------------------------------------------------------------------
 // Tetra.js
 //
