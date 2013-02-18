@@ -1111,16 +1111,22 @@ describe("the view; ", function() {
         });
         
         it("should respond appropriately to an onBlur", function() {
-            VNS.test.triggerEvent(this.nonBubblingTestField, "focus");
+            //VNS.test.triggerEvent(this.nonBubblingTestField, "focus");
             VNS.test.triggerEvent(this.nonBubblingTestField, "blur");
-            
-            expect(this.spy.called).toBeTruthy();
-            expect(this.spy.callCount).toBe(4, "as focus/blur should have been called on the event and its parent");
 
-            VNS.test.validateEventArguments(this.spy.getCall(0).args, this.nonBubblingTestField, "focus");
-            VNS.test.validateEventArguments(this.spy.getCall(1).args, this.nonBubblingTestFieldParent, "focus");
-            VNS.test.validateEventArguments(this.spy.getCall(2).args, this.nonBubblingTestField, "blur");
-            VNS.test.validateEventArguments(this.spy.getCall(3).args, this.nonBubblingTestFieldParent, "blur");
+	        waitsFor(function() {
+		        return this.spy.called;
+	        }, 2000);
+
+	        runs(function() {
+		        expect(this.spy.called).toBeTruthy();
+		        expect(this.spy.callCount).toBe(2, "as blur should have been called on the event and its parent");
+
+		        VNS.test.validateEventArguments(this.spy.getCall(0).args, this.nonBubblingTestField, "blur");
+		        VNS.test.validateEventArguments(this.spy.getCall(1).args, this.nonBubblingTestFieldParent, "blur");
+		        //VNS.test.validateEventArguments(this.spy.getCall(2).args, this.nonBubblingTestField, "blur");
+		        //VNS.test.validateEventArguments(this.spy.getCall(3).args, this.nonBubblingTestFieldParent, "blur");
+	        });
         });
         
         it("should respond appropriately to a clickout", function() {
@@ -1193,40 +1199,62 @@ describe("the view; ", function() {
             
             VNS.test.triggerEvent(this.nonBubblingTestField, "focus");
 
-            expect(this.spy.called).toBeTruthy();
-            expect(this.spy.callCount).toBe(3, "as nonBubblingTestField focus should have fired three times");
-            expect(this.spy.getCall(2).args[0]).toBe("mySecondView");
+	        waitsFor(function() {
+		        return this.spy.called;
+	        }, 2000);
 
-            VNS.test.triggerEvent(this.nonBubblingTestField, "blur");
+	        runs(function() {
+		        expect(this.spy.callCount).toBe(3, "as nonBubblingTestField focus should have fired three times");
+		        expect(this.spy.getCall(2).args[0]).toBe("mySecondView");
+	        });
 
-            this.spy = sinon.spy();
-            VNS.test.triggerEvent(someOtherField, "focus");
-            
-            expect(this.spy.callCount).toBe(1, "as some other field should only have been focused on once");
-            expect(this.spy.getCall(0).args[0]).toBe("mySecondView someOtherTestField");
+	        runs(function() {
+		        VNS.test.triggerEvent(this.nonBubblingTestField, "blur");
+		        this.spy = sinon.spy();
+		        VNS.test.triggerEvent(someOtherField, "focus");
+	        });
 
-            VNS.test.triggerEvent(this.nonBubblingTestField, "focus");
-            
-            this.spy = sinon.spy();
-            VNS.test.triggerEvent(this.nonBubblingTestField, "blur");
-            
-            expect(this.spy.called).toBeTruthy();
-            expect(this.spy.callCount).toBe(3, "as nonBubblingTestField blur should have fired three times");
-            expect(this.spy.getCall(2).args[0]).toBe("mySecondView");
-    
-            this.spy = sinon.spy();
-            VNS.test.triggerEvent(someOtherField, "focus");
-    
-            expect(this.spy.callCount).toBe(1);
-            expect(this.spy.getCall(0).args[0]).toBe("mySecondView someOtherTestField");
-            someOtherField = null;
+	        waitsFor(function() {
+		        return this.spy.called;
+	        }, 2000);
+
+	        runs(function() {
+		        expect(this.spy.callCount).toBe(1, "as some other field should only have been focused on once");
+		        expect(this.spy.getCall(0).args[0]).toBe("mySecondView someOtherTestField");
+	        });
+
+	        runs(function() {
+		        //VNS.test.triggerEvent(this.nonBubblingTestField, "focus");
+		        this.spy = sinon.spy();
+		        VNS.test.triggerEvent(this.nonBubblingTestField, "blur");
+	        });
+
+	        waitsFor(function() {
+		        return this.spy.called;
+	        }, 2000);
+
+	        runs(function() {
+		        expect(this.spy.callCount).toBe(3, "as nonBubblingTestField blur should have fired three times");
+		        expect(this.spy.getCall(2).args[0]).toBe("mySecondView");
+	        });
+
+	        runs(function() {
+		        this.spy = sinon.spy();
+		        VNS.test.triggerEvent(someOtherField, "focus");
+	        });
+
+	        waitsFor(function() {
+		        return this.spy.called;
+	        }, 2000);
+
+	        runs(function() {
+		        expect(this.spy.callCount).toBe(1);
+		        expect(this.spy.getCall(0).args[0]).toBe("mySecondView someOtherTestField");
+		        someOtherField = null;
+	        });
         });
-        
-        it("should reattach event listeners to all applicable elements with me.listen", function() {
-            
-        });
-        
-        xit("should reattach event listeners to elements that satisfy the selector passed to me.listen", function() {
+
+        it("should reattach event listeners to elements that satisfy the selector passed to me.listen", function() {
             // First, create the "foo" element
             var fooElement = d.createElement("input");
             fooElement.id = "foo";
@@ -1234,15 +1262,15 @@ describe("the view; ", function() {
             d.getElementById("jasmine-fixtures").appendChild(fooElement);
             
             var fooInput = d.getElementById("foo");
-            
-            
-            
+
             VNS.test.triggerEvent(fooInput, "keyup");
-            
-            
+
+	        waitsFor(function() {
+		        return this.spy.called;
+	        }, 2000);
+
             runs(function(){
-                console.log(this.spy.getCall(0).args);
-                //expect(this.spy.called).toBeFalsy();
+	            VNS.test.validateEventArguments(this.spy.getCall(0).args, fooInput, "keyup");
             });
         });
     });
