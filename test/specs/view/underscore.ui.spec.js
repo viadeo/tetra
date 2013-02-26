@@ -600,6 +600,7 @@ describe("underscore library; ", function() {
 							init: function(){
 								nullResults.push(_("#nonexistentField").val());
 								nullResults.push(_(that.node).attr("style"));
+								nullResults.push(_(that.node).prop("style"));
 							}
 						}
 					};

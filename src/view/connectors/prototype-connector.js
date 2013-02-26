@@ -100,7 +100,8 @@
         // Ensure that exceptions are always thrown
         Ajax.Responders.register({
             onException: function(request, exception) {
-                (function() { throw exception; }).defer();
+                var throwException = function() { throw exception; };
+	            throwException.defer();
             }
         });
 
@@ -139,6 +140,18 @@
 
                 return null;
             },
+	        prop: function(name, value) {
+		        if(this && !this.splice) {
+			        if(typeof value === 'undefined') {
+				        return this.getAttribute(name);
+			        } else {
+				        this.setAttribute(name, value);
+				        return this;
+			        }
+		        }
+
+		        return null;
+	        },
             parents: function(selector) {
                 var parents = (this && !this.splice && this.ancestors) ? this.ancestors() : [];
 
@@ -373,7 +386,7 @@
                     });
             },
             initApi: function(conf) {
-                VD.init(conf);
+                window.VD.init(conf);
                 _VDinit = true;
             },
             api: function(url, options) {
@@ -382,7 +395,7 @@
                     return false;
                 }
 
-                VD.api(
+                window.VD.api(
                     url,
                     options.type,
                     options.data,

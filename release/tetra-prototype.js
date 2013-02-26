@@ -20689,8 +20689,8 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
                 });
             },
             initApi: function(conf) {
-                VD.init(conf);
-                _VDinit = true;
+		        window.VD.init(conf);
+		        _VDinit = true;
             },
             api: function(url, options) {
                 if(!_VDinit) {
@@ -20698,7 +20698,7 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
                     return false;
                 }
 
-                VD.api(
+                window.VD.api(
                     url,
                     options.type,
                     options.data,
@@ -20835,7 +20835,8 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
         // Ensure that exceptions are always thrown
         Ajax.Responders.register({
             onException: function(request, exception) {
-                (function() { throw exception; }).defer();
+                var throwException = function() { throw exception; };
+	            throwException.defer();
             }
         });
 
@@ -20874,6 +20875,18 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 
                 return null;
             },
+	        prop: function(name, value) {
+		        if(this && !this.splice) {
+			        if(typeof value === 'undefined') {
+				        return this.getAttribute(name);
+			        } else {
+				        this.setAttribute(name, value);
+				        return this;
+			        }
+		        }
+
+		        return null;
+	        },
             parents: function(selector) {
                 var parents = (this && !this.splice && this.ancestors) ? this.ancestors() : [];
 
@@ -21108,7 +21121,7 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
                     });
             },
             initApi: function(conf) {
-                VD.init(conf);
+                window.VD.init(conf);
                 _VDinit = true;
             },
             api: function(url, options) {
@@ -21117,7 +21130,7 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
                     return false;
                 }
 
-                VD.api(
+                window.VD.api(
                     url,
                     options.type,
                     options.data,
@@ -21179,7 +21192,7 @@ tetra.extend('lib', function(_conf, _mod, _) {
     return (function(libs) {
 
         var
-            _exposedDOMFcts = ['attr', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset'],
+            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset'],
             _exposedDOMFctsOnArray = ['hasClass', 'addClass', 'removeClass', 'append', 'prepend', 'before', 'after', 'replaceWith', 'remove', 'animate', 'bind', 'unbind', 'ready'],
             _exposedDOMFctsWithExtendedOutput = ['parents', 'find', 'siblings', 'prev', 'next'],
             _exposedHelpers = ['elm', 'ajax', 'initApi', 'api', 'initMysql', 'mysql', 'extend', 'toJSON', 'parseJSON', 'inArray', 'trim', 'render', 'send', 'jsonSend'],
@@ -23860,7 +23873,7 @@ tetra.extend('view', function(_conf, _mod, _) {
                                     if(!(target.hasClass('no-prevent') || target.parents('.no-prevent').length > 0 || elm.is('body') ||
                                         ((elm.is('input') || elm.is('textarea')) &&
                                             (eventName === 'keydown' || elm.attr('type') === 'checkbox' ||
-                                                elm.attr('type') === 'radio')))) {
+                                                elm.prop('type') === 'radio')))) {
                                         e.preventDefault();
                                     }
 

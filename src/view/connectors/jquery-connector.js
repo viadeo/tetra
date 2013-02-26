@@ -152,8 +152,8 @@
                 });
             },
             initApi: function(conf) {
-                VD.init(conf);
-                _VDinit = true;
+		        window.VD.init(conf);
+		        _VDinit = true;
             },
             api: function(url, options) {
                 if(!_VDinit) {
@@ -161,7 +161,7 @@
                     return false;
                 }
 
-                VD.api(
+                window.VD.api(
                     url,
                     options.type,
                     options.data,
