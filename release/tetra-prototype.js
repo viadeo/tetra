@@ -24896,7 +24896,6 @@ tetra.extend('model', function(_conf, _mod, _) {
                                 //        }
                                 //    }
 
-                                // An empty or undefined response is valid for a SAVE
                                 respObj = respObj || {};
 
                                 if(typeof respObj === 'string') {
@@ -25007,6 +25006,13 @@ tetra.extend('model', function(_conf, _mod, _) {
                                         col = [],
                                         data
                                         ;
+
+	                                // Strip any whitespace at the start of HTML, so it can be passed to jQuery-style
+	                                // element creation
+	                                if(respObj && model.req.fetch.headers["Content-Type"] &&
+		                                model.req.fetch.headers["Content-Type"].indexOf("text/html") !== -1) {
+		                                respObj = respObj.replace(/^\s\s*/, '');
+	                                }
 
                                     if(typeof model.req.fetch.parser !== 'undefined') {
                                         if(uriParams) {

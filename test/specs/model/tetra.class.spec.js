@@ -2454,14 +2454,17 @@ describe("the model; ", function() {
             
             // Setup routes for valid and invalid requests
             // NOTE Firefox with Prototype only returns the correct format if we set a doctype, otherwise its parsed as XML.
-            htmlServer.respondWith("GET", /\/my\/html\/test\/fetch.json/, 
-                    [200, {"Content-type": "text/html"}, "<!doctype HTML><div><p>TEST</p></div>"]);
+            htmlServer.respondWith("GET", /\/my\/html\/test\/fetch.html/,
+                    [200, {"Content-type": "text/html"}, "             <!doctype HTML><div><p>TEST</p></div>"]);
     
             tetra.model.register("myModel", {
                 scope: "myScope",
                 req: {
                     fetch: {
-                        url: "/my/html/test/fetch.json",
+                        url: "/my/html/test/fetch.html",
+	                    headers: {
+		                  "Content-type": "text/html"
+	                    },
                         method: "GET",
                         parser : function(resp, col, cond) {
                             col[0] = {html: resp};
