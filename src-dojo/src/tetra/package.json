@@ -1,0 +1,24 @@
+{
+    "name": "tetra",
+    "version": "1.0",
+    "main": "main",
+    "dependencies": {
+        "dojo": "1.8.3",
+        "util": "1.8.3"
+    },
+    "description": "Tetra framework in Dojo test",
+    "licenses": [
+        {
+            "type": "AFLv2.1",
+            "url": "http://bugs.dojotoolkit.org/browser/dojo/trunk/LICENSE#L43"
+        },
+        {
+            "type": "BSD",
+            "url": "http://bugs.dojotoolkit.org/browser/dojo/trunk/LICENSE#L13"
+        }
+    ],
+    "bugs": "https://github.com/csnover/dojo-boilerplate/issues",
+    "keywords": ["JavaScript", "Dojo", "Boilerplate", "Example", "Howto"],
+    "homepage": "https://github.com/csnover/dojo-boilerplate",
+    "dojoBuild": "package.js"
+}

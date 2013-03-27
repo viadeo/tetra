@@ -1,0 +1,4055 @@
+Build started: Wed Mar 13 2013 11:39:55 GMT+0100 (Paris, Madrid)
+Build application version: 1.7.0dev (23930)
+Messages:
+info(103) Optimizing module complete.
+	c:\viadeo\projects\tetra\src-dojo\dist\tetra\_base\kernel.js (compile time:2.17s)
+	c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js (compile time:2.301s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cache.js (compile time:0.188s)
+	c:\viadeo\projects\tetra\src-dojo\dist\tetra\main.js (compile time:2.08s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\aspect.js (compile time:2.153s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\currency.js (compile time:0.172s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\AdapterRegistry.js (compile time:0.16s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js (compile time:0.408s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cookie.js (compile time:0.275s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\DeferredList.js (compile time:0.154s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\behavior.js (compile time:0.232s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js (compile time:0.346s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-geometry.js (compile time:0.271s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-form.js (compile time:0.185s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js (compile time:0.108s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js (compile time:0.134s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\gears.js (compile time:0.118s)
+	c:\viadeo\projects\tetra\src-dojo\dist\tetra\run.js (compile time:3.033s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js (compile time:0.136s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\Evented.js (compile time:0.109s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\jaxer.js (compile time:0.137s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js (compile time:0.123s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\loadInit.js (compile time:0.109s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\i18n.js (compile time:0.137s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js (compile time:0.098s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\colors.js (compile time:0.245s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js (compile time:0.118s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js (compile time:1.087s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\main.js (compile time:0.095s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js (compile time:0.091s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-fx.js (compile time:0.036s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\Deferred.js (compile time:0.109s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom.js (compile time:0.053s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-html.js (compile time:0.079s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-attr.js (compile time:0.111s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-construct.js (compile time:0.118s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\on.js (compile time:0.145s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js (compile time:0.169s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\require.js (compile time:0.05s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\hash.js (compile time:0.067s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\domReady.js (compile time:0.089s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\keys.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\sniff.js (compile time:0.064s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js (compile time:0.06s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\mouse.js (compile time:0.032s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-prop.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\json.js (compile time:0.032s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js (compile time:0.265s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js (compile time:0.061s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\hccss.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\when.js (compile time:0.075s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request.js (compile time:0.043s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-manipulate.js (compile time:0.086s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\buddhist.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-dom.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\topic.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList.js (compile time:0.033s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\currency.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\monetary.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\router.js (compile time:0.034s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-traverse.js (compile time:0.059s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\currency.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\buddhist.js (compile time:0.051s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js (compile time:0.056s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\string.js (compile time:0.035s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\number.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\query.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\currency.js (compile time:0.046s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js (compile time:0.043s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\hebrew.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\window.js (compile time:0.051s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\Stateful.js (compile time:0.041s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\number.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\gregorian.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\gregorian.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\uacss.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\currency.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\islamic.js (compile time:0.028s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\gregorian.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\buddhist.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\buddhist.js (compile time:0.039s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\text.js (compile time:0.061s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\gregorian.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\islamic.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\currency.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hebrew.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\hebrew.js (compile time:0.028s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\gregorian.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\buddhist.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\number.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\buddhist.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\currency.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\buddhist.js (compile time:0.028s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\currency.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\currency.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\number.js (compile time:0.012s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\currency.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\gregorian.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\buddhist.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\hebrew.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\number.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\number.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\currency.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\currency.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\buddhist.js (compile time:0.011s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js (compile time:0.015s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\number.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\number.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\gregorian.js (compile time:0.011s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\number.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\islamic.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\islamic.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\buddhist.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\buddhist.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\islamic.js (compile time:0.027s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\number.js (compile time:0.012s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\number.js (compile time:0.019s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\gregorian.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\islamic.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\currency.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\gregorian.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\currency.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\number.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\buddhist.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\buddhist.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\gregorian.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\gregorian.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js (compile time:0.009s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\gregorian.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\number.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\currency.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\buddhist.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\islamic.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\islamic.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\islamic.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\islamic.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\islamic.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\number.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\number.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\gregorian.js (compile time:0.015s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\hebrew.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\islamic.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\gregorian.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\hebrew.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\currency.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\buddhist.js (compile time:0.015s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\buddhist.js (compile time:0.011s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\hebrew.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\hebrew.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\buddhist.js (compile time:0.039s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\hebrew.js (compile time:0.041s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\buddhist.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\buddhist.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\islamic.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\number.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\number.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\currency.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\buddhist.js (compile time:0.01s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\islamic.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\number.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\hebrew.js (compile time:0.019s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\islamic.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\number.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\gregorian.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\currency.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\gregorian.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\gregorian.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js (compile time:0.01s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\currency.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\gregorian.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\number.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\gregorian.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\currency.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\hebrew.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\islamic.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\currency.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\buddhist.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\islamic.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\gregorian.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\islamic.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\gregorian.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\currency.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\number.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\gregorian.js (compile time:0.018s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\islamic.js (compile time:0.019s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js (compile time:0.027s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\currency.js (compile time:0.029s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js (compile time:0.028s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\buddhist.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\gregorian.js (compile time:0.043s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\currency.js (compile time:0.048s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\hebrew.js (compile time:0.035s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\currency.js (compile time:0.042s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\islamic.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileReadStore.js (compile time:0.095s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js (compile time:0.032s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\currency.js (compile time:0.044s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\number.js (compile time:0.046s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\currency.js (compile time:0.087s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js (compile time:0.057s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileWriteStore.js (compile time:0.085s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\number.js (compile time:0.046s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\hebrew.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\buddhist.js (compile time:0.013s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js (compile time:0.023s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Read.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\number.js (compile time:0.02s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\currency.js (compile time:0.033s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\number.js (compile time:0.019s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\hebrew.js (compile time:0.046s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\filter.js (compile time:0.034s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\hebrew.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\buddhist.js (compile time:0.015s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\buddhist.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Identity.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\move.js (compile time:0.032s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\gregorian.js (compile time:0.032s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\currency.js (compile time:0.043s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Request.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js (compile time:0.049s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\number.js (compile time:0.062s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\sorter.js (compile time:0.065s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js (compile time:0.062s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\gregorian.js (compile time:0.033s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\gregorian.js (compile time:0.072s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Source.js (compile time:0.108s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\number.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Avatar.js (compile time:0.032s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\CancelError.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js (compile time:0.044s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Item.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\Toggler.js (compile time:0.015s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\islamic.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Mover.js (compile time:0.035s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\cs\colors.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\number.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\simpleFetch.js (compile time:0.037s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js (compile time:0.028s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\easing.js (compile time:0.041s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Write.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\colors.js (compile time:0.014s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\autoscroll.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\es\colors.js (compile time:0.046s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js (compile time:0.052s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ar\colors.js (compile time:0.058s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\kk\colors.js (compile time:0.071s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Manager.js (compile time:0.075s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\de\colors.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\locale.js (compile time:0.094s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\he\colors.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ja\colors.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Target.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\common.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nl\colors.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\create.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt-pt\colors.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js (compile time:0.036s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pl\colors.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Container.js (compile time:0.066s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\iframe.js (compile time:0.044s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sv\colors.js (compile time:0.049s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\tr\colors.js (compile time:0.041s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js (compile time:0.063s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\el\colors.js (compile time:0.03s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Selector.js (compile time:0.042s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh\colors.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js (compile time:0.017s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestTimeoutError.js (compile time:0.016s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh-tw\colors.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fi\colors.js (compile time:0.036s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js (compile time:0.034s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\script.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\handlers.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\instrumentation.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\da\colors.js (compile time:0.026s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ko\colors.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js (compile time:0.034s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hr\colors.js (compile time:0.012s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\script.js (compile time:0.058s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nb\colors.js (compile time:0.042s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\it\colors.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js (compile time:0.046s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\iframe.js (compile time:0.102s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ru\colors.js (compile time:0.033s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ro\colors.js (compile time:0.043s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js (compile time:0.045s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\node.js (compile time:0.061s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\util.js (compile time:0.029s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sl\colors.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\th\colors.js (compile time:0.052s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Cache.js (compile time:0.049s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\first.js (compile time:0.038s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\lite.js (compile time:0.047s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\tracer.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js (compile time:0.063s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\default.js (compile time:0.024s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\api\Store.js (compile time:0.027s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js (compile time:0.027s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\SimpleQueryEngine.js (compile time:0.031s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\registry.js (compile time:0.035s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\watch.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\browser.js (compile time:0.039s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js (compile time:0.053s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\notify.js (compile time:0.036s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\xhr.js (compile time:0.043s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonService.js (compile time:0.04s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Deferred.js (compile time:0.068s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\event.js (compile time:0.092s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js (compile time:0.079s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\acme.js (compile time:0.166s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\_loader.js (compile time:0.138s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js (compile time:0.133s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\xhr.js (compile time:0.097s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\array.js (compile time:0.089s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js (compile time:0.316s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Observable.js (compile time:0.104s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\url.js (compile time:0.086s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\json.js (compile time:0.027s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\JsonRest.js (compile time:0.029s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\NodeList.js (compile time:0.083s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\connect.js (compile time:0.09s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\declare.js (compile time:0.123s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\html.js (compile time:0.025s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\DataStore.js (compile time:0.047s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\window.js (compile time:0.015s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\query.js (compile time:0.021s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\unload.js (compile time:0.022s)
+	c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\lang.js (compile time:0.03s)
+info(104) Optimizer messages.
+	c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js:
+Done (compile time:2.301s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js:
+Done (compile time:0.408s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js:
+Done (compile time:0.346s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js:
+Done (compile time:0.136s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js:
+Done (compile time:0.098s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js:
+Done (compile time:0.091s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js:
+Done (compile time:0.169s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:120: WARNING - unreachable code
+	if( 0  && dojo.config.parseOnLoad && !dojo.isAsync){
+	                                                   ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:131: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 2 warning(s)
+Done (compile time:0.06s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js:
+Done (compile time:0.056s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js:
+Done (compile time:0.009s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js:
+Done (compile time:0.057s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:13: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:768: WARNING - unreachable code
+		}catch(e){
+^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.316s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\main.js:
+Done (compile time:2.08s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cookie.js:
+Done (compile time:0.275s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\behavior.js:
+Done (compile time:0.232s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-form.js:
+Done (compile time:0.185s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\gears.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Evented.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\loadInit.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:6: WARNING - unreachable code
+	return {
+	^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-fx.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\on.js:
+Done (compile time:0.145s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\require.js:
+Done (compile time:0.05s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\sniff.js:
+Done (compile time:0.064s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\when.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\currency.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\buddhist.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\currency.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\currency.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\currency.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\buddhist.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\hebrew.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\gregorian.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\islamic.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\buddhist.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\islamic.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileReadStore.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileWriteStore.js:
+Done (compile time:0.085s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Read.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\filter.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\move.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Source.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\CancelError.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\Toggler.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\cs\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\es\colors.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\kk\colors.js:
+Done (compile time:0.071s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ja\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt-pt\colors.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sv\colors.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\handlers.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\script.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\node.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Cache.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\api\Store.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:171: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Deferred.js:
+Done (compile time:0.068s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:10: WARNING - unreachable code
+	if (! 1 ){
+	         ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.133s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\url.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\NodeList.js:
+Done (compile time:0.083s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\aspect.js:
+Done (compile time:2.153s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\AdapterRegistry.js:
+Done (compile time:0.16s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\DeferredList.js:
+Done (compile time:0.154s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-geometry.js:
+Done (compile time:0.271s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:19: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.134s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\jaxer.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\i18n.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\main.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-html.js:
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:9: WARNING - Suspicious code. This code lacks side-effects. Is there a bug?
+	new Date("X"); // workaround for #11279, new Date("") == NaN
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.265s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\topic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\monetary.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\currency.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\hebrew.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\islamic.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\buddhist.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\islamic.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\islamic.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\hebrew.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\gregorian.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\islamic.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\gregorian.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\gregorian.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\currency.js:
+Done (compile time:0.048s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\currency.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\number.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\currency.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Identity.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Request.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\sorter.js:
+Done (compile time:0.065s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Avatar.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Mover.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\easing.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\colors.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ar\colors.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\de\colors.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\he\colors.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\tr\colors.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh-tw\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\instrumentation.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\iframe.js:
+Done (compile time:0.102s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\util.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\lite.js:
+Done (compile time:0.047s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\SimpleQueryEngine.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\browser.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\event.js:
+Done (compile time:0.092s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:139: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\xhr.js:
+Done (compile time:0.097s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\json.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\_base\kernel.js:
+Done (compile time:2.17s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cache.js:
+Done (compile time:0.188s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\currency.js:
+Done (compile time:0.172s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:148: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:158: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:189: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:206: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:532: WARNING - unreachable code
+					if( 0  && p=="async"){
+					                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:652: WARNING - unreachable code
+					if( 0 ){
+					       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:663: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:690: WARNING - unreachable code
+	}else{
+	     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:706: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:719: WARNING - unreachable code
+				if( 0  && comboPending && !comboPendingTimer){
+				                                             ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:818: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:823: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:910: WARNING - unreachable code
+			if( 0 ){
+			       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1015: WARNING - unreachable code
+				if( 0  && legacyMode == sync && !plugin.executed){
+				                                                 ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1197: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1273: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1373: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1409: WARNING - unreachable code
+					if( 0  && legacyMode){
+					                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1425: WARNING - unreachable code
+				if( 0  && legacyMode){
+				                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1510: WARNING - unreachable code
+				if( 0  && module.plugin && module.plugin.isCombo){
+				                                                 ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1546: WARNING - unreachable code
+				if( 0  && legacyMode && !waiting[mid]){
+				                                      ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1668: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1680: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1747: WARNING - unreachable code
+		if( 0  && args[1]===defaultDeps){
+		                                ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1781: WARNING - unreachable code
+				if( 0  && !targetModule){
+				                        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1791: WARNING - unreachable code
+			if( 0  && isArray(targetModule)){
+			                                ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1809: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1839: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1868: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1875: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1880: WARNING - unreachable code
+	if( 0  && req.combo && req.combo.plugins){
+	                                         ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1894: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2201: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2634: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2968: WARNING - unreachable code
+	}else{
+	     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:7189: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 36 warning(s)
+Done (compile time:1.087s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom.js:
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-attr.js:
+Done (compile time:0.111s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\hash.js:
+Done (compile time:0.067s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\keys.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\mouse.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-manipulate.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\string.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\window.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\buddhist.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\buddhist.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\islamic.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\buddhist.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\number.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\islamic.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\hebrew.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\hebrew.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\buddhist.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\hebrew.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\gregorian.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\islamic.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\gregorian.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\hebrew.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\currency.js:
+Done (compile time:0.087s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\buddhist.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\number.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\number.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\gregorian.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Item.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\simpleFetch.js:
+Done (compile time:0.037s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\autoscroll.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Manager.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Target.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\create.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\iframe.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\el\colors.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fi\colors.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ko\colors.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nb\colors.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ro\colors.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\th\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\tracer.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\registry.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\notify.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonService.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\_loader.js:
+Done (compile time:0.138s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Observable.js:
+Done (compile time:0.104s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\declare.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\html.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\query.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\lang.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\run.js:
+Done (compile time:3.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\colors.js:
+Done (compile time:0.245s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Deferred.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-construct.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\domReady.js:
+Done (compile time:0.089s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-prop.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\json.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\hccss.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-dom.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-traverse.js:
+Done (compile time:0.059s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\query.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Stateful.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\uacss.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\text.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\text.js:10: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\number.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\currency.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\buddhist.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\islamic.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\islamic.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\islamic.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\gregorian.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\currency.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\buddhist.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\buddhist.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\number.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\currency.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\buddhist.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\currency.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\number.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\hebrew.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\hebrew.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\currency.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\gregorian.js:
+Done (compile time:0.072s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\islamic.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\number.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Write.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\locale.js:
+Done (compile time:0.094s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\common.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Container.js:
+Done (compile time:0.066s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Selector.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestTimeoutError.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\script.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\da\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hr\colors.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\it\colors.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ru\colors.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sl\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\first.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\default.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\default.js:11: WARNING - unreachable code
+	}else if( 0 ){
+	      ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\watch.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\xhr.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\acme.js:
+Done (compile time:0.166s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\array.js:
+Done (compile time:0.089s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\JsonRest.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\connect.js:
+Done (compile time:0.09s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\DataStore.js:
+Done (compile time:0.047s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\window.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\unload.js:
+Done (compile time:0.022s)
+
+info(106) Optimizing CSS.
+	file: c:/viadeo/projects/tetra/src-dojo/src/dojo/resources/dnd.css
+	file: c:/viadeo/projects/tetra/src-dojo/src/dojo/resources/dojo.css
+	file: c:/viadeo/projects/tetra/src-dojo/src/dojo/_firebug/firebug.css
+info(107) Package Version:
+	package: tetra; version: 1.0
+	package: dojo; version: 1.8.3
+warn(201) Cycle detected in layer dependencies.
+	module: tetra/main
+warn(216) dojo/has plugin resource could not be resolved during build-time.
+	plugin resource id: dojo-firebug?./_firebug/firebug; reference module id: dojo/main
+	plugin resource id: dom-addeventlistener?:./aspect; reference module id: dojo/on
+	plugin resource id: host-browser?dom-addeventlistener?:../on:; reference module id: dojo/request/watch
+warn(224) A plugin dependency was encountered but there was no build-time plugin resolver.
+	module: dojo/request; plugin: dojo/request/default
+	module: dojo/request/node; plugin: dojo/node
+	module: dojo/request/node; plugin: dojo/node
+	module: dojo/request/node; plugin: dojo/node
+	module: dojo/request/node; plugin: dojo/node
+	module: dojo/request/registry; plugin: dojo/request/default
+Layer Contents:
+tetra/main:
+	tetra/dom
+	tetra/_base/kernel
+
+dojo/dojo:
+	dojo/dojo
+	dojo/dom
+	dojo/sniff
+	dojo/has
+	dojo/_base/window
+	dojo/_base/kernel
+	dojo/_base/config
+	dojo/_base/lang
+	dojo/_base/fx
+	dojo/Evented
+	dojo/aspect
+	dojo/on
+	dojo/_base/Color
+	dojo/_base/array
+	dojo/_base/connect
+	dojo/topic
+	dojo/_base/event
+	dojo/dom-geometry
+	dojo/dom-style
+	dojo/mouse
+	dojo/_base/sniff
+	dojo/keys
+	tetra/main
+	tetra/dom
+	tetra/_base/kernel
+	tetra/run
+
+Optimizer Messages:
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js:
+Done (compile time:2.301s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js:
+Done (compile time:0.408s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js:
+Done (compile time:0.346s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js:
+Done (compile time:0.136s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js:
+Done (compile time:0.098s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js:
+Done (compile time:0.091s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js:
+Done (compile time:0.169s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:120: WARNING - unreachable code
+	if( 0  && dojo.config.parseOnLoad && !dojo.isAsync){
+	                                                   ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:131: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 2 warning(s)
+Done (compile time:0.06s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js:
+Done (compile time:0.056s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js:
+Done (compile time:0.009s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js:
+Done (compile time:0.057s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:13: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:768: WARNING - unreachable code
+		}catch(e){
+^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.316s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js:
+Done (compile time:2.301s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js:
+Done (compile time:0.408s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js:
+Done (compile time:0.346s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js:
+Done (compile time:0.136s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js:
+Done (compile time:0.098s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js:
+Done (compile time:0.091s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js:
+Done (compile time:0.169s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:120: WARNING - unreachable code
+	if( 0  && dojo.config.parseOnLoad && !dojo.isAsync){
+	                                                   ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:131: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 2 warning(s)
+Done (compile time:0.06s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js:
+Done (compile time:0.056s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js:
+Done (compile time:0.009s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js:
+Done (compile time:0.057s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:13: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:768: WARNING - unreachable code
+		}catch(e){
+^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.316s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\main.js:
+Done (compile time:2.08s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cookie.js:
+Done (compile time:0.275s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\behavior.js:
+Done (compile time:0.232s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-form.js:
+Done (compile time:0.185s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\gears.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Evented.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\loadInit.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:6: WARNING - unreachable code
+	return {
+	^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-fx.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\on.js:
+Done (compile time:0.145s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\require.js:
+Done (compile time:0.05s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\sniff.js:
+Done (compile time:0.064s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\when.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\currency.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\buddhist.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\currency.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\currency.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\currency.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\buddhist.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\hebrew.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\gregorian.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\islamic.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\buddhist.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\islamic.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileReadStore.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileWriteStore.js:
+Done (compile time:0.085s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Read.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\filter.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\move.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Source.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\CancelError.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\Toggler.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\cs\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\es\colors.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\kk\colors.js:
+Done (compile time:0.071s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ja\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt-pt\colors.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sv\colors.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\handlers.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\script.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\node.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Cache.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\api\Store.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:171: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Deferred.js:
+Done (compile time:0.068s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:10: WARNING - unreachable code
+	if (! 1 ){
+	         ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.133s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\url.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\NodeList.js:
+Done (compile time:0.083s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js:
+Done (compile time:2.301s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js:
+Done (compile time:0.408s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js:
+Done (compile time:0.346s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js:
+Done (compile time:0.136s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js:
+Done (compile time:0.098s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js:
+Done (compile time:0.091s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js:
+Done (compile time:0.169s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:120: WARNING - unreachable code
+	if( 0  && dojo.config.parseOnLoad && !dojo.isAsync){
+	                                                   ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:131: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 2 warning(s)
+Done (compile time:0.06s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js:
+Done (compile time:0.056s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js:
+Done (compile time:0.009s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js:
+Done (compile time:0.057s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:13: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:768: WARNING - unreachable code
+		}catch(e){
+^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.316s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\main.js:
+Done (compile time:2.08s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cookie.js:
+Done (compile time:0.275s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\behavior.js:
+Done (compile time:0.232s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-form.js:
+Done (compile time:0.185s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\gears.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Evented.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\loadInit.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:6: WARNING - unreachable code
+	return {
+	^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-fx.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\on.js:
+Done (compile time:0.145s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\require.js:
+Done (compile time:0.05s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\sniff.js:
+Done (compile time:0.064s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\when.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\currency.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\buddhist.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\currency.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\currency.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\currency.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\buddhist.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\hebrew.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\gregorian.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\islamic.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\buddhist.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\islamic.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileReadStore.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileWriteStore.js:
+Done (compile time:0.085s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Read.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\filter.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\move.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Source.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\CancelError.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\Toggler.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\cs\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\es\colors.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\kk\colors.js:
+Done (compile time:0.071s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ja\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt-pt\colors.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sv\colors.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\handlers.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\script.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\node.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Cache.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\api\Store.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:171: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Deferred.js:
+Done (compile time:0.068s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:10: WARNING - unreachable code
+	if (! 1 ){
+	         ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.133s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\url.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\NodeList.js:
+Done (compile time:0.083s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\aspect.js:
+Done (compile time:2.153s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\AdapterRegistry.js:
+Done (compile time:0.16s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\DeferredList.js:
+Done (compile time:0.154s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-geometry.js:
+Done (compile time:0.271s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:19: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.134s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\jaxer.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\i18n.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\main.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-html.js:
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:9: WARNING - Suspicious code. This code lacks side-effects. Is there a bug?
+	new Date("X"); // workaround for #11279, new Date("") == NaN
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.265s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\topic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\monetary.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\currency.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\hebrew.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\islamic.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\buddhist.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\islamic.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\islamic.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\hebrew.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\gregorian.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\islamic.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\gregorian.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\gregorian.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\currency.js:
+Done (compile time:0.048s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\currency.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\number.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\currency.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Identity.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Request.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\sorter.js:
+Done (compile time:0.065s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Avatar.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Mover.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\easing.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\colors.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ar\colors.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\de\colors.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\he\colors.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\tr\colors.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh-tw\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\instrumentation.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\iframe.js:
+Done (compile time:0.102s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\util.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\lite.js:
+Done (compile time:0.047s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\SimpleQueryEngine.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\browser.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\event.js:
+Done (compile time:0.092s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:139: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\xhr.js:
+Done (compile time:0.097s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\json.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js:
+Done (compile time:2.301s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js:
+Done (compile time:0.408s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js:
+Done (compile time:0.346s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js:
+Done (compile time:0.136s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js:
+Done (compile time:0.098s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js:
+Done (compile time:0.091s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js:
+Done (compile time:0.169s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:120: WARNING - unreachable code
+	if( 0  && dojo.config.parseOnLoad && !dojo.isAsync){
+	                                                   ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:131: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 2 warning(s)
+Done (compile time:0.06s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js:
+Done (compile time:0.056s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js:
+Done (compile time:0.009s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js:
+Done (compile time:0.057s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:13: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:768: WARNING - unreachable code
+		}catch(e){
+^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.316s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\main.js:
+Done (compile time:2.08s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cookie.js:
+Done (compile time:0.275s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\behavior.js:
+Done (compile time:0.232s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-form.js:
+Done (compile time:0.185s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\gears.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Evented.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\loadInit.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:6: WARNING - unreachable code
+	return {
+	^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-fx.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\on.js:
+Done (compile time:0.145s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\require.js:
+Done (compile time:0.05s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\sniff.js:
+Done (compile time:0.064s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\when.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\currency.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\buddhist.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\currency.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\currency.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\currency.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\buddhist.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\hebrew.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\gregorian.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\islamic.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\buddhist.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\islamic.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileReadStore.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileWriteStore.js:
+Done (compile time:0.085s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Read.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\filter.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\move.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Source.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\CancelError.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\Toggler.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\cs\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\es\colors.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\kk\colors.js:
+Done (compile time:0.071s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ja\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt-pt\colors.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sv\colors.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\handlers.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\script.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\node.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Cache.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\api\Store.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:171: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Deferred.js:
+Done (compile time:0.068s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:10: WARNING - unreachable code
+	if (! 1 ){
+	         ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.133s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\url.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\NodeList.js:
+Done (compile time:0.083s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\aspect.js:
+Done (compile time:2.153s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\AdapterRegistry.js:
+Done (compile time:0.16s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\DeferredList.js:
+Done (compile time:0.154s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-geometry.js:
+Done (compile time:0.271s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:19: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.134s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\jaxer.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\i18n.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\main.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-html.js:
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:9: WARNING - Suspicious code. This code lacks side-effects. Is there a bug?
+	new Date("X"); // workaround for #11279, new Date("") == NaN
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.265s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\topic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\monetary.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\currency.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\hebrew.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\islamic.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\buddhist.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\islamic.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\islamic.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\hebrew.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\gregorian.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\islamic.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\gregorian.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\gregorian.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\currency.js:
+Done (compile time:0.048s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\currency.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\number.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\currency.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Identity.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Request.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\sorter.js:
+Done (compile time:0.065s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Avatar.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Mover.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\easing.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\colors.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ar\colors.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\de\colors.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\he\colors.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\tr\colors.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh-tw\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\instrumentation.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\iframe.js:
+Done (compile time:0.102s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\util.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\lite.js:
+Done (compile time:0.047s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\SimpleQueryEngine.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\browser.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\event.js:
+Done (compile time:0.092s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:139: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\xhr.js:
+Done (compile time:0.097s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\json.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\_base\kernel.js:
+Done (compile time:2.17s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cache.js:
+Done (compile time:0.188s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\currency.js:
+Done (compile time:0.172s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:148: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:158: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:189: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:206: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:532: WARNING - unreachable code
+					if( 0  && p=="async"){
+					                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:652: WARNING - unreachable code
+					if( 0 ){
+					       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:663: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:690: WARNING - unreachable code
+	}else{
+	     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:706: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:719: WARNING - unreachable code
+				if( 0  && comboPending && !comboPendingTimer){
+				                                             ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:818: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:823: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:910: WARNING - unreachable code
+			if( 0 ){
+			       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1015: WARNING - unreachable code
+				if( 0  && legacyMode == sync && !plugin.executed){
+				                                                 ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1197: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1273: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1373: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1409: WARNING - unreachable code
+					if( 0  && legacyMode){
+					                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1425: WARNING - unreachable code
+				if( 0  && legacyMode){
+				                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1510: WARNING - unreachable code
+				if( 0  && module.plugin && module.plugin.isCombo){
+				                                                 ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1546: WARNING - unreachable code
+				if( 0  && legacyMode && !waiting[mid]){
+				                                      ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1668: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1680: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1747: WARNING - unreachable code
+		if( 0  && args[1]===defaultDeps){
+		                                ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1781: WARNING - unreachable code
+				if( 0  && !targetModule){
+				                        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1791: WARNING - unreachable code
+			if( 0  && isArray(targetModule)){
+			                                ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1809: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1839: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1868: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1875: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1880: WARNING - unreachable code
+	if( 0  && req.combo && req.combo.plugins){
+	                                         ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1894: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2201: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2634: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2968: WARNING - unreachable code
+	}else{
+	     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:7189: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 36 warning(s)
+Done (compile time:1.087s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom.js:
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-attr.js:
+Done (compile time:0.111s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\hash.js:
+Done (compile time:0.067s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\keys.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\mouse.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-manipulate.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\string.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\window.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\buddhist.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\buddhist.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\islamic.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\buddhist.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\number.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\islamic.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\hebrew.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\hebrew.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\buddhist.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\hebrew.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\gregorian.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\islamic.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\gregorian.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\hebrew.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\currency.js:
+Done (compile time:0.087s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\buddhist.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\number.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\number.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\gregorian.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Item.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\simpleFetch.js:
+Done (compile time:0.037s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\autoscroll.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Manager.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Target.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\create.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\iframe.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\el\colors.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fi\colors.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ko\colors.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nb\colors.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ro\colors.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\th\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\tracer.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\registry.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\notify.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonService.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\_loader.js:
+Done (compile time:0.138s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Observable.js:
+Done (compile time:0.104s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\declare.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\html.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\query.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\lang.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\dom.js:
+Done (compile time:2.301s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\back.js:
+Done (compile time:0.408s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date.js:
+Done (compile time:0.346s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-class.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-style.js:
+Done (compile time:0.136s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io-query.js:
+Done (compile time:0.098s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\html.js:
+Done (compile time:0.091s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-data.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\number.js:
+Done (compile time:0.169s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\regexp.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:120: WARNING - unreachable code
+	if( 0  && dojo.config.parseOnLoad && !dojo.isAsync){
+	                                                   ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\ready.js:131: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 2 warning(s)
+Done (compile time:0.06s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\touch.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\supplemental.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\gregorian.js:
+Done (compile time:0.056s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\buddhist.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\number.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\currency.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\currency.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\currency.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\hebrew.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\gregorian.js:
+Done (compile time:0.009s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\currency.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\currency.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\buddhist.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\currency.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ObjectStore.js:
+Done (compile time:0.057s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Notification.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\stamp.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\AutoSource.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Moveable.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\TimedMoveable.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestError.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\az\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ca\colors.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fr\colors.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hu\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sk\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt\colors.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\all.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\Promise.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router\RouterBase.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonpService.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\RpcService.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\QueryResults.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Memory.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Color.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\fx.js:
+Done (compile time:0.063s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\sniff.js:13: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_firebug\firebug.js:768: WARNING - unreachable code
+		}catch(e){
+^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.316s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\main.js:
+Done (compile time:2.08s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cookie.js:
+Done (compile time:0.275s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\behavior.js:
+Done (compile time:0.232s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-form.js:
+Done (compile time:0.185s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\gears.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Evented.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\loadInit.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\node.js:6: WARNING - unreachable code
+	return {
+	^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-fx.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\on.js:
+Done (compile time:0.145s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\require.js:
+Done (compile time:0.05s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\sniff.js:
+Done (compile time:0.064s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\when.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\currency.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\buddhist.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\currency.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\currency.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\gregorian.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\gregorian.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-ca\currency.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\buddhist.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\hebrew.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\gregorian.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\buddhist.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\islamic.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\buddhist.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\gregorian.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\hebrew.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\islamic.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileReadStore.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\ItemFileWriteStore.js:
+Done (compile time:0.085s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Read.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\filter.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\move.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Source.js:
+Done (compile time:0.108s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\CancelError.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\Toggler.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\cs\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\es\colors.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\kk\colors.js:
+Done (compile time:0.071s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ja\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pt-pt\colors.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sv\colors.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\handlers.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\script.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\node.js:
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Cache.js:
+Done (compile time:0.049s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\api\Store.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\config.js:171: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\Deferred.js:
+Done (compile time:0.068s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\loader.js:10: WARNING - unreachable code
+	if (! 1 ){
+	         ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.133s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\url.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\NodeList.js:
+Done (compile time:0.083s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\aspect.js:
+Done (compile time:2.153s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\AdapterRegistry.js:
+Done (compile time:0.16s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\DeferredList.js:
+Done (compile time:0.154s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-geometry.js:
+Done (compile time:0.271s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\has.js:19: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.134s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\jaxer.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\i18n.js:
+Done (compile time:0.137s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\main.js:
+Done (compile time:0.095s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-html.js:
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\parser.js:9: WARNING - Suspicious code. This code lacks side-effects. Is there a bug?
+	new Date("X"); // workaround for #11279, new Date("") == NaN
+	        ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.265s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\topic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\monetary.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\currency.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\number.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\hebrew.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ca\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\islamic.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\buddhist.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\hebrew.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\currency.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\buddhist.js:
+Done (compile time:0.011s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\number.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\islamic.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\gregorian.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\islamic.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ko\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\hebrew.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\islamic.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\islamic.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\gregorian.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\islamic.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\gregorian.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sl\gregorian.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\currency.js:
+Done (compile time:0.048s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\islamic.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\currency.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\number.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\currency.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\hebrew.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Identity.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Request.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\sorter.js:
+Done (compile time:0.065s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Avatar.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Mover.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\fx\easing.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\colors.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ar\colors.js:
+Done (compile time:0.058s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\de\colors.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\he\colors.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\pl\colors.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\tr\colors.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\zh-tw\colors.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\instrumentation.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\iframe.js:
+Done (compile time:0.102s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\util.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\lite.js:
+Done (compile time:0.047s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\util\SimpleQueryEngine.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\browser.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\event.js:
+Done (compile time:0.092s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\kernel.js:139: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.079s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\xhr.js:
+Done (compile time:0.097s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\json.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\_base\kernel.js:
+Done (compile time:2.17s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cache.js:
+Done (compile time:0.188s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\currency.js:
+Done (compile time:0.172s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:148: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:158: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:189: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:206: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:532: WARNING - unreachable code
+					if( 0  && p=="async"){
+					                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:652: WARNING - unreachable code
+					if( 0 ){
+					       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:663: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:690: WARNING - unreachable code
+	}else{
+	     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:706: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:719: WARNING - unreachable code
+				if( 0  && comboPending && !comboPendingTimer){
+				                                             ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:818: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:823: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:910: WARNING - unreachable code
+			if( 0 ){
+			       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1015: WARNING - unreachable code
+				if( 0  && legacyMode == sync && !plugin.executed){
+				                                                 ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1197: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1273: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1373: WARNING - unreachable code
+				if( 0 ){
+				       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1409: WARNING - unreachable code
+					if( 0  && legacyMode){
+					                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1425: WARNING - unreachable code
+				if( 0  && legacyMode){
+				                     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1510: WARNING - unreachable code
+				if( 0  && module.plugin && module.plugin.isCombo){
+				                                                 ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1546: WARNING - unreachable code
+				if( 0  && legacyMode && !waiting[mid]){
+				                                      ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1668: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1680: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1747: WARNING - unreachable code
+		if( 0  && args[1]===defaultDeps){
+		                                ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1781: WARNING - unreachable code
+				if( 0  && !targetModule){
+				                        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1791: WARNING - unreachable code
+			if( 0  && isArray(targetModule)){
+			                                ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1809: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1839: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1868: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1875: WARNING - unreachable code
+		if( 0 ){
+		       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1880: WARNING - unreachable code
+	if( 0  && req.combo && req.combo.plugins){
+	                                         ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:1894: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2201: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2634: WARNING - unreachable code
+	if( 0 ){
+	       ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:2968: WARNING - unreachable code
+	}else{
+	     ^
+
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dojo.js:7189: WARNING - unreachable code
+	if(! 1 ){
+	        ^
+
+0 error(s), 36 warning(s)
+Done (compile time:1.087s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom.js:
+Done (compile time:0.053s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-attr.js:
+Done (compile time:0.111s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\hash.js:
+Done (compile time:0.067s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\keys.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\mouse.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-manipulate.js:
+Done (compile time:0.086s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\router.js:
+Done (compile time:0.034s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\string.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\window.js:
+Done (compile time:0.051s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\buddhist.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\islamic.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\buddhist.js:
+Done (compile time:0.028s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\number.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\el\buddhist.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-au\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\islamic.js:
+Done (compile time:0.027s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\buddhist.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr-ch\number.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\islamic.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\hebrew.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hu\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\hebrew.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\buddhist.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\currency.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\hebrew.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nl\gregorian.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\currency.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\buddhist.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt-pt\gregorian.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\islamic.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\gregorian.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ru\hebrew.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\currency.js:
+Done (compile time:0.087s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\buddhist.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\number.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\number.js:
+Done (compile time:0.019s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\buddhist.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\gregorian.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\number.js:
+Done (compile time:0.062s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\gregorian.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Item.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\util\simpleFetch.js:
+Done (compile time:0.037s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\autoscroll.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Manager.js:
+Done (compile time:0.075s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Target.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\create.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\iframe.js:
+Done (compile time:0.044s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\el\colors.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\fi\colors.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ko\colors.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\nb\colors.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ro\colors.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\th\colors.js:
+Done (compile time:0.052s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\tracer.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\registry.js:
+Done (compile time:0.035s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\notify.js:
+Done (compile time:0.036s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\rpc\JsonService.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\_loader.js:
+Done (compile time:0.138s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\Observable.js:
+Done (compile time:0.104s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\declare.js:
+Done (compile time:0.123s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\html.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\query.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\lang.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\tetra\run.js:
+Done (compile time:3.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\colors.js:
+Done (compile time:0.245s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Deferred.js:
+Done (compile time:0.109s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-construct.js:
+Done (compile time:0.118s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\domReady.js:
+Done (compile time:0.089s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dom-prop.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\json.js:
+Done (compile time:0.032s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\hccss.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-dom.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\NodeList-traverse.js:
+Done (compile time:0.059s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\query.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\Stateful.js:
+Done (compile time:0.041s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\uacss.js:
+Done (compile time:0.025s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\text.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\text.js:10: WARNING - unreachable code
+	}else{
+	     ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.061s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\hebrew.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ar\number.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\cs\currency.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\number.js:
+Done (compile time:0.018s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\da\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\de\islamic.js:
+Done (compile time:0.023s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\buddhist.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en\islamic.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\en-gb\gregorian.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\es\islamic.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fi\islamic.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\fr\gregorian.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\he\currency.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\buddhist.js:
+Done (compile time:0.039s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\it\number.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\buddhist.js:
+Done (compile time:0.01s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ja\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\currency.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\number.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\nb\gregorian.js:
+Done (compile time:0.013s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\currency.js:
+Done (compile time:0.02s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pl\islamic.js:
+Done (compile time:0.014s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\pt\number.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\currency.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\ro\buddhist.js:
+Done (compile time:0.017s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\currency.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sk\number.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\sv\hebrew.js:
+Done (compile time:0.045s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\hebrew.js:
+Done (compile time:0.046s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\th\buddhist.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\tr\currency.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hant\gregorian.js:
+Done (compile time:0.072s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-hk\number.js:
+Done (compile time:0.021s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh\islamic.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\cldr\nls\zh-tw\number.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\data\api\Write.js:
+Done (compile time:0.03s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\date\locale.js:
+Done (compile time:0.094s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\common.js:
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Container.js:
+Done (compile time:0.066s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\dnd\Selector.js:
+Done (compile time:0.042s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\errors\RequestTimeoutError.js:
+Done (compile time:0.016s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\io\script.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\da\colors.js:
+Done (compile time:0.026s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\hr\colors.js:
+Done (compile time:0.012s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\it\colors.js:
+Done (compile time:0.04s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\ru\colors.js:
+Done (compile time:0.033s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\nls\sl\colors.js:
+Done (compile time:0.031s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\promise\first.js:
+Done (compile time:0.038s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\default.js:
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\default.js:11: WARNING - unreachable code
+	}else if( 0 ){
+	      ^
+
+0 error(s), 1 warning(s)
+Done (compile time:0.024s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\watch.js:
+Done (compile time:0.022s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\request\xhr.js:
+Done (compile time:0.043s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\selector\acme.js:
+Done (compile time:0.166s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\array.js:
+Done (compile time:0.089s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\JsonRest.js:
+Done (compile time:0.029s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\connect.js:
+Done (compile time:0.09s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\store\DataStore.js:
+Done (compile time:0.047s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\window.js:
+Done (compile time:0.015s)
+c:\viadeo\projects\tetra\src-dojo\dist\dojo\_base\unload.js:
+Done (compile time:0.022s)
+
+
+Process finished normally
+	errors: 0
+	warnings: 10
+	build time: 9.908 seconds

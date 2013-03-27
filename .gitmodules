@@ -11,3 +11,18 @@
 [submodule "test/lib/jasmine-jquery"]
 	path = test/lib/jasmine-jquery
 	url = https://github.com/velesin/jasmine-jquery.git
+[submodule "src-dojo/src/dojo"]
+	path = src-dojo/src/dojo
+	url = https://github.com/dojo/dojo.git
+[submodule "src-dojo/src/dijit"]
+	path = src-dojo/src/dijit
+	url = https://github.com/dojo/dijit.git
+[submodule "src-dojo/src/dojox"]
+	path = src-dojo/src/dojox
+	url = https://github.com/dojo/dojox.git
+[submodule "src-dojo/src/util"]
+	path = src-dojo/src/util
+	url = https://github.com/dojo/util.git
+[submodule "src-experiment/src/lib/when"]
+	path = src-experiment/src/lib/when
+	url = https://github.com/cujojs/when

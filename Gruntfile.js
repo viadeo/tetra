@@ -94,12 +94,24 @@ module.exports = function( grunt ) {
 			folder: {
 				src: "test/specs"
 			}
+		},
+		connect: {
+			server: {
+				options: {
+					keepalive: true,
+					hostname: '0.0.0.0',
+					port: 8080,
+					base: '.'
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	// Default task.
 	grunt.registerTask("default", ["jshint", "concat"]);
+	grunt.registerTask("watch-server", ['connect']);
 };
