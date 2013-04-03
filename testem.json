@@ -2,6 +2,7 @@
     "framework": "jasmine",
     "src_files": [
         "lib/jquery/1.9.1/jquery.js",
+	    "lib/jquery/1.9.1/jquery.browser.js",
         "lib/JSON-js/json2.js",
         "test/lib/Sinon.JS/sinon-1.5.2.js",
         "test/lib/Sinon.JS/sinon-ie-1.5.2.js",

@@ -89,6 +89,7 @@
                     return str;
                 }
             },
+
             //
             //    siblings:         "siblings",
             //    prev:             "prev",
@@ -174,6 +175,8 @@
             mysql: function(dbTable, options) {
                 options.error(500, {errors:['not implemented']});
             },
+
+	        browser: $.browser,
             /*bind: function(eventName, callback) {
              if(eventName === 'domLoaded') {
              eventName = 'ready';

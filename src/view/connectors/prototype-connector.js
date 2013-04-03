@@ -420,7 +420,9 @@
             },
             trim: function(str) {
                 return (str) ? str.strip() : '';
-            }
+            },
+
+	        browser: Prototype.Browser
         });
     }
 })();
