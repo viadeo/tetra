@@ -1,17 +1,44 @@
-define(['tetra/_base/kernel', 'tetra/_base/Component', 'when'], function(kernel, Component, when) {
+define(['tetra/_base/Component', 'tetra/_base/kernel', 'promise'], function(Component, kernel, promise) {
 
+	function _success(data) {
+		data = data || {};
+		return {
+			status: 'SUCCESS',
+			data: data
+		};
+	}
 
+	function _fail(data, errors) {
+		data = data || {};
+		return {
+			status: 'FAIL',
+			data: data
+		};
+	}
 
 	return kernel.extend(Component, {
 
 		data: {},
 
-		fetch: function(params) {
+		validator: {
+			validate: function() {
+				return [];
+			}
+		},
 
+		fetch: function(id) {
+			var deferred = promise.defer();
+			if(id && this.data[id]) {
+				deferred.resolve(this.data[id]);
+			} else {
+				deferred.reject(id);
+			}
+
+			return deferred.promise;
 		},
 
 		remove: function(obj) {
-			var deferred = when.defer();
+			var deferred = promise.defer();
 			if(obj.id) {
 				delete this.data[obj.id];
 				deferred.resolve(obj);
@@ -22,14 +49,21 @@ define(['tetra/_base/kernel', 'tetra/_base/Component', 'when'], function(kernel,
 			return deferred.promise;
 		},
 
-		save: function(obj) {
-			var deferred = when.defer();
+		save: function(obj, params) {
+			var deferred = promise.defer();
+
 			if(obj.id) {
-				obj.ref = kernel.generateGUID();
-				this.data[obj.id] = obj;
-				deferred.resolve(obj);
+				var errors = this.validator.validate(obj);
+				if(!errors.length) {
+					obj.ref = kernel.generateGUID();
+					this.data[obj.id] = obj;
+
+					deferred.resolve(_success(obj));
+				} else {
+					deferred.reject(_fail(obj, errors));
+				}
 			} else {
-				deferred.reject(obj);
+				deferred.reject(_fail(obj));
 			}
 
 			return deferred.promise;
@@ -37,6 +71,10 @@ define(['tetra/_base/kernel', 'tetra/_base/Component', 'when'], function(kernel,
 
 		reset: function(params) {
 
+		},
+
+		constructor: function(validator) {
+			this.validator = validator;
 		}
 	});
 });

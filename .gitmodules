@@ -26,3 +26,9 @@
 [submodule "src-experiment/src/lib/when"]
 	path = src-experiment/src/lib/when
 	url = https://github.com/cujojs/when
+[submodule "src-experiment/src/lib/JSV"]
+	path = src-experiment/src/lib/JSV
+	url = https://github.com/redking/JSV.git
+[submodule "src-experiment/src/lib/PubSubJS"]
+	path = src-experiment/src/lib/PubSubJS
+	url = https://github.com/mroderick/PubSubJS.git

@@ -266,6 +266,7 @@ describe("the controller; ", function() {
                         events: {
                             view: {
                                 "myTestViewEvent": function(data) {
+	                                console.log("orm", orm);
                                     spy(data);
                                 }
                             }

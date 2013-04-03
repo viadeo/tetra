@@ -1,9 +1,11 @@
 define(function(){
 
+	'use strict';
+
 	// Core functions for Tetra
 	// ========================
 
-	if(!Object.create) {
+	if(!Object.prototype.create) {
 		var F = function(){};
 	}
 
@@ -16,7 +18,7 @@ define(function(){
 		// TODO Maybe make this private, as complex type behaviours could be
 		// confusing, see http://elsamman.com/?p=32
 		create: function(proto) {
-			if(Object.create) {
+			if(Object.prototype.create) {
 				return Object.create(proto);
 			}
 
@@ -79,6 +81,22 @@ define(function(){
 		// Create a new unique identifier
 		generateGUID: function() {
 			return new Date().getTime() + '-' + Math.ceil(Math.random()*1001);
+		},
+
+		// Trim a string
+		trim: function(str) {
+			if(str) {
+				if(String.prototype.trim) {
+					return str.trim();
+				}
+
+				return str.replace(/^\s+|\s+$/g, '');
+			}
+
+			return str;
 		}
+
+		// TODO maybe add 'addURLParameter'
+
 	};
 });

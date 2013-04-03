@@ -1,6 +1,6 @@
 define([], function() {
 
-	// A base object from which all others extend
+	// A base object from which all others MVC objects extend
 	// ==========================================
 
 	var Component = function() {
@@ -8,6 +8,7 @@ define([], function() {
 	};
 
 	Component.prototype = {
+
 		destroy: function() {
 			console.log("destroying");
 		}
