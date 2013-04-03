@@ -1,1 +1,0 @@
-define("tetra/_base/kernel",[],function(){return{start:function(){console.log("Starting")}}}),define("tetra/model",["./_base/kernel"],function(e){return{start:function(){e.start(),console.log("Starting model")}}}),require(["tetra/model"],function(e){e.start()}),define("main",function(){});

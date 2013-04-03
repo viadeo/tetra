@@ -1,3 +1,0 @@
-//>>built
-require({cache:{"tetra/dom":function(){define("tetra/dom",["./_base/kernel","dojo/dom","dojo/has"],function(a,c,d){return{start:function(){a.start()},updateTitle:function(){var a=c.byId("title");d("ie-event-behavior")?require(["dojo/dom-style"],function(b){b.set(a,"fontSize","100px")}):require(["dojo/_base/fx"],function(b){b.animateProperty({node:a,properties:{fontSize:{end:100,units:"px"}},duration:1E3}).play()})}}})},"tetra/_base/kernel":function(){define([],function(){return{start:function(){}}})}}});
-require(["tetra/dom"],function(a){a.start();a.updateTitle()});
