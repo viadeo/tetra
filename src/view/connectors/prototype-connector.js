@@ -245,6 +245,12 @@
 
                 return this;
             },
+	        children: function() {
+			   return this.childElements();
+	        },
+	        clone: function() {
+			   return this.clone();
+	        },
             css: function() {
                 var map = {};
 

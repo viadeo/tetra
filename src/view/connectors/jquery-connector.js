@@ -177,22 +177,8 @@
             },
 
 	        browser: $.browser,
-            /*bind: function(eventName, callback) {
-             if(eventName === 'domLoaded') {
-             eventName = 'ready';
-             }
-
-             $(this).bind(eventName, callback);
-             },
-             unbind: function(eventName, callback) {
-             if(eventName === 'domLoaded') {
-             eventName = 'ready';
-             }
-
-             $(this).unbind(eventName, callback);
-             },*/
             extend: $.extend,
-            inArray: $.inArray,
+	        inArray: $.inArray,
             toJSON: JSON.stringify,
             parseJSON: $.parseJSON,
             trim: $.trim

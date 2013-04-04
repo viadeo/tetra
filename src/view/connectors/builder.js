@@ -31,7 +31,7 @@ tetra.extend('lib', function(_conf, _mod, _) {
     return (function(libs) {
 
         var
-            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset'],
+            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset', 'clone', 'children'],
             _exposedDOMFctsOnArray = ['hasClass', 'addClass', 'removeClass', 'append', 'prepend', 'before', 'after', 'replaceWith', 'remove', 'animate', 'bind', 'unbind', 'ready'],
             _exposedDOMFctsWithExtendedOutput = ['parents', 'find', 'siblings', 'prev', 'next'],
             _exposedHelpers = ['elm', 'ajax', 'initApi', 'api', 'initMysql', 'mysql', 'extend', 'toJSON', 'parseJSON', 'inArray', 'trim', 'render', 'send', 'jsonSend', 'browser'],
