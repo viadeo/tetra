@@ -450,7 +450,7 @@ describe("the view; ", function() {
 
             tetra.view.register("myView", {
                 scope: "myScope",
-                constr: function(me, app) {
+                constr: function(me, app, _) {
                     return {
                         events: {
                             user: {

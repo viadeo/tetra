@@ -520,6 +520,26 @@ describe("underscore library; ", function() {
 			dim = null;
 		});
 
+		it("should clone an HTML element", function() {
+			var clone = [];
+
+			tetra.view.register("myView", {
+				scope: "myScope",
+				constr: function(me, app, _) {
+					return {
+						events: {},
+						methods: {
+							init: function(){
+								clone = _('#nodeToClone').clone();
+							}
+						}
+					};
+				}
+			});
+
+			expect(clone[0].id).toEqual('nodeToClone');
+		});
+
 		// ## Error states ##
 		it("should return 'false' if the element doesn't exist, for all boolean operations", function() {
 			var 
@@ -571,6 +591,7 @@ describe("underscore library; ", function() {
 								emptyResults.push(_("#notThere").prepend("<b>prepend</b>"));
 								emptyResults.push(_("#notThereEither").replaceWith("<b>replacey</b>"));
 								emptyResults.push(_(that.node).remove());
+								emptyResults.push(_('#notThere').clone());
 							}
 						}
 					};
@@ -775,6 +796,34 @@ describe("underscore library; ", function() {
 		
 			expect(next[0]).toEqual(d.getElementById("thirdChild"));
 		});
+
+		it("should return the children of an element", function() {
+			var
+				that = this,
+				children
+				;
+
+			this.node = d.getElementById("elementWithChildren");
+
+			tetra.view.register("myView", {
+				scope: "myScope",
+				constr: function(me, app, _) {
+					return {
+						events: {},
+						methods: {
+							init: function(){
+								children = _(that.node).children();
+							}
+						}
+					};
+				}
+			});
+
+			expect(children.length).toBe(3);
+			expect(children[0].id).toBe('child1');
+			expect(children[1].id).toBe('child2');
+			expect(children[2].id).toBe('child3');
+		});
 		
 		// ## Error States ##
 		
@@ -799,6 +848,7 @@ describe("underscore library; ", function() {
 								emptyResults.push(_("#notThere").siblings());
 								emptyResults.push(_("#notThere").prev());
 								emptyResults.push(_("#notThereEither").next());
+								emptyResults.push(_("#notThereEither").children());
 							}
 						}
 					};
@@ -1035,5 +1085,7 @@ describe("underscore library; ", function() {
 				expect(results[i]).toBe("");
 			}
 		});
+
+
 	});
 });

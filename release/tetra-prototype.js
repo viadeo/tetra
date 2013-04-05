@@ -20714,22 +20714,8 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
             },
 
 	        browser: $.browser,
-            /*bind: function(eventName, callback) {
-             if(eventName === 'domLoaded') {
-             eventName = 'ready';
-             }
-
-             $(this).bind(eventName, callback);
-             },
-             unbind: function(eventName, callback) {
-             if(eventName === 'domLoaded') {
-             eventName = 'ready';
-             }
-
-             $(this).unbind(eventName, callback);
-             },*/
             extend: $.extend,
-            inArray: $.inArray,
+	        inArray: $.inArray,
             toJSON: JSON.stringify,
             parseJSON: $.parseJSON,
             trim: $.trim
@@ -20983,6 +20969,12 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 
                 return this;
             },
+	        children: function() {
+			   return this.childElements();
+	        },
+	        clone: function() {
+			   return this.clone();
+	        },
             css: function() {
                 var map = {};
 
@@ -21197,7 +21189,7 @@ tetra.extend('lib', function(_conf, _mod, _) {
     return (function(libs) {
 
         var
-            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset'],
+            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset', 'clone', 'children'],
             _exposedDOMFctsOnArray = ['hasClass', 'addClass', 'removeClass', 'append', 'prepend', 'before', 'after', 'replaceWith', 'remove', 'animate', 'bind', 'unbind', 'ready'],
             _exposedDOMFctsWithExtendedOutput = ['parents', 'find', 'siblings', 'prev', 'next'],
             _exposedHelpers = ['elm', 'ajax', 'initApi', 'api', 'initMysql', 'mysql', 'extend', 'toJSON', 'parseJSON', 'inArray', 'trim', 'render', 'send', 'jsonSend', 'browser'],
