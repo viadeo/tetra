@@ -20969,11 +20969,24 @@ if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 
                 return this;
             },
-	        children: function() {
-			   return this.childElements();
+	        children: function(selector) {
+		        var children = (this && !this.splice && this.childElements) ? this.childElements() : [];
+
+		        if(selector) {
+			        for(var p = 0, len = children.length; p < len;) {
+				        if(!children[p].match(selector)) {
+					        children.splice(p,1);
+					        len--;
+				        } else {
+					        p++;
+				        }
+			        }
+		        }
+
+		        return children;
 	        },
 	        clone: function() {
-			   return this.clone();
+			   return _chainableFct.call(this, 'clone', arguments);
 	        },
             css: function() {
                 var map = {};
