@@ -530,7 +530,7 @@ describe("underscore library; ", function() {
 						events: {},
 						methods: {
 							init: function(){
-								clone = _('#nodeToClone').clone();
+								clone = _(_('#nodeToClone').clone());
 							}
 						}
 					};

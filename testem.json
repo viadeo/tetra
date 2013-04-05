@@ -1,15 +1,17 @@
 {
     "framework": "jasmine",
     "src_files": [
-        "lib/jquery/1.9.1/jquery.js",
-	    "lib/jquery/1.9.1/jquery.browser.js",
+        "lib/sizzle/sizzle.js",
+        "lib/prototype/1.6.1/prototype.js",
         "lib/JSON-js/json2.js",
         "test/lib/Sinon.JS/sinon-1.5.2.js",
         "test/lib/Sinon.JS/sinon-ie-1.5.2.js",
-        "test/lib/jasmine-jquery/lib/jasmine-jquery.js",
+        "test/lib/jasmine-prototype/jasmine-prototype.js",
         "test/conf/jasmine/init_testem_fixtures.js",
         "test/utils.js",
         "src/tetra.js",
+        "src/view/connectors/prototype-connector.js",
+        "src/view/connectors/builder.js",
         "lib/requirejs/require.js",
         "src/conf/requirejs/client.js",
         "src/view/client-micro-tmpl.js",
@@ -20,6 +22,8 @@
         "test/specs/tetra.spec.js",
         "test/specs/model/*.spec.js",
         "test/specs/controller/*.spec.js",
-        "test/specs/view/*.spec.js"
+        "test/specs/view/tetra.bootnode.spec.js",
+        "test/specs/view/tetra.view.spec.js",
+        "test/specs/view/underscore.ui.spec.js"
     ]
 }

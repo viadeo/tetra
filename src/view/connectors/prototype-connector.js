@@ -262,7 +262,7 @@
 		        return children;
 	        },
 	        clone: function() {
-			   return _(this.clone());
+			   return _chainableFct.call(this, 'clone', arguments);;
 	        },
             css: function() {
                 var map = {};
