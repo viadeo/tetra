@@ -21202,9 +21202,9 @@ tetra.extend('lib', function(_conf, _mod, _) {
     return (function(libs) {
 
         var
-            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset', 'clone', 'children'],
+            _exposedDOMFcts = ['attr', 'prop', 'is', 'val', 'html', 'serialize', 'css', 'height', 'width', 'offset'],
             _exposedDOMFctsOnArray = ['hasClass', 'addClass', 'removeClass', 'append', 'prepend', 'before', 'after', 'replaceWith', 'remove', 'animate', 'bind', 'unbind', 'ready'],
-            _exposedDOMFctsWithExtendedOutput = ['parents', 'find', 'siblings', 'prev', 'next'],
+            _exposedDOMFctsWithExtendedOutput = ['parents', 'find', 'siblings', 'prev', 'next', 'clone', 'children'],
             _exposedHelpers = ['elm', 'ajax', 'initApi', 'api', 'initMysql', 'mysql', 'extend', 'toJSON', 'parseJSON', 'inArray', 'trim', 'render', 'send', 'jsonSend', 'browser'],
 
             _helpers = {},
@@ -24571,8 +24571,8 @@ tetra.extend('controller', function(_conf, _mod, _) {
                     if(scope !== 'all' && ctrl.events.view || ctrl.events.controller) {
                         ctrlListener = (scope !== 'all') ? ctrl.events.view : ctrl.events.controller;
 
-                        if((scope === 'all' || scope === ctrlScope) &&
-                            typeof ctrlListener[message] !== 'undefined') {
+                        if((scope === 'all' || scope === ctrlScope) && typeof ctrlListener !== 'undefined' &&
+	                        typeof ctrlListener[message] !== 'undefined') {
                             _mod.debug.log('ctrl ' + name + ' : exec ' + message, scope, 'info');
                             ctrlListener[message](data);
                         }

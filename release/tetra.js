@@ -3558,8 +3558,8 @@ tetra.extend('controller', function(_conf, _mod, _) {
                     if(scope !== 'all' && ctrl.events.view || ctrl.events.controller) {
                         ctrlListener = (scope !== 'all') ? ctrl.events.view : ctrl.events.controller;
 
-                        if((scope === 'all' || scope === ctrlScope) &&
-                            typeof ctrlListener[message] !== 'undefined') {
+                        if((scope === 'all' || scope === ctrlScope) && typeof ctrlListener !== 'undefined' &&
+	                        typeof ctrlListener[message] !== 'undefined') {
                             _mod.debug.log('ctrl ' + name + ' : exec ' + message, scope, 'info');
                             ctrlListener[message](data);
                         }
