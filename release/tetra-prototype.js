@@ -24854,7 +24854,7 @@ tetra.extend('model', function(_conf, _mod, _) {
                         return obj;
                     },
 
-                // Saves the object to the server
+                    // Saves the object to the server
                     _save = function(attributes, success) {
 
                         var
@@ -25507,6 +25507,11 @@ tetra.extend('model', function(_conf, _mod, _) {
                 ref: 0,
                 id: 0
             }, modelAttr);
+
+			// Add the nonce to the model object, if present
+	        if(_conf.CSRFToken) {
+		        attr.CSRFToken = _conf.CSRFToken;
+	        }
 
             var bckAttr = {};
             for(var a in attr) {
