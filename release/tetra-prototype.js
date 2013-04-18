@@ -23393,6 +23393,7 @@ var requirejs, require, define;
             //By default load any module IDs from js/lib
             baseUrl: getStaticURL(_conf, _conf.APPS_PATH),
             enforceDefine:true,
+	        waitSeconds: 10,
             urlArgs:_conf.jsVersion ? 'v=' + _conf.jsVersion : '',
             //except, if the module ID starts with "app",
             //load it from the js/app directory. paths
