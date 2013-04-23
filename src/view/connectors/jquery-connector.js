@@ -176,7 +176,7 @@
                 options.error(500, {errors:['not implemented']});
             },
 
-            suppoer: $.support,
+            support: $.support,
 	        browser: $.browser,
             extend: $.extend,
 	        inArray: $.inArray,
