@@ -441,7 +441,8 @@
                 return (str) ? str.strip() : '';
             },
 
-	        browser: Prototype.Browser
+	        browser: Prototype.Browser,
+            support: {}
         });
     }
 })();
