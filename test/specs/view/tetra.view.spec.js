@@ -1111,16 +1111,13 @@ describe("the view; ", function() {
 	    });
 
 	    it("should respond appropriately to an onBlur", function() {
-		    VNS.test.triggerEvent(this.nonBubblingTestField, "focus");
 		    VNS.test.triggerEvent(this.nonBubblingTestField, "blur");
 
 		    expect(this.spy.called).toBeTruthy();
-		    expect(this.spy.callCount).toBe(4, "as focus/blur should have been called on the event and its parent");
+		    expect(this.spy.callCount).toBe(2, "as blur should have been called on the event and its parent");
 
-		    VNS.test.validateEventArguments(this.spy.getCall(0).args, this.nonBubblingTestField, "focus");
-		    VNS.test.validateEventArguments(this.spy.getCall(1).args, this.nonBubblingTestFieldParent, "focus");
-		    VNS.test.validateEventArguments(this.spy.getCall(2).args, this.nonBubblingTestField, "blur");
-		    VNS.test.validateEventArguments(this.spy.getCall(3).args, this.nonBubblingTestFieldParent, "blur");
+		    VNS.test.validateEventArguments(this.spy.getCall(0).args, this.nonBubblingTestField, "blur");
+		    VNS.test.validateEventArguments(this.spy.getCall(1).args, this.nonBubblingTestFieldParent, "blur");
 	    });
         
         it("should respond appropriately to a clickout", function() {
