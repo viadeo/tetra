@@ -1,7 +1,0 @@
-{
-    "title": "Welcome to Viadeo",
-    "css": {
-        "/resources/home.css": true,
-        "/css/style.css": false
-    }
-}

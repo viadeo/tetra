@@ -1,1 +1,0 @@
-console.log("toto");var blabla=function(a){return a}

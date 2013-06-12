@@ -1,8 +1,0 @@
-{
-    "firstname": {
-        "value": "Prénom"
-    },
-    "hello": {
-        "value": "Salut @var0 @var1"
-    }
-}
