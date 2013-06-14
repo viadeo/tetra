@@ -40,6 +40,21 @@ module.exports = function( grunt ) {
 				"src/view/tetra-view.js",
 				"src/controller/tetra-controller.js",
 				"src/model/tetra-model.js"
+			],
+			"release/tetra-jquery.js": [
+    			"lib/sizzle/sizzle.js",
+                "lib/jquery/1.9.1/jquery-nosizzle.js",
+                "lib/jquery/1.9.1/jquery.browser.js",
+                "lib/JSON-js/json2.js",
+                "src/tetra.js",
+				"src/view/connectors/jquery-connector.js",
+				"src/view/connectors/builder.js",
+				"lib/requirejs/require.js",
+				"src/conf/requirejs/client.js",
+				"src/view/client-micro-tmpl.js",
+				"src/view/tetra-view.js",
+				"src/controller/tetra-controller.js",
+				"src/model/tetra-model.js"
 			]
 		},
 		jshint: {
@@ -88,8 +103,23 @@ module.exports = function( grunt ) {
 		min: {
 			"release/<%=meta.version%>/tetra-core.min.js": ["<banner>", "release/tetra-core.js"],
 			"release/<%=meta.version%>/tetra.min.js": ["<banner>", "release/tetra.js"],
-			"release/<%=meta.version%>/tetra-prototype.min.js": ["<banner>", "release/tetra-prototype.js"]
+			"release/<%=meta.version%>/tetra-prototype.min.js": ["<banner>", "release/tetra-prototype.js"],
+			"release/<%=meta.version%>/tetra-jquery.min.js": ["<banner>", "release/tetra-jquery.js"]
 		},
+		uglify: {
+    		build : {
+                options: {
+                    // the banner is inserted at the top of the output
+                    banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */\n"
+                },
+        		files : {
+                    "release/tetra-core.min.js": ["release/tetra-core.js"],
+        			"release/tetra.min.js": ["release/tetra.js"],
+        			"release/tetra-prototype.min.js": ["release/tetra-prototype.js"],
+        			"release/tetra-jquery.min.js": ["release/tetra-jquery.js"]
+    			}
+			}
+        },
 		jasmine: {
 			folder: {
 				src: "test/specs"
@@ -99,7 +129,8 @@ module.exports = function( grunt ) {
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	// Default task.
-	grunt.registerTask("default", ["jshint", "concat"]);
+	grunt.registerTask("default", ["jshint", "concat", "uglify"]);
 };
