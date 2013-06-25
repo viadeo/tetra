@@ -7,13 +7,13 @@ module.exports = function( grunt ) {
 		},
 		concat: {
 			"release/tetra-core.js": [
-				"src/tetra.js",
-				"lib/requirejs/require.js",
-				"src/conf/requirejs/client.js",
-				"src/view/client-micro-tmpl.js",
-				"src/view/tetra-view.js",
-				"src/controller/tetra-controller.js",
-				"src/model/tetra-model.js"
+                "src/tetra.js",
+                "lib/requirejs/require.js",
+                "src/conf/requirejs/client.js",
+                "src/view/client-micro-tmpl.js",
+                "src/view/tetra-view.js",
+                "src/controller/tetra-controller.js",
+                "src/model/tetra-model.js"
 			],
 			"release/tetra.js": [
 				"release/tetra-core.js",
@@ -30,16 +30,16 @@ module.exports = function( grunt ) {
                 "lib/scriptaculous/1.8.2/effects.js",
                 "lib/scriptaculous/1.8.2/dragdrop.js",
                 "lib/scriptaculous/1.8.2/controls.js",
-				"src/tetra.js",
-				"src/view/connectors/jquery-connector.js",
-				"src/view/connectors/prototype-connector.js",
-				"src/view/connectors/builder.js",
-				"lib/requirejs/require.js",
-				"src/conf/requirejs/client.js",
-				"src/view/client-micro-tmpl.js",
-				"src/view/tetra-view.js",
-				"src/controller/tetra-controller.js",
-				"src/model/tetra-model.js"
+                "src/tetra.js",
+                "src/view/connectors/jquery-connector.js",
+                "src/view/connectors/prototype-connector.js",
+                "src/view/connectors/builder.js",
+                "lib/requirejs/require.js",
+                "src/conf/requirejs/client.js",
+                "src/view/client-micro-tmpl.js",
+                "src/view/tetra-view.js",
+                "src/controller/tetra-controller.js",
+                "src/model/tetra-model.js"
 			],
 			"release/tetra-jquery.js": [
     			"lib/sizzle/sizzle.js",
@@ -91,28 +91,23 @@ module.exports = function( grunt ) {
 					extend: true
 				}
 			},
-			files: ["src/tetra.js",
-					"src/view/connectors/**/builder.js",
-					"src/view/connectors/**/jquery-connector.js",
-					"src/view/connectors/**/prototype-connector.js",
-					"src/view/client-micro-tmpl.js",
-					"src/view/tetra-view.js",
-					"src/controller/tetra-controller.js",
-					"src/model/tetra-model.js"]
-		},
-		min: {
-			"release/<%=meta.version%>/tetra-core.min.js": ["<banner>", "release/tetra-core.js"],
-			"release/<%=meta.version%>/tetra.min.js": ["<banner>", "release/tetra.js"],
-			"release/<%=meta.version%>/tetra-prototype.min.js": ["<banner>", "release/tetra-prototype.js"],
-			"release/<%=meta.version%>/tetra-jquery.min.js": ["<banner>", "release/tetra-jquery.js"]
+			files: [
+    			"src/tetra.js",
+                "src/view/connectors/**/builder.js",
+                "src/view/connectors/**/jquery-connector.js",
+                "src/view/connectors/**/prototype-connector.js",
+                "src/view/client-micro-tmpl.js",
+                "src/view/tetra-view.js",
+                "src/controller/tetra-controller.js",
+                "src/model/tetra-model.js"
+            ]
 		},
 		uglify: {
     		build : {
                 options: {
-                    // the banner is inserted at the top of the output
-                    banner: "/*! Tetra.js v<%= pkg.version %> | (MIT Licence) (c) Viadeo/APVO Corp */\n"
+                    banner: "<%=meta.banner%>"
                 },
-        		files : {
+        		files: {
                     "release/tetra-core.min.js": ["release/tetra-core.js"],
         			"release/tetra.min.js": ["release/tetra.js"],
         			"release/tetra-prototype.min.js": ["release/tetra-prototype.js"],
@@ -132,5 +127,9 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	// Default task.
-	grunt.registerTask("default", ["jshint", "concat", "uglify"]);
+	grunt.registerTask("default", ["jshint", "concat"]);
+	
+	// Default + uglify
+	grunt.registerTask("default-uglify", ["default", "uglify"]);
+	
 };
