@@ -48,6 +48,7 @@ module.exports = function( grunt ) {
                 "lib/JSON-js/json2.js",
                 "src/tetra.js",
 				"src/view/connectors/jquery-connector.js",
+				"src/view/connectors/prototype-connector.js",
 				"src/view/connectors/builder.js",
 				"lib/requirejs/require.js",
 				"src/conf/requirejs/client.js",
@@ -92,7 +93,7 @@ module.exports = function( grunt ) {
 				}
 			},
 			files: [
-    			"src/tetra.js",
+                "src/tetra.js",
                 "src/view/connectors/**/builder.js",
                 "src/view/connectors/**/jquery-connector.js",
                 "src/view/connectors/**/prototype-connector.js",

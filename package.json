@@ -3,8 +3,8 @@
   "description": "Tetra.js MVC framework for client-side and server-side (with Node.js/Express)",
   "version": "1.0.22",
   "author": {
-      "name": "Viadeo",
-      "email": "cflynn@viadeoteam.com"
+    "name": "Viadeo",
+    "email": "cflynn@viadeoteam.com"
   },
   "contributors": [
     {
@@ -33,7 +33,8 @@
     "grunt": "~0.4.1",
     "grunt-cli": "latest",
     "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-concat": "~0.1.2"
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-uglify": "~0.2.2"
   },
   "repository": {
     "type": "git",
