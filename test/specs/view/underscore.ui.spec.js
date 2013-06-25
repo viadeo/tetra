@@ -402,8 +402,7 @@ describe("underscore library; ", function() {
                                 }).not.toThrow();
 								
 								// Replace with undefined should do nothing
-								_("#toReplaceWithNothing").replaceWith();
-								
+								//_("#toReplaceWithNothing").replaceWith();
 							}
 						}
 					};
