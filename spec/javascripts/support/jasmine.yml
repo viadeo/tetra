@@ -1,19 +1,20 @@
 src_files:
-  - lib/jquery/1.8.3/jquery.js
-  - lib/requirejs/require.js
-  - lib/JSON-js/json2.js
-  - src/tetra.js
-  - src/conf/requirejs/client.js
-  - src/view/client-micro-tmpl.js
-  - src/view/tetra-view.js
-  - src/controller/tetra-controller.js
-  - src/model/tetra-model.js
-  - test/conf/default.js
-  - test/lib/Sinon.JS/sinon-1.5.2.js
-  - test/lib/Sinon.JS/sinon-ie-1.5.2.js
+  - lib/jquery/1.9.1/jquery.js 
+  - lib/jquery/1.9.1/jquery.browser.js 
+  - lib/JSON-js/json2.js 
+  - test/lib/Sinon.JS/sinon-1.5.2.js 
+  - test/lib/Sinon.JS/sinon-ie-1.5.2.js 
   - test/lib/jasmine-jquery/lib/jasmine-jquery.js
-  - test/conf/jasmine/init_remote_fixtures.js
-  - test/utils.js
+  - test/conf/jasmine/init_testem_fixtures.js
+  - test/utils.js 
+  - src/tetra.js 
+  - lib/requirejs/require.js 
+  - src/conf/requirejs/client.js 
+  - src/view/client-micro-tmpl.js 
+  - src/view/tetra-view.js 
+  - src/controller/tetra-controller.js 
+  - src/model/tetra-model.js 
+  - test/conf/default.js
 
 spec_files:
   - tetra.spec.js
