@@ -5,7 +5,7 @@ src_files:
   - test/lib/Sinon.JS/sinon-1.5.2.js 
   - test/lib/Sinon.JS/sinon-ie-1.5.2.js 
   - test/lib/jasmine-jquery/lib/jasmine-jquery.js
-  - test/conf/jasmine/init_testem_fixtures.js
+  - test/conf/jasmine/fixtures.js
   - test/utils.js 
   - src/tetra.js 
   - lib/requirejs/require.js 
