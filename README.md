@@ -19,8 +19,6 @@ Additionally, the "[bootnode](https://github.com/viadeo/tetra/wiki/Bootnode)" fe
 Slides about Tetra.js & Tetra UI for a quick overview:
 <http://viadeo.github.com/tetra-slides/2012-11-20/>
 
-Tetra Roadmap : <https://trello.com/b/ooKdS2Z4/>
-
 ## Tetra core tree
 
    * **lib**: External dependencies of the client-side framework.
