@@ -131,5 +131,5 @@ module.exports = function( grunt ) {
 	
 	// Default + uglify
 	grunt.registerTask("default-uglify", ["default", "uglify"]);
-	
+
 };

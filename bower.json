@@ -1,0 +1,21 @@
+{
+  "name": "tetra",
+  "version": "1.0.23",
+  "main": "release/",
+  "ignore": [
+    "**/.*",
+    "examples",
+    "lib",
+    "spec",
+    "test",
+    "Gemfile",
+    "Gemfile.lock",
+    "Gruntfile.js",
+    "Rakefile",
+    "index.js",
+    "package.json",
+    "testem.json",
+    "testem.prototype.json",
+    "tetra.png"
+  ]
+}
