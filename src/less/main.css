@@ -7,7 +7,7 @@
   height: 0;
   padding: 29px 0 0 0;
   overflow: hidden;
-  background: url("/public/img/tetra.png") no-repeat;
+  background: url("/tetra/public/img/tetra.png") no-repeat;
 }
 .wrap .content .inner-content {
   margin-top: 67px;
