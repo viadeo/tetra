@@ -1,0 +1,50 @@
+{
+  "name": "assemble",
+  "description": "Visit http://assemble.io. Assemble is a full-featured documentation generator, static site generator and component builder. Created from the ground up as a plugin for Grunt.js.",
+  "version": "0.4.7",
+  "homepage": "http://assemble.io",
+  "author": {
+    "name": "assemble",
+    "url": "https://github.com/assemble/assemble"
+  },
+  "contributors": [
+    {
+      "name": "Brian Woodward",
+      "url": "https://github.com/doowb"
+    },
+    {
+      "name": "Jon Schlinkert",
+      "url": "https://github.com/jonschlinkert"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/assemble/assemble.git"
+  },
+  "bugs": {
+    "url": "git://github.com/assemble/assemble/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/assemble/assemble/blob/master/LICENSE-MIT"
+    }
+  ],
+
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-watch":"*",
+    "grunt-contrib-connect":"*",
+    "grunt-contrib-uglify": "*",
+    "assemble":"*"
+  }
+
+}
