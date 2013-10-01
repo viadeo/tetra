@@ -1,1 +1,98 @@
-<h2>Page description controller</h2>
+<p class="h3">Interface</p>
+
+<pre>
+tetra.controller.register(name, Object)
+</pre>
+
+<p class="description">
+name: The name of the controller. It must be the same of the file name. For example: if you call your controller likeCtrl, the file will be called likeCtrl.ctrl.js.<br>
+Object: This object describes view and models’ listeners and notifiers. A more detailed definition follows.
+</p>
+
+<span class="subtitle">Controller description</span>
+
+<pre>
+{  
+    scope : 'scope name',  
+    use : ['Mymodel', 'OtherModel', ...],   
+    constr : function  
+}
+</pre>
+
+<span class="subtitle">Parameters</span>
+
+<p class="description">
+scope: this is the visibility scope of message sent by the controller to view. Actually this is the application scope and it must be the application name. For example: for the like feature, the scope must be likeApp.<br>
+use: An Array list of model require by the controller to work properly. This list is mandatory when the controller is loaded using the bootstrap. If the nested model is a global one, prefix its name with g/ (example: use: ['g/name']).<br>
+constr: is a function returning controller's behaviors in the following context.
+</p>
+
+<span class="subtitle">Contructor</span>
+
+<pre>
+constr : function(me, app, page, orm) { 
+  return {  
+    events : {...},
+    methods : {...}  
+  };
+}
+</pre>
+
+<p class="description">
+me: this variable gives you access to all datas of the controller object generated : scope, events, methods and all other attributes you can attach to.<br>
+app: the communication pipe to all views in the scope.<br>
+page: the communication pipe to all controllers.<br>
+orm: object relational model of the core framework. it allows you to create, retrieve, update or delete data objects and synchronize data with the server. It is a total abstraction of ajax calls. A deeper explanation will be done in another section.
+</p>
+
+<span class="subtitle">Events</span>
+
+<pre>
+events : {  
+   model : {  
+      'MyModel' : {   
+          'append' : function(obj){...},  
+          'save' : function(obj){...},  
+          'saved' : function(obj){...},  
+           ...  
+       },  
+       ...    
+   },  
+   view : {  
+      'message' : function(data){...},  
+       ...  
+   },  
+   controller : {  
+      'message from page.notify' : function(data){...},  
+       ...  
+   } 
+}
+</pre>
+<p class="description">events: description of callbacks executed as a consequence of view demand or model change.</p>
+
+<p class="description">  
+Here is the list of all models change messages :<br><br>
+call: operations done before each ajax call.<br>
+complete: operations done after each ajax call.<br>
+create: Operations done at the creation of an object. Receives the created object in parameter.<br>
+fetch: Operations done before a fetch call. Receives the conditions of the request.<br>
+append: Callback of a succeed fetch call. Receives the collection of results in parameter.<br>
+save: Operations done before a save call. Receives the updated object in parameter.<br>
+saved: Callback of a succeeded save call. Receives the updated object in parameter.<br>
+delete: Operations done before a delete call. Receives the updated object in parameter.<br>
+deleted: Callback of a succeed delete call. Receives the updated object in parameter.<br>
+reset: Operations done before a reset. Receives the collection of all objects in parameter.<br>
+reseted: Callback of a succeed reset call. Receives the name of the model in parameter.<br>
+invalid: Operations done when updated attributes of an object are not valid. Receive the list of incorrect attr and the obj instance in parameter.<br>
+alert: Callback of successful call (200) with alerts. Receives alert type (save, fetch, ...), alerts object, conditions of the call or object.<br>
+error: Callback of every failed call (!=200). Receives error type (save, fetch, ...), error code (500, 404, ...), errors object, conditions of the call or object.
+</p>
+
+Sample code ...@
+
+
+
+
+
+
+

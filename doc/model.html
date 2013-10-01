@@ -25,13 +25,10 @@
             <div class="gr inner-content">
                 <div class="gu gu-1of4">
                                     <div class="sidebar">
-                    <span class="h2 dispb tar prl ptm">
-                        <a href="/tetra/doc/about.html">About</a>
-                    </span>
-                    <span class="nav-section-title h3 tar prl ptl">
-                        Getting-Started
-                    </span>
                     <ul class="nav-stacked">
+                        <li>
+                            <a href="/tetra/doc/about.html">About</a>
+                        </li>
                         <li>
                             <a href="/tetra/doc/view.html">View</a>
                         </li>
@@ -56,8 +53,103 @@
                 </div>
                 </div>
                 <div class="gu gu-last">
-                    <div class="panel-docs ptl">
-                    <h2>Page description model</h2>
+                    <div class="panel-docs ptxs pll">
+                    <p class="h3">Interface</p>
+
+<pre>
+tetra.model.register(name, Object)
+</pre>
+
+<p class="description">
+name: The name of the model. It must be the same of the file name.
+Object: This object describes models attributes, validation methods and routes.
+</p>
+<span class="subtitle">Model description</span>
+
+<pre>
+{  
+   req : {},  
+   attr : {},  
+   methods : {}  
+}
+</pre>
+
+<span class="subtitle">Parameters</span>
+
+<p class="description">
+req: For request settings : routes for accessing server-side objects.<br>
+attr: (mandatory) Object listing all attributes of the class with their default value. They are all private.<br>
+methods: Contains custom and reserved methods.
+</p>
+
+<span class="subtitle">req parameter</span>
+
+<pre>
+{  
+    save : {  
+        params: {  
+             action: 'addInterest'  
+        }  
+    },  
+    fetch : {  
+        url: '/path/to/{0}/{1}',  
+        uriParams: ['test', 'var'],  
+        method: 'POST',  
+        params: {  
+            action: 'getInterest'  
+        },  
+        parser: function(resp, col, cond) {   
+            return col;  
+        }  
+    },  
+    del : {  
+        params: {  
+            action: 'deleteInterest'  
+        }  
+    }  
+}
+</pre>
+
+<p class="description">
+This attribute is not mandatory if you use default settings.<br>
+
+There's simple call types for each actions :<br>
+
+save: settings used when calling save() method through ORM.<br>
+fetch: settings used when calling fetch() method through ORM.<br>
+del: settings used when calling del() method through ORM.<br>
+reset: settings used when calling reset() method through ORM.
+</p>
+
+<p class="description">
+Here are the settings you can set for each call type :<br>
+
+url [string]: default pattern is "/javascript/coremvc/model/modelName/callType.json" but you can override it using this setting.<br>
+uriParams [array]: name of a condition or an attribute of the object that must replace a var in the url pattern. For example: "/path/to/{0}/{1}" with uriParams = ['test', 'var'] will replace {0} by cond.test or attr.test and {1} with cond.var or attr.var.<br>
+methods [string]: "GET" or "POST" (by default : fetch is set to "GET", save and del are set to “POST”).<br>
+params [object]: a javascript object listing all constant parameters with their value used in a specific call type.<br>
+parser [function]: if the response of a fetch call doesn’t fit the Standard JSON Format, you have to define this function. You receive in arguments the ajax response (resp), an empty object (col) and the request conditions (cond). With this information, you must fill the col object using a key/value structure. The key must be unique and the value is an object similar to the attr object of the model (same attribute names).
+</p>
+
+<span class="subtitle">Methods</span>
+
+<p>
+All model created vie core.model.register inherit of default methods that allow access to the underlying collection.
+
+default methods (implemented in core)
+
+get(attrName): get an attribute
+getAll(): get all attributes
+set(attrName, value): set an attribute with a value
+update(attributes): set attributes with values listed in the passed object
+revert(): revert data to last saved state. Automatically called when a save call failed.
+save(): save the object on server
+remove(): remove the object locally and on server.
+reserved methods (optional and implemented in class by you)
+
+init(): call when an object is constructed
+validate(): call before saving data on server
+</p>
                     </div>
                 </div>
             </div>
