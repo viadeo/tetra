@@ -22,49 +22,49 @@
             </div>
         </div>
         <div class="content fluid-container">
-            <div class="gr inner-content">
+            <div class="gr inner-content ptl">
                 <div class="gu gu-1of4">
                                     <div class="sidebar">
                     <ul class="nav-stacked">
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/about.html">About</a>
                         </li>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/view.html">View</a>
                         </li>
-                        <li class="active">
+                        <li class="h4">
                             <a href="/tetra/doc/controller.html">Controller</a>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/model.html">Model</a>
                         </li>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/orm.html">ORM</a>
                         </li>
-                        <li>
+                        <!-- <li class="h4">
                             <a href="/tetra/doc/templating.html">Templating</a>
-                        </li>
-                        <li>
+                        </li> -->
+                        <li class="h4">
                             <a href="/tetra/doc/bootnode.html">Bootnode</a>
                         </li>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/debugger.html">Debugger</a>
                         </li>
                     </ul>
                 </div>
                 </div>
                 <div class="gu gu-last">
-                    <div class="panel-docs ptxs pll">
-                    <p class="h3">Interface</p>
+                    <div class="panel-docs pll">
+                    <p class="h3">Define a view</p>
 
 <pre>
 tetra.view.register(name, Object)
 </pre>
 
 <p class="description">
-name: The name of the view that is coupled to module filename. It must be the same as js file name. 
-For example: if you call your view likeButton, included file will be named “likeButton.ui.js”.
+<b>name</b> : The name of the view that is coupled to module filename. It must be the same as js file name.
+For example: if you call your view likeButton, included file will be named “likeButton.ui.js”.<br>
 
-Object: This object describes view module listeners and notifiers as well as DOM handlers. 
+<b>Object</b> : This object describes view module listeners and notifiers as well as DOM handlers.
 A more detailed definition follows.
 </p>
 
@@ -82,10 +82,10 @@ A more detailed definition follows.
 <span class="subtitle">Parameters</span>
 
 <p class="description">
-scope: it’s the visibility scope of message sent by the view to controller. Actually this is the application scope and it must be the application name. Example: for the “like” feature, the scope could be “likeApp”.<br>
-use: the list of controllers required by the view to work properly. This list is mandatory when the view is loaded using the bootstrap feature (see below).<br> 
-root:(optional) id of a root element for the view. It will limit selectors matching to this container.<br>
-constr: is a function returning view’s behaviors
+<b>scope</b> : it’s the visibility scope of message sent by the view to controller. Actually this is the application scope and it must be the application name. Example: for the “like” feature, the scope could be “likeApp”.<br>
+<b>use</b> : the list of controllers required by the view to work properly. This list is mandatory when the view is loaded using the bootstrap feature (see below).<br>
+<b>root</b> :(optional) id of a root element for the view. It will limit selectors matching to this container.<br>
+<b>constr</b> : is a function returning view’s behaviors
 </p>
 
 <span class="subtitle">Contructor</span>
@@ -100,9 +100,9 @@ constr : function(me, app, _) {
 </pre>
 
 <p class="description">
-me: this variable give you access to all data of the view object generated : scope, events, methods and all other attributes you can attach to.<br>
-app: the communication pipe to all controllers in the scope.<br>
-_ : abstracted javascript library based on <a href="http://api.jquery.com" target="_blank">jQuery</a> structure with following available functions.
+<b>me</b> : this variable give you access to all data of the view object generated : scope, events, methods and all other attributes you can attach to.<br>
+<b>app</b> : the communication pipe to all controllers in the scope.<br>
+<b>_</b> : abstracted javascript library based on <a href="http://api.jquery.com" target="_blank">jQuery</a> structure with following available functions.
 </p>
 
 <span class="subtitle">Events</span>
@@ -128,21 +128,21 @@ events : {
 </pre>
 
 <p class="description">
-events: description of callbacks executed as a consequence of controller or user demand :
+<b>events</b> : description of callbacks executed as a consequence of controller or user demand :<br>
 
-user: list of events listened on the page. For each event (click, mouseover, …), we specify a list of selectors (CSS2.1 syntax) that must be reactive to this action and the function called on action. This function has access to the native event and the matched DOM element in context. e.preventDefault() is automatically call when an event match with one of the callback (except for checkbox/radio input element and keydown event). If you want to disable this behavior, add a “no-prevent” class on your element.
+<b>user</b> : list of events listened on the page. For each event (click, mouseover, …), we specify a list of selectors (CSS2.1 syntax) that must be reactive to this action and the function called on action. This function has access to the native event and the matched DOM element in context. e.preventDefault() is automatically call when an event match with one of the callback (except for checkbox/radio input element and keydown event). If you want to disable this behavior, add a “no-prevent” class on your element.
 </p>
 
-Special event management:<br>
+<span class="subtitle">Special event management:</span><br>
 
 <p class="description">
-mouseover/mouseout: these events are cleaned. That means they work as mouseenter and mouseleave and then an element don’t catch event from its children.<br>
-clickout: you can define a clickout listener for a specific selector. This callback function will be called when the user click outside a any element matching this selector. This listener only works if a click listener with the same selector is defined in the same view.
+<b>mouseover/mouseout</b> : these events are cleaned. That means they work as mouseenter and mouseleave and then an element don’t catch event from its children.<br>
+<b>clickout</b> : you can define a clickout listener for a specific selector. This callback function will be called when the user click outside a any element matching this selector. This listener only works if a click listener with the same selector is defined in the same view.
 </p>
 
 <p class="description">
-window: list of window events listened on the page. A callback function is associated to each event you want to listen.<br>
-controller: list of messages sent by controllers listened in the view with the function that must executed at the reception. Datas given by controller are accessible.
+<b>window</b> : list of window events listened on the page. A callback function is associated to each event you want to listen.<br>
+<b>controller</b> : list of messages sent by controllers listened in the view with the function that must executed at the reception. Datas given by controller are accessible.
 </p>
 
 <span class="subtitle">Methods</span>
@@ -156,8 +156,9 @@ methods : {
 </pre>
 
 <p class="description">
-init: is a reserved method executed when the view is registered. It can be used to define some variables accessible in the view. For example to define a DOM access, you can define a variable as an attribute attached to me : me.target = document.getElementById('targetId');<br>
-Methods are common functions used locally in the view. They can be called using the me keyword. For example : me.methods.customMethod(data); to call the function customMethod.
+<b>init</b> : is a reserved method executed when the view is registered. It can be used to define some variables accessible in the view. For example to define a DOM access, you can define a variable as an attribute attached to me : me.target = document.getElementById('targetId');<br>
+Methods are common functions used locally in the view. They can be called using the me keyword.<br>
+For example : <b>me.methods.customMethod(data);</b> to call the function customMethod.
 </p>
 
 Sampe code ...
@@ -172,5 +173,7 @@ Sampe code ...
             <p>©2013 APVO CORP.</p>
         </div>
     </div>
+    <script src="/tetra/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/tetra/public/js/main.js"></script>
 </body>
 </html>

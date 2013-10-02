@@ -22,39 +22,85 @@
             </div>
         </div>
         <div class="content fluid-container">
-            <div class="gr inner-content">
+            <div class="gr inner-content ptl">
                 <div class="gu gu-1of4">
                                     <div class="sidebar">
                     <ul class="nav-stacked">
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/about.html">About</a>
                         </li>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/view.html">View</a>
                         </li>
-                        <li class="active">
+                        <li class="h4">
                             <a href="/tetra/doc/controller.html">Controller</a>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/model.html">Model</a>
                         </li>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/orm.html">ORM</a>
                         </li>
-                        <li>
+                        <!-- <li class="h4">
                             <a href="/tetra/doc/templating.html">Templating</a>
-                        </li>
-                        <li>
+                        </li> -->
+                        <li class="h4">
                             <a href="/tetra/doc/bootnode.html">Bootnode</a>
                         </li>
-                        <li>
+                        <li class="h4">
                             <a href="/tetra/doc/debugger.html">Debugger</a>
                         </li>
                     </ul>
                 </div>
                 </div>
                 <div class="gu gu-last">
-                    <div class="panel-docs ptxs pll">
-                    <h2>Page description debugging</h2>
+                    <div class="panel-docs pll">
+                    <p class="h3">Debugger</p>
+
+<p class="description">
+A command line debugger is available. It can be enabled in you code with the code tetra.debug.enable() or tetra.debug.enable(scope).
+It could help you to test you code using firebug and find where an error occurs.
+Following commands are available (you can display them at any time using tetra.debug.man()) :
+</p>
+
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> debug enabled
+> man specs > tetra.debug.man()
+	# View specs			> tetra.debug.view.man()
+	# Controller specs		> tetra.debug.controller.man()
+	# Model specs			> tetra.debug.model.man()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+
+<span class="subtitle">View</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> View specs:
+	- notify app views as a controller		> tetra.debug.view(scope).notify(message, data)
+	- list all views and their scope		> tetra.debug.view.list()
+	- list all controller messages listened > tetra.debug.view.msg(viewName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<span class="subtitle">Controller</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Controller specs:
+	- notify app controllers as a view		> tetra.debug.ctrl.app(scope).notify(message, data)
+	- notify all as a controller			> tetra.debug.ctrl.page.notify(message, data)
+	- list all controllers with their scope	> tetra.debug.ctrl.list()
+	- list all view messages listened		> tetra.debug.ctrl.msg(ctrlName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<span class="subtitle">Model</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Model specs:
+	- retrieve an object and its ref		> tetra.debug.model(modelName).findByRef(ref)
+	- notify all controllers as a model		> tetra.debug.model(modelName).notify(type)(data)
+	* types : call, complete, append, create, stored, update, delete, error
+	- list all models				        > tetra.debug.model.list()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
                     </div>
                 </div>
             </div>
@@ -65,5 +111,7 @@
             <p>©2013 APVO CORP.</p>
         </div>
     </div>
+    <script src="/tetra/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/tetra/public/js/main.js"></script>
 </body>
 </html>
