@@ -54,32 +54,53 @@
                 </div>
                 <div class="gu gu-last">
                     <div class="panel-docs pll">
-                    <p class="h3">Tetra, a clean MVC javascript framework</p>
+                    <p class="h3">Debugger</p>
 
-<p class="description">Tetra aims to help developers build faster, more maintainable and better structured code, is a complete MVC framework, normalizing all implementations through a simple structure that splits the code into 3 different layers :
 <p class="description">
-View: DOM access and UX behaviors<br>
-Controller: Programmatic logic<br>
-Model: Structured data and Ajax requests
-</p>
-<p class="description">
-Each layer has access to a communication pipe linked to a potential listener, allowing asynchronous communication between each part of the application.
-Tetra is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic.<br>
-An ORM encapsulates Ajax transactions and ensures data consistency between front-end and back-end.
-Additionally, bootnode feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
+A command line debugger is available. It can be enabled in you code with the code tetra.debug.enable() or tetra.debug.enable(scope).
+It could help you to test you code using firebug and find where an error occurs.
+Following commands are available (you can display them at any time using tetra.debug.man()) :
 </p>
 
-<span class="h3">Tetra Core</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> debug enabled
+> man specs > tetra.debug.man()
+	# View specs			> tetra.debug.view.man()
+	# Controller specs		> tetra.debug.controller.man()
+	# Model specs			> tetra.debug.model.man()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
 
-<ul>
-    <li> - lib: External dependencies of the client-side framework.</li>
-    <li> - src </li>
-    <li>conf: Tetra.js and RequireJS configuration files.</li>
-    <li>controller: Controller layer</li>
-    <li>model: Model layer</li>
-    <li>view: View layer</li>
-        <li>connectors: Abstracted library to use Tetra.js with librairies other than jQuery. Prototype and Node.js connectors are already implemented.</li>
-<li> - tetra.js: Core of Tetra.js framework, an interface that provides access to the MVC layers, framework extensions and debug features.</li>
+<span class="subtitle">View</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> View specs:
+	- notify app views as a controller		> tetra.debug.view(scope).notify(message, data)
+	- list all views and their scope		> tetra.debug.view.list()
+	- list all controller messages listened > tetra.debug.view.msg(viewName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<span class="subtitle">Controller</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Controller specs:
+	- notify app controllers as a view		> tetra.debug.ctrl.app(scope).notify(message, data)
+	- notify all as a controller			> tetra.debug.ctrl.page.notify(message, data)
+	- list all controllers with their scope	> tetra.debug.ctrl.list()
+	- list all view messages listened		> tetra.debug.ctrl.msg(ctrlName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<span class="subtitle">Model</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Model specs:
+	- retrieve an object and its ref		> tetra.debug.model(modelName).findByRef(ref)
+	- notify all controllers as a model		> tetra.debug.model(modelName).notify(type)(data)
+	* types : call, complete, append, create, stored, update, delete, error
+	- list all models				        > tetra.debug.model.list()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
                     </div>
                 </div>
             </div>

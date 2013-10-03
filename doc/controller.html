@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Tetra JS | MVC</title>
+    <link rel="icon" href="/tetra/public/img/favicon.ico" />
+    <link rel="stylesheet" href="/tetra/public/tetra-ui/css/tetra-ui-doc.min.css" />
+    <link rel="stylesheet" href="/tetra/public/css/main.css" />
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="fluid-container">
+                <h1 class="fl">Powered by <i class="vicon">o</i>
+                    <a href="/tetra" class="logo">Tetra JS</a>
+                </h1>
+                <a href="https://github.com/viadeo/tetra" class="fr mts btn btn-default btn-large github">
+                    Tetra JS on GitHub
+                </a>
+            </div>
+        </div>
+        <div class="content fluid-container">
+            <div class="gr inner-content ptl">
+                <div class="gu gu-1of4">
+                                    <div class="sidebar">
+                    <ul class="nav-stacked">
+                        <li class="h4">
+                            <a href="/tetra/doc/about.html">About</a>
+                        </li>
+                        <li class="h4">
+                            <a href="/tetra/doc/view.html">View</a>
+                        </li>
+                        <li class="h4">
+                            <a href="/tetra/doc/controller.html">Controller</a>
+                        <li class="h4">
+                            <a href="/tetra/doc/model.html">Model</a>
+                        </li>
+                        <li class="h4">
+                            <a href="/tetra/doc/orm.html">ORM</a>
+                        </li>
+                        <!-- <li class="h4">
+                            <a href="/tetra/doc/templating.html">Templating</a>
+                        </li> -->
+                        <li class="h4">
+                            <a href="/tetra/doc/bootnode.html">Bootnode</a>
+                        </li>
+                        <li class="h4">
+                            <a href="/tetra/doc/debugger.html">Debugger</a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="gu gu-last">
+                    <div class="panel-docs pll">
+                    <p class="h3">Define a controller</p>
+
+<pre>
+tetra.controller.register(name, Object)
+</pre>
+
+<p class="description">
+<b>name</b> : The name of the controller. It must be the same of the file name. For example: if you call your controller likeCtrl, the file will be called likeCtrl.ctrl.js.<br>
+<b>Object</b> : This object describes view and models’ listeners and notifiers. A more detailed definition follows.
+</p>
+
+<span class="subtitle">Controller description</span>
+
+<pre>
+{  
+    scope : 'scope name',  
+    use : ['Mymodel', 'OtherModel', ...],   
+    constr : function  
+}
+</pre>
+
+<span class="subtitle">Parameters</span>
+
+<p class="description">
+<b>scope</b> : this is the visibility scope of message sent by the controller to view. Actually this is the application scope and it must be the application name. For example: for the like feature, the scope must be likeApp.<br>
+<b>use</b> : An Array list of model require by the controller to work properly. This list is mandatory when the controller is loaded using the bootstrap. If the nested model is a global one, prefix its name with g/ (example: use: ['g/name']).<br>
+<b>constr</b>: is a function returning controller's behaviors in the following context.
+</p>
+
+<span class="subtitle">Contructor</span>
+
+<pre>
+constr : function(me, app, page, orm) { 
+  return {  
+    events : {...},
+    methods : {...}  
+  };
+}
+</pre>
+
+<p class="description">
+<b>me</b> : this variable gives you access to all datas of the controller object generated : scope, events, methods and all other attributes you can attach to.<br>
+<b>app</b> : the communication pipe to all views in the scope.<br>
+<b>page</b> : the communication pipe to all controllers.<br>
+<b>orm</b> : object relational model of the core framework. it allows you to create, retrieve, update or delete data objects and synchronize data with the server. It is a total abstraction of ajax calls. A deeper explanation will be done in another section.
+</p>
+
+<span class="subtitle">Events</span>
+
+<pre>
+events : {  
+   model : {  
+      'MyModel' : {   
+          'append' : function(obj){...},  
+          'save' : function(obj){...},  
+          'saved' : function(obj){...},  
+           ...  
+       },  
+       ...    
+   },  
+   view : {  
+      'message' : function(data){...},  
+       ...  
+   },  
+   controller : {  
+      'message from page.notify' : function(data){...},  
+       ...  
+   } 
+}
+</pre>
+<p class="description">events: description of callbacks executed as a consequence of view demand or model change.</p>
+
+<p class="description">  
+Here is the list of all models change messages :<br><br>
+<b>call</b> : operations done before each ajax call.<br>
+<b>complete</b> : operations done after each ajax call.<br>
+<b>create</b> : Operations done at the creation of an object. Receives the created object in parameter.<br>
+<b>fetch</b> : Operations done before a fetch call. Receives the conditions of the request.<br>
+<b>append</b> : Callback of a succeed fetch call. Receives the collection of results in parameter.<br>
+<b>save</b> : Operations done before a save call. Receives the updated object in parameter.<br>
+<b>saved</b> : Callback of a succeeded save call. Receives the updated object in parameter.<br>
+<b>delete</b> : Operations done before a delete call. Receives the updated object in parameter.<br>
+<b>deleted</b> : Callback of a succeed delete call. Receives the updated object in parameter.<br>
+<b>reset</b> : Operations done before a reset. Receives the collection of all objects in parameter.<br>
+<b>reseted</b> : Callback of a succeed reset call. Receives the name of the model in parameter.<br>
+<b>invalid</b> : Operations done when updated attributes of an object are not valid. Receive the list of incorrect attr and the obj instance in parameter.<br>
+<b>alert</b> : Callback of successful call (200) with alerts. Receives alert type (save, fetch, ...), alerts object, conditions of the call or object.<br>
+<b>error</b> : Callback of every failed call (!=200). Receives error type (save, fetch, ...), error code (500, 404, ...), errors object, conditions of the call or object.
+</p>
+
+Sample code ...@
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copy fluid-container">
+            <p>©2013 APVO CORP.</p>
+        </div>
+    </div>
+    <script src="/tetra/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/tetra/public/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Tetra JS | MVC</title>
+    <link rel="icon" href="{{path}}/public/img/favicon.ico" />
+    <link rel="stylesheet" href="{{path}}/public/tetra-ui/css/tetra-ui-doc.min.css" />
+    <link rel="stylesheet" href="{{path}}/public/css/main.css" />
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="fluid-container">
+                <h1 class="fl">Powered by <i class="vicon">o</i>
+                    <a href="{{path}}" class="logo">Tetra JS</a>
+                </h1>
+                <a href="https://github.com/viadeo/tetra" class="fr mts btn btn-default btn-large github">
+                    Tetra JS on GitHub
+                </a>
+            </div>
+        </div>
+        <div class="content fluid-container">
+            <div class="gr inner-content ptl">
+                <div class="gu gu-1of4">
+                    {{> nav-doc }}
+                </div>
+                <div class="gu gu-last">
+                    <div class="panel-docs pll">
+                    {{> body}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copy fluid-container">
+            <p>©2013 APVO CORP.</p>
+        </div>
+    </div>
+    <script src="/tetra/public/js/jquery-1.10.2.min.js"></script>
+    <script src="/tetra/public/js/main.js"></script>
+</body>
+</html>

@@ -54,32 +54,48 @@
                 </div>
                 <div class="gu gu-last">
                     <div class="panel-docs pll">
-                    <p class="h3">Tetra, a clean MVC javascript framework</p>
+                    <p class="h3">Bootnode</p>
 
-<p class="description">Tetra aims to help developers build faster, more maintainable and better structured code, is a complete MVC framework, normalizing all implementations through a simple structure that splits the code into 3 different layers :
+<span class="subtitle">Concept</span>
+
 <p class="description">
-View: DOM access and UX behaviors<br>
-Controller: Programmatic logic<br>
-Model: Structured data and Ajax requests
-</p>
-<p class="description">
-Each layer has access to a communication pipe linked to a potential listener, allowing asynchronous communication between each part of the application.
-Tetra is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic.<br>
-An ORM encapsulates Ajax transactions and ensures data consistency between front-end and back-end.
-Additionally, bootnode feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
+The bootnode is a simple way to load necessary javascript on the fly. If you have a feature not really used or available across all the site, you may like not to specify associated javascript in the head. So bootnode allows you to define it in the html markup using data attributes.
 </p>
 
-<span class="h3">Tetra Core</span>
+<span class="subtitle">Activation</span>
+<p class="description">
+In the core building using tetra configuration, you have to set the enableBootnode parameter in the conf to true. Il will activate this feature for all applications.
+</p>
 
-<ul>
-    <li> - lib: External dependencies of the client-side framework.</li>
-    <li> - src </li>
-    <li>conf: Tetra.js and RequireJS configuration files.</li>
-    <li>controller: Controller layer</li>
-    <li>model: Model layer</li>
-    <li>view: View layer</li>
-        <li>connectors: Abstracted library to use Tetra.js with librairies other than jQuery. Prototype and Node.js connectors are already implemented.</li>
-<li> - tetra.js: Core of Tetra.js framework, an interface that provides access to the MVC layers, framework extensions and debug features.</li>
+<pre>
+tetra.extend({conf:{}})
+</pre>
+
+<span class="subtitle">Definition in markup</span>
+
+<p class="description">
+Bootnode definition must be set in the container element of the application interface. We need to have 3 parameters :<br>
+
+<b>class="bootnode"</b> : the bootnode className allows the core to find which element is reactive to bootnode actions. <br>
+<b>data-view="appName/viewName"</b> : the path to the view object associated to the html markup.<br>
+<b>data-comp="compName"</b> : replace the data-view attribute if you want to load a packed javascript with a custom name compName.<br>
+<b>data-event="click"</b> : the event that will be handled to launch js retrieving and action call. This attribute supports click, mouseover and focus event type.
+</p>
+
+&#60;div class="bootnode" data-view="likeApp/likeButton" data-event="click"&#62;<br>
+...<br>
+&#60;/div&#62;
+<br>
+&#60;div class="bootnode" data-comp="likePackage" data-event="click"&#62;<br>
+...<br>
+&#60;/div&#62;
+
+<br><br>
+<span class="subtitle">Dependency management system</span>
+
+<p class="description">
+Controller and model objects will be retrieved according to the use parameter of the view and controllers. The core build a chain of dependencies, download each js file and initialize them in the following order: models then controllers then view. After all these steps are completed, the event action is called.
+</p>
                     </div>
                 </div>
             </div>
