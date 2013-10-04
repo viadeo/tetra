@@ -2,13 +2,53 @@
 
 <p class="description">Tetra aims to help developers build faster, more maintainable and better structured code, is a complete MVC framework, normalizing all implementations through a simple structure that splits the code into 3 different layers :
 <p class="description">
-View: DOM access and UX behaviors<br>
-Controller: Programmatic logic<br>
-Model: Structured data and Ajax requests
+<b>View</b> DOM access and UX behaviors<br>
+</p>
+<p class="description">
+<b>Controller</b> Programmatic logic
+</p>
+<p class="description">
+<b>Model</b> Structured data and Ajax requests
 </p>
 <p class="description">
 Each layer has access to a communication pipe linked to a potential listener, allowing asynchronous communication between each part of the application.
 Tetra is also Object-oriented, encouraging the developer to better separate and organise structured data and its associated logic.<br>
 An ORM encapsulates Ajax transactions and ensures data consistency between front-end and back-end.
 Additionally, bootnode feature allows JavaScript resources to be loaded dynamically, either through data attributes set on DOM nodes or via a dependency management system.
+</p>
+
+<div class="code">
+<pre>
+lib
+ |
+src
+ |__ conf
+ |__ controller
+ |__ model
+ |__ view
+ |    |__connectors
+ |__tetra
+</pre>
+</div>
+
+<p class="description">
+<b>lib</b> External dependencies of the client-side framework.
+</p>
+<p class="description">
+<b>conf</b> Tetra.js and RequireJS configuration files.
+</p>
+<p class="description">
+<b>controller</b> Controller layer
+</p>
+<p class="description">
+<b>model</b> Model layer
+</p>
+<p class="description">
+<b>view</b> View layer
+</p>
+<p class="description">
+<b>connectors</b> Abstracted library to use Tetra.js with librairies other than jQuery. Prototype and Node.js connectors are already implemented.
+</p>
+<p class="description">
+<b>tetra</b>: Core of Tetra.js framework, an interface that provides access to the MVC layers, framework extensions and debug features.
 </p>
