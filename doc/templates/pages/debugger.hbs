@@ -1,0 +1,47 @@
+<p class="h3">Debugger</p>
+
+<p class="description">
+A command line debugger is available. It can be enabled in you code with the code tetra.debug.enable() or tetra.debug.enable(scope).
+It could help you to test you code using firebug and find where an error occurs.
+Following commands are available (you can display them at any time using tetra.debug.man()) :
+</p>
+
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> debug enabled
+> man specs > tetra.debug.man()
+	# View specs			> tetra.debug.view.man()
+	# Controller specs		> tetra.debug.controller.man()
+	# Model specs			> tetra.debug.model.man()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+
+<span class="subtitle">View</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> View specs:
+	- notify app views as a controller		> tetra.debug.view(scope).notify(message, data)
+	- list all views and their scope		> tetra.debug.view.list()
+	- list all controller messages listened > tetra.debug.view.msg(viewName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<span class="subtitle">Controller</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Controller specs:
+	- notify app controllers as a view		> tetra.debug.ctrl.app(scope).notify(message, data)
+	- notify all as a controller			> tetra.debug.ctrl.page.notify(message, data)
+	- list all controllers with their scope	> tetra.debug.ctrl.list()
+	- list all view messages listened		> tetra.debug.ctrl.msg(ctrlName)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<span class="subtitle">Model</span>
+<pre>
+Tetra.js ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Model specs:
+	- retrieve an object and its ref		> tetra.debug.model(modelName).findByRef(ref)
+	- notify all controllers as a model		> tetra.debug.model(modelName).notify(type)(data)
+	* types : call, complete, append, create, stored, update, delete, error
+	- list all models				        > tetra.debug.model.list()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
