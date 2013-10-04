@@ -11,18 +11,27 @@ The bootnode is a simple way to load necessary javascript on the fly. If you hav
 In the core building using tetra configuration, you have to set the enableBootnode parameter in the conf to true. Il will activate this feature for all applications.
 </p>
 
+<div class="code">
 <pre>
 tetra.extend({conf:{}})
 </pre>
+</div>
 
 <span class="subtitle">Definition in markup</span>
 
 <p class="description">
-Bootnode definition must be set in the container element of the application interface. We need to have 3 parameters :<br>
-
-<b>class="bootnode"</b> : the bootnode className allows the core to find which element is reactive to bootnode actions. <br>
-<b>data-view="appName/viewName"</b> : the path to the view object associated to the html markup.<br>
-<b>data-comp="compName"</b> : replace the data-view attribute if you want to load a packed javascript with a custom name compName.<br>
+Bootnode definition must be set in the container element of the application interface. We need to have 3 parameters
+</p>
+<p class="description">
+<b>class="bootnode"</b> : the bootnode className allows the core to find which element is reactive to bootnode actions.
+</p>
+<p class="description">
+<b>data-view="appName/viewName"</b> : the path to the view object associated to the html markup.
+</p>
+<p class="description">
+<b>data-comp="compName"</b> : replace the data-view attribute if you want to load a packed javascript with a custom name compName.
+</p>
+<p class="description">
 <b>data-event="click"</b> : the event that will be handled to launch js retrieving and action call. This attribute supports click, mouseover and focus event type.
 </p>
 
