@@ -21,8 +21,8 @@ module.exports = function( grunt ) {
 			],
 			"release/tetra-prototype.js": [
 				"lib/sizzle/sizzle.js",
-				"lib/jquery/1.10.1/jquery-nosizzle.js",
-				"lib/jquery/1.10.1/jquery.browser.js",
+				"lib/jquery/1.10.2/jquery-nosizzle.js",
+				"lib/jquery/1.10.2/jquery.browser.js",
 				"lib/JSON-js/json2.js",
 				"lib/prototype/1.6.1/prototype.js",
 				"lib/scriptaculous/1.8.2/scriptaculous.js",
@@ -43,8 +43,8 @@ module.exports = function( grunt ) {
 			],
 			"release/tetra-jquery.js": [
     			"lib/sizzle/sizzle.js",
-                "lib/jquery/1.10.1/jquery-nosizzle.js",
-                "lib/jquery/1.10.1/jquery.browser.js",
+                "lib/jquery/1.10.2/jquery-nosizzle.js",
+                "lib/jquery/1.10.2/jquery.browser.js",
                 "lib/JSON-js/json2.js",
                 "src/tetra.js",
 				"src/view/connectors/jquery-connector.js",
