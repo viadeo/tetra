@@ -1,6 +1,6 @@
 src_files:
-  - lib/jquery/1.10.1/jquery.js
-  - lib/jquery/1.10.1/jquery.browser.js
+  - lib/jquery/1.10.2/jquery.js
+  - lib/jquery/1.10.2/jquery.browser.js
   - lib/JSON-js/json2.js 
   - test/lib/Sinon.JS/sinon-1.7.3.js
   - test/lib/Sinon.JS/sinon-ie-1.7.3.js
