@@ -2415,6 +2415,7 @@ var requirejs, require, define;
         return (_conf.BOOTNODE_HOST) ? _conf.BOOTNODE_HOST + url : url;
     }
 })();
+
 // ------------------------------------------------------------------------------
 // Tetra.js
 //
@@ -2635,6 +2636,7 @@ tetra.extend('tmpl', function(_conf, _mod, _) {
     };
 
 });
+
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native view functions of Tetra.js
@@ -3345,6 +3347,7 @@ tetra.extend('view', function(_conf, _mod, _) {
         debug: _debug
     };
 });
+
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native controller functions of Tetra.js
@@ -3640,6 +3643,7 @@ tetra.extend('controller', function(_conf, _mod, _) {
         debug: _debug
     };
 });
+
 // ------------------------------------------------------------------------------
 // Tetra.js
 // Native model functions of Tetra.js
@@ -3749,7 +3753,7 @@ tetra.extend('model', function(_conf, _mod, _) {
 
             return {
                 queue: function(src, url, options) {
-                    if(_conf.env === 'Node') {
+                    if(_conf.env === 'Node' || (options.asyncModel && typeof(VNS) !== 'undefined' && typeof(VNS.enabledDashboardAsyncAjax) !== 'undefined' && VNS.enabledDashboardAsyncAjax)) {
                         _requester.request(src, url, options);
                     } else {
                         stack.push({src: src, url: url, options: options});
@@ -3868,6 +3872,7 @@ tetra.extend('model', function(_conf, _mod, _) {
                             type : model.req.save.method,
                             headers : model.req.save.headers,
                             data : _buildData(model.req.save, attributes),
+                            asyncModel : model.req.save.asyncModel || false,
                             success : function(respObj){
 
                                 // A successful save response should have the following format: 
@@ -3984,6 +3989,7 @@ tetra.extend('model', function(_conf, _mod, _) {
                             type : model.req.fetch.method,
                             headers : model.req.fetch.headers,
                             data : _buildData(model.req.fetch, cond),
+                            asyncModel : model.req.fetch.asyncModel || false,
                             success : function(respObj){
                                 //    {
                                 //        status: "SUCCESS",
@@ -4248,6 +4254,7 @@ tetra.extend('model', function(_conf, _mod, _) {
                             type : model.req.del.method,
                             headers : model.req.del.headers,
                             data : _buildData(model.req.del, attr),
+                            asyncModel : model.req.del.asyncModel || false,
                             success : function(respObj){
 
                                 //    {
