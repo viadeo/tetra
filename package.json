@@ -1,7 +1,7 @@
 {
   "name": "tetra",
   "description": "Tetra.js MVC framework for client-side and server-side (with Node.js/Express)",
-  "version": "1.0.23",
+  "version": "2.0.0",
   "author": {
     "name": "Viadeo",
     "email": "cflynn@viadeoteam.com"
@@ -22,26 +22,30 @@
     {
       "name": "Yannick Croissant",
       "email": "ycroissant@viadeoteam.com"
+    },
+    {
+      "name": "Gilles Perreymond",
+      "email": "gperreymond@viadeoteam.com"
     }
   ],
   "dependencies": {
-    "express": ">= 3.0",
-    "mysql": ">= 0.9.5",
-    "requirejs": "*"
+    "express": "3.0",
+    "mysql": "0.9.5",
+    "requirejs": "2.3.3"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-cli": "latest",
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-concat": "~0.1.2",
-    "grunt-contrib-uglify": "~0.2.2"
+    "grunt": "0.4.1",
+    "grunt-cli": "1.2.0",
+    "grunt-contrib-concat": "0.1.2",
+    "grunt-contrib-jshint": "0.1.1",
+    "grunt-contrib-uglify": "0.2.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/viadeo/tetra.git"
   },
   "engines": {
-    "node": ">= 0.8.14"
+    "node": ">=6"
   },
   "scripts": {
     "postinstall": "grunt default --verbose"

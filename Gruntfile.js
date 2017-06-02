@@ -20,6 +20,8 @@ module.exports = function( grunt ) {
 				"src/conf/default.js"
 			],
 			"release/tetra-prototype.js": [
+				"lib/react/15.5.4/react.js",
+				"lib/react/15.5.4/react-dom.js",
 				"lib/sizzle/sizzle.js",
 				"lib/jquery/1.10.2/jquery-nosizzle.js",
 				"lib/jquery/1.10.2/jquery.browser.js",
@@ -128,7 +130,7 @@ module.exports = function( grunt ) {
 
 	// Default task.
 	grunt.registerTask("default", ["jshint", "concat"]);
-	
+
 	// Default + uglify
 	grunt.registerTask("default-uglify", ["default", "uglify"]);
 
